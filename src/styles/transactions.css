@@ -1,0 +1,522 @@
+/* ====================================
+   PAGE
+==================================== */
+
+.tx-page {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+/* ====================================
+   HEADER
+==================================== */
+
+.tx-header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 20px;
+}
+
+.tx-header h1 {
+    font-size: 24px;
+    font-weight: 700;
+    color: var(--text);
+}
+
+.tx-header p {
+    margin-top: 4px;
+    color: var(--text-secondary);
+    font-size: 13px;
+}
+
+.tx-export-btn {
+    height: 42px;
+    padding: 0 14px;
+
+    display: flex;
+    align-items: center;
+    gap: 8px;
+
+    border-radius: 8px;
+    border: 1px solid var(--border);
+
+    background: var(--card-secondary);
+    color: var(--text);
+
+    font-size: 13px;
+    cursor: pointer;
+
+    transition: all 0.2s ease;
+}
+
+.tx-export-btn:hover {
+    border-color: var(--border-hover);
+}
+
+/* ====================================
+   STATS
+==================================== */
+
+.tx-stats {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+}
+
+.tx-stat-card {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+
+    padding: 18px;
+
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+}
+
+.tx-stat-icon {
+    width: 48px;
+    height: 48px;
+
+    border-radius: 8px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-size: 18px;
+}
+
+.tx-stat-icon.green {
+    background: var(--success-bg);
+    color: var(--success);
+}
+
+.tx-stat-icon.purple {
+    background: rgba(124, 58, 237, 0.12);
+    color: var(--primary);
+}
+
+.tx-stat-card span {
+    color: var(--text-secondary);
+    font-size: 12px;
+}
+
+.tx-stat-card h3 {
+    margin-top: 2px;
+    color: var(--text);
+    font-size: 22px;
+    font-weight: 700;
+}
+
+.tx-stat-card small {
+    display: block;
+    margin-top: 4px;
+
+    color: var(--text-secondary);
+    font-size: 11px;
+}
+
+/* ====================================
+   FILTERS
+==================================== */
+
+.tx-filters {
+    display: grid;
+    grid-template-columns: 1.5fr 200px 240px;
+    gap: 12px;
+}
+
+.tx-search {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+
+    height: 46px;
+    padding: 0 14px;
+
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+}
+
+.tx-search svg {
+    color: var(--text-secondary);
+    font-size: 16px;
+}
+
+.tx-search input {
+    flex: 1;
+
+    background: transparent;
+    border: none;
+    outline: none;
+
+    color: var(--text);
+    font-size: 16px;
+}
+
+.tx-search input::placeholder { 
+    color: var(--text-secondary);
+    font-size: 13px;
+}
+
+/* =========================
+   SELECTS
+========================= */
+
+.tx-filters .select-wrapper {
+    position: relative;
+}
+
+.tx-filters .select-wrapper::after {
+    content: "▾";
+    position: absolute;
+    right: 14px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--text-secondary);
+    pointer-events: none;
+    font-size: 14px;
+}
+
+.tx-filters select {
+    width: 100%;
+    height: 46px;
+
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+
+    padding: 0 38px 0 14px;
+
+    color: var(--text);
+    font-size: 13px;
+    font-weight: 500;
+
+    outline: none;
+
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+
+    cursor: pointer;
+
+    transition: border 0.2s ease,
+                box-shadow 0.2s ease;
+}
+
+.tx-filters select:focus {
+    border-color: var(--primary);
+    box-shadow: 0 0 0 3px rgba(124, 58, 237, 0.15);
+}
+
+/* ====================================
+   TABLE CARD
+==================================== */
+
+.tx-table {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+
+    overflow: hidden;
+}
+
+.tx-table-head {
+    display: grid;
+    grid-template-columns: 3fr 2fr 2fr 1fr;
+
+    padding: 14px 18px;
+
+    color: var(--text-secondary);
+    font-size: 11px;
+    font-weight: 600;
+
+    text-transform: uppercase;
+    letter-spacing: 0.4px;
+
+    border-bottom: 1px solid var(--border);
+}
+
+/* ====================================
+   ROWS
+==================================== */
+
+.tx-row {
+    display: grid;
+    grid-template-columns: 3fr 2fr 2fr 1fr 20px;
+
+    align-items: center;
+
+    padding: 14px 18px;
+
+    border-bottom: 1px solid var(--border);
+
+    transition: all 0.2s ease;
+}
+
+.tx-row:hover {
+    background: var(--table-hover);
+}
+
+.tx-row:last-child {
+    border-bottom: none;
+}
+
+.tx-info {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.tx-icon {
+    width: 42px;
+    height: 42px;
+
+    border-radius: 8px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-size: 15px;
+}
+
+.tx-icon.deposit {
+    background: var(--success-bg);
+    color: var(--success);
+}
+
+.tx-icon.purchase {
+    background: rgba(124, 58, 237, 0.12);
+    color: var(--primary);
+}
+
+.tx-icon.telegram {
+    background: rgba(59, 130, 246, 0.12);
+    color: var(--info);
+}
+
+.tx-info h4 {
+    color: var(--text);
+    font-size: 13px;
+    font-weight: 600;
+    margin-bottom: 3px;
+}
+
+.tx-info p {
+    color: var(--text-secondary);
+    font-size: 11px;
+}
+
+/* ====================================
+   STATUS
+==================================== */
+
+.tx-status {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: 4px 10px;
+    border-radius: 999px;
+
+    font-size: 10px;
+    font-weight: 600;
+}
+
+.tx-status.success,
+.tx-status.completed {
+    background: rgba(59, 130, 246, 0.12);
+    color: var(--info);
+}
+
+.tx-status.failed {
+    background: rgba(239, 68, 68, 0.12);
+    color: var(--danger);
+}
+
+.tx-status.pending {
+    background: rgba(245, 158, 11, 0.12);
+    color: var(--warning);
+}
+
+/* ====================================
+   AMOUNT
+==================================== */
+
+.tx-amount {
+    font-size: 15px;
+    font-weight: 700;
+}
+
+.tx-amount.credit {
+    color: var(--success);
+}
+
+.tx-amount.debit {
+    color: var(--danger);
+}
+
+/* ====================================
+   DATE
+==================================== */
+
+.tx-date {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.tx-date span {
+    color: var(--text);
+    font-size: 12px;
+}
+
+.tx-date small {
+    color: var(--text-secondary);
+    font-size: 11px;
+}
+
+.tx-arrow {
+    color: var(--text-secondary);
+    font-size: 16px;
+}
+
+/* ====================================
+   PAGINATION
+==================================== */
+
+.tx-pagination {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    padding: 14px 18px;
+}
+
+.tx-pagination p {
+    color: var(--text-secondary);
+    font-size: 12px;
+}
+
+.tx-pages {
+    display: flex;
+    gap: 6px;
+}
+
+.tx-pages button {
+    width: 34px;
+    height: 34px;
+
+    border-radius: 8px;
+    border: 1px solid var(--border);
+
+    background: var(--card-secondary);
+    color: var(--text);
+
+    font-size: 12px;
+    cursor: pointer;
+}
+
+.tx-pages button.active {
+    background: var(--primary);
+    border-color: var(--primary);
+    color: #fff;
+}
+
+/* ====================================
+   MOBILE
+==================================== */
+
+@media (max-width: 768px) {
+
+    .tx-header {
+        flex-direction: column;
+        gap: 14px;
+    }
+
+    .tx-stats {
+        grid-template-columns: 1fr;
+    }
+
+    .tx-filters {
+        grid-template-columns: 1fr;
+    }
+
+    .tx-arrow {
+        display: none;
+    }
+
+    .tx-pagination {
+        flex-direction: column;
+        gap: 12px;
+    }
+
+    .tx-stat-card h3 {
+        font-size: 20px;
+    }
+
+    .tx-table-head {
+        display: none;
+    }
+
+    .tx-row {
+        display: grid;
+        grid-template-columns: 1fr auto;
+        grid-template-areas:
+            "info status"
+            "amount date";
+
+        gap: 10px 12px;
+        padding: 14px 16px;
+    }
+
+    .tx-info {
+        grid-area: info;
+        min-width: 0;
+    }
+
+    .tx-icon {
+        width: 30px;
+        height: 30px;
+        font-size: 12px;
+    }
+
+    .tx-status {
+        grid-area: status;
+        justify-self: end;
+        align-self: start;
+        white-space: nowrap;
+    }
+
+    .tx-amount {
+        grid-area: amount;
+        font-size: 12px;
+        font-weight: 600;
+    }
+
+    .tx-date {
+        grid-area: date;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-end;
+        text-align: right;
+        gap: 2px;
+    }
+
+    .tx-pages button {
+        display: none;
+    }
+
+    .tx-pages button.active,
+    .tx-pages .next-btn {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+}

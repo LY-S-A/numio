@@ -1,0 +1,241 @@
+/* =========================
+   TOPBAR
+========================= */
+
+.topbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  padding: 20px 24px;
+
+  background-color: var(--bg);
+  border-bottom: 1px solid var(--border);
+
+  position: fixed;
+  top: 0;
+  right: 0;
+  left: 0;
+
+  z-index: 1100;
+}
+
+/* Left */
+
+.topbar-left {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+
+  flex: 1;
+  min-width: 0;
+}
+
+/* Right */
+
+.topbar-right {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+
+  flex-shrink: 0;
+}
+
+/* Welcome */
+
+.welcome-text {
+  min-width: 0;
+}
+
+.welcome-text p {
+  font-size: 12px;
+  color: var(--text-secondary);
+  margin: 0;
+}
+
+.welcome-text h1 {
+  font-size: 20px;
+  font-weight: 700;
+  margin: 0;
+  color: var(--text);
+}
+
+/* Hamburger */
+
+.hamburger {
+  display: none;
+
+  border: none;
+  background: transparent;
+
+  color: var(--text);
+  font-size: 20px;
+
+  cursor: pointer;
+  padding: 0;
+}
+
+/* Wallet */
+
+.wallet-box {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  gap: 14px;
+
+  padding: 10px 14px;
+
+  background: var(--card-secondary);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+}
+
+.wallet-box span {
+  font-size: 11px;
+  color: var(--text-secondary);
+}
+
+.wallet-box h3 {
+  font-size: 14px;
+  font-weight: 600;
+  margin: 2px 0 0;
+  color: var(--text);
+}
+
+.wallet-box svg {
+  font-size: 18px;
+  color: var(--text-muted);
+}
+
+/* Icons */
+
+.top-icon {
+  font-size: 16px;
+  color: var(--text-muted);
+  cursor: pointer;
+  transition: 0.2s ease;
+}
+
+.top-icon:hover {
+  color: var(--text);
+}
+
+.avatar {
+  font-size: 32px;
+  color: var(--text-muted);
+}
+
+/* =========================
+   RESPONSIVE
+========================= */
+
+@media (max-width: 992px) {
+  .hamburger {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+}
+
+@media (min-width: 769px) {
+  .topbar {
+    left: 280px;
+  }
+}
+
+@media (max-width: 768px) {
+  .topbar {
+    padding: 18px 16px;
+    min-height: 85px;
+    z-index: 900;
+  }
+
+  .welcome-text p {
+    display: none;
+  }
+
+  .welcome-text h1 {
+    font-size: 14px;
+  }
+
+  .hamburger {
+    font-size: 22px;
+  }
+
+  .topbar-right {
+    gap: 18px;
+    margin-left: 12px;
+  }
+
+  .wallet-box {
+    padding: 8px 12px;
+    gap: 10px;
+    border-radius: 10px;
+    margin-right: 6px;
+  }
+
+  .wallet-box span {
+    font-size: 8px;
+  }
+
+  .wallet-box h3 {
+    font-size: 16px;
+  }
+
+  .wallet-box svg {
+    font-size: 18px;
+  }
+
+  .top-icon {
+    font-size: 18px;
+  }
+
+  .avatar {
+    font-size: 34px;
+  }
+}
+
+/* Small Phones */
+
+@media (max-width: 480px) {
+  .topbar {
+    padding: 16px 14px;
+    min-height: 80px;
+  }
+
+  .topbar-right {
+    gap: 14px;
+    margin-left: 8px;
+  }
+
+  .wallet-box {
+    padding: 7px 10px;
+    gap: 8px;
+    margin-right: 4px;
+  }
+
+  .wallet-box span {
+    display: none;
+  }
+
+  .wallet-box h3 {
+    font-size: 13px;
+  }
+
+  .wallet-box svg {
+    font-size: 16px;
+  }
+
+  .top-icon {
+    font-size: 17px;
+  }
+
+  .avatar {
+    font-size: 32px;
+  }
+
+  .hamburger {
+    font-size: 21px;
+  }
+}
