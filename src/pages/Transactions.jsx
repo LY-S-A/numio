@@ -55,164 +55,154 @@ const deposits = [
 
 const DepositHistory = () => {
   return (
-      <div className="tx-page">
+    <div className="tx-page">
 
-        {/* HEADER */}
-        <div className="tx-header">
+      {/* HEADER */}
+      <div className="tx-header">
+        <div>
+          <h1>Deposit History</h1>
+          <p>
+            View all wallet funding transactions and deposit records
+          </p>
+        </div>
+
+
+      </div>
+
+      {/* STATS */}
+      <div className="tx-stats">
+
+        <div className="tx-stat-card">
+          <div className="tx-stat-icon green">
+            <FaArrowDown />
+          </div>
+
           <div>
-            <h1>Deposit History</h1>
-            <p>
-              View all wallet funding transactions and deposit records
-            </p>
+            <span>Total Deposited</span>
+            <h3>₦120,000.00</h3>
+            <small>Lifetime deposits</small>
           </div>
-
-          
         </div>
 
-        {/* STATS */}
-        <div className="tx-stats">
-
-          <div className="tx-stat-card">
-            <div className="tx-stat-icon green">
-              <FaArrowDown />
-            </div>
-
-            <div>
-              <span>Total Deposited</span>
-              <h3>₦120,000.00</h3>
-              <small>Lifetime deposits</small>
-            </div>
+        <div className="tx-stat-card">
+          <div className="tx-stat-icon purple">
+            <FaWallet />
           </div>
 
-          <div className="tx-stat-card">
-            <div className="tx-stat-icon purple">
-              <FaWallet />
-            </div>
-
-            <div>
-              <span>Current Balance</span>
-              <h3>₦81,500.00</h3>
-              <small>Available wallet balance</small>
-            </div>
+          <div>
+            <span>Current Balance</span>
+            <h3>₦81,500.00</h3>
+            <small>Available wallet balance</small>
           </div>
-
         </div>
 
-        {/* FILTERS */}
-        <div className="tx-filters">
+      </div>
 
-          <div className="tx-search">
-            <FiSearch />
+      {/* FILTERS */}
+      <div className="tx-filters">
 
-            <input
-              type="text"
-              placeholder="Search deposit reference..."
-            />
-          </div>
+        <div className="tx-search">
+          <FiSearch />
 
-          {/* <button className="tx-filter-btn">
-            All Deposits
-            <FiChevronDown />
-          </button>
-
-          <button className="tx-filter-btn">
-            Last 30 Days
-            <FiChevronDown />
-          </button> */}
-
-          <div className="select-wrapper">
-  <select>
-    <option>All Deposits</option>
-    <option>Successful</option>
-    <option>Pending</option>
-    <option>Failed</option>
-  </select>
-</div>
-
-<div className="select-wrapper">
-  <select>
-    <option>Last 30 Days</option>
-    <option>Today</option>
-    <option>Last 7 Days</option>
-    <option>Last 90 Days</option>
-    <option>This Year</option>
-  </select>
-</div>
-
+          <input
+            type="text"
+            placeholder="Search deposit reference..."
+          />
         </div>
 
-        {/* TABLE */}
-        <div className="tx-table">
+        <div className="select-wrapper">
+          <select>
+            <option>All Deposits</option>
+            <option>Successful</option>
+            <option>Pending</option>
+            <option>Failed</option>
+          </select>
+        </div>
 
-          <div className="tx-table-head">
-            <span>Gateway</span>
-            <span>Status</span>
-            <span>Amount</span>
-            <span>Date</span>
+        <div className="select-wrapper">
+          <select>
+            <option>Last 30 Days</option>
+            <option>Today</option>
+            <option>Last 7 Days</option>
+            <option>Last 90 Days</option>
+            <option>This Year</option>
+          </select>
+        </div>
+
+      </div>
+
+      {/* TABLE */}
+      <div className="tx-table">
+
+        <div className="tx-table-head">
+          <span>Gateway</span>
+          <span>Status</span>
+          <span>Amount</span>
+          <span>Date</span>
+        </div>
+
+        {deposits.map((item, index) => (
+          <div
+            className="tx-row"
+            key={index}
+          >
+
+            <div className="tx-info">
+
+              <div className="tx-icon deposit">
+                <FaArrowDown />
+              </div>
+
+              <div>
+                <h4>{item.title}</h4>
+                <p>{item.reference}</p>
+              </div>
+
+            </div>
+
+            <div className="tx-status-wrapper">
+              <span
+                className={`tx-status ${item.status.toLowerCase()}`}
+              >
+                {item.status}
+              </span>
+            </div>
+
+            <div className="tx-amount credit">
+              {item.amount}
+            </div>
+
+            <div className="tx-date">
+              <span>{item.date}</span>
+              <small>{item.time}</small>
+            </div>
+
+            <FiChevronRight className="tx-arrow" />
+
           </div>
+        ))}
 
-          {deposits.map((item, index) => (
-            <div
-              className="tx-row"
-              key={index}
-            >
+        {/* PAGINATION */}
+        <div className="tx-pagination">
 
-              <div className="tx-info">
+          <p className="pagination-text">
+            Showing 1 to 5 of 25 deposits
+          </p>
 
-                <div className="tx-icon deposit">
-                  <FaArrowDown />
-                </div>
-
-                <div>
-                  <h4>{item.title}</h4>
-                  <p>{item.reference}</p>
-                </div>
-
-              </div>
-
-              <div className="tx-status-wrapper">
-                <span
-                  className={`tx-status ${item.status.toLowerCase()}`}
-                >
-                  {item.status}
-                </span>
-              </div>
-
-              <div className="tx-amount credit">
-                {item.amount}
-              </div>
-
-              <div className="tx-date">
-                <span>{item.date}</span>
-                <small>{item.time}</small>
-              </div>
-
-              <FiChevronRight className="tx-arrow" />
-
-            </div>
-          ))}
-
-          {/* PAGINATION */}
-          <div className="tx-pagination">
-
-            <p className="pagination-text">
-              Showing 1 to 5 of 25 deposits
-            </p>
-
-            <div className="tx-pages">
-              <button className="active">1</button>
-              <button>2</button>
-              <button>3</button>
-              <button className="next-btn">
-                <FiChevronRight />
-              </button>
-            </div>
-
+          <div className="tx-pages">
+            <button className="active">1</button>
+            <button>2</button>
+            <button>3</button>
+            <button className="next-btn">
+              <FiChevronRight />
+            </button>
           </div>
 
         </div>
 
       </div>
+
+    </div>
   );
 };
 
