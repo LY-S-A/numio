@@ -509,6 +509,11 @@
         gap: 2px;
     }
 
+    .tx-pagination{
+        display: flex;
+        flex-direction: row;
+    }
+
     .tx-pages button {
         display: none;
     }
