@@ -103,7 +103,7 @@ export default function Support() {
         {/* Input */}
         <div className="chat-input">
           <button className="attach-btn">
-            <FiPaperclip />
+            <FiPaperclip /> 
           </button>
 
           <input
