@@ -56,7 +56,7 @@ export const BalanceProvider = ({ children }) => {
       }
 
       const { data } = await axios.get(
-        `${API_URL}/user/wallet`,
+        `${API_URL}/api/user/wallet`,
         {
           headers: {
             Authorization: `Bearer ${token}`,
