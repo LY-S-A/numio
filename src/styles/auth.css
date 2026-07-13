@@ -322,6 +322,17 @@ body.light-theme .input-wrapper input {
   height: 16px;
 }
 
+.google-btn-wrapper {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  margin-top: 16px;
+}
+
+.google-btn-wrapper > div {
+  width: 100%;
+}
+
 /* ====================================
    DIVIDER
 ==================================== */
