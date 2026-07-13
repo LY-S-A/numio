@@ -176,20 +176,6 @@ const FundWallet = () => {
 
         </div>
 
-        {/* BALANCE CARD */}
-        <div className="wallet-balance-card">
-
-          <div className="wallet-balance-header">
-
-            <h3>Wallet Balance</h3>
-
-            <button className="wallet-refresh-btn">
-              <FiRefreshCw />
-              Refresh
-            </button>
-
-          </div>
-
         {/* TRANSACTIONS */}
         <div className="wallet-transactions-card">
 
