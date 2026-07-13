@@ -190,17 +190,6 @@ const FundWallet = () => {
 
           </div>
 
-          <div className="wallet-balance-amount">
-            ₦100,900.00
-          </div>
-
-          <p>
-            Available balance for purchasing
-            your numbers.
-          </p>
-
-        </div>
-
         {/* TRANSACTIONS */}
         <div className="wallet-transactions-card">
 
