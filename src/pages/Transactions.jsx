@@ -8,6 +8,7 @@ import {
   FaWallet,
 } from "react-icons/fa";
 
+import { useBalance } from "../context/BalanceContext";
 import "../styles/transactions.css";
 
 const deposits = [
@@ -54,6 +55,9 @@ const deposits = [
 ];
 
 const DepositHistory = () => {
+
+  const { formattedBalance } = useBalance();
+  
   return (
     <div className="tx-page">
 
@@ -91,7 +95,7 @@ const DepositHistory = () => {
 
           <div>
             <span>Current Balance</span>
-            <h3>₦81,500.00</h3>
+            <h3>{formattedBalance}</h3>
             <small>Available wallet balance</small>
           </div>
         </div>
