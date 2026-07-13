@@ -223,7 +223,7 @@ export default function Register() {
 
           <p className="auth-footer">
             Already have an account?
-            <a href="/login"> Login</a>
+            <a href="/"> Login</a>
           </p>
         </div>
       </div>
