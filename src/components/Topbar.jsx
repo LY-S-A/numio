@@ -1,7 +1,6 @@
 import {
   FaBell,
   FaWallet,
-  // FaUserCircle,
   FaBars,
 } from "react-icons/fa";
 
