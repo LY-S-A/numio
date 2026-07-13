@@ -1,7 +1,7 @@
 import {
   FaBell,
   FaWallet,
-  FaUserCircle,
+  // FaUserCircle,
   FaBars,
 } from "react-icons/fa";
 
@@ -35,7 +35,6 @@ const Topbar = ({ setSidebarOpen }) => {
         </div>
 
         <FaBell className="top-icon" />
-        <FaUserCircle className="avatar" />
       </div>
     </header>
   );
