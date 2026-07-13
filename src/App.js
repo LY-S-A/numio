@@ -10,6 +10,7 @@ import Layout from "./components/Layout";
 
 import Login from "./pages/Login";
 import Register from "./pages/Register";
+import ForgotPassword from "./pages/ForgotPassword";
 
 import Dashboard from "./pages/Dashboard";
 import BuyNumber from "./pages/BuyNumber";
@@ -36,6 +37,11 @@ function App() {
           <Route
             path="/register"
             element={<Register />}
+          />
+
+          <Route
+            path="/forgot-password"
+            element={<ForgotPassword />}
           />
 
           {/* Protected Pages */}
