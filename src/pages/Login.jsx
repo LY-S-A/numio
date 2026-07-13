@@ -191,7 +191,7 @@
 
 import { useState } from "react";
 import axios from "axios";
-import { useGoogleLogin } from "@react-oauth/google";
+import { GoogleLogin } from "@react-oauth/google";
 import {
   FiMail,
   FiLock,
