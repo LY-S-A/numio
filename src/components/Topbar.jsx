@@ -45,12 +45,12 @@
 
 // export default Topbar;
 
+import { useEffect, useRef, useState } from "react";
 import {
   FaBell,
   FaWallet,
   FaBars,
 } from "react-icons/fa";
-import { useEffect, useState } from "react";
 
 import { useBalance } from "../context/BalanceContext";
 
@@ -60,31 +60,32 @@ const Topbar = ({ setSidebarOpen }) => {
   const { balance } = useBalance();
 
   const [displayBalance, setDisplayBalance] = useState(0);
+  const previousBalance = useRef(0);
 
   useEffect(() => {
-    let start = displayBalance;
-    const end = balance;
+    const from = previousBalance.current;
+    const to = balance;
+    const duration = 800;
 
-    if (start === end) return;
+    const start = performance.now();
 
-    const duration = 800; // ms
-    const increment = (end - start) / (duration / 16);
+    const animate = (time) => {
+      const progress = Math.min((time - start) / duration, 1);
 
-    const timer = setInterval(() => {
-      start += increment;
+      const value = Math.round(
+        from + (to - from) * progress
+      );
 
-      if (
-        (increment > 0 && start >= end) ||
-        (increment < 0 && start <= end)
-      ) {
-        start = end;
-        clearInterval(timer);
+      setDisplayBalance(value);
+
+      if (progress < 1) {
+        requestAnimationFrame(animate);
+      } else {
+        previousBalance.current = to;
       }
+    };
 
-      setDisplayBalance(Math.round(start));
-    }, 16);
-
-    return () => clearInterval(timer);
+    requestAnimationFrame(animate);
   }, [balance]);
 
   const formattedBalance = new Intl.NumberFormat("en-NG", {
@@ -104,6 +105,7 @@ const Topbar = ({ setSidebarOpen }) => {
         </button>
 
         <div className="welcome-text">
+          {/* <p>Welcome back,</p> */}
           <h1>Hi Olalekan 👋</h1>
         </div>
       </div>
