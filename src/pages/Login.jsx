@@ -267,15 +267,15 @@ export default function Login() {
   };
 
   // ================= GOOGLE LOGIN =================
-  const googleLogin = useGoogleLogin({
-  flow: "auth-code",
-
-  onSuccess: async (codeResponse) => {
+  const handleGoogleSuccess = async (
+    credentialResponse
+  ) => {
     try {
       const res = await axios.post(
         `${API_URL}/api/auth/google`,
         {
-          code: codeResponse.code,
+          token:
+            credentialResponse.credential,
         }
       );
 
@@ -296,43 +296,7 @@ export default function Login() {
           "Google login failed."
       );
     }
-  },
-
-  onError: () => {
-    alert("Google login failed.");
-  },
-});
-
-  // const handleGoogleSuccess = async (
-  //   credentialResponse
-  // ) => {
-  //   try {
-  //     const res = await axios.post(
-  //       `${API_URL}/api/auth/google`,
-  //       {
-  //         token:
-  //           credentialResponse.credential,
-  //       }
-  //     );
-
-  //     localStorage.setItem(
-  //       "token",
-  //       res.data.token
-  //     );
-
-  //     localStorage.setItem(
-  //       "user",
-  //       JSON.stringify(res.data.user)
-  //     );
-
-  //     navigate("/dashboard");
-  //   } catch (err) {
-  //     alert(
-  //       err.response?.data?.message ||
-  //         "Google login failed."
-  //     );
-  //   }
-  // };
+  };
 
   return (
     <div className="auth-page">
@@ -432,18 +396,17 @@ export default function Login() {
             <span>OR</span>
           </div>
 
-         <button
-  type="button"
-  className="social-btn"
-  onClick={() => googleLogin()}
->
-  <img
-    src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/google/google-original.svg"
-    alt="Google"
+        <div className="google-btn-wrapper">
+  <GoogleLogin
+    onSuccess={handleGoogleSuccess}
+    onError={() => alert("Google login failed.")}
+    theme={darkMode ? "filled_black" : "outline"}
+    size="large"
+    text="continue_with"
+    shape="rectangular"
+    width="380"
   />
-
-  Continue with Google
-</button>
+</div>
 
           <p className="auth-footer">
             Don't have an account?{" "}
