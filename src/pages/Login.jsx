@@ -191,7 +191,7 @@
 
 import { useState } from "react";
 import axios from "axios";
-import { GoogleLogin } from "@react-oauth/google";
+import { useGoogleLogin } from "@react-oauth/google";
 import {
   FiMail,
   FiLock,
@@ -267,6 +267,41 @@ export default function Login() {
   };
 
   // ================= GOOGLE LOGIN =================
+  const googleLogin = useGoogleLogin({
+  flow: "auth-code",
+
+  onSuccess: async (codeResponse) => {
+    try {
+      const res = await axios.post(
+        `${API_URL}/api/auth/google`,
+        {
+          code: codeResponse.code,
+        }
+      );
+
+      localStorage.setItem(
+        "token",
+        res.data.token
+      );
+
+      localStorage.setItem(
+        "user",
+        JSON.stringify(res.data.user)
+      );
+
+      navigate("/dashboard");
+    } catch (err) {
+      alert(
+        err.response?.data?.message ||
+          "Google login failed."
+      );
+    }
+  },
+
+  onError: () => {
+    alert("Google login failed.");
+  },
+});
 
   const handleGoogleSuccess = async (
     credentialResponse
@@ -397,19 +432,18 @@ export default function Login() {
             <span>OR</span>
           </div>
 
-          <GoogleLogin
-            onSuccess={handleGoogleSuccess}
-            onError={() =>
-              alert("Google login failed.")
-            }
-            theme={
-              darkMode ? "filled_black" : "outline"
-            }
-            size="large"
-            width="100%"
-            text="continue_with"
-            shape="rectangular"
-          />
+         <button
+  type="button"
+  className="social-btn"
+  onClick={() => googleLogin()}
+>
+  <img
+    src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/google/google-original.svg"
+    alt="Google"
+  />
+
+  Continue with Google
+</button>
 
           <p className="auth-footer">
             Don't have an account?{" "}
