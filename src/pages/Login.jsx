@@ -303,36 +303,36 @@ export default function Login() {
   },
 });
 
-  const handleGoogleSuccess = async (
-    credentialResponse
-  ) => {
-    try {
-      const res = await axios.post(
-        `${API_URL}/api/auth/google`,
-        {
-          token:
-            credentialResponse.credential,
-        }
-      );
+  // const handleGoogleSuccess = async (
+  //   credentialResponse
+  // ) => {
+  //   try {
+  //     const res = await axios.post(
+  //       `${API_URL}/api/auth/google`,
+  //       {
+  //         token:
+  //           credentialResponse.credential,
+  //       }
+  //     );
 
-      localStorage.setItem(
-        "token",
-        res.data.token
-      );
+  //     localStorage.setItem(
+  //       "token",
+  //       res.data.token
+  //     );
 
-      localStorage.setItem(
-        "user",
-        JSON.stringify(res.data.user)
-      );
+  //     localStorage.setItem(
+  //       "user",
+  //       JSON.stringify(res.data.user)
+  //     );
 
-      navigate("/dashboard");
-    } catch (err) {
-      alert(
-        err.response?.data?.message ||
-          "Google login failed."
-      );
-    }
-  };
+  //     navigate("/dashboard");
+  //   } catch (err) {
+  //     alert(
+  //       err.response?.data?.message ||
+  //         "Google login failed."
+  //     );
+  //   }
+  // };
 
   return (
     <div className="auth-page">
