@@ -1,6 +1,5 @@
 import {
   FiInfo,
-  FiRefreshCw,
   FiChevronRight,
 } from "react-icons/fi";
 
