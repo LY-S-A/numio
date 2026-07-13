@@ -404,7 +404,7 @@ export default function Login() {
     size="large"
     text="continue_with"
     shape="rectangular"
-    width="320"
+    width="340"
   />
 </div>
 
