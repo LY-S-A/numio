@@ -1,3 +1,271 @@
+// import {
+//   FiInfo,
+//   FiChevronRight,
+// } from "react-icons/fi";
+
+// import flutterwaveLogo from "../assets/flutterwave.png";
+// import paystackLogo from "../assets/paystack.png";
+// import "../styles/fund-wallet.css";
+
+// const FundWallet = () => {
+//   return (
+  
+//       <div className="wallet-page">
+
+//         {/* HEADER */}
+//         <div className="wallet-header">
+//           <h1>Fund Wallet</h1>
+//           <p>
+//             Add funds to your account using available payment gateways.
+//           </p>
+//         </div>
+
+//         {/* FUND CARD */}
+//         <div className="wallet-card">
+
+//           {/* STEPS */}
+//           <div className="wallet-steps">
+
+//             <div className="wallet-step active">
+//               <div className="wallet-step-circle">1</div>
+
+//               <div>
+//                 <h4>Enter Amount</h4>
+//                 <p>Choose amount to fund</p>
+//               </div>
+//             </div>
+
+//             <div className="wallet-step-arrow">
+//               <FiChevronRight />
+//             </div>
+
+//             <div className="wallet-step active">
+//               <div className="wallet-step-circle">2</div>
+
+//               <div>
+//                 <h4>Select Gateway</h4>
+//                 <p>Choose payment method</p>
+//               </div>
+//             </div>
+
+//             <div className="wallet-step-arrow">
+//               <FiChevronRight />
+//             </div>
+
+//             <div className="wallet-step active">
+//               <div className="wallet-step-circle">3</div>
+
+//               <div>
+//                 <h4>Complete Payment</h4>
+//                 <p>Secure checkout</p>
+//               </div>
+//             </div>
+
+//           </div>
+
+//           {/* FORM */}
+//           <div className="wallet-form">
+
+//             <div className="wallet-field">
+//               <label>Amount</label>
+
+//               <div className="wallet-amount-input">
+//                 <span>₦</span>
+
+//                 <input
+//                   type="number"
+//                   placeholder="5000"
+//                 />
+//               </div>
+//             </div>
+
+//             <div className="wallet-field">
+//               <label>Min: ₦1,000 • Max: ₦500,000</label>
+
+//               <div className="wallet-quick-amounts">
+//                 <button type="button">₦1,000</button>
+
+//                 <button
+//                   type="button"
+//                   className="active"
+//                 >
+//                   ₦5,000
+//                 </button>
+
+//                 <button type="button">₦10,000</button>
+
+//                 <button type="button">₦50,000</button>
+//               </div>
+//             </div>
+
+//             <div className="wallet-field">
+//               <label>Payment Gateway</label>
+
+//               <div className="wallet-gateway-grid">
+
+//                 <div className="wallet-gateway-card active">
+
+//                   <div className="wallet-gateway-left">
+
+//                     <img
+//                       src={flutterwaveLogo}
+//                       alt="Flutterwave"
+//                       className="wallet-gateway-logo"
+//                     />
+
+//                     <div>
+//                       <h4>Flutterwave</h4>
+//                       <p>Card • Transfer • USSD</p>
+//                     </div>
+
+//                   </div>
+
+//                   <div className="wallet-radio active">
+//                     <span></span>
+//                   </div>
+
+//                 </div>
+
+//               <div className="wallet-gateway-card">
+
+//   <div className="wallet-gateway-left">
+
+//     <img
+//       src={paystackLogo}
+//       alt="Paystack"
+//       className="wallet-gateway-logo"
+//     />
+
+//     <div>
+//       <h4>Paystack</h4>
+//       <p>Card • Bank Transfer • USSD</p>
+//     </div>
+
+//   </div>
+
+//   <div className="wallet-radio">
+//     <span></span>
+//   </div>
+
+// </div>
+
+//               </div>
+//             </div>
+
+//           </div>
+
+//           {/* ACTION */}
+//           <div className="wallet-action-row">
+
+//             <button className="wallet-fund-btn">
+//               Fund Wallet
+//             </button>
+
+//           </div>
+
+//           <div className="wallet-notice">
+//             <FiInfo />
+
+//             <span>
+//               Payments are securely processed through
+//               payment gateways.
+//             </span>
+//           </div>
+
+//         </div>
+
+//         {/* TRANSACTIONS */}
+//         <div className="wallet-transactions-card">
+
+//           <div className="wallet-transactions-header">
+
+//             <h3>Recent Deposits</h3>
+
+//             <button type="button">
+//               View All
+//             </button>
+
+//           </div>
+
+//           <div className="wallet-transaction-item">
+
+//             <div>
+//               <h4>Flutterwave Deposit</h4>
+//               <p>Today • 11:35 AM</p>
+//             </div>
+
+//             <div className="wallet-transaction-right">
+//               <span className="wallet-success">
+//                 Success
+//               </span>
+
+//               <h4>+₦5,000</h4>
+//             </div>
+
+//           </div>
+
+//           <div className="wallet-transaction-item">
+
+//             <div>
+//               <h4>Paystack Deposit</h4>
+//               <p>Yesterday • 4:12 PM</p>
+//             </div>
+
+//             <div className="wallet-transaction-right">
+//               <span className="wallet-success">
+//                 Success
+//               </span>
+
+//               <h4>+₦10,000</h4>
+//             </div>
+
+//           </div>
+
+//           <div className="wallet-transaction-item">
+
+//             <div>
+//               <h4>Flutterwave Deposit</h4>
+//               <p>Jun 05 • 08:45 AM</p>
+//             </div>
+
+//             <div className="wallet-transaction-right">
+//               <span className="wallet-pending">
+//                 Pending
+//               </span>
+
+//               <h4>+₦2,500</h4>
+//             </div>
+
+//           </div>
+
+//         </div>
+
+//         {/* HELP CARD */}
+//         <div className="wallet-help-card">
+
+//           <div>
+//             <h4>Need help funding?</h4>
+
+//             <p>
+//               Contact support if your payment
+//               hasn't reflected in your wallet.
+//             </p>
+//           </div>
+
+//           <button className="wallet-docs-btn">
+//             Contact Support
+//           </button>
+
+//         </div>
+
+//       </div>
+//   );
+// };
+
+// export default FundWallet;
+
+import React, { useState } from "react";
+import axios from "axios";
 import {
   FiInfo,
   FiChevronRight,
@@ -5,260 +273,358 @@ import {
 
 import flutterwaveLogo from "../assets/flutterwave.png";
 import paystackLogo from "../assets/paystack.png";
+
 import "../styles/fund-wallet.css";
 
+const API_URL = process.env.REACT_APP_API_URL;
+
+const quickAmounts = [1000, 5000, 10000, 50000];
+
 const FundWallet = () => {
+  const [amount, setAmount] = useState("");
+  const [gateway, setGateway] = useState("flutterwave");
+  const [loading, setLoading] = useState(false);
+
+  const handleQuickAmount = (value) => {
+    setAmount(value);
+  };
+
+  const handleFundWallet = async () => {
+    if (!amount || Number(amount) < 1000) {
+      return alert("Minimum deposit is ₦1,000");
+    }
+
+    try {
+      setLoading(true);
+
+      const token = localStorage.getItem("token");
+
+      const endpoint =
+        gateway === "flutterwave"
+          ? `${API_URL}/api/flutterwave/init`
+          : `${API_URL}/api/paystack/init`;
+
+      const { data } = await axios.post(
+        endpoint,
+        {
+          amount: Number(amount),
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+
+      window.location.href = data.paymentUrl;
+    } catch (err) {
+      alert(
+        err.response?.data?.message ||
+          "Unable to initialize payment."
+      );
+    } finally {
+      setLoading(false);
+    }
+  };
+
   return (
-  
-      <div className="wallet-page">
+    <div className="wallet-page">
 
-        {/* HEADER */}
-        <div className="wallet-header">
-          <h1>Fund Wallet</h1>
-          <p>
-            Add funds to your account using available payment gateways.
-          </p>
-        </div>
+      {/* HEADER */}
+      <div className="wallet-header">
+        <h1>Fund Wallet</h1>
 
-        {/* FUND CARD */}
-        <div className="wallet-card">
+        <p>
+          Add funds to your account using a secure payment gateway.
+        </p>
+      </div>
 
-          {/* STEPS */}
-          <div className="wallet-steps">
+      {/* CARD */}
+      <div className="wallet-card">
 
-            <div className="wallet-step active">
-              <div className="wallet-step-circle">1</div>
+        {/* STEPS */}
+        <div className="wallet-steps">
 
-              <div>
-                <h4>Enter Amount</h4>
-                <p>Choose amount to fund</p>
-              </div>
+          <div className="wallet-step active">
+            <div className="wallet-step-circle">1</div>
+
+            <div>
+              <h4>Enter Amount</h4>
+              <p>Choose amount to fund</p>
             </div>
-
-            <div className="wallet-step-arrow">
-              <FiChevronRight />
-            </div>
-
-            <div className="wallet-step active">
-              <div className="wallet-step-circle">2</div>
-
-              <div>
-                <h4>Select Gateway</h4>
-                <p>Choose payment method</p>
-              </div>
-            </div>
-
-            <div className="wallet-step-arrow">
-              <FiChevronRight />
-            </div>
-
-            <div className="wallet-step active">
-              <div className="wallet-step-circle">3</div>
-
-              <div>
-                <h4>Complete Payment</h4>
-                <p>Secure checkout</p>
-              </div>
-            </div>
-
           </div>
 
-          {/* FORM */}
-          <div className="wallet-form">
+          <div className="wallet-step-arrow">
+            <FiChevronRight />
+          </div>
 
-            <div className="wallet-field">
-              <label>Amount</label>
+          <div className="wallet-step active">
+            <div className="wallet-step-circle">2</div>
 
-              <div className="wallet-amount-input">
-                <span>₦</span>
-
-                <input
-                  type="number"
-                  placeholder="5000"
-                />
-              </div>
+            <div>
+              <h4>Select Gateway</h4>
+              <p>Choose payment method</p>
             </div>
+          </div>
 
-            <div className="wallet-field">
-              <label>Min: ₦1,000 • Max: ₦500,000</label>
+          <div className="wallet-step-arrow">
+            <FiChevronRight />
+          </div>
 
-              <div className="wallet-quick-amounts">
-                <button type="button">₦1,000</button>
+          <div className="wallet-step active">
+            <div className="wallet-step-circle">3</div>
+
+            <div>
+              <h4>Complete Payment</h4>
+              <p>Secure checkout</p>
+            </div>
+          </div>
+
+        </div>
+
+        {/* FORM */}
+        <div className="wallet-form">
+
+          {/* Amount */}
+          <div className="wallet-field">
+            <label>Amount</label>
+
+            <div className="wallet-amount-input">
+              <span>₦</span>
+
+              <input
+                type="number"
+                placeholder="5000"
+                value={amount}
+                onChange={(e) => setAmount(e.target.value)}
+              />
+            </div>
+          </div>
+
+          {/* Quick Amounts */}
+          <div className="wallet-field">
+
+            <label>
+              Min: ₦1,000 • Max: ₦500,000
+            </label>
+
+            <div className="wallet-quick-amounts">
+
+              {quickAmounts.map((value) => (
 
                 <button
+                  key={value}
                   type="button"
-                  className="active"
+                  className={
+                    Number(amount) === value
+                      ? "active"
+                      : ""
+                  }
+                  onClick={() =>
+                    handleQuickAmount(value)
+                  }
                 >
-                  ₦5,000
+                  ₦{value.toLocaleString()}
                 </button>
 
-                <button type="button">₦10,000</button>
+              ))}
 
-                <button type="button">₦50,000</button>
-              </div>
             </div>
 
-            <div className="wallet-field">
-              <label>Payment Gateway</label>
+          </div>
 
-              <div className="wallet-gateway-grid">
+          {/* Payment Gateway */}
+          <div className="wallet-field">
 
-                <div className="wallet-gateway-card active">
+            <label>Payment Gateway</label>
 
-                  <div className="wallet-gateway-left">
+            <div className="wallet-gateway-grid">
+                            {/* Flutterwave */}
+              <div
+                className={`wallet-gateway-card ${
+                  gateway === "flutterwave" ? "active" : ""
+                }`}
+                onClick={() => setGateway("flutterwave")}
+              >
+                <div className="wallet-gateway-left">
+                  <img
+                    src={flutterwaveLogo}
+                    alt="Flutterwave"
+                    className="wallet-gateway-logo"
+                  />
 
-                    <img
-                      src={flutterwaveLogo}
-                      alt="Flutterwave"
-                      className="wallet-gateway-logo"
-                    />
-
-                    <div>
-                      <h4>Flutterwave</h4>
-                      <p>Card • Transfer • USSD</p>
-                    </div>
-
+                  <div>
+                    <h4>Flutterwave</h4>
+                    <p>Card • Transfer • USSD</p>
                   </div>
-
-                  <div className="wallet-radio active">
-                    <span></span>
-                  </div>
-
                 </div>
 
-              <div className="wallet-gateway-card">
-
-  <div className="wallet-gateway-left">
-
-    <img
-      src={paystackLogo}
-      alt="Paystack"
-      className="wallet-gateway-logo"
-    />
-
-    <div>
-      <h4>Paystack</h4>
-      <p>Card • Bank Transfer • USSD</p>
-    </div>
-
-  </div>
-
-  <div className="wallet-radio">
-    <span></span>
-  </div>
-
-</div>
-
+                <div
+                  className={`wallet-radio ${
+                    gateway === "flutterwave" ? "active" : ""
+                  }`}
+                >
+                  <span />
+                </div>
               </div>
+
+              {/* Paystack */}
+              <div
+                className={`wallet-gateway-card ${
+                  gateway === "paystack" ? "active" : ""
+                }`}
+                onClick={() => setGateway("paystack")}
+              >
+                <div className="wallet-gateway-left">
+                  <img
+                    src={paystackLogo}
+                    alt="Paystack"
+                    className="wallet-gateway-logo"
+                  />
+
+                  <div>
+                    <h4>Paystack</h4>
+                    <p>Card • Bank Transfer • USSD</p>
+                  </div>
+                </div>
+
+                <div
+                  className={`wallet-radio ${
+                    gateway === "paystack" ? "active" : ""
+                  }`}
+                >
+                  <span />
+                </div>
+              </div>
+
             </div>
-
-          </div>
-
-          {/* ACTION */}
-          <div className="wallet-action-row">
-
-            <button className="wallet-fund-btn">
-              Fund Wallet
-            </button>
-
-          </div>
-
-          <div className="wallet-notice">
-            <FiInfo />
-
-            <span>
-              Payments are securely processed through
-              payment gateways.
-            </span>
           </div>
 
         </div>
 
-        {/* TRANSACTIONS */}
-        <div className="wallet-transactions-card">
+        {/* ACTION */}
+        <div className="wallet-action-row">
 
-          <div className="wallet-transactions-header">
-
-            <h3>Recent Deposits</h3>
-
-            <button type="button">
-              View All
-            </button>
-
-          </div>
-
-          <div className="wallet-transaction-item">
-
-            <div>
-              <h4>Flutterwave Deposit</h4>
-              <p>Today • 11:35 AM</p>
-            </div>
-
-            <div className="wallet-transaction-right">
-              <span className="wallet-success">
-                Success
-              </span>
-
-              <h4>+₦5,000</h4>
-            </div>
-
-          </div>
-
-          <div className="wallet-transaction-item">
-
-            <div>
-              <h4>Paystack Deposit</h4>
-              <p>Yesterday • 4:12 PM</p>
-            </div>
-
-            <div className="wallet-transaction-right">
-              <span className="wallet-success">
-                Success
-              </span>
-
-              <h4>+₦10,000</h4>
-            </div>
-
-          </div>
-
-          <div className="wallet-transaction-item">
-
-            <div>
-              <h4>Flutterwave Deposit</h4>
-              <p>Jun 05 • 08:45 AM</p>
-            </div>
-
-            <div className="wallet-transaction-right">
-              <span className="wallet-pending">
-                Pending
-              </span>
-
-              <h4>+₦2,500</h4>
-            </div>
-
-          </div>
-
-        </div>
-
-        {/* HELP CARD */}
-        <div className="wallet-help-card">
-
-          <div>
-            <h4>Need help funding?</h4>
-
-            <p>
-              Contact support if your payment
-              hasn't reflected in your wallet.
-            </p>
-          </div>
-
-          <button className="wallet-docs-btn">
-            Contact Support
+          <button
+            className="wallet-fund-btn"
+            onClick={handleFundWallet}
+            disabled={loading}
+          >
+            {loading
+              ? "Redirecting..."
+              : `Fund via ${
+                  gateway === "flutterwave"
+                    ? "Flutterwave"
+                    : "Paystack"
+                }`}
           </button>
 
         </div>
 
+        {/* NOTICE */}
+        <div className="wallet-notice">
+          <FiInfo />
+
+          <span>
+            Payments are securely processed using{" "}
+            <strong>
+              {gateway === "flutterwave"
+                ? "Flutterwave"
+                : "Paystack"}
+            </strong>
+            . Your wallet will be credited automatically
+            after successful payment verification.
+          </span>
+        </div>
+
       </div>
+
+      {/* RECENT DEPOSITS */}
+      <div className="wallet-transactions-card">
+
+        <div className="wallet-transactions-header">
+          <h3>Recent Deposits</h3>
+
+          <button type="button">
+            View All
+          </button>
+        </div>
+
+        <div className="wallet-transaction-item">
+
+          <div>
+            <h4>Flutterwave Deposit</h4>
+            <p>Today • 11:35 AM</p>
+          </div>
+
+          <div className="wallet-transaction-right">
+            <span className="wallet-success">
+              Success
+            </span>
+
+            <h4>+₦5,000</h4>
+          </div>
+
+        </div>
+
+        <div className="wallet-transaction-item">
+
+          <div>
+            <h4>Paystack Deposit</h4>
+            <p>Yesterday • 4:12 PM</p>
+          </div>
+
+          <div className="wallet-transaction-right">
+            <span className="wallet-success">
+              Success
+            </span>
+
+            <h4>+₦10,000</h4>
+          </div>
+
+        </div>
+
+        <div className="wallet-transaction-item">
+
+          <div>
+            <h4>Flutterwave Deposit</h4>
+            <p>Jun 05 • 08:45 AM</p>
+          </div>
+
+          <div className="wallet-transaction-right">
+            <span className="wallet-pending">
+              Pending
+            </span>
+
+            <h4>+₦2,500</h4>
+          </div>
+
+        </div>
+
+      </div>
+            {/* HELP CARD */}
+      <div className="wallet-help-card">
+
+        <div>
+          <h4>Need help funding?</h4>
+
+          <p>
+            Contact our support team if your payment
+            hasn't reflected in your wallet after a
+            successful transaction.
+          </p>
+        </div>
+
+        <button
+          className="wallet-docs-btn"
+          onClick={() => window.location.href = "/support"}
+        >
+          Contact Support
+        </button>
+
+      </div>
+
+    </div>
   );
 };
 
