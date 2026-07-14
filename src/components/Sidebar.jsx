@@ -1,5 +1,6 @@
 // import { useState, useEffect } from "react";
 // import { NavLink, useNavigate } from "react-router-dom";
+// import axios from "axios";
 
 // import logoDark from "../assets/logo-dark.png";
 // import logoLight from "../assets/logo-light.png";
@@ -19,31 +20,61 @@
 
 // import "../styles/sidebar.css";
 
+// const API_URL = process.env.REACT_APP_API_URL;
+
 // const Sidebar = ({
 //   sidebarOpen,
 //   setSidebarOpen,
 // }) => {
-//   const [showMenu, setShowMenu] =
-//     useState(false);
+//   const [showMenu, setShowMenu] = useState(false);
+//   const [isLightTheme, setIsLightTheme] = useState(false);
 
-//   const [isLightTheme, setIsLightTheme] =
-//     useState(false);
+//   const [username, setUsername] = useState("");
+//   const [email, setEmail] = useState("");
+//   const [loadingProfile, setLoadingProfile] = useState(true);
 
 //   const navigate = useNavigate();
 
+//   // Fetch authenticated user's profile
+//   useEffect(() => {
+//     const fetchProfile = async () => {
+//       try {
+//         const token = localStorage.getItem("token");
+
+//         const { data } = await axios.get(
+//           `${API_URL}/api/user/profile`,
+//           {
+//             headers: {
+//               Authorization: `Bearer ${token}`,
+//             },
+//           }
+//         );
+
+//         if (data.success) {
+//           setUsername(data.user.username);
+//           setEmail(data.user.email);
+//         }
+//       } catch (error) {
+//         console.error("Failed to fetch profile:", error);
+//       } finally {
+//         setLoadingProfile(false);
+//       }
+//     };
+
+//     fetchProfile();
+//   }, []);
+
+//   // Detect theme changes
 //   useEffect(() => {
 //     const checkTheme = () => {
 //       setIsLightTheme(
-//         document.body.classList.contains(
-//           "light-theme"
-//         )
+//         document.body.classList.contains("light-theme")
 //       );
 //     };
 
 //     checkTheme();
 
-//     const observer =
-//       new MutationObserver(checkTheme);
+//     const observer = new MutationObserver(checkTheme);
 
 //     observer.observe(document.body, {
 //       attributes: true,
@@ -72,28 +103,20 @@
 //       {sidebarOpen && (
 //         <div
 //           className="sidebar-overlay"
-//           onClick={() =>
-//             setSidebarOpen(false)
-//           }
+//           onClick={() => setSidebarOpen(false)}
 //         />
 //       )}
 
 //       <aside
 //         className={`sidebar ${
-//           sidebarOpen
-//             ? "sidebar-open"
-//             : ""
+//           sidebarOpen ? "sidebar-open" : ""
 //         }`}
 //       >
 //         {/* Logo */}
 //         <div className="sidebar-logo">
 //           <img
-//             src={
-//               isLightTheme
-//                 ? logoLight
-//                 : logoDark
-//             }
-//             alt="Numio Logo"
+//             src={isLightTheme ? logoLight : logoDark}
+//             alt="RealSMS Logo"
 //             className="logo-image"
 //           />
 //         </div>
@@ -103,16 +126,10 @@
 //           <NavLink
 //             to="/dashboard"
 //             end
-//             className={({
-//               isActive,
-//             }) =>
-//               isActive
-//                 ? "menu-item active"
-//                 : "menu-item"
+//             className={({ isActive }) =>
+//               isActive ? "menu-item active" : "menu-item"
 //             }
-//             onClick={() =>
-//               setSidebarOpen(false)
-//             }
+//             onClick={() => setSidebarOpen(false)}
 //           >
 //             <FaHome />
 //             Dashboard
@@ -120,16 +137,10 @@
 
 //           <NavLink
 //             to="/buy-number"
-//             className={({
-//               isActive,
-//             }) =>
-//               isActive
-//                 ? "menu-item active"
-//                 : "menu-item"
+//             className={({ isActive }) =>
+//               isActive ? "menu-item active" : "menu-item"
 //             }
-//             onClick={() =>
-//               setSidebarOpen(false)
-//             }
+//             onClick={() => setSidebarOpen(false)}
 //           >
 //             <FaShoppingCart />
 //             Buy Number
@@ -137,16 +148,10 @@
 
 //           <NavLink
 //             to="/inbox"
-//             className={({
-//               isActive,
-//             }) =>
-//               isActive
-//                 ? "menu-item active"
-//                 : "menu-item"
+//             className={({ isActive }) =>
+//               isActive ? "menu-item active" : "menu-item"
 //             }
-//             onClick={() =>
-//               setSidebarOpen(false)
-//             }
+//             onClick={() => setSidebarOpen(false)}
 //           >
 //             <FaEnvelope />
 //             Inbox (SMS)
@@ -154,16 +159,10 @@
 
 //           <NavLink
 //             to="/fund-wallet"
-//             className={({
-//               isActive,
-//             }) =>
-//               isActive
-//                 ? "menu-item active"
-//                 : "menu-item"
+//             className={({ isActive }) =>
+//               isActive ? "menu-item active" : "menu-item"
 //             }
-//             onClick={() =>
-//               setSidebarOpen(false)
-//             }
+//             onClick={() => setSidebarOpen(false)}
 //           >
 //             <FaWallet />
 //             Fund Wallet
@@ -171,16 +170,10 @@
 
 //           <NavLink
 //             to="/transactions"
-//             className={({
-//               isActive,
-//             }) =>
-//               isActive
-//                 ? "menu-item active"
-//                 : "menu-item"
+//             className={({ isActive }) =>
+//               isActive ? "menu-item active" : "menu-item"
 //             }
-//             onClick={() =>
-//               setSidebarOpen(false)
-//             }
+//             onClick={() => setSidebarOpen(false)}
 //           >
 //             <FaExchangeAlt />
 //             Transactions
@@ -188,16 +181,10 @@
 
 //           <NavLink
 //             to="/support"
-//             className={({
-//               isActive,
-//             }) =>
-//               isActive
-//                 ? "menu-item active"
-//                 : "menu-item"
+//             className={({ isActive }) =>
+//               isActive ? "menu-item active" : "menu-item"
 //             }
-//             onClick={() =>
-//               setSidebarOpen(false)
-//             }
+//             onClick={() => setSidebarOpen(false)}
 //           >
 //             <FaHeadset />
 //             Support
@@ -213,22 +200,26 @@
 
 //             <div className="user-details">
 //               <div className="user-name">
-//                 User
+//                 {loadingProfile
+//                   ? "Loading..."
+//                   : username || "User"}
 
 //                 <span className="pro-badge">
 //                   Pro
 //                 </span>
 //               </div>
 
-//               <p>user@numio.com</p>
+//               <p>
+//                 {loadingProfile
+//                   ? "Loading..."
+//                   : email || "No email"}
+//               </p>
 //             </div>
 
 //             <button
 //               className="user-settings"
 //               onClick={() =>
-//                 setShowMenu(
-//                   !showMenu
-//                 )
+//                 setShowMenu(!showMenu)
 //               }
 //             >
 //               <FaChevronDown
@@ -246,9 +237,7 @@
 //               <button
 //                 className="account-item"
 //                 onClick={() =>
-//                   handleNavigate(
-//                     "/settings"
-//                   )
+//                   handleNavigate("/settings")
 //                 }
 //               >
 //                 <FaCog />
@@ -257,9 +246,7 @@
 
 //               <button
 //                 className="account-item signout"
-//                 onClick={
-//                   handleLogout
-//                 }
+//                 onClick={handleLogout}
 //               >
 //                 <FaSignOutAlt />
 //                 Sign Out
@@ -273,7 +260,6 @@
 // };
 
 // export default Sidebar;
-
 
 import { useState, useEffect } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
@@ -475,23 +461,26 @@ const Sidebar = ({
               <FaUserCircle />
             </div>
 
-            <div className="user-details">
-              <div className="user-name">
-                {loadingProfile
-                  ? "Loading..."
-                  : username || "User"}
+           <div className="user-details">
+  {loadingProfile ? (
+    <>
+      <div className="sidebar-skeleton skeleton-name"></div>
+      <div className="sidebar-skeleton skeleton-email"></div>
+    </>
+  ) : (
+    <>
+      <div className="user-name">
+        {username}
 
-                <span className="pro-badge">
-                  Pro
-                </span>
-              </div>
+        <span className="pro-badge">
+          Pro
+        </span>
+      </div>
 
-              <p>
-                {loadingProfile
-                  ? "Loading..."
-                  : email || "No email"}
-              </p>
-            </div>
+      <p>{email}</p>
+    </>
+  )}
+</div>
 
             <button
               className="user-settings"
