@@ -7,7 +7,7 @@ import {
   FaMobileAlt,
   FaCommentDots,
   FaChartLine,
-  FaCalendarAlt,
+  FaClipboardList,
 } from "react-icons/fa";
 
 import "../styles/dashboard.css";
@@ -38,8 +38,8 @@ const Dashboard = () => {
         />
 
         <StatCard
-          icon={<FaCalendarAlt />}
-          title="Number Expiring"
+          icon={<FaClipboardList  />}
+          title="Total Orders"
           value="3"
           color="blue"
         />
