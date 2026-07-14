@@ -1,4 +1,5 @@
 // import { useEffect, useRef, useState } from "react";
+// import axios from "axios";
 // import {
 //   FaBell,
 //   FaWallet,
@@ -9,12 +10,43 @@
 
 // import "../styles/topbar.css";
 
+// const API_URL = process.env.REACT_APP_API_URL;
+
 // const Topbar = ({ setSidebarOpen }) => {
 //   const { balance } = useBalance();
 
+//   const [username, setUsername] = useState("");
 //   const [displayBalance, setDisplayBalance] = useState(0);
+
 //   const previousBalance = useRef(0);
 
+//   // Fetch user profile
+//   useEffect(() => {
+//     const fetchProfile = async () => {
+//       try {
+//         const token = localStorage.getItem("token");
+
+//         const { data } = await axios.get(
+//           `${API_URL}/api/user/profile`,
+//           {
+//             headers: {
+//               Authorization: `Bearer ${token}`,
+//             },
+//           }
+//         );
+
+//         if (data.success) {
+//           setUsername(data.user.username);
+//         }
+//       } catch (err) {
+//         console.error("Failed to fetch profile:", err);
+//       }
+//     };
+
+//     fetchProfile();
+//   }, []);
+
+//   // Animate wallet balance
 //   useEffect(() => {
 //     const from = previousBalance.current;
 //     const to = balance;
@@ -58,8 +90,7 @@
 //         </button>
 
 //         <div className="welcome-text">
-//           {/* <p>Welcome back,</p> */}
-//           <h1>Hi Olalekan 👋</h1>
+//           <h1>Hi {username || "User"} 👋</h1>
 //         </div>
 //       </div>
 
@@ -99,18 +130,19 @@ const Topbar = ({ setSidebarOpen }) => {
   const { balance } = useBalance();
 
   const [username, setUsername] = useState("");
-  const [displayBalance, setDisplayBalance] = useState(0);
+  const [loadingProfile, setLoadingProfile] = useState(true);
 
+  const [displayBalance, setDisplayBalance] = useState(0);
   const previousBalance = useRef(0);
 
-  // Fetch user profile
+  // Fetch authenticated user's profile
   useEffect(() => {
     const fetchProfile = async () => {
       try {
         const token = localStorage.getItem("token");
 
         const { data } = await axios.get(
-          `${API_URL}/api/user/profile`,
+          `${API_URL}/user/profile`,
           {
             headers: {
               Authorization: `Bearer ${token}`,
@@ -121,8 +153,10 @@ const Topbar = ({ setSidebarOpen }) => {
         if (data.success) {
           setUsername(data.user.username);
         }
-      } catch (err) {
-        console.error("Failed to fetch profile:", err);
+      } catch (error) {
+        console.error("Failed to fetch profile:", error);
+      } finally {
+        setLoadingProfile(false);
       }
     };
 
@@ -140,9 +174,7 @@ const Topbar = ({ setSidebarOpen }) => {
     const animate = (time) => {
       const progress = Math.min((time - start) / duration, 1);
 
-      const value = Math.round(
-        from + (to - from) * progress
-      );
+      const value = Math.round(from + (to - from) * progress);
 
       setDisplayBalance(value);
 
@@ -173,7 +205,11 @@ const Topbar = ({ setSidebarOpen }) => {
         </button>
 
         <div className="welcome-text">
-          <h1>Hi {username || "User"} 👋</h1>
+          <h1>
+            {loadingProfile
+              ? "Hi..."
+              : `Hi ${username || "there"} 👋`}
+          </h1>
         </div>
       </div>
 
