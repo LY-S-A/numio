@@ -4,8 +4,7 @@ import {
 } from "react-icons/fi";
 
 import flutterwaveLogo from "../assets/flutterwave.png";
-import korapayLogo from "../assets/korapay.png";
-
+import paystackLogo from "../assets/paystack.png";
 import "../styles/fund-wallet.css";
 
 const FundWallet = () => {
@@ -127,28 +126,28 @@ const FundWallet = () => {
 
                 </div>
 
-                <div className="wallet-gateway-card">
+              <div className="wallet-gateway-card">
 
-                  <div className="wallet-gateway-left">
+  <div className="wallet-gateway-left">
 
-                    <img
-                      src={korapayLogo}
-                      alt="Korapay"
-                      className="wallet-gateway-logo"
-                    />
+    <img
+      src={paystackLogo}
+      alt="Paystack"
+      className="wallet-gateway-logo"
+    />
 
-                    <div>
-                      <h4>Korapay</h4>
-                      <p>Card • Transfer</p>
-                    </div>
+    <div>
+      <h4>Paystack</h4>
+      <p>Card • Bank Transfer • USSD</p>
+    </div>
 
-                  </div>
+  </div>
 
-                  <div className="wallet-radio">
-                    <span></span>
-                  </div>
+  <div className="wallet-radio">
+    <span></span>
+  </div>
 
-                </div>
+</div>
 
               </div>
             </div>
@@ -208,7 +207,7 @@ const FundWallet = () => {
           <div className="wallet-transaction-item">
 
             <div>
-              <h4>Korapay Deposit</h4>
+              <h4>Paystack Deposit</h4>
               <p>Yesterday • 4:12 PM</p>
             </div>
 
