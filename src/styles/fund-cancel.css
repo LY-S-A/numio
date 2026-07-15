@@ -315,26 +315,22 @@ body[data-theme="dark"] .fund-status-card {
     margin-top:20px;
   }
 
-  .wallet-result-actions button{
-    width:100%;
-    height:56px;
-    border-radius:16px;
-    font-size:15px;
-    font-weight:600;
+   .wallet-result-actions button{
+    min-height: 58px;
+    height: 58px;
+    padding: 0 18px;
+    border-radius: 16px;
+    font-size: 15px;
+    font-weight: 600;
   }
 
-  /* Primary CTA */
   .wallet-cancel-primary-btn{
-    order:1;
-    box-shadow:0 10px 24px rgba(255,71,110,.22);
+    min-height: 58px;
+    line-height: 58px;
   }
 
-  /* Secondary CTA */
   .wallet-cancel-secondary-btn{
-    order:2;
-    background:transparent;
-    border:1px solid var(--border-color);
-    color:var(--text-color);
+    min-height: 54px;
   }
 
   .wallet-cancel-secondary-btn:hover{
