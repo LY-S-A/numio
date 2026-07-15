@@ -14,34 +14,6 @@
   color: var(--text-color);
 }
 
-/* ==========================================
-   FLOATING DOTS
-========================================== */
-
-.floating-dots {
-  position: absolute;
-  width: 120px;
-  height: 120px;
-  background-image: radial-gradient(
-    circle,
-    rgba(255, 71, 110, 0.35) 2px,
-    transparent 2px
-  );
-  background-size: 18px 18px;
-  opacity: 0.7;
-  animation: floatDots 6s ease-in-out infinite;
-}
-
-.dots-left {
-  top: 18%;
-  left: 10%;
-}
-
-.dots-right {
-  right: 10%;
-  bottom: 16%;
-}
-
 @keyframes floatDots {
   0%,
   100% {
@@ -80,27 +52,27 @@
    DECORATION
 ========================================== */
 
-.shape {
+.cancel-shape {
   position: absolute;
   border-radius: 50%;
   background: rgba(255, 71, 110, .12);
 }
 
-.shape1 {
+.cancel-shape1 {
   width: 10px;
   height: 10px;
   left: 70px;
   top: 55px;
 }
 
-.shape2 {
+.cancel-shape2 {
   width: 12px;
   height: 12px;
   right: 90px;
   top: 90px;
 }
 
-.shape3 {
+.cancel-shape3 {
   width: 7px;
   height: 7px;
   right: 130px;
