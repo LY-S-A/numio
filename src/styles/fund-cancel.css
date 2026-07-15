@@ -1,0 +1,347 @@
+/* ==========================================
+   FUND CANCEL PAGE
+========================================== */
+
+.fund-status-page {
+  min-height: 100vh;
+  padding: 30px 16px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  overflow: hidden;
+  color: var(--text-color);
+}
+
+/* ==========================================
+   FLOATING DOTS
+========================================== */
+
+.floating-dots {
+  position: absolute;
+  width: 120px;
+  height: 120px;
+  background-image: radial-gradient(
+    circle,
+    rgba(255, 71, 110, 0.35) 2px,
+    transparent 2px
+  );
+  background-size: 18px 18px;
+  opacity: 0.7;
+  animation: floatDots 6s ease-in-out infinite;
+}
+
+.dots-left {
+  top: 18%;
+  left: 10%;
+}
+
+.dots-right {
+  right: 10%;
+  bottom: 16%;
+}
+
+@keyframes floatDots {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-14px);
+  }
+}
+
+/* ==========================================
+   CARD
+========================================== */
+
+.fund-status-card {
+  width: 100%;
+  max-width: 540px;
+  background: var(--card-bg);
+  color: var(--text-color);
+  border: 1px solid var(--border-color);
+  border-radius: 20px;
+  padding: 38px 30px;
+  position: relative;
+  overflow: hidden;
+  text-align: center;
+  animation: fadeUp .6s ease;
+  box-shadow: 0 18px 45px rgba(0, 0, 0, .06);
+}
+
+.cancel {
+  border-top: 4px solid #ff476e;
+}
+
+/* ==========================================
+   DECORATION
+========================================== */
+
+.shape {
+  position: absolute;
+  border-radius: 50%;
+  background: rgba(255, 71, 110, .12);
+}
+
+.shape1 {
+  width: 10px;
+  height: 10px;
+  left: 70px;
+  top: 55px;
+}
+
+.shape2 {
+  width: 12px;
+  height: 12px;
+  right: 90px;
+  top: 90px;
+}
+
+.shape3 {
+  width: 7px;
+  height: 7px;
+  right: 130px;
+  top: 150px;
+}
+
+/* ==========================================
+   ICON
+========================================== */
+
+.icon-wrapper {
+  width: 84px;
+  height: 84px;
+  margin: 0 auto 26px;
+  position: relative;
+}
+
+.icon-wrapper::before,
+.icon-wrapper::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background: rgba(255, 71, 110, .16);
+  animation: pulse 2s infinite;
+}
+
+.icon-wrapper::after {
+  animation-delay: .8s;
+}
+
+.status-icon-cancel {
+  width: 84px;
+  height: 84px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #ff4a73, #ff1744);
+  color: #fff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 34px;
+  position: relative;
+  z-index: 2;
+}
+
+@keyframes pulse {
+  from {
+    transform: scale(1);
+    opacity: .8;
+  }
+
+  to {
+    transform: scale(1.8);
+    opacity: 0;
+  }
+}
+
+/* ==========================================
+   TEXT
+========================================== */
+
+.fund-status-card h2 {
+  font-size: 34px;
+  font-weight: 700;
+  margin-bottom: 14px;
+  color: var(--text-color);
+}
+
+.cancel-status {
+  color: #ff476e;
+}
+
+.fund-status-card > p {
+  font-size: 15px;
+  color: var(--secondary-text);
+  line-height: 1.7;
+  margin-bottom: 28px;
+}
+
+/* ==========================================
+   WARNING BOX
+========================================== */
+
+.warning-box {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 18px;
+  margin-bottom: 28px;
+  text-align: left;
+  border-radius: 14px;
+  background: rgba(255, 71, 110, .05);
+  border: 1px solid rgba(255, 71, 110, .14);
+}
+
+.warning-box svg {
+  font-size: 24px;
+  color: #ff476e;
+  flex-shrink: 0;
+}
+
+.warning-box h4 {
+  margin: 0 0 5px;
+  font-size: 16px;
+  color: var(--text-color);
+}
+
+.warning-box p {
+  margin: 0;
+  font-size: 13px;
+  color: var(--secondary-text);
+}
+
+/* ==========================================
+   BUTTONS
+========================================== */
+
+.wallet-result-actions {
+  display: flex;
+  gap: 14px;
+  margin-top: 24px;
+}
+
+.wallet-result-actions button {
+  flex: 1;
+  height: 56px;
+  border-radius: 14px;
+  border: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: .25s ease;
+}
+
+.wallet-primary-btn {
+  background: linear-gradient(135deg, #ff4a73, #ff1744);
+  color: #fff;
+}
+
+.wallet-primary-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 24px rgba(255, 71, 110, .30);
+}
+
+.wallet-secondary-btn {
+  background: transparent;
+  border: 1px solid rgba(255, 71, 110, .18);
+  color: var(--text-color);
+}
+
+.wallet-secondary-btn:hover {
+  background: rgba(255, 71, 110, .06);
+  transform: translateY(-2px);
+}
+
+/* ==========================================
+   REDIRECT
+========================================== */
+
+.redirect-info {
+  margin-top: 20px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--secondary-text);
+  font-size: 14px;
+}
+
+.cancel-countdown {
+  color: #ff476e;
+  font-weight: 700;
+}
+
+/* ==========================================
+   ANIMATION
+========================================== */
+
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(25px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ==========================================
+   DARK MODE
+========================================== */
+
+body.dark .fund-status-card,
+body[data-theme="dark"] .fund-status-card {
+  box-shadow:
+    0 22px 55px rgba(0, 0, 0, .45),
+    inset 0 1px 0 rgba(255, 255, 255, .03);
+}
+
+/* ==========================================
+   MOBILE
+========================================== */
+
+@media (max-width: 768px) {
+
+  .fund-status-card {
+    max-width: 100%;
+    padding: 30px 20px;
+    border-radius: 18px;
+  }
+
+  .fund-status-card h2 {
+    font-size: 28px;
+  }
+
+  .fund-status-card > p {
+    font-size: 14px;
+  }
+
+  .wallet-result-actions {
+    flex-direction: column;
+  }
+
+  .wallet-result-actions button {
+    width: 100%;
+    height: 52px;
+  }
+
+  .redirect-info {
+    font-size: 13px;
+    text-align: center;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  .floating-dots {
+    display: none;
+  }
+}
