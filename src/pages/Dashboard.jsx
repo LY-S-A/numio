@@ -1,3 +1,4 @@
+import React, { useEffect } from "react";
 import StatCard from "../components/StatCard";
 import NumbersTable from "../components/NumbersTable";
 import SmsPanel from "../components/SmsPanel";
@@ -13,6 +14,12 @@ import {
 import "../styles/dashboard.css";
 
 const Dashboard = () => {
+
+  useEffect(() => {
+    document.title = "Dashboard - RealSMS";
+  }, []);
+
+  
   return (
     <div className="dashboard-page">
       <div className="stats-grid">
