@@ -526,14 +526,7 @@ const FundWallet = () => {
           <FiInfo />
 
           <span>
-            Payments are securely processed using{" "}
-            <strong>
-              {gateway === "flutterwave"
-                ? "Flutterwave"
-                : "Paystack"}
-            </strong>
-            . Your wallet will be credited automatically
-            after successful payment verification.
+            Payments are securely processed through payment gateways.
           </span>
         </div>
 
