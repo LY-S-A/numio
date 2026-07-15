@@ -37,9 +37,9 @@ const FundCancel = () => {
       <div className="fund-status-card cancel">
 
         {/* Decorative Shapes */}
-        <div className="shape shape1"></div>
-        <div className="shape shape2"></div>
-        <div className="shape shape3"></div>
+        <div className="cancel-shape cancel-shape1"></div>
+        <div className="cancel-shape cancel-shape2"></div>
+        <div className="cancel-shape cancel-shape3"></div>
 
         {/* Cancel Icon */}
         <div className="cancel-icon-wrapper">
