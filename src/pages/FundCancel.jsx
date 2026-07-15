@@ -77,7 +77,7 @@ const FundCancel = () => {
         <div className="wallet-result-actions">
 
           <button
-            className="wallet-primary-btn"
+            className="wallet-cancel-primary-btn"
             onClick={() => navigate("/fund-wallet")}
           >
             <FiRefreshCw />
@@ -85,7 +85,7 @@ const FundCancel = () => {
           </button>
 
           <button
-            className="wallet-secondary-btn"
+            className="wallet-cancel-secondary-btn"
             onClick={() => navigate("/dashboard")}
           >
             <FiArrowLeft />
