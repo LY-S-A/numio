@@ -283,37 +283,70 @@ body[data-theme="dark"] .fund-status-card {
 
 @media (max-width: 768px) {
 
+  .fund-status-page{
+    padding:24px 16px;
+  }
+
   .fund-status-card {
     max-width: 100%;
-    padding: 30px 20px;
+    padding: 28px 20px 32px;
     border-radius: 18px;
   }
 
   .fund-status-card h2 {
     font-size: 28px;
+    line-height: 1.3;
   }
 
   .fund-status-card > p {
     font-size: 14px;
+    margin-bottom: 24px;
   }
 
-  .wallet-result-actions {
-    flex-direction: column;
+  .warning-box{
+    padding:16px;
+    margin-bottom:24px;
   }
 
-  .wallet-result-actions button {
-    width: 100%;
-    height: 52px;
+  .wallet-result-actions{
+    display:flex;
+    flex-direction:column;
+    gap:12px;
+    margin-top:20px;
   }
 
-  .redirect-info {
-    font-size: 13px;
-    text-align: center;
-    justify-content: center;
-    flex-wrap: wrap;
+  .wallet-result-actions button{
+    width:100%;
+    height:56px;
+    border-radius:16px;
+    font-size:15px;
+    font-weight:600;
   }
 
-  .floating-dots {
-    display: none;
+  /* Primary CTA */
+  .wallet-cancel-primary-btn{
+    order:1;
+    box-shadow:0 10px 24px rgba(255,71,110,.22);
+  }
+
+  /* Secondary CTA */
+  .wallet-cancel-secondary-btn{
+    order:2;
+    background:transparent;
+    border:1px solid var(--border-color);
+    color:var(--text-color);
+  }
+
+  .wallet-cancel-secondary-btn:hover{
+    background:rgba(255,255,255,.04);
+    transform:none;
+  }
+
+  .redirect-info{
+    justify-content:center;
+    text-align:center;
+    font-size:13px;
+    margin-top:18px;
+    flex-wrap:wrap;
   }
 }
