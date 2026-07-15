@@ -1,54 +1,79 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import {
-  FiXCircle,
+  FiX,
+  FiAlertCircle,
   FiRefreshCw,
   FiArrowLeft,
+  FiClock,
 } from "react-icons/fi";
 
-// import "../styles/fund-result.css";
+import "../styles/fund-cancel.css";
 
 const FundCancel = () => {
   const navigate = useNavigate();
+  const [countdown, setCountdown] = useState(8);
+
+  useEffect(() => {
+    document.title = "Payment Cancelled - RealSMS";
+
+    const timer = setInterval(() => {
+      setCountdown((prev) => {
+        if (prev <= 1) {
+          navigate("/fund-wallet");
+          return 0;
+        }
+
+        return prev - 1;
+      });
+    }, 1000);
+
+    return () => clearInterval(timer);
+  }, [navigate]);
 
   return (
-    <div className="wallet-page">
+    <div className="fund-status-page">
 
-      <div className="wallet-header">
-        <h1>Payment Cancelled</h1>
-        <p>Your wallet was not funded.</p>
-      </div>
+      {/* Floating Background */}
+      <div className="floating-dots dots-left" />
+      <div className="floating-dots dots-right" />
 
-      <div className="wallet-result-card cancel">
+      <div className="fund-status-card cancel">
 
-        <div className="wallet-result-icon cancel">
-          <FiXCircle />
+        {/* Decorative Shapes */}
+        <div className="shape shape1"></div>
+        <div className="shape shape2"></div>
+        <div className="shape shape3"></div>
+
+        {/* Cancel Icon */}
+        <div className="icon-wrapper">
+          <div className="status-icon-cancel">
+            <FiX />
+          </div>
         </div>
 
-        <h2>Payment Failed or Cancelled</h2>
+        {/* Title */}
+        <h2>
+          Payment <span className="cancel-status">Cancelled</span>
+        </h2>
 
         <p>
-          The payment was cancelled or could not be
-          verified. No funds have been deducted from
-          your wallet.
+          Your payment was cancelled or could not be verified.
+          <br />
+          No funds have been deducted from your wallet.
         </p>
 
-        <div className="wallet-result-info">
+        {/* Warning Box */}
+        <div className="warning-box">
+          <FiAlertCircle />
 
-          <div className="wallet-result-row">
-            <span>Status</span>
-            <strong className="cancel-text">
-              Cancelled
-            </strong>
+          <div>
+            <h4>Don't worry!</h4>
+            <p>Your wallet balance remains unchanged.</p>
           </div>
-
-          <div className="wallet-result-row">
-            <span>Wallet</span>
-            <strong>No Changes</strong>
-          </div>
-
         </div>
 
+        {/* Action Buttons */}
         <div className="wallet-result-actions">
 
           <button
@@ -69,6 +94,16 @@ const FundCancel = () => {
 
         </div>
 
+      </div>
+
+      {/* Countdown */}
+      <div className="redirect-info">
+        <FiClock />
+        Redirecting automatically in
+        <span className="cancel-countdown">
+          {countdown}
+        </span>
+        seconds...
       </div>
 
     </div>
