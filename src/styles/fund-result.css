@@ -1,0 +1,160 @@
+.wallet-result-card{
+    background:var(--card);
+    border:1px solid var(--border);
+    border-radius:14px;
+    padding:40px;
+    text-align:center;
+}
+
+.wallet-result-icon{
+    width:90px;
+    height:90px;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    margin:0 auto 24px;
+
+    border-radius:50%;
+
+    font-size:44px;
+}
+
+.wallet-result-icon.success{
+    color:#10b981;
+    background:rgba(16,185,129,.12);
+}
+
+.wallet-result-icon.cancel{
+    color:#ef4444;
+    background:rgba(239,68,68,.12);
+}
+
+.wallet-result-card h2{
+    color:var(--text);
+    font-size:28px;
+    margin-bottom:14px;
+}
+
+.wallet-result-card>p{
+    max-width:560px;
+    margin:0 auto;
+    color:var(--text-secondary);
+    line-height:1.7;
+    font-size:15px;
+}
+
+.wallet-result-info{
+    margin-top:32px;
+
+    background:var(--card-secondary);
+
+    border:1px solid var(--border);
+    border-radius:12px;
+
+    overflow:hidden;
+}
+
+.wallet-result-row{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+
+    padding:18px 22px;
+}
+
+.wallet-result-row:not(:last-child){
+    border-bottom:1px solid var(--border);
+}
+
+.wallet-result-row span{
+    color:var(--text-secondary);
+}
+
+.wallet-result-row strong{
+    color:var(--text);
+}
+
+.success-text{
+    color:#10b981!important;
+}
+
+.cancel-text{
+    color:#ef4444!important;
+}
+
+.wallet-result-actions{
+    display:flex;
+    gap:14px;
+
+    margin-top:30px;
+}
+
+.wallet-primary-btn,
+.wallet-secondary-btn{
+
+    flex:1;
+
+    height:50px;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:10px;
+
+    border-radius:10px;
+
+    font-size:14px;
+    font-weight:600;
+
+    cursor:pointer;
+
+    transition:.2s;
+}
+
+.wallet-primary-btn{
+    border:none;
+    background:var(--primary);
+    color:#fff;
+}
+
+.wallet-primary-btn:hover{
+    opacity:.9;
+}
+
+.wallet-secondary-btn{
+    background:transparent;
+    color:var(--text);
+
+    border:1px solid var(--border);
+}
+
+.wallet-secondary-btn:hover{
+    background:var(--table-hover);
+}
+
+@media(max-width:768px){
+
+    .wallet-result-card{
+        padding:28px 18px;
+    }
+
+    .wallet-result-card h2{
+        font-size:22px;
+    }
+
+    .wallet-result-actions{
+        flex-direction:column;
+    }
+
+    .wallet-primary-btn,
+    .wallet-secondary-btn{
+        width:100%;
+    }
+
+    .wallet-result-row{
+        padding:16px;
+    }
+
+}
