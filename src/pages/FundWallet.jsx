@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
 import {
   FiInfo,
@@ -18,6 +18,13 @@ const FundWallet = () => {
   const [amount, setAmount] = useState("");
   const [gateway, setGateway] = useState("flutterwave");
   const [loading, setLoading] = useState(false);
+
+  useEffect(() => {
+  const gatewayName =
+    gateway === "flutterwave" ? "Flutterwave" : "Paystack";
+
+  document.title = `Fund Wallet (${gatewayName}) - Numio`;
+}, [gateway]);
 
   const handleQuickAmount = (value) => {
     setAmount(value);
