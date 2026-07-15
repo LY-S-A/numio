@@ -34,10 +34,6 @@ const FundCancel = () => {
   return (
     <div className="fund-status-page">
 
-      {/* Floating Background */}
-      <div className="floating-dots dots-left" />
-      <div className="floating-dots dots-right" />
-
       <div className="fund-status-card cancel">
 
         {/* Decorative Shapes */}
@@ -46,7 +42,7 @@ const FundCancel = () => {
         <div className="shape shape3"></div>
 
         {/* Cancel Icon */}
-        <div className="icon-wrapper">
+        <div className="cancel-icon-wrapper">
           <div className="status-icon-cancel">
             <FiX />
           </div>
