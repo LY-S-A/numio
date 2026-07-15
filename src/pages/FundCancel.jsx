@@ -6,7 +6,7 @@ import {
   FiArrowLeft,
 } from "react-icons/fi";
 
-import "../styles/fund-result.css";
+// import "../styles/fund-result.css";
 
 const FundCancel = () => {
   const navigate = useNavigate();
