@@ -8,7 +8,7 @@ import {
   FiClock,
 } from "react-icons/fi";
 
-import "../styles/fund-result.css";
+import "../styles/fund-success.css";
 
 const FundSuccess = () => {
   const navigate = useNavigate();
