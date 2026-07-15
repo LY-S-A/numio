@@ -16,7 +16,7 @@ import "../styles/dashboard.css";
 const Dashboard = () => {
 
   useEffect(() => {
-    document.title = "Dashboard - RealSMS";
+    document.title = "Dashboard - Numio";
   }, []);
 
   
