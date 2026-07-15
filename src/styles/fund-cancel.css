@@ -111,15 +111,15 @@
    ICON
 ========================================== */
 
-.icon-wrapper {
+.cancel-icon-wrapper {
   width: 84px;
   height: 84px;
   margin: 0 auto 26px;
   position: relative;
 }
 
-.icon-wrapper::before,
-.icon-wrapper::after {
+.cancel-icon-wrapper::before,
+.cancel-icon-wrapper::after {
   content: "";
   position: absolute;
   inset: 0;
@@ -128,7 +128,7 @@
   animation: pulse 2s infinite;
 }
 
-.icon-wrapper::after {
+.cancel-icon-wrapper::after {
   animation-delay: .8s;
 }
 
