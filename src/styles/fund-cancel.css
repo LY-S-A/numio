@@ -239,23 +239,23 @@
   transition: .25s ease;
 }
 
-.wallet-primary-btn {
+.wallet-cancel-primary-btn {
   background: linear-gradient(135deg, #ff4a73, #ff1744);
   color: #fff;
 }
 
-.wallet-primary-btn:hover {
+.wallet-cancel-primary-btn:hover {
   transform: translateY(-2px);
   box-shadow: 0 12px 24px rgba(255, 71, 110, .30);
 }
 
-.wallet-secondary-btn {
+.wallet-cancel-secondary-btn {
   background: transparent;
   border: 1px solid rgba(255, 71, 110, .18);
   color: var(--text-color);
 }
 
-.wallet-secondary-btn:hover {
+.wallet-cancel-secondary-btn:hover {
   background: rgba(255, 71, 110, .06);
   transform: translateY(-2px);
 }
