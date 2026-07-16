@@ -14,7 +14,6 @@ import { useBalance } from "../context/BalanceContext";
 import "../styles/transactions.css";
 
 const API_URL = process.env.REACT_APP_API_URL;
-
 const ITEMS_PER_PAGE = 10;
 
 const DepositHistory = () => {
@@ -22,9 +21,8 @@ const DepositHistory = () => {
 
   const [deposits, setDeposits] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [error, setError] = useState("");
 
-  const [search, setSearch] = useState("");
+  const [searchTerm, setSearchTerm] = useState("");
   const [statusFilter, setStatusFilter] =
     useState("All Deposits");
   const [dateFilter, setDateFilter] =
@@ -62,91 +60,78 @@ const DepositHistory = () => {
       );
     } catch (err) {
       console.error(err);
-
-      setError(
-        err.response?.data?.message ||
-          "Unable to load deposit history."
-      );
     } finally {
       setLoading(false);
     }
   };
 
-  const formatDate = (date) => {
-    return new Date(date).toLocaleString(
-      "en-NG",
-      {
-        day: "numeric",
-        month: "short",
-        year: "numeric",
-        hour: "numeric",
-        minute: "2-digit",
-      }
-    );
-  };
-
   const filteredDeposits = useMemo(() => {
-    return deposits.filter((tx) => {
-      const referenceMatch =
-        tx.reference
+    return deposits.filter((item) => {
+      const matchesSearch =
+        item.reference
           ?.toLowerCase()
-          .includes(search.toLowerCase());
+          .includes(
+            searchTerm.toLowerCase()
+          );
 
-      const statusMatch =
+      const matchesStatus =
         statusFilter === "All Deposits"
           ? true
-          : tx.status?.toLowerCase() ===
+          : item.status?.toLowerCase() ===
             statusFilter.toLowerCase();
 
-      const created = new Date(tx.createdAt);
+      const createdAt = new Date(
+        item.createdAt
+      );
+
       const now = new Date();
 
-      let dateMatch = true;
+      let matchesDate = true;
 
       switch (dateFilter) {
         case "Today":
-          dateMatch =
-            created.toDateString() ===
+          matchesDate =
+            createdAt.toDateString() ===
             now.toDateString();
           break;
 
         case "Last 7 Days":
-          dateMatch =
-            now - created <=
+          matchesDate =
+            now - createdAt <=
             7 * 24 * 60 * 60 * 1000;
           break;
 
         case "Last 30 Days":
-          dateMatch =
-            now - created <=
+          matchesDate =
+            now - createdAt <=
             30 * 24 * 60 * 60 * 1000;
           break;
 
         case "Last 90 Days":
-          dateMatch =
-            now - created <=
+          matchesDate =
+            now - createdAt <=
             90 * 24 * 60 * 60 * 1000;
           break;
 
         case "This Year":
-          dateMatch =
-            created.getFullYear() ===
+          matchesDate =
+            createdAt.getFullYear() ===
             now.getFullYear();
           break;
 
         default:
-          dateMatch = true;
+          matchesDate = true;
       }
 
       return (
-        referenceMatch &&
-        statusMatch &&
-        dateMatch
+        matchesSearch &&
+        matchesStatus &&
+        matchesDate
       );
     });
   }, [
     deposits,
-    search,
+    searchTerm,
     statusFilter,
     dateFilter,
   ]);
@@ -163,11 +148,33 @@ const DepositHistory = () => {
       currentPage * ITEMS_PER_PAGE
     );
 
+  const formatDate = (date) => {
+    return new Date(date).toLocaleDateString(
+      "en-NG",
+      {
+        day: "2-digit",
+        month: "short",
+        year: "numeric",
+      }
+    );
+  };
+
+  const formatTime = (date) => {
+    return new Date(date).toLocaleTimeString(
+      "en-NG",
+      {
+        hour: "2-digit",
+        minute: "2-digit",
+      }
+    );
+  };
+
   return (
-    <div className="transactions-page">
+    <div className="tx-page">
 
       {/* HEADER */}
       <div className="tx-header">
+
         <div>
           <h1>Deposit History</h1>
 
@@ -177,12 +184,14 @@ const DepositHistory = () => {
             records
           </p>
         </div>
+
       </div>
 
       {/* STATS */}
       <div className="tx-stats">
 
         <div className="tx-stat-card">
+
           <div className="tx-stat-icon green">
             <FaArrowDown />
           </div>
@@ -201,27 +210,27 @@ const DepositHistory = () => {
               Lifetime deposits
             </small>
           </div>
+
         </div>
 
         <div className="tx-stat-card">
+
           <div className="tx-stat-icon purple">
             <FaWallet />
           </div>
 
           <div>
-            <span>
-              Current Balance
-            </span>
+            <span>Current Balance</span>
 
             <h3>
               {formattedBalance}
             </h3>
 
             <small>
-              Available wallet
-              balance
+              Available wallet balance
             </small>
           </div>
+
         </div>
 
       </div>
@@ -230,22 +239,25 @@ const DepositHistory = () => {
       <div className="tx-filters">
 
         <div className="tx-search">
+
           <FiSearch />
 
           <input
             type="text"
             placeholder="Search deposit reference..."
-            value={search}
+            value={searchTerm}
             onChange={(e) => {
-              setSearch(
+              setSearchTerm(
                 e.target.value
               );
               setCurrentPage(1);
             }}
           />
+
         </div>
 
         <div className="select-wrapper">
+
           <select
             value={statusFilter}
             onChange={(e) => {
@@ -268,9 +280,11 @@ const DepositHistory = () => {
               Failed
             </option>
           </select>
+
         </div>
 
         <div className="select-wrapper">
+
           <select
             value={dateFilter}
             onChange={(e) => {
@@ -296,6 +310,7 @@ const DepositHistory = () => {
               This Year
             </option>
           </select>
+
         </div>
 
       </div>
@@ -309,17 +324,25 @@ const DepositHistory = () => {
           <span>Amount</span>
           <span>Date</span>
         </div>
-                 {loading ? (
-          <div className="tx-loading">
+                {loading ? (
+          <div
+            style={{
+              padding: "40px",
+              textAlign: "center",
+              color: "var(--text-secondary)",
+            }}
+          >
             Loading deposit history...
           </div>
-        ) : error ? (
-          <div className="tx-empty">
-            <p>{error}</p>
-          </div>
         ) : paginatedDeposits.length === 0 ? (
-          <div className="tx-empty">
-            <p>No deposit history found.</p>
+          <div
+            style={{
+              padding: "40px",
+              textAlign: "center",
+              color: "var(--text-secondary)",
+            }}
+          >
+            No deposit history found.
           </div>
         ) : (
           paginatedDeposits.map((item) => (
@@ -340,8 +363,7 @@ const DepositHistory = () => {
                       : item.provider ===
                         "paystack"
                       ? "Paystack Deposit"
-                      : item.paymentMethod ||
-                        "Wallet Deposit"}
+                      : "Wallet Deposit"}
                   </h4>
 
                   <p>{item.reference}</p>
@@ -369,6 +391,12 @@ const DepositHistory = () => {
                     item.createdAt
                   )}
                 </span>
+
+                <small>
+                  {formatTime(
+                    item.createdAt
+                  )}
+                </small>
               </div>
 
               <FiChevronRight className="tx-arrow" />
@@ -405,8 +433,7 @@ const DepositHistory = () => {
                   }
                   onClick={() =>
                     setCurrentPage(
-                      (prev) =>
-                        prev - 1
+                      currentPage - 1
                     )
                   }
                 >
@@ -446,8 +473,7 @@ const DepositHistory = () => {
                   }
                   onClick={() =>
                     setCurrentPage(
-                      (prev) =>
-                        prev + 1
+                      currentPage + 1
                     )
                   }
                 >
@@ -456,6 +482,7 @@ const DepositHistory = () => {
               </div>
             </div>
           )}
+
       </div>
     </div>
   );
