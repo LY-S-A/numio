@@ -366,7 +366,11 @@ const DepositHistory = () => {
                       : "Wallet Deposit"}
                   </h4>
 
-                  <p>{item.reference}</p>
+                  <p>
+  {item.reference?.length > 17
+    ? `${item.reference.substring(0, 17)}...`
+    : item.reference}
+</p>
                 </div>
               </div>
 
