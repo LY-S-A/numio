@@ -348,17 +348,10 @@ useEffect(() => {
 
         <div className="wallet-transaction-right">
           <span
-            className={
-              deposit.status === "success"
-                ? "wallet-success"
-                : deposit.status === "pending"
-                ? "wallet-pending"
-                : "wallet-failed"
-            }
+            className={`wallet-status ${deposit.status.toLowerCase()}`}
           >
-            {deposit.status}
-          </span>
-
+  {deposit.status}
+</span>
           <h4>
             +₦{Number(deposit.amount).toLocaleString()}
           </h4>
