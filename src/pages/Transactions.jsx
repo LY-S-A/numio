@@ -46,7 +46,7 @@ const DepositHistory = () => {
       const token = localStorage.getItem("token");
 
       const res = await axios.get(
-        "/api/transaction/deposits-history",
+        "/api/transaction/recent-deposits",
         {
           headers: {
             Authorization: `Bearer ${token}`,
