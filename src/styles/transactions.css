@@ -482,9 +482,12 @@
     }
 
     .tx-icon {
-        width: 30px;
-        height: 30px;
-        font-size: 12px;
+       width: 36px;
+       height: 36px;
+       min-width: 36px;
+       min-height: 36px;
+       flex-shrink: 0;
+       font-size: 12px;
     }
 
     .tx-status {
