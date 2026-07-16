@@ -18,6 +18,8 @@ const FundWallet = () => {
   const [amount, setAmount] = useState("");
   const [gateway, setGateway] = useState("flutterwave");
   const [loading, setLoading] = useState(false);
+  const [recentDeposits, setRecentDeposits] = useState([]);
+  const [loadingDeposits, setLoadingDeposits] = useState(true);
 
   useEffect(() => {
   const gatewayName =
@@ -67,6 +69,42 @@ const FundWallet = () => {
       setLoading(false);
     }
   };
+
+  const fetchRecentDeposits = async () => {
+  try {
+    setLoadingDeposits(true);
+
+    const token = localStorage.getItem("token");
+
+    const { data } = await axios.get(
+      `${API_URL}/api/wallet/deposits`,
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
+
+    setRecentDeposits(data.deposits || []);
+  } catch (err) {
+    console.error(err);
+  } finally {
+    setLoadingDeposits(false);
+  }
+};
+
+useEffect(() => {
+  fetchRecentDeposits();
+}, []);
+  
+  const formatDate = (date) => {
+  return new Date(date).toLocaleString("en-NG", {
+    day: "numeric",
+    month: "short",
+    hour: "numeric",
+    minute: "2-digit",
+  });
+};
 
   return (
     <div className="wallet-page">
@@ -274,69 +312,64 @@ const FundWallet = () => {
       </div>
 
       {/* RECENT DEPOSITS */}
-      <div className="wallet-transactions-card">
+     <div className="wallet-transactions-card">
 
-        <div className="wallet-transactions-header">
-          <h3>Recent Deposits</h3>
+  <div className="wallet-transactions-header">
+    <h3>Recent Deposits</h3>
 
-          <button type="button">
-            View All
-          </button>
+    <button type="button">
+      View All
+    </button>
+  </div>
+
+  {loadingDeposits ? (
+    <p className="wallet-empty">
+      Loading...
+    </p>
+  ) : recentDeposits.length === 0 ? (
+    <p className="wallet-empty">
+      No deposits yet.
+    </p>
+  ) : (
+    recentDeposits.slice(0, 5).map((deposit) => (
+      <div
+        className="wallet-transaction-item"
+        key={deposit._id}
+      >
+        <div>
+          <h4>
+            {deposit.gateway === "flutterwave"
+              ? "Flutterwave Deposit"
+              : "Paystack Deposit"}
+          </h4>
+
+          <p>{formatDate(deposit.createdAt)}</p>
         </div>
 
-        <div className="wallet-transaction-item">
+        <div className="wallet-transaction-right">
+          <span
+            className={
+              deposit.status === "success"
+                ? "wallet-success"
+                : deposit.status === "pending"
+                ? "wallet-pending"
+                : "wallet-failed"
+            }
+          >
+            {deposit.status}
+          </span>
 
-          <div>
-            <h4>Flutterwave Deposit</h4>
-            <p>Today • 11:35 AM</p>
-          </div>
-
-          <div className="wallet-transaction-right">
-            <span className="wallet-success">
-              Success
-            </span>
-
-            <h4>+₦5,000</h4>
-          </div>
-
+          <h4>
+            +₦{Number(deposit.amount).toLocaleString()}
+          </h4>
         </div>
-
-        <div className="wallet-transaction-item">
-
-          <div>
-            <h4>Paystack Deposit</h4>
-            <p>Yesterday • 4:12 PM</p>
-          </div>
-
-          <div className="wallet-transaction-right">
-            <span className="wallet-success">
-              Success
-            </span>
-
-            <h4>+₦10,000</h4>
-          </div>
-
-        </div>
-
-        <div className="wallet-transaction-item">
-
-          <div>
-            <h4>Flutterwave Deposit</h4>
-            <p>Jun 05 • 08:45 AM</p>
-          </div>
-
-          <div className="wallet-transaction-right">
-            <span className="wallet-pending">
-              Pending
-            </span>
-
-            <h4>+₦2,500</h4>
-          </div>
-
-        </div>
-
       </div>
-            {/* HELP CARD */}
+    ))
+  )}
+
+</div>
+            
+      {/* HELP CARD */}
       <div className="wallet-help-card">
 
         <div>
