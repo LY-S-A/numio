@@ -35,7 +35,7 @@ const DepositHistory = () => {
     useState(1);
 
   useEffect(() => {
-    document.title = "Deposit History - RealSMS";
+    document.title = "Deposit History - Numio";
     fetchDeposits();
   }, []);
 
