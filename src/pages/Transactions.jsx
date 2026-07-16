@@ -13,6 +13,8 @@ import {
 import { useBalance } from "../context/BalanceContext";
 import "../styles/transactions.css";
 
+const API_URL = process.env.REACT_APP_API_URL;
+
 const ITEMS_PER_PAGE = 10;
 
 const DepositHistory = () => {
@@ -45,8 +47,8 @@ const DepositHistory = () => {
 
       const token = localStorage.getItem("token");
 
-      const res = await axios.get(
-        "/api/transaction/recent-deposits",
+      const { data } = await axios.get(
+        `${API_URL}/api/transaction/deposits-history`,
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -54,9 +56,9 @@ const DepositHistory = () => {
         }
       );
 
-      setDeposits(res.data.deposits || []);
+      setDeposits(data.deposits || []);
       setTotalDeposited(
-        res.data.totalDeposited || 0
+        data.totalDeposited || 0
       );
     } catch (err) {
       console.error(err);
@@ -70,11 +72,25 @@ const DepositHistory = () => {
     }
   };
 
+  const formatDate = (date) => {
+    return new Date(date).toLocaleString(
+      "en-NG",
+      {
+        day: "numeric",
+        month: "short",
+        year: "numeric",
+        hour: "numeric",
+        minute: "2-digit",
+      }
+    );
+  };
+
   const filteredDeposits = useMemo(() => {
     return deposits.filter((tx) => {
-      const referenceMatch = tx.reference
-        ?.toLowerCase()
-        .includes(search.toLowerCase());
+      const referenceMatch =
+        tx.reference
+          ?.toLowerCase()
+          .includes(search.toLowerCase());
 
       const statusMatch =
         statusFilter === "All Deposits"
@@ -136,31 +152,36 @@ const DepositHistory = () => {
   ]);
 
   const totalPages = Math.ceil(
-    filteredDeposits.length / ITEMS_PER_PAGE
+    filteredDeposits.length /
+      ITEMS_PER_PAGE
   );
 
   const paginatedDeposits =
     filteredDeposits.slice(
-      (currentPage - 1) * ITEMS_PER_PAGE,
+      (currentPage - 1) *
+        ITEMS_PER_PAGE,
       currentPage * ITEMS_PER_PAGE
     );
 
   return (
     <div className="transactions-page">
+
       {/* HEADER */}
       <div className="tx-header">
         <div>
           <h1>Deposit History</h1>
 
           <p>
-            View all wallet funding transactions
-            and deposit records
+            View all wallet funding
+            transactions and deposit
+            records
           </p>
         </div>
       </div>
 
       {/* STATS */}
       <div className="tx-stats">
+
         <div className="tx-stat-card">
           <div className="tx-stat-icon green">
             <FaArrowDown />
@@ -176,7 +197,9 @@ const DepositHistory = () => {
               ).toLocaleString()}
             </h3>
 
-            <small>Lifetime deposits</small>
+            <small>
+              Lifetime deposits
+            </small>
           </div>
         </div>
 
@@ -186,19 +209,26 @@ const DepositHistory = () => {
           </div>
 
           <div>
-            <span>Current Balance</span>
+            <span>
+              Current Balance
+            </span>
 
-            <h3>{formattedBalance}</h3>
+            <h3>
+              {formattedBalance}
+            </h3>
 
             <small>
-              Available wallet balance
+              Available wallet
+              balance
             </small>
           </div>
         </div>
+
       </div>
 
       {/* FILTERS */}
       <div className="tx-filters">
+
         <div className="tx-search">
           <FiSearch />
 
@@ -207,7 +237,9 @@ const DepositHistory = () => {
             placeholder="Search deposit reference..."
             value={search}
             onChange={(e) => {
-              setSearch(e.target.value);
+              setSearch(
+                e.target.value
+              );
               setCurrentPage(1);
             }}
           />
@@ -223,10 +255,18 @@ const DepositHistory = () => {
               setCurrentPage(1);
             }}
           >
-            <option>All Deposits</option>
-            <option>Success</option>
-            <option>Pending</option>
-            <option>Failed</option>
+            <option>
+              All Deposits
+            </option>
+            <option>
+              Success
+            </option>
+            <option>
+              Pending
+            </option>
+            <option>
+              Failed
+            </option>
           </select>
         </div>
 
@@ -240,24 +280,36 @@ const DepositHistory = () => {
               setCurrentPage(1);
             }}
           >
-            <option>Last 30 Days</option>
-            <option>Today</option>
-            <option>Last 7 Days</option>
-            <option>Last 90 Days</option>
-            <option>This Year</option>
+            <option>
+              Last 30 Days
+            </option>
+            <option>
+              Today
+            </option>
+            <option>
+              Last 7 Days
+            </option>
+            <option>
+              Last 90 Days
+            </option>
+            <option>
+              This Year
+            </option>
           </select>
         </div>
+
       </div>
 
       {/* TABLE */}
       <div className="tx-table">
+
         <div className="tx-table-head">
           <span>Gateway</span>
           <span>Status</span>
           <span>Amount</span>
           <span>Date</span>
         </div>
-                {loading ? (
+                 {loading ? (
           <div className="tx-loading">
             Loading deposit history...
           </div>
@@ -282,9 +334,14 @@ const DepositHistory = () => {
 
                 <div>
                   <h4>
-                    {item.provider ||
-                      item.paymentMethod ||
-                      "Deposit"}
+                    {item.provider ===
+                    "flutterwave"
+                      ? "Flutterwave Deposit"
+                      : item.provider ===
+                        "paystack"
+                      ? "Paystack Deposit"
+                      : item.paymentMethod ||
+                        "Wallet Deposit"}
                   </h4>
 
                   <p>{item.reference}</p>
@@ -293,7 +350,7 @@ const DepositHistory = () => {
 
               <div className="tx-status-wrapper">
                 <span
-                  className={`tx-status ${item.status?.toLowerCase()}`}
+                  className={`tx-status ${item.status.toLowerCase()}`}
                 >
                   {item.status}
                 </span>
@@ -308,29 +365,10 @@ const DepositHistory = () => {
 
               <div className="tx-date">
                 <span>
-                  {new Date(
+                  {formatDate(
                     item.createdAt
-                  ).toLocaleDateString(
-                    "en-NG",
-                    {
-                      day: "2-digit",
-                      month: "short",
-                      year: "numeric",
-                    }
                   )}
                 </span>
-
-                <small>
-                  {new Date(
-                    item.createdAt
-                  ).toLocaleTimeString(
-                    "en-NG",
-                    {
-                      hour: "2-digit",
-                      minute: "2-digit",
-                    }
-                  )}
-                </small>
               </div>
 
               <FiChevronRight className="tx-arrow" />
@@ -340,7 +378,8 @@ const DepositHistory = () => {
 
         {/* PAGINATION */}
         {!loading &&
-          filteredDeposits.length > 0 && (
+          filteredDeposits.length >
+            0 && (
             <div className="tx-pagination">
               <p className="pagination-text">
                 Showing{" "}
@@ -360,10 +399,14 @@ const DepositHistory = () => {
 
               <div className="tx-pages">
                 <button
-                  disabled={currentPage === 1}
+                  disabled={
+                    currentPage ===
+                    1
+                  }
                   onClick={() =>
                     setCurrentPage(
-                      currentPage - 1
+                      (prev) =>
+                        prev - 1
                     )
                   }
                 >
@@ -371,7 +414,10 @@ const DepositHistory = () => {
                 </button>
 
                 {Array.from(
-                  { length: totalPages },
+                  {
+                    length:
+                      totalPages,
+                  },
                   (_, index) => (
                     <button
                       key={index}
@@ -400,7 +446,8 @@ const DepositHistory = () => {
                   }
                   onClick={() =>
                     setCurrentPage(
-                      currentPage + 1
+                      (prev) =>
+                        prev + 1
                     )
                   }
                 >
