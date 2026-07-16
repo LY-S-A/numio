@@ -77,7 +77,7 @@ const FundWallet = () => {
     const token = localStorage.getItem("token");
 
     const { data } = await axios.get(
-      `${API_URL}/api/wallet/deposits`,
+      `${API_URL}/api/transaction/deposits`,
       {
         headers: {
           Authorization: `Bearer ${token}`,
