@@ -3,6 +3,7 @@ import axios from "axios";
 import {
   FiSearch,
   FiChevronRight,
+  FiChevronLeft,
 } from "react-icons/fi";
 
 import {
@@ -439,7 +440,7 @@ const DepositHistory = () => {
                     )
                   }
                 >
-                  Prev
+                  <FiChevronLeft />
                 </button>
 
                 {Array.from(
