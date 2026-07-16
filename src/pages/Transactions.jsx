@@ -357,14 +357,12 @@ const DepositHistory = () => {
 
                 <div>
                   <h4>
-                    {item.provider ===
-                    "flutterwave"
-                      ? "Flutterwave Deposit"
-                      : item.provider ===
-                        "paystack"
-                      ? "Paystack Deposit"
-                      : "Wallet Deposit"}
-                  </h4>
+  {item.provider === "FLUTTERWAVE"
+    ? "Flutterwave Deposit"
+    : item.provider === "PAYSTACK"
+    ? "Paystack Deposit"
+    : "Wallet Deposit"}
+</h4>
 
                   <p>
   {item.reference?.length > 17
