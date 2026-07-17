@@ -1,195 +1,195 @@
-// import {
-//   FiRefreshCw,
-//   FiCopy,
-//   FiTrash2,
-//   FiInfo,
-//   FiChevronRight,
-// } from "react-icons/fi";
+// // import {
+// //   FiRefreshCw,
+// //   FiCopy,
+// //   FiTrash2,
+// //   FiInfo,
+// //   FiChevronRight,
+// // } from "react-icons/fi";
 
-// import "../styles/buy-number.css";
+// // import "../styles/buy-number.css";
 
-// const BuyNumber = () => {
+// // const BuyNumber = () => {
   
-//   const smsMessages = [];
+// //   const smsMessages = [];
 
-//   return (
-//     <div className="buy-number-page">
-//       {/* HEADER */}
-//       <div className="page-header">
-//         <h1>Buy Number</h1>
-//         <p>
-//           Get a temporary number to receive SMS
-//           verification codes
-//         </p>
-//       </div>
+// //   return (
+// //     <div className="buy-number-page">
+// //       {/* HEADER */}
+// //       <div className="page-header">
+// //         <h1>Buy Number</h1>
+// //         <p>
+// //           Get a temporary number to receive SMS
+// //           verification codes
+// //         </p>
+// //       </div>
 
-//       {/* PURCHASE CARD */}
-//       <div className="buy-card">
-//         {/* STEPS */}
-//         <div className="steps-row">
-//           <div className="step-item active">
-//             <div className="step-circle">1</div>
-//             <div>
-//               <h4>Select Service</h4>
-//               <p>Choose the platform</p>
-//             </div>
-//           </div>
+// //       {/* PURCHASE CARD */}
+// //       <div className="buy-card">
+// //         {/* STEPS */}
+// //         <div className="steps-row">
+// //           <div className="step-item active">
+// //             <div className="step-circle">1</div>
+// //             <div>
+// //               <h4>Select Service</h4>
+// //               <p>Choose the platform</p>
+// //             </div>
+// //           </div>
 
-//           <div className="step-arrow">
-//             <FiChevronRight />
-//           </div>
+// //           <div className="step-arrow">
+// //             <FiChevronRight />
+// //           </div>
 
-//           <div className="step-item active">
-//             <div className="step-circle">2</div>
-//             <div>
-//               <h4>Select Country</h4>
-//               <p>Choose the country</p>
-//             </div>
-//           </div>
+// //           <div className="step-item active">
+// //             <div className="step-circle">2</div>
+// //             <div>
+// //               <h4>Select Country</h4>
+// //               <p>Choose the country</p>
+// //             </div>
+// //           </div>
 
-//           <div className="step-arrow">
-//             <FiChevronRight />
-//           </div>
+// //           <div className="step-arrow">
+// //             <FiChevronRight />
+// //           </div>
 
-//           <div className="step-item active">
-//             <div className="step-circle">3</div>
-//             <div>
-//               <h4>Get Number</h4>
-//               <p>Receive your number</p>
-//             </div>
-//           </div>
-//         </div>
+// //           <div className="step-item active">
+// //             <div className="step-circle">3</div>
+// //             <div>
+// //               <h4>Get Number</h4>
+// //               <p>Receive your number</p>
+// //             </div>
+// //           </div>
+// //         </div>
 
-//         {/* FORM */}
-//         <div className="buy-form">
-//           <div className="field">
-//             <label>Service</label>
+// //         {/* FORM */}
+// //         <div className="buy-form">
+// //           <div className="field">
+// //             <label>Service</label>
 
-//             <div className="select-wrapper">
-//               <select>
-//                 <option>WhatsApp</option>
-//                 <option>Telegram</option>
-//                 <option>Google</option>
-//                 <option>Facebook</option>
-//                 <option>Discord</option>
-//               </select>
-//             </div>
-//           </div>
+// //             <div className="select-wrapper">
+// //               <select>
+// //                 <option>WhatsApp</option>
+// //                 <option>Telegram</option>
+// //                 <option>Google</option>
+// //                 <option>Facebook</option>
+// //                 <option>Discord</option>
+// //               </select>
+// //             </div>
+// //           </div>
 
-//           <div className="field">
-//             <label>Country</label>
+// //           <div className="field">
+// //             <label>Country</label>
 
-//             <div className="select-wrapper">
-//               <select>
-//                 <option>Nigeria (+234)</option>
-//                 <option>United Kingdom (+44)</option>
-//                 <option>United States (+1)</option>
-//                 <option>Canada (+1)</option>
-//               </select>
-//             </div>
-//           </div>
-//         </div>
+// //             <div className="select-wrapper">
+// //               <select>
+// //                 <option>Nigeria (+234)</option>
+// //                 <option>United Kingdom (+44)</option>
+// //                 <option>United States (+1)</option>
+// //                 <option>Canada (+1)</option>
+// //               </select>
+// //             </div>
+// //           </div>
+// //         </div>
 
-//         {/* ACTION */}
-//         <div className="action-row">
-//           <button className="get-number-btn">
-//             Get Number
-//           </button>
+// //         {/* ACTION */}
+// //         <div className="action-row">
+// //           <button className="get-number-btn">
+// //             Get Number
+// //           </button>
 
-//           <div className="price-box">
-//             <span>Estimated Price</span>
-//             <h3>$0.30</h3>
-//           </div>
-//         </div>
+// //           <div className="price-box">
+// //             <span>Estimated Price</span>
+// //             <h3>$0.30</h3>
+// //           </div>
+// //         </div>
 
-//         <div className="notice">
-//           <FiInfo />
-//           <span>
-//             Number will be reserved for 20 minutes.
-//             Receive SMS within the time limit.
-//           </span>
-//         </div>
-//       </div>
+// //         <div className="notice">
+// //           <FiInfo />
+// //           <span>
+// //             Number will be reserved for 20 minutes.
+// //             Receive SMS within the time limit.
+// //           </span>
+// //         </div>
+// //       </div>
 
-//       {/* ASSIGNED NUMBER + SMS */}
-//       <div className="assigned-wrapper">
-//         <div className="assigned-top">
-//           <div className="assigned-title">
-//             <h3>Assigned Number</h3>
+// //       {/* ASSIGNED NUMBER + SMS */}
+// //       <div className="assigned-wrapper">
+// //         <div className="assigned-top">
+// //           <div className="assigned-title">
+// //             <h3>Assigned Number</h3>
 
-//             <span className="status-badge">
-//               <span className="status-dot"></span>
-//               Active
-//             </span>
-//           </div>
+// //             <span className="status-badge">
+// //               <span className="status-dot"></span>
+// //               Active
+// //             </span>
+// //           </div>
 
-//           <button className="refresh-btn">
-//             <FiRefreshCw />
-//             Refresh
-//           </button>
-//         </div>
+// //           <button className="refresh-btn">
+// //             <FiRefreshCw />
+// //             Refresh
+// //           </button>
+// //         </div>
 
-//         <div className="assigned-grid">
-//           {/* NUMBER CARD */}
-//           <div className="number-card">
-//             <div className="number-header">
-//               <h2>+234 901 234 5678</h2>
+// //         <div className="assigned-grid">
+// //           {/* NUMBER CARD */}
+// //           <div className="number-card">
+// //             <div className="number-header">
+// //               <h2>+234 901 234 5678</h2>
 
-//               <button type="button">
-//                 <FiCopy />
-//               </button>
-//             </div>
+// //               <button type="button">
+// //                 <FiCopy />
+// //               </button>
+// //             </div>
 
-//             <p>
-//               Expires in <strong>19:42</strong>
-//             </p>
+// //             <p>
+// //               Expires in <strong>19:42</strong>
+// //             </p>
 
-//             <button className="cancel-btn">
-//               <FiTrash2 />
-//               Cancel Number
-//             </button>
-//           </div>
+// //             <button className="cancel-btn">
+// //               <FiTrash2 />
+// //               Cancel Number
+// //             </button>
+// //           </div>
 
-//           {/* SMS CARD */}
-//           <div className="sms-cards">
-//             <h3>SMS Inbox</h3>
+// //           {/* SMS CARD */}
+// //           <div className="sms-cards">
+// //             <h3>SMS Inbox</h3>
 
-//             {smsMessages.length > 0 ? (
-//               smsMessages.map((sms, index) => (
-//                 <div key={index} className="sms-message">
-//                   <h4>Verification Code</h4>
-//                   <p>{sms.message}</p>
-//                 </div>
-//               ))
-//             ) : (
-//               <div className="sms-empty">
-//                 <h4>No messages yet</h4>
-//                 <p>Waiting for SMS...</p>
-//               </div>
-//             )}
-//           </div>
-//         </div>
-//       </div>
+// //             {smsMessages.length > 0 ? (
+// //               smsMessages.map((sms, index) => (
+// //                 <div key={index} className="sms-message">
+// //                   <h4>Verification Code</h4>
+// //                   <p>{sms.message}</p>
+// //                 </div>
+// //               ))
+// //             ) : (
+// //               <div className="sms-empty">
+// //                 <h4>No messages yet</h4>
+// //                 <p>Waiting for SMS...</p>
+// //               </div>
+// //             )}
+// //           </div>
+// //         </div>
+// //       </div>
 
-//       {/* HELP CARD */}
-//       <div className="help-card">
-//         <div>
-//           <h4>Need help?</h4>
-//           <p>
-//             Check our documentation or contact
-//             support.
-//           </p>
-//         </div>
+// //       {/* HELP CARD */}
+// //       <div className="help-card">
+// //         <div>
+// //           <h4>Need help?</h4>
+// //           <p>
+// //             Check our documentation or contact
+// //             support.
+// //           </p>
+// //         </div>
 
-//         <button className="docs-btn">
-//           View Docs
-//         </button>
-//       </div>
-//     </div>
-//   );
-// };
+// //         <button className="docs-btn">
+// //           View Docs
+// //         </button>
+// //       </div>
+// //     </div>
+// //   );
+// // };
 
-// export default BuyNumber;
+// // export default BuyNumber;
 
 // import { useEffect, useState } from "react";
 // import axios from "axios";
@@ -1376,7 +1376,6 @@
 
 import { useEffect, useState } from "react";
 import axios from "axios";
-
 import {
   FiRefreshCw,
   FiCopy,
@@ -1387,568 +1386,491 @@ import {
 
 import "../styles/buy-number.css";
 
-
 const API = process.env.REACT_APP_API_URL;
 
-
 const BuyNumber = () => {
+  const [services, setServices] = useState([]);
+  const [service, setService] = useState("");
 
+  const [countries, setCountries] = useState([]);
+  const [country, setCountry] = useState("");
 
-const [services, setServices] = useState([]);
+  const [order, setOrder] = useState(null);
 
-const [service, setService] = useState("");
+  const [loading, setLoading] = useState(false);
+  const [refreshing, setRefreshing] = useState(false);
 
-const [countries, setCountries] = useState([]);
+  const [smsMessages, setSmsMessages] = useState([]);
 
-const [country, setCountry] = useState("");
+  useEffect(() => {
+    document.title = "Buy Number - RealSMS";
+  }, []);
 
+  const getAuthConfig = () => ({
+    headers: {
+      Authorization: `Bearer ${localStorage.getItem("token")}`,
+    },
+  });
 
-const [order, setOrder] = useState(null);
+  /* ==========================
+      FETCH COUNTRIES
+  ========================== */
 
+  useEffect(() => {
+    const fetchCountries = async () => {
+      try {
+        const res = await axios.get(
+          `${API}/api/5sim/countries`,
+          getAuthConfig()
+        );
 
-const [loading, setLoading] = useState(false);
+        setCountries(res.data.countries || []);
+      } catch (err) {
+        console.log(err.response?.data || err.message);
+      }
+    };
 
-const [refreshing, setRefreshing] = useState(false);
+    fetchCountries();
+  }, []);
 
+  /* ==========================
+      FETCH SERVICES
+  ========================== */
 
-const [smsMessages, setSmsMessages] = useState([]);
-
-
-
-
-
-/*
-=========================
-AUTH CONFIG
-=========================
-*/
-
-const getAuthConfig = () => ({
-
-    headers:{
-        Authorization:
-        `Bearer ${localStorage.getItem("token")}`
-    }
-
-});
-
-
-
-
-
-
-
-/*
-=========================
-FETCH COUNTRIES
-=========================
-*/
-
-useEffect(()=>{
-
-
-const fetchCountries = async()=>{
-
-
-try{
-
-
-const res = await axios.get(
-
-`${API}/api/5sim/countries`,
-
-getAuthConfig()
-
-);
-
-
-
-setCountries(
-res.data.countries || []
-);
-
-
-
-}catch(err){
-
-
-console.log(
-err.response?.data || err.message
-);
-
-
-}
-
-
-
-};
-
-
-fetchCountries();
-
-
-},[]);
-
-
-/*
-=========================
-FETCH SERVICES
-=========================
-*/
-useEffect(() => {
+  useEffect(() => {
     if (!country) {
-        setServices([]);
-        setService("");
-        return;
+      setServices([]);
+      setService("");
+      return;
     }
 
     const fetchServices = async () => {
-        try {
-            const res = await axios.get(
-                `${API}/api/5sim/services?country=${country}`,
-                getAuthConfig()
-            );
+      try {
+        const res = await axios.get(
+          `${API}/api/5sim/services?country=${country}`,
+          getAuthConfig()
+        );
 
-            setServices(res.data.services || []);
-            setService("");
-
-        } catch (err) {
-            console.log(err.response?.data || err.message);
-            setServices([]);
-        }
+        setServices(res.data.services || []);
+        setService("");
+      } catch (err) {
+        console.log(err.response?.data || err.message);
+        setServices([]);
+      }
     };
 
     fetchServices();
-
-}, [country]);
-
-
-/*
-=========================
-BUY NUMBER
-=========================
-*/
-
-const buyNumber = async()=>{
-
-
-try{
-
-
-setLoading(true);
-
-
-
-const res = await axios.post(
-
-`${API}/api/5sim/buy`,
-
-{
-service,
-country
-},
-
-getAuthConfig()
-
-);
-
-
-
-setOrder(
-res.data.order
-);
-
-
-
-setSmsMessages([]);
-
-
-
-}catch(err){
-
-
-alert(
-
-err.response?.data?.message ||
-
-"Unable to buy number"
-
-);
-
-
-
-}
-
-finally{
-
-
-setLoading(false);
-
-
-}
-
-
-};
-
-  /*
-=========================
-REFRESH SMS
-=========================
-*/
-
-const refreshSMS = async()=>{
-
-
-if(!order) return;
-
-
-
-try{
-
-
-setRefreshing(true);
-
-
-
-const res = await axios.get(
-
-`${API}/api/5sim/refresh/${order._id}`,
-
-getAuthConfig()
-
-);
-
-
-
-setSmsMessages(
-
-res.data.sms || []
-
-);
-
-
-
-setOrder(
-
-res.data.order
-
-);
-
-
-
-}catch(err){
-
-
-console.log(
-
-err.response?.data || err.message
-
-);
-
-
-
-}
-
-finally{
-
-
-setRefreshing(false);
-
-
-}
-
-
-};
-
-
-
-
-
-
-
-
-
-/*
-=========================
-CANCEL NUMBER
-=========================
-*/
-
-const cancelNumber = async()=>{
-
-
-if(!order) return;
-
-
-
-try{
-
-
-await axios.post(
-
-`${API}/api/5sim/cancel/${order._id}`,
-
-{},
-
-getAuthConfig()
-
-);
-
-
-
-setOrder(null);
-
-setSmsMessages([]);
-
-
-
-}catch(err){
-
-
-alert(
-
-err.response?.data?.message ||
-
-"Unable to cancel"
-
-);
-
-
-
-}
-
-
-};
-
-
-return (
-  <div className="buy-number-page">
-    {/* ================= HEADER ================= */}
-    <div className="page-header">
-      <h1>Buy Number</h1>
-      <p>Purchase a temporary number and receive OTP instantly.</p>
-    </div>
-
-    {/* ================= BUY CARD ================= */}
-    <div className="buy-card">
-      {/* Steps */}
-      <div className="steps-row">
-        <div className={`step-item ${country ? "active" : ""}`}>
-          <div className="step-circle">1</div>
-          <div>
-            <h4>Select Country</h4>
-            <p>Choose destination</p>
-          </div>
-        </div>
-
-        <div className="step-arrow">
-          <FiChevronRight />
-        </div>
-
-        <div className={`step-item ${service ? "active" : ""}`}>
-          <div className="step-circle">2</div>
-          <div>
-            <h4>Select Service</h4>
-            <p>Choose platform</p>
-          </div>
-        </div>
-
-        <div className="step-arrow">
-          <FiChevronRight />
-        </div>
-
-        <div
-          className={`step-item ${
-            country && service ? "active" : ""
-          }`}
-        >
-          <div className="step-circle">3</div>
-          <div>
-            <h4>Get Number</h4>
-            <p>Receive instantly</p>
-          </div>
-        </div>
-      </div>
-
-      {/* Form */}
-      <div className="buy-form">
-        <div className="field">
-          <label>Country</label>
-
-          <div className="select-wrapper">
-            <select
-              value={country}
-              onChange={(e) => {
-                setCountry(e.target.value);
-                setService("");
-                setServices([]);
-              }}
-            >
-              <option value="" disabled>
-                Select Country
-              </option>
-
-              {countries.map((item) => (
-                <option key={item.code} value={item.code}>
-                  {item.name}
-                </option>
-              ))}
-            </select>
-          </div>
-        </div>
-
-        <div className="field">
-          <label>Service</label>
-
-          <div className="select-wrapper">
-            <select
-              value={service}
-              onChange={(e) => setService(e.target.value)}
-              disabled={!country}
-            >
-              <option value="" disabled>
-                {country
-                  ? "Select Service"
-                  : "Select Country First"}
-              </option>
-
-              {services.map((item) => (
-                <option key={item.name} value={item.name}>
-                  {item.name}
-                </option>
-              ))}
-            </select>
-          </div>
-        </div>
-      </div>
-
-      {/* Action */}
-      <div className="action-row">
-        <button
-          className="get-number-btn"
-          onClick={buyNumber}
-          disabled={!country || !service || loading}
-        >
-          {loading ? "Getting..." : "Get Number"}
-        </button>
-
-        <div className="price-box">
-          <span>PRICE</span>
-
-          <h3>
-            ₦
-            {services.find((x) => x.name === service)?.price || 0}
-          </h3>
-        </div>
-      </div>
-
-      <div className="notice">
-        <FiInfo />
-        Number will be reserved for 20 minutes. Receive SMS within the
-        time limit.
-      </div>
-    </div>
-
-    {/* ================= ASSIGNED ================= */}
-    <div className="assigned-wrapper">
-      <div className="assigned-top">
-        <div className="assigned-title">
-          <h3>Assigned Number</h3>
-
-          <div className="status-badge">
-            <span className="status-dot"></span>
-
-            {order ? order.status : "Inactive"}
-          </div>
-        </div>
-
-        <button
-          className="refresh-btn"
-          onClick={refreshSMS}
-          disabled={!order}
-        >
-          <FiRefreshCw />
-
-          {refreshing ? "Refreshing..." : "Refresh"}
-        </button>
-      </div>
-
-      <div className="assigned-grid">
-        {/* Number */}
-        <div className="number-card">
-          <div className="number-header">
-            <h2>{order?.phone || "No Number"}</h2>
-
-            <button
-              disabled={!order}
-              onClick={() =>
-                navigator.clipboard.writeText(order?.phone || "")
-              }
-            >
-              <FiCopy />
-            </button>
-          </div>
-
-          <p>
-            Expires:
-            <br />
-            <strong>
-              {order?.expires
-                ? new Date(order.expires).toLocaleTimeString()
-                : "--"}
-            </strong>
-          </p>
-
-          <button
-            className="cancel-btn"
-            onClick={cancelNumber}
-            disabled={!order}
-          >
-            <FiTrash2 />
-            Cancel Number
-          </button>
-        </div>
-
-        {/* SMS */}
-        <div className="sms-cards">
-          <h3>SMS Messages</h3>
-
-          {smsMessages.length > 0 ? (
-            smsMessages.map((sms, index) => (
-              <div key={index} className="sms-message">
-                <strong>{sms.sender}</strong>
-
-                <p>{sms.text}</p>
-              </div>
-            ))
-          ) : (
-            <div className="sms-empty">
-              <h4>No SMS Yet</h4>
-
-              <p>
-                Click refresh after the verification code has been
-                sent.
-              </p>
-            </div>
-          )}
-        </div>
-      </div>
-    </div>
-
-    {/* ================= HELP ================= */}
-    <div className="help-card">
-      <div>
-        <h4>Need Help?</h4>
-
+  }, [country]);
+
+  /* ==========================
+      BUY NUMBER
+  ========================== */
+
+  const buyNumber = async () => {
+    try {
+      setLoading(true);
+
+      const res = await axios.post(
+        `${API}/api/5sim/buy`,
+        {
+          country,
+          service,
+        },
+        getAuthConfig()
+      );
+
+      setOrder(res.data.order);
+      setSmsMessages([]);
+    } catch (err) {
+      alert(err.response?.data?.message || "Unable to buy number");
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  /* ==========================
+      REFRESH SMS
+  ========================== */
+
+  const refreshSMS = async () => {
+    if (!order) return;
+
+    try {
+      setRefreshing(true);
+
+      const res = await axios.get(
+        `${API}/api/5sim/refresh/${order._id}`,
+        getAuthConfig()
+      );
+
+      setOrder(res.data.order);
+      setSmsMessages(res.data.sms || []);
+    } catch (err) {
+      console.log(err.response?.data || err.message);
+    } finally {
+      setRefreshing(false);
+    }
+  };
+
+  /* ==========================
+      CANCEL ORDER
+  ========================== */
+
+  const cancelNumber = async () => {
+    if (!order) return;
+
+    try {
+      await axios.post(
+        `${API}/api/5sim/cancel/${order._id}`,
+        {},
+        getAuthConfig()
+      );
+
+      setOrder(null);
+      setSmsMessages([]);
+    } catch (err) {
+      alert(err.response?.data?.message || "Unable to cancel");
+    }
+  };
+
+  const selectedService = services.find(
+    (item) => item.name === service
+  );
+
+  return (
+    <div className="buy-number-page">
+      {/* ================= HEADER ================= */}
+
+      <div className="page-header">
+        <h1>Buy Number</h1>
         <p>
-          Check our documentation or contact support if you encounter
-          any issues.
+          Purchase a temporary phone number and receive SMS verification codes
+          instantly.
         </p>
       </div>
 
-      <button className="docs-btn">View Docs</button>
+      {/* ================= PURCHASE CARD ================= */}
+
+      <div className="buy-card">
+
+        {/* ================= STEPS ================= */}
+
+        <div className="steps-row">
+
+          <div className={`step-item ${country ? "active" : ""}`}>
+            <div className="step-circle">1</div>
+
+            <div>
+              <h4>Select Country</h4>
+              <p>Choose destination</p>
+            </div>
+          </div>
+
+          <div className="step-arrow">
+            <FiChevronRight />
+          </div>
+
+          <div className={`step-item ${service ? "active" : ""}`}>
+            <div className="step-circle">2</div>
+
+            <div>
+              <h4>Select Service</h4>
+              <p>Pick an available platform</p>
+            </div>
+          </div>
+
+          <div className="step-arrow">
+            <FiChevronRight />
+          </div>
+
+          <div
+            className={`step-item ${
+              order ? "active" : ""
+            }`}
+          >
+            <div className="step-circle">3</div>
+
+            <div>
+              <h4>Receive SMS</h4>
+              <p>Verification messages</p>
+            </div>
+          </div>
+
+        </div>
+
+        {/* ================= FORM ================= */}
+
+        <div className="buy-form">
+
+          <div className="field">
+            <label>Country</label>
+
+            <div className="select-wrapper">
+              <select
+                value={country}
+                onChange={(e) => {
+                  setCountry(e.target.value);
+                  setService("");
+                  setServices([]);
+                }}
+              >
+                <option value="" disabled>
+                  Select Country
+                </option>
+
+                {countries.map((item) => (
+                  <option
+                    key={item.code}
+                    value={item.code}
+                  >
+                    {item.name}
+                  </option>
+                ))}
+              </select>
+            </div>
+          </div>
+
+          <div className="field">
+            <label>Service</label>
+
+            <div className="select-wrapper">
+              <select
+                value={service}
+                disabled={!country}
+                onChange={(e) =>
+                  setService(e.target.value)
+                }
+              >
+                <option value="" disabled>
+                  {country
+                    ? "Select Service"
+                    : "Select Country First"}
+                </option>
+
+                {services.map((item) => (
+                  <option
+                    key={item.name}
+                    value={item.name}
+                  >
+                    {item.name}
+                  </option>
+                ))}
+              </select>
+            </div>
+          </div>
+
+        </div>
+
+        {/* ================= ACTION ================= */}
+
+        <div className="action-row">
+
+          <button
+            className="get-number-btn"
+            disabled={
+              loading ||
+              !country ||
+              !service
+            }
+            onClick={buyNumber}
+          >
+            {loading
+              ? "Getting Number..."
+              : "Get Number"}
+          </button>
+
+          <div className="price-box">
+            <span>Estimated Price</span>
+
+            <h3>
+              ₦
+              {selectedService?.price ??
+                "0.00"}
+            </h3>
+          </div>
+
+        </div>
+
+        {/* ================= NOTICE ================= */}
+
+        <div className="notice">
+          <FiInfo />
+
+          <span>
+            Your number will remain active for approximately
+            20 minutes. Refresh periodically to check for new
+            SMS messages.
+          </span>
+        </div>
+
+      </div>
+
+            {/* ================= ASSIGNED NUMBER ================= */}
+
+      <div className="assigned-wrapper">
+
+        <div className="assigned-top">
+
+          <div className="assigned-title">
+            <h3>Current Number</h3>
+
+            <div className="status-badge">
+              <span className="status-dot"></span>
+
+              {order ? order.status : "Inactive"}
+            </div>
+          </div>
+
+          <button
+            className="refresh-btn"
+            onClick={refreshSMS}
+            disabled={!order || refreshing}
+          >
+            <FiRefreshCw />
+
+            {refreshing ? "Refreshing..." : "Refresh"}
+          </button>
+
+        </div>
+
+        <div className="assigned-grid">
+
+          {/* ================= NUMBER CARD ================= */}
+
+          <div className="number-card">
+
+            <div className="number-header">
+
+              <h2>
+                {order?.phone || "No Number"}
+              </h2>
+
+              {order && (
+                <button
+                  title="Copy Number"
+                  onClick={() =>
+                    navigator.clipboard.writeText(order.phone)
+                  }
+                >
+                  <FiCopy />
+                </button>
+              )}
+
+            </div>
+
+            <p>
+              <strong>Country:</strong>{" "}
+              {order?.country || "--"}
+            </p>
+
+            <p>
+              <strong>Service:</strong>{" "}
+              {order?.service || "--"}
+            </p>
+
+            <p>
+              <strong>Expires:</strong>{" "}
+              {order?.expires
+                ? new Date(order.expires).toLocaleString()
+                : "--"}
+            </p>
+
+            <button
+              className="cancel-btn"
+              onClick={cancelNumber}
+              disabled={!order}
+            >
+              <FiTrash2 />
+              Cancel Number
+            </button>
+
+          </div>
+
+          {/* ================= SMS CARD ================= */}
+
+          <div className="sms-cards">
+
+            <h3>Incoming SMS</h3>
+
+            {smsMessages.length > 0 ? (
+
+              smsMessages.map((sms, index) => (
+
+                <div
+                  key={index}
+                  className="sms-message"
+                >
+
+                  <p>
+                    {sms.text ||
+                      sms.message ||
+                      "No content"}
+                  </p>
+
+                  {(sms.code || sms.otp) && (
+                    <strong>
+                      OTP: {sms.code || sms.otp}
+                    </strong>
+                  )}
+
+                </div>
+
+              ))
+
+            ) : (
+
+              <div className="sms-empty">
+
+                <FiRefreshCw
+                  size={42}
+                  style={{
+                    opacity: 0.35,
+                    marginBottom: 14,
+                  }}
+                />
+
+                <h4>No SMS Yet</h4>
+
+                <p>
+                  Once the service sends a verification
+                  message, it will automatically appear
+                  here after you refresh.
+                </p>
+
+              </div>
+
+            )}
+
+          </div>
+
+        </div>
+
+      </div>
+
+      {/* ================= HELP CARD ================= */}
+
+      <div className="help-card">
+
+        <div>
+          <h4>Need Help?</h4>
+
+          <p>
+            Having trouble receiving SMS? Check our
+            documentation or contact support.
+          </p>
+        </div>
+
+        <button
+          className="docs-btn"
+          onClick={() => window.open("/docs", "_blank")}
+        >
+          View Docs
+        </button>
+
+      </div>
+
     </div>
-  </div>
-);
+  );
+};
 
 export default BuyNumber;
