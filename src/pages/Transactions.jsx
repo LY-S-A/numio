@@ -203,13 +203,13 @@ const DepositHistory = () => {
           <div>
             <span>Total Deposited</span>
 
-            <h3>
-              ₦
-              {Number(
-                totalDeposited
-              ).toLocaleString()}
-            </h3>
-
+           <h3>
+  ₦
+  {Number(totalDeposited).toLocaleString("en-NG", {
+    minimumFractionDigits: 2,
+    maximumFractionDigits: 2,
+  })}
+</h3>
             <small>
               Lifetime deposits
             </small>
