@@ -113,7 +113,7 @@
 
 .buy-form {
   display: grid;
-  grid-template-columns: 1fr 1fr 260px;
+  grid-template-columns: 1fr 1fr;
   gap: 18px;
   margin-top: 20px;
 }
