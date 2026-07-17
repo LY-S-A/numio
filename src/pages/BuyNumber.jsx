@@ -9,8 +9,8 @@ import {
 import "../styles/buy-number.css";
 
 const BuyNumber = () => {
-  // waiting | received | expired | refunded
-  const status = "waiting";
+  // // waiting | received | expired | refunded
+  // const status = "waiting";
 
   const smsMessages = [];
 
