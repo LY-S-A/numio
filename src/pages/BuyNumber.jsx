@@ -195,11 +195,11 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 
 import {
-FiRefreshCw,
-FiCopy,
-FiTrash2,
-FiInfo,
-FiChevronRight,
+  FiRefreshCw,
+  FiCopy,
+  FiTrash2,
+  FiInfo,
+  FiChevronRight,
 } from "react-icons/fi";
 
 import "../styles/buy-number.css";
@@ -208,16 +208,47 @@ import "../styles/buy-number.css";
 const BuyNumber = () => {
 
 
+const API = process.env.REACT_APP_API_URL;
+
+
+
 const [services, setServices] = useState([]);
+
 const [service, setService] = useState("");
+
 const [country, setCountry] = useState("nigeria");
+
 
 const [order, setOrder] = useState(null);
 
+
 const [loading, setLoading] = useState(false);
+
 const [refreshing, setRefreshing] = useState(false);
 
+
 const [smsMessages, setSmsMessages] = useState([]);
+
+
+
+
+
+/*
+=========================
+AUTH CONFIG
+=========================
+*/
+
+const getAuthConfig = () => ({
+
+    headers:{
+        Authorization:
+        `Bearer ${localStorage.getItem("token")}`
+    }
+
+});
+
+
 
 
 
@@ -227,35 +258,54 @@ FETCH SERVICES
 =========================
 */
 
-useEffect(() => {
-
-    const fetchServices = async () => {
-
-        try {
-
-            const res = await axios.get(
-                `/api/5sim/services?country=${country}`
-            );
+useEffect(()=>{
 
 
-            setServices(res.data.services || []);
+const fetchServices = async()=>{
 
 
-        } catch (err) {
-
-            console.log(
-                err.response?.data || err.message
-            );
-
-        }
-
-    };
+try{
 
 
-    fetchServices();
+const res = await axios.get(
+
+`${API}/api/5sim/services?country=${country}`,
+
+getAuthConfig()
+
+);
 
 
-}, [country]);
+
+setServices(
+res.data.services || []
+);
+
+
+
+}catch(err){
+
+
+console.log(
+err.response?.data || err.message
+);
+
+
+}
+
+
+
+};
+
+
+
+fetchServices();
+
+
+},[country]);
+
+
+
 
 
 
@@ -267,48 +317,69 @@ BUY NUMBER
 =========================
 */
 
-const buyNumber = async () => {
+const buyNumber = async()=>{
 
 
-    try {
-
-        setLoading(true);
+try{
 
 
-        const res = await axios.post(
-            "/api/5sim/buy",
-            {
-                service,
-                country
-            },
-            {
-                withCredentials:true
-            }
-        );
+setLoading(true);
 
 
-        setOrder(
-            res.data.order
-        );
+
+const res = await axios.post(
+
+`${API}/api/5sim/buy`,
+
+{
+service,
+country
+},
+
+getAuthConfig()
+
+);
 
 
-        setSmsMessages([]);
+
+setOrder(
+res.data.order
+);
 
 
-    } catch(err){
 
-        alert(
-            err.response?.data?.message ||
-            "Unable to buy number"
-        );
+setSmsMessages([]);
 
-    } finally {
 
-        setLoading(false);
 
-    }
+}catch(err){
+
+
+alert(
+
+err.response?.data?.message ||
+
+"Unable to buy number"
+
+);
+
+
+}
+
+finally{
+
+
+setLoading(false);
+
+
+}
+
 
 };
+
+
+
+
 
 
 
@@ -323,46 +394,71 @@ REFRESH SMS
 const refreshSMS = async()=>{
 
 
-if(!order) return;
+if(!order)
+return;
+
 
 
 try{
 
+
 setRefreshing(true);
 
 
+
 const res = await axios.get(
-`/api/5sim/refresh/${order._id}`,
-{
-withCredentials:true
-}
+
+`${API}/api/5sim/refresh/${order._id}`,
+
+getAuthConfig()
+
 );
+
 
 
 setSmsMessages(
+
 res.data.sms || []
+
 );
 
 
+
 setOrder(
+
 res.data.order
+
 );
 
 
 
 }catch(err){
 
-console.log(err);
+
+console.log(
+err.response?.data || err.message
+);
+
+
 
 }
+
+
 finally{
+
 
 setRefreshing(false);
 
+
 }
 
 
+
 };
+
+
+
+
 
 
 
@@ -377,22 +473,28 @@ CANCEL NUMBER
 const cancelNumber = async()=>{
 
 
-if(!order) return;
+if(!order)
+return;
+
 
 
 try{
 
 
 await axios.post(
-`/api/5sim/cancel/${order._id}`,
+
+`${API}/api/5sim/cancel/${order._id}`,
+
 {},
-{
-withCredentials:true
-}
+
+getAuthConfig()
+
 );
 
 
+
 setOrder(null);
+
 
 setSmsMessages([]);
 
@@ -400,10 +502,16 @@ setSmsMessages([]);
 
 }catch(err){
 
+
 alert(
+
 err.response?.data?.message ||
+
 "Unable to cancel"
+
 );
+
+
 
 }
 
@@ -413,9 +521,14 @@ err.response?.data?.message ||
 
 
 
+
+
+
+
+
 return (
 
-<div>
+<div className="buy-page">
 
 
 {/* HEADER */}
@@ -426,20 +539,30 @@ return (
 Buy Number
 </h1>
 
+
 <p>
 Get a temporary number to receive SMS
 verification codes
 </p>
+
 
 </div>
 
 
 
 
+
+
+
+{/* PURCHASE CARD */}
+
+
 <div className="buy-card">
 
 
+
 {/* STEPS */}
+
 
 <div className="steps-row">
 
@@ -450,57 +573,115 @@ verification codes
 1
 </div>
 
+
 <div>
-<h4>Select Service</h4>
-<p>Choose the platform</p>
-</div>
+
+<h4>
+Select Service
+</h4>
+
+
+<p>
+Choose the platform
+</p>
+
 
 </div>
+
+
+</div>
+
+
 
 
 <div className="step-arrow">
+
 <FiChevronRight/>
+
 </div>
+
+
+
 
 
 
 <div className="step-item active">
 
+
 <div className="step-circle">
+
 2
+
 </div>
+
 
 <div>
-<h4>Select Country</h4>
-<p>Choose the country</p>
-</div>
+
+<h4>
+Select Country
+</h4>
+
+
+<p>
+Choose the country
+</p>
+
 
 </div>
+
+
+</div>
+
+
 
 
 
 <div className="step-arrow">
+
 <FiChevronRight/>
+
 </div>
+
+
+
 
 
 
 <div className="step-item active">
 
+
 <div className="step-circle">
+
 3
+
 </div>
+
 
 <div>
-<h4>Get Number</h4>
-<p>Receive your number</p>
-</div>
+
+<h4>
+Get Number
+</h4>
+
+
+<p>
+Receive your number
+</p>
+
 
 </div>
 
 
+</div>
+
+
+
 
 </div>
+
+
+
+
 
 
 
@@ -508,10 +689,13 @@ verification codes
 
 {/* FORM */}
 
+
+
 <div className="buy-form">
 
 
 <div className="field">
+
 
 <label>
 Service
@@ -522,8 +706,11 @@ Service
 
 
 <select
+
 value={service}
+
 onChange={(e)=>setService(e.target.value)}
+
 >
 
 
@@ -533,14 +720,26 @@ Select service
 
 
 {
+
 services.map((item)=>(
+
+
 <option
+
 key={item.name}
+
 value={item.name}
+
 >
+
 {item.name}
+
 </option>
+
+
 ))
+
+
 }
 
 
@@ -549,13 +748,19 @@ value={item.name}
 
 </div>
 
+
 </div>
 
 
 
 
 
+
+
+
+
 <div className="field">
+
 
 <label>
 Country
@@ -566,8 +771,11 @@ Country
 
 
 <select
+
 value={country}
+
 onChange={(e)=>setCountry(e.target.value)}
+
 >
 
 
@@ -596,10 +804,15 @@ Canada (+1)
 
 </div>
 
+
 </div>
 
 
+
+
 </div>
+
+
 
 
 
@@ -610,18 +823,32 @@ Canada (+1)
 <div className="action-row">
 
 
+
 <button
+
 className="get-number-btn"
+
 onClick={buyNumber}
-disabled={loading || !service}
+
+disabled={
+loading || !service
+}
+
 >
 
+
 {
+
 loading
+
 ?
+
 "Getting..."
+
 :
+
 "Get Number"
+
 }
 
 
@@ -629,26 +856,42 @@ loading
 
 
 
+
+
 <div className="price-box">
+
 
 <span>
 Estimated Price
 </span>
 
 
+
 <h3>
+
+
 {
+
 services.find(
 x=>x.name===service
 )?.price || "0"
+
 }
+
+
 </h3>
 
 
+
 </div>
 
 
+
 </div>
+
+
+
+
 
 
 
@@ -656,15 +899,20 @@ x=>x.name===service
 
 <div className="notice">
 
+
 <FiInfo/>
 
+
 <span>
+
 Number will be reserved for 20 minutes.
 Receive SMS within the time limit.
+
 </span>
 
 
 </div>
+
 
 
 </div>
@@ -680,10 +928,13 @@ Receive SMS within the time limit.
 {/* ASSIGNED NUMBER + SMS */}
 
 
+
 <div className="assigned-wrapper">
 
 
+
 <div className="assigned-top">
+
 
 
 <div className="assigned-title">
@@ -694,43 +945,77 @@ Assigned Number
 </h3>
 
 
+
 <span className="status-badge">
+
 
 <span className="status-dot"></span>
 
+
 {
-order ? order.status : "Inactive"
+
+order
+
+?
+
+order.status
+
+:
+
+"Inactive"
+
 }
+
 
 </span>
 
 
+
 </div>
+
+
+
 
 
 
 
 <button
+
 className="refresh-btn"
+
 onClick={refreshSMS}
+
 disabled={!order}
+
 >
+
 
 <FiRefreshCw/>
 
+
 {
+
 refreshing
+
 ?
+
 "Refreshing"
+
 :
+
 "Refresh"
+
 }
+
 
 
 </button>
 
 
+
 </div>
+
+
 
 
 
@@ -742,7 +1027,11 @@ refreshing
 
 
 
+
+
+
 <div className="number-card">
+
 
 
 <div className="number-header">
@@ -751,11 +1040,16 @@ refreshing
 <h2>
 
 {
+
 order?.phone ||
+
 "No number"
+
 }
 
+
 </h2>
+
 
 
 <button>
@@ -765,7 +1059,10 @@ order?.phone ||
 </button>
 
 
+
 </div>
+
+
 
 
 
@@ -773,16 +1070,25 @@ order?.phone ||
 
 Expires in
 
+
 <strong>
 
+
 {
+
 order?.expires
+
 ?
+
 new Date(order.expires)
 .toLocaleTimeString()
+
 :
+
 "--"
+
 }
+
 
 </strong>
 
@@ -792,13 +1098,22 @@ new Date(order.expires)
 
 
 
+
+
+
 <button
+
 className="cancel-btn"
+
 onClick={cancelNumber}
+
 disabled={!order}
+
 >
 
+
 <FiTrash2/>
+
 
 Cancel Number
 
@@ -807,7 +1122,9 @@ Cancel Number
 
 
 
+
 </div>
+
 
 
 
@@ -825,18 +1142,25 @@ SMS Inbox
 
 
 
+
+
 {
+
 smsMessages.length > 0
 
 ?
 
-smsMessages.map(
-(sms,index)=>(
+smsMessages.map((sms,index)=>(
+
 
 <div
+
 key={index}
+
 className="sms-message"
+
 >
+
 
 <h4>
 Verification Code
@@ -850,18 +1174,19 @@ Verification Code
 
 </div>
 
-)
 
-)
+))
 
 
 :
 
 <div className="sms-empty">
 
+
 <h4>
 No messages yet
 </h4>
+
 
 <p>
 Waiting for SMS...
@@ -875,13 +1200,6 @@ Waiting for SMS...
 
 
 
-</div>
-
-
-
-</div>
-
-
 
 </div>
 
@@ -889,6 +1207,23 @@ Waiting for SMS...
 
 
 
+</div>
+
+
+
+
+
+</div>
+
+
+
+
+
+
+
+
+
+{/* HELP CARD */}
 
 
 
@@ -897,13 +1232,17 @@ Waiting for SMS...
 
 <div>
 
+
 <h4>
 Need help?
 </h4>
 
 
 <p>
-Check our documentation or contact support.
+
+Check our documentation or contact
+support.
+
 </p>
 
 
@@ -918,7 +1257,9 @@ View Docs
 </button>
 
 
+
 </div>
+
 
 
 
