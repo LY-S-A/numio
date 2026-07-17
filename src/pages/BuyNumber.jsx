@@ -9,9 +9,7 @@ import {
 import "../styles/buy-number.css";
 
 const BuyNumber = () => {
-  // // waiting | received | expired | refunded
-  // const status = "waiting";
-
+  
   const smsMessages = [];
 
   return (
@@ -88,16 +86,6 @@ const BuyNumber = () => {
                 <option>United States (+1)</option>
                 <option>Canada (+1)</option>
               </select>
-            </div>
-          </div>
-
-          <div className="field">
-            <label>Quantity (Optional)</label>
-
-            <div className="qty-box">
-              <button type="button">−</button>
-              <span>1</span>
-              <button type="button">+</button>
             </div>
           </div>
         </div>
