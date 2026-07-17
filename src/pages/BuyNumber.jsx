@@ -180,15 +180,6 @@ const BuyNumber = () => {
               </div>
             )}
           </div>
-
-          {/* REFUND BUTTON (NOW HERE) */}
-          {status === "waiting" && (
-            <div className="refund-section">
-              <button className="refund-btn">
-                Request Refund
-              </button>
-            </div>
-          )}
         </div>
       </div>
 
