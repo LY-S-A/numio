@@ -191,11 +191,7 @@
 
 // export default BuyNumber;
 
-import React, {
-  useEffect,
-  useState,
-  useCallback,
-} from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import axios from "axios";
 import {
   FiRefreshCw,
@@ -221,83 +217,34 @@ const BuyNumber = () => {
 
   const [timeLeft, setTimeLeft] = useState("");
 
- useEffect(() => {
-  document.title = "Buy Number - Numio";
-  loadActiveOrder();
-}, [loadActiveOrder]);
-
-  /*
-  ========================================
-  COUNTDOWN
-  ========================================
-  */
-
-  useEffect(() => {
-    if (!order?.expires) return;
-
-    const interval = setInterval(() => {
-      const diff =
-        new Date(order.expires).getTime() - Date.now();
-
-      if (diff <= 0) {
-        setTimeLeft("Expired");
-        clearInterval(interval);
-        return;
-      }
-
-      const mins = Math.floor(diff / 60000);
-      const secs = Math.floor((diff % 60000) / 1000);
-
-      setTimeLeft(
-        `${mins}:${secs.toString().padStart(2, "0")}`
-      );
-    }, 1000);
-
-    return () => clearInterval(interval);
-  }, [order]);
-
-  /*
-  ========================================
-  AUTO REFRESH SMS
-  ========================================
-  */
-
- useEffect(() => {
-  if (!order) return;
-
-  const interval = setInterval(refreshSMS, 10000);
-
-  return () => clearInterval(interval);
-}, [order, refreshSMS]);
-  
   /*
   ========================================
   LOAD ACTIVE ORDER
   ========================================
   */
 
-const loadActiveOrder = useCallback(async () => {
-  try {
-    const { data } = await axios.get(
-      `${process.env.REACT_APP_API_URL}/5sim/active`,
-      {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      }
-    );
+  const loadActiveOrder = useCallback(async () => {
+    try {
+      const { data } = await axios.get(
+        `${process.env.REACT_APP_API_URL}/5sim/active`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
 
-    if (data.success && data.orders.length) {
-      setOrder(data.orders[0]);
-      setSmsMessages(data.orders[0].sms || []);
-    } else {
-      setOrder(null);
-      setSmsMessages([]);
+      if (data.success && data.orders.length > 0) {
+        setOrder(data.orders[0]);
+        setSmsMessages(data.orders[0].sms || []);
+      } else {
+        setOrder(null);
+        setSmsMessages([]);
+      }
+    } catch (error) {
+      console.error(error);
     }
-  } catch (err) {
-    console.log(err);
-  }
-}, [token]);
+  }, [token]);
 
   /*
   ========================================
@@ -323,12 +270,12 @@ const loadActiveOrder = useCallback(async () => {
       );
 
       setOrder(data.order);
-      setSmsMessages([]);
+      setSmsMessages(data.order.sms || []);
 
       alert(data.message);
-    } catch (err) {
+    } catch (error) {
       alert(
-        err.response?.data?.message ||
+        error.response?.data?.message ||
           "Unable to purchase number."
       );
     } finally {
@@ -343,31 +290,31 @@ const loadActiveOrder = useCallback(async () => {
   */
 
   const refreshSMS = useCallback(async () => {
-  if (!order) return;
+    if (!order) return;
 
-  try {
-    setRefreshing(true);
+    try {
+      setRefreshing(true);
 
-    const { data } = await axios.get(
-      `${process.env.REACT_APP_API_URL}/5sim/refresh/${order._id}`,
-      {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
+      const { data } = await axios.get(
+        `${process.env.REACT_APP_API_URL}/5sim/refresh/${order._id}`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+
+      if (data.success) {
+        setOrder(data.order);
+        setSmsMessages(data.sms || []);
       }
-    );
-
-    if (data.success) {
-      setOrder(data.order);
-      setSmsMessages(data.sms);
+    } catch (error) {
+      console.error(error);
+    } finally {
+      setRefreshing(false);
     }
-  } catch (err) {
-    console.log(err);
-  } finally {
-    setRefreshing(false);
-  }
-}, [order, token]);
-  
+  }, [order, token]);
+
   /*
   ========================================
   CANCEL NUMBER
@@ -377,7 +324,11 @@ const loadActiveOrder = useCallback(async () => {
   const cancelNumber = async () => {
     if (!order) return;
 
-    if (!window.confirm("Cancel this number?")) return;
+    const confirmed = window.confirm(
+      "Are you sure you want to cancel this number?"
+    );
+
+    if (!confirmed) return;
 
     try {
       const { data } = await axios.post(
@@ -397,9 +348,9 @@ const loadActiveOrder = useCallback(async () => {
       setTimeLeft("");
 
       loadActiveOrder();
-    } catch (err) {
+    } catch (error) {
       alert(
-        err.response?.data?.message ||
+        error.response?.data?.message ||
           "Unable to cancel number."
       );
     }
@@ -416,8 +367,104 @@ const loadActiveOrder = useCallback(async () => {
 
     navigator.clipboard.writeText(order.phone);
 
-    alert("Number copied.");
+    alert("Number copied successfully.");
   };
+
+  /*
+  ========================================
+  FINISH ORDER (OPTIONAL)
+  ========================================
+  */
+
+  const finishOrder = async () => {
+    if (!order) return;
+
+    try {
+      const { data } = await axios.post(
+        `${process.env.REACT_APP_API_URL}/5sim/finish/${order._id}`,
+        {},
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+
+      alert(data.message);
+
+      loadActiveOrder();
+    } catch (error) {
+      alert(
+        error.response?.data?.message ||
+          "Unable to finish order."
+      );
+    }
+  };
+
+   /*
+  ========================================
+  PAGE LOAD
+  ========================================
+  */
+
+  useEffect(() => {
+    document.title = "Buy Number - Numio";
+    loadActiveOrder();
+  }, [loadActiveOrder]);
+
+  /*
+  ========================================
+  COUNTDOWN TIMER
+  ========================================
+  */
+
+  useEffect(() => {
+    if (!order?.expires) {
+      setTimeLeft("");
+      return;
+    }
+
+    const updateCountdown = () => {
+      const diff =
+        new Date(order.expires).getTime() - Date.now();
+
+      if (diff <= 0) {
+        setTimeLeft("Expired");
+        return;
+      }
+
+      const minutes = Math.floor(diff / 60000);
+      const seconds = Math.floor((diff % 60000) / 1000);
+
+      setTimeLeft(
+        `${minutes}:${seconds
+          .toString()
+          .padStart(2, "0")}`
+      );
+    };
+
+    updateCountdown();
+
+    const interval = setInterval(updateCountdown, 1000);
+
+    return () => clearInterval(interval);
+  }, [order]);
+
+  /*
+  ========================================
+  AUTO REFRESH SMS
+  ========================================
+  */
+
+  useEffect(() => {
+    if (!order) return;
+
+    const interval = setInterval(() => {
+      refreshSMS();
+    }, 10000);
+
+    return () => clearInterval(interval);
+  }, [order, refreshSMS]);
 
   return (
     <div className="buy-page">
@@ -428,8 +475,8 @@ const loadActiveOrder = useCallback(async () => {
         <h1>Buy Number</h1>
 
         <p>
-          Get a temporary number to receive SMS
-          verification codes
+          Get a temporary number to receive
+          SMS verification codes.
         </p>
       </div>
 
@@ -442,11 +489,16 @@ const loadActiveOrder = useCallback(async () => {
         <div className="steps-row">
 
           <div className="step-item active">
-            <div className="step-circle">1</div>
+            <div className="step-circle">
+              1
+            </div>
 
             <div>
               <h4>Select Service</h4>
-              <p>Choose the platform</p>
+
+              <p>
+                Choose the platform
+              </p>
             </div>
           </div>
 
@@ -455,11 +507,16 @@ const loadActiveOrder = useCallback(async () => {
           </div>
 
           <div className="step-item active">
-            <div className="step-circle">2</div>
+            <div className="step-circle">
+              2
+            </div>
 
             <div>
               <h4>Select Country</h4>
-              <p>Choose the country</p>
+
+              <p>
+                Choose the country
+              </p>
             </div>
           </div>
 
@@ -468,11 +525,16 @@ const loadActiveOrder = useCallback(async () => {
           </div>
 
           <div className="step-item active">
-            <div className="step-circle">3</div>
+            <div className="step-circle">
+              3
+            </div>
 
             <div>
               <h4>Get Number</h4>
-              <p>Receive your number</p>
+
+              <p>
+                Receive your number
+              </p>
             </div>
           </div>
 
@@ -483,13 +545,17 @@ const loadActiveOrder = useCallback(async () => {
         <div className="buy-form">
 
           <div className="field">
+
             <label>Service</label>
 
             <div className="select-wrapper">
+
               <select
                 value={service}
                 onChange={(e) =>
-                  setService(e.target.value)
+                  setService(
+                    e.target.value
+                  )
                 }
               >
                 <option value="whatsapp">
@@ -511,18 +577,25 @@ const loadActiveOrder = useCallback(async () => {
                 <option value="discord">
                   Discord
                 </option>
+
               </select>
+
             </div>
+
           </div>
 
           <div className="field">
+
             <label>Country</label>
 
             <div className="select-wrapper">
+
               <select
                 value={country}
                 onChange={(e) =>
-                  setCountry(e.target.value)
+                  setCountry(
+                    e.target.value
+                  )
                 }
               >
                 <option value="nigeria">
@@ -540,8 +613,11 @@ const loadActiveOrder = useCallback(async () => {
                 <option value="canada">
                   Canada (+1)
                 </option>
+
               </select>
+
             </div>
+
           </div>
 
         </div>
@@ -552,8 +628,10 @@ const loadActiveOrder = useCallback(async () => {
 
           <button
             className="get-number-btn"
-            disabled={loading || order}
             onClick={buyNumber}
+            disabled={
+              loading || order
+            }
           >
             {loading
               ? "Purchasing..."
@@ -563,24 +641,31 @@ const loadActiveOrder = useCallback(async () => {
           </button>
 
           <div className="price-box">
-            <span>Estimated Price</span>
+            <span>
+              Estimated Price
+            </span>
+
             <h3>Auto</h3>
           </div>
 
         </div>
 
         <div className="notice">
+
           <FiInfo />
 
           <span>
-            Number will be reserved for 20
-            minutes. Receive SMS before the
-            timer expires.
+            Your number will remain
+            reserved until it expires or
+            you manually finish/cancel
+            the order.
           </span>
+
         </div>
 
       </div>
-              {/* ASSIGNED NUMBER */}
+
+            {/* ASSIGNED NUMBER */}
 
       {order && (
         <div className="assigned-wrapper">
@@ -592,7 +677,6 @@ const loadActiveOrder = useCallback(async () => {
 
               <span className="status-badge">
                 <span className="status-dot"></span>
-
                 {order.status}
               </span>
             </div>
@@ -604,7 +688,9 @@ const loadActiveOrder = useCallback(async () => {
             >
               <FiRefreshCw />
 
-              {refreshing ? "Refreshing..." : "Refresh"}
+              {refreshing
+                ? "Refreshing..."
+                : "Refresh"}
             </button>
 
           </div>
@@ -622,6 +708,7 @@ const loadActiveOrder = useCallback(async () => {
                 <button
                   type="button"
                   onClick={copyNumber}
+                  title="Copy Number"
                 >
                   <FiCopy />
                 </button>
@@ -633,13 +720,34 @@ const loadActiveOrder = useCallback(async () => {
                 <strong>{timeLeft}</strong>
               </p>
 
-              <button
-                className="cancel-btn"
-                onClick={cancelNumber}
+              <div
+                style={{
+                  display: "flex",
+                  gap: "10px",
+                  marginTop: "20px",
+                  flexWrap: "wrap",
+                }}
               >
-                <FiTrash2 />
-                Cancel Number
-              </button>
+
+                <button
+                  className="cancel-btn"
+                  onClick={cancelNumber}
+                >
+                  <FiTrash2 />
+                  Cancel
+                </button>
+
+                {(order.status === "RECEIVED" ||
+                  smsMessages.length > 0) && (
+                  <button
+                    className="finish-btn"
+                    onClick={finishOrder}
+                  >
+                    Finish
+                  </button>
+                )}
+
+              </div>
 
             </div>
 
@@ -658,14 +766,15 @@ const loadActiveOrder = useCallback(async () => {
                     <h4>
                       {sms.code
                         ? `Verification Code: ${sms.code}`
-                        : "New Message"}
+                        : "Incoming SMS"}
                     </h4>
 
                     <p>{sms.text}</p>
 
                     {sms.sender && (
                       <small>
-                        From: {sms.sender}
+                        <strong>Sender:</strong>{" "}
+                        {sms.sender}
                       </small>
                     )}
 
@@ -673,7 +782,7 @@ const loadActiveOrder = useCallback(async () => {
                       <small
                         style={{
                           display: "block",
-                          marginTop: "6px",
+                          marginTop: "8px",
                           opacity: 0.7,
                         }}
                       >
@@ -682,6 +791,7 @@ const loadActiveOrder = useCallback(async () => {
                         ).toLocaleString()}
                       </small>
                     )}
+
                   </div>
                 ))
               ) : (
@@ -711,13 +821,21 @@ const loadActiveOrder = useCallback(async () => {
 
           <p>
             Check our documentation or
-            contact support if you're
-            experiencing any issues.
+            contact support if you
+            experience any issues while
+            purchasing numbers or
+            receiving SMS.
           </p>
 
         </div>
 
-        <button className="docs-btn">
+        <button
+          className="docs-btn"
+          onClick={() => {
+            // Replace with your docs/support route
+            window.location.href = "/support";
+          }}
+        >
           View Docs
         </button>
 
@@ -728,5 +846,3 @@ const loadActiveOrder = useCallback(async () => {
 };
 
 export default BuyNumber;
-
-      
