@@ -211,7 +211,9 @@ const [services, setServices] = useState([]);
 
 const [service, setService] = useState("");
 
-const [country, setCountry] = useState("nigeria");
+const [countries, setCountries] = useState([]);
+
+const [country, setCountry] = useState("");
 
 
 const [order, setOrder] = useState(null);
@@ -301,7 +303,54 @@ fetchServices();
 
 
 
+useEffect(()=>{
 
+
+const fetchCountries = async()=>{
+
+
+try{
+
+
+const res = await axios.get(
+`${API}/api/5sim/countries`,
+getAuthConfig()
+);
+
+
+setCountries(
+res.data.countries || []
+);
+
+
+
+if(res.data.countries?.length){
+
+setCountry(
+res.data.countries[0].code
+);
+
+}
+
+
+}catch(err){
+
+
+console.log(
+err.response?.data || err.message
+);
+
+
+}
+
+
+};
+
+
+fetchCountries();
+
+
+},[]);
 
 
 
@@ -766,32 +815,29 @@ Country
 
 
 <select
-
 value={country}
-
 onChange={(e)=>setCountry(e.target.value)}
-
 >
 
-
-<option value="nigeria">
-Nigeria (+234)
+<option value="">
+Select country
 </option>
 
 
-<option value="england">
-United Kingdom (+44)
+{
+countries.map((item)=>(
+
+<option
+key={item.code}
+value={item.code}
+>
+
+{item.name}
+
 </option>
 
-
-<option value="usa">
-United States (+1)
-</option>
-
-
-<option value="canada">
-Canada (+1)
-</option>
+))
+}
 
 
 </select>
