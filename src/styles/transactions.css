@@ -273,6 +273,20 @@
     gap: 12px;
 }
 
+.gateway-icon {
+  background: var(--card-secondary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.gateway-icon img {
+  width: 26px;
+  height: 26px;
+  object-fit: contain;
+}
+
 .tx-icon {
     width: 42px;
     height: 42px;
