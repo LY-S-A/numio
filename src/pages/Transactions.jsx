@@ -11,6 +11,9 @@ import {
   FaWallet,
 } from "react-icons/fa";
 
+import flutterwaveLogo from "../assets/flutterwave.png";
+import paystackLogo from "../assets/paystack.png";
+
 import { useBalance } from "../context/BalanceContext";
 import "../styles/transactions.css";
 
@@ -352,9 +355,18 @@ const DepositHistory = () => {
               key={item._id}
             >
               <div className="tx-info">
-                <div className="tx-icon deposit">
-                  <FaArrowDown />
-                </div>
+                <div className="tx-icon deposit gateway-icon">
+  <img
+    src={
+      item.provider === "FLUTTERWAVE"
+        ? flutterwaveLogo
+        : item.provider === "PAYSTACK"
+        ? paystackLogo
+        : flutterwaveLogo
+    }
+    alt={item.provider}
+  />
+</div>
 
                 <div>
                   <h4>
