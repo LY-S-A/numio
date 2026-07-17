@@ -408,8 +408,8 @@ const BuyNumber = () => {
             <div className="step-circle">1</div>
 
             <div>
-              <h4>Select Service</h4>
-              <p>Choose the platform</p>
+              <h4>Select Country</h4>
+              <p>Choose Service Region</p>
             </div>
           </div>
 
@@ -421,8 +421,8 @@ const BuyNumber = () => {
             <div className="step-circle">2</div>
 
             <div>
-              <h4>Select Country</h4>
-              <p>Choose Service Region</p>
+              <h4>Select Service</h4>
+              <p>Choose the platform</p>
             </div>
           </div>
 
