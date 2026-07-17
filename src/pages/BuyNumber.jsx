@@ -276,7 +276,7 @@ const buyNumber = async () => {
 
 
         const res = await axios.post(
-            "/api/fivesim/buy",
+            "/api/5sim/buy",
             {
                 service,
                 country
@@ -332,7 +332,7 @@ setRefreshing(true);
 
 
 const res = await axios.get(
-`/api/fivesim/refresh/${order._id}`,
+`/api/5sim/refresh/${order._id}`,
 {
 withCredentials:true
 }
@@ -384,7 +384,7 @@ try{
 
 
 await axios.post(
-`/api/fivesim/cancel/${order._id}`,
+`/api/5sim/cancel/${order._id}`,
 {},
 {
 withCredentials:true
