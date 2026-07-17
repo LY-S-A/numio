@@ -191,7 +191,11 @@
 
 // export default BuyNumber;
 
-import React, { useEffect, useState } from "react";
+import React, {
+  useEffect,
+  useState,
+  useCallback,
+} from "react";
 import axios from "axios";
 import {
   FiRefreshCw,
@@ -217,11 +221,10 @@ const BuyNumber = () => {
 
   const [timeLeft, setTimeLeft] = useState("");
 
-  useEffect(() => {
-    document.title = "Buy Number - RealSMS";
-
-    loadActiveOrder();
-  }, []);
+ useEffect(() => {
+  document.title = "Buy Number - Numio";
+  loadActiveOrder();
+}, [loadActiveOrder]);
 
   /*
   ========================================
@@ -259,41 +262,42 @@ const BuyNumber = () => {
   ========================================
   */
 
-  useEffect(() => {
-    if (!order) return;
+ useEffect(() => {
+  if (!order) return;
 
-    const interval = setInterval(() => {
-      refreshSMS();
-    }, 10000);
+  const interval = setInterval(refreshSMS, 10000);
 
-    return () => clearInterval(interval);
-  }, [order]);
-
+  return () => clearInterval(interval);
+}, [order, refreshSMS]);
+  
   /*
   ========================================
   LOAD ACTIVE ORDER
   ========================================
   */
 
-  const loadActiveOrder = async () => {
-    try {
-      const { data } = await axios.get(
-        `${process.env.REACT_APP_API_URL}/5sim/active`,
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
-
-      if (data.success && data.orders.length) {
-        setOrder(data.orders[0]);
-        setSmsMessages(data.orders[0].sms || []);
+const loadActiveOrder = useCallback(async () => {
+  try {
+    const { data } = await axios.get(
+      `${process.env.REACT_APP_API_URL}/5sim/active`,
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
       }
-    } catch (err) {
-      console.log(err);
+    );
+
+    if (data.success && data.orders.length) {
+      setOrder(data.orders[0]);
+      setSmsMessages(data.orders[0].sms || []);
+    } else {
+      setOrder(null);
+      setSmsMessages([]);
     }
-  };
+  } catch (err) {
+    console.log(err);
+  }
+}, [token]);
 
   /*
   ========================================
@@ -338,32 +342,32 @@ const BuyNumber = () => {
   ========================================
   */
 
-  const refreshSMS = async () => {
-    if (!order) return;
+  const refreshSMS = useCallback(async () => {
+  if (!order) return;
 
-    try {
-      setRefreshing(true);
+  try {
+    setRefreshing(true);
 
-      const { data } = await axios.get(
-        `${process.env.REACT_APP_API_URL}/5sim/refresh/${order._id}`,
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
-
-      if (data.success) {
-        setOrder(data.order);
-        setSmsMessages(data.sms);
+    const { data } = await axios.get(
+      `${process.env.REACT_APP_API_URL}/5sim/refresh/${order._id}`,
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
       }
-    } catch (err) {
-      console.log(err);
-    } finally {
-      setRefreshing(false);
-    }
-  };
+    );
 
+    if (data.success) {
+      setOrder(data.order);
+      setSmsMessages(data.sms);
+    }
+  } catch (err) {
+    console.log(err);
+  } finally {
+    setRefreshing(false);
+  }
+}, [order, token]);
+  
   /*
   ========================================
   CANCEL NUMBER
