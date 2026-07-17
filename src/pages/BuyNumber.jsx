@@ -226,7 +226,7 @@ const BuyNumber = () => {
   const loadActiveOrder = useCallback(async () => {
     try {
       const { data } = await axios.get(
-        `${process.env.REACT_APP_API_URL}/5sim/active`,
+        `${process.env.REACT_APP_API_URL}/api/5sim/active`,
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -257,7 +257,7 @@ const BuyNumber = () => {
       setLoading(true);
 
       const { data } = await axios.post(
-        `${process.env.REACT_APP_API_URL}/5sim/buy`,
+        `${process.env.REACT_APP_API_URL}/api/5sim/buy`,
         {
           service,
           country,
@@ -296,7 +296,7 @@ const BuyNumber = () => {
       setRefreshing(true);
 
       const { data } = await axios.get(
-        `${process.env.REACT_APP_API_URL}/5sim/refresh/${order._id}`,
+        `${process.env.REACT_APP_API_URL}/api/5sim/refresh/${order._id}`,
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -332,7 +332,7 @@ const BuyNumber = () => {
 
     try {
       const { data } = await axios.post(
-        `${process.env.REACT_APP_API_URL}/5sim/cancel/${order._id}`,
+        `${process.env.REACT_APP_API_URL}/api/5sim/cancel/${order._id}`,
         {},
         {
           headers: {
@@ -381,7 +381,7 @@ const BuyNumber = () => {
 
     try {
       const { data } = await axios.post(
-        `${process.env.REACT_APP_API_URL}/5sim/finish/${order._id}`,
+        `${process.env.REACT_APP_API_URL}/api/5sim/finish/${order._id}`,
         {},
         {
           headers: {
