@@ -217,7 +217,7 @@ const [service, setService] = useState("");
 
 const [countries, setCountries] = useState([]);
 
-const [country, setCountry] = useState("nigeria");
+const [country, setCountry] = useState("");
 
 
 const [order, setOrder] = useState(null);
@@ -307,83 +307,37 @@ fetchCountries();
 },[]);
 
 
-
-
-
-
-
-
-
 /*
 =========================
 FETCH SERVICES
 =========================
 */
+useEffect(() => {
+    if (!country) {
+        setServices([]);
+        setService("");
+        return;
+    }
 
-useEffect(()=>{
+    const fetchServices = async () => {
+        try {
+            const res = await axios.get(
+                `${API}/api/5sim/services?country=${country}`,
+                getAuthConfig()
+            );
 
+            setServices(res.data.services || []);
+            setService("");
 
-if(!country) return;
+        } catch (err) {
+            console.log(err.response?.data || err.message);
+            setServices([]);
+        }
+    };
 
+    fetchServices();
 
-
-const fetchServices = async()=>{
-
-
-try{
-
-
-const res = await axios.get(
-
-`${API}/api/5sim/services?country=${country}`,
-
-getAuthConfig()
-
-);
-
-
-
-setServices(
-res.data.services || []
-);
-
-
-
-setService("");
-
-
-
-}catch(err){
-
-
-console.log(
-err.response?.data || err.message
-);
-
-
-
-}
-
-
-};
-
-
-
-fetchServices();
-
-
-
-},[country]);
-
-
-
-
-
-
-
-
-
-
+}, [country]);
 
 
 /*
@@ -794,49 +748,24 @@ Service
 
 <div className="select-wrapper">
 
-
 <select
-
-value={service}
-
-onChange={(e)=>setService(e.target.value)}
-
+    value={service}
+    onChange={(e) => setService(e.target.value)}
+    disabled={!country}
 >
+    <option value="" disabled>
+        {country ? "Select Service" : "Select Country First"}
+    </option>
 
-
-<option value="">
-Select service
-</option>
-
-
-
-{
-
-services.map((item)=>(
-
-
-<option
-
-key={item.name}
-
-value={item.name}
-
->
-
-{item.name}
-
-</option>
-
-
-))
-
-
-}
-
-
-
+    {services.map((item) => (
+        <option
+            key={item.name}
+            value={item.name}
+        >
+            {item.name}
+        </option>
+    ))}
 </select>
-
 
 </div>
 
@@ -865,51 +794,26 @@ Country
 
 
 <select
-
-value={country}
-
-onChange={(e)=>{
-
-setCountry(e.target.value);
-
-}}
-
+    value={country}
+    onChange={(e) => {
+        setCountry(e.target.value);
+        setService("");
+        setServices([]);
+    }}
 >
+    <option value="" disabled>
+        Select Country
+    </option>
 
-
-<option value="">
-Select country
-</option>
-
-
-
-{
-
-countries.map((item)=>(
-
-
-<option
-
-key={item.code}
-
-value={item.code}
-
->
-
-{item.name}
-
-</option>
-
-
-))
-
-
-}
-
-
-
+    {countries.map((item) => (
+        <option
+            key={item.code}
+            value={item.code}
+        >
+            {item.name}
+        </option>
+    ))}
 </select>
-
 
 </div>
 
@@ -936,15 +840,9 @@ value={item.code}
 
 
 <button
-
-className="get-number-btn"
-
-onClick={buyNumber}
-
-disabled={
-loading || !service
-}
-
+    className="get-number-btn"
+    onClick={buyNumber}
+    disabled={loading || !country || !service}
 >
 
 
