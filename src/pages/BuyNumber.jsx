@@ -203,9 +203,13 @@ import {
 } from "react-icons/fi";
 
 import "../styles/buy-number.css";
+
+
 const API = process.env.REACT_APP_API_URL;
 
+
 const BuyNumber = () => {
+
 
 const [services, setServices] = useState([]);
 
@@ -213,7 +217,7 @@ const [service, setService] = useState("");
 
 const [countries, setCountries] = useState([]);
 
-const [country, setCountry] = useState("");
+const [country, setCountry] = useState("nigeria");
 
 
 const [order, setOrder] = useState(null);
@@ -249,6 +253,67 @@ const getAuthConfig = () => ({
 
 
 
+
+
+/*
+=========================
+FETCH COUNTRIES
+=========================
+*/
+
+useEffect(()=>{
+
+
+const fetchCountries = async()=>{
+
+
+try{
+
+
+const res = await axios.get(
+
+`${API}/api/5sim/countries`,
+
+getAuthConfig()
+
+);
+
+
+
+setCountries(
+res.data.countries || []
+);
+
+
+
+}catch(err){
+
+
+console.log(
+err.response?.data || err.message
+);
+
+
+}
+
+
+
+};
+
+
+fetchCountries();
+
+
+},[]);
+
+
+
+
+
+
+
+
+
 /*
 =========================
 FETCH SERVICES
@@ -256,6 +321,10 @@ FETCH SERVICES
 */
 
 useEffect(()=>{
+
+
+if(!country) return;
+
 
 
 const fetchServices = async()=>{
@@ -280,6 +349,10 @@ res.data.services || []
 
 
 
+setService("");
+
+
+
 }catch(err){
 
 
@@ -288,8 +361,8 @@ err.response?.data || err.message
 );
 
 
-}
 
+}
 
 
 };
@@ -299,58 +372,16 @@ err.response?.data || err.message
 fetchServices();
 
 
+
 },[country]);
 
 
 
-useEffect(()=>{
-
-
-const fetchCountries = async()=>{
-
-
-try{
-
-
-const res = await axios.get(
-`${API}/api/5sim/countries`,
-getAuthConfig()
-);
-
-
-setCountries(
-res.data.countries || []
-);
 
 
 
-if(res.data.countries?.length){
-
-setCountry(
-res.data.countries[0].code
-);
-
-}
 
 
-}catch(err){
-
-
-console.log(
-err.response?.data || err.message
-);
-
-
-}
-
-
-};
-
-
-fetchCountries();
-
-
-},[]);
 
 
 
@@ -408,6 +439,7 @@ err.response?.data?.message ||
 );
 
 
+
 }
 
 finally{
@@ -421,15 +453,7 @@ setLoading(false);
 
 };
 
-
-
-
-
-
-
-
-
-/*
+  /*
 =========================
 REFRESH SMS
 =========================
@@ -438,8 +462,7 @@ REFRESH SMS
 const refreshSMS = async()=>{
 
 
-if(!order)
-return;
+if(!order) return;
 
 
 
@@ -480,13 +503,14 @@ res.data.order
 
 
 console.log(
+
 err.response?.data || err.message
+
 );
 
 
 
 }
-
 
 finally{
 
@@ -495,7 +519,6 @@ setRefreshing(false);
 
 
 }
-
 
 
 };
@@ -517,8 +540,7 @@ CANCEL NUMBER
 const cancelNumber = async()=>{
 
 
-if(!order)
-return;
+if(!order) return;
 
 
 
@@ -538,7 +560,6 @@ getAuthConfig()
 
 
 setOrder(null);
-
 
 setSmsMessages([]);
 
@@ -575,9 +596,14 @@ return (
 <div className="buy-page">
 
 
+
+
+
 {/* HEADER */}
 
+
 <div className="buy-header">
+
 
 <h1>
 Buy Number
@@ -598,24 +624,35 @@ verification codes
 
 
 
+
+
 {/* PURCHASE CARD */}
+
 
 
 <div className="buy-card">
 
 
 
+
+
+
+
 {/* STEPS */}
+
 
 
 <div className="steps-row">
 
 
+
 <div className="step-item active">
+
 
 <div className="step-circle">
 1
 </div>
+
 
 
 <div>
@@ -633,16 +670,19 @@ Choose the platform
 </div>
 
 
+
 </div>
+
 
 
 
 
 <div className="step-arrow">
 
-<FiChevronRight/>
+<FiChevronRight />
 
 </div>
+
 
 
 
@@ -653,10 +693,9 @@ Choose the platform
 
 
 <div className="step-circle">
-
 2
-
 </div>
+
 
 
 <div>
@@ -674,7 +713,10 @@ Choose the country
 </div>
 
 
+
 </div>
+
+
 
 
 
@@ -682,9 +724,10 @@ Choose the country
 
 <div className="step-arrow">
 
-<FiChevronRight/>
+<FiChevronRight />
 
 </div>
+
 
 
 
@@ -695,10 +738,9 @@ Choose the country
 
 
 <div className="step-circle">
-
 3
-
 </div>
+
 
 
 <div>
@@ -716,7 +758,9 @@ Receive your number
 </div>
 
 
+
 </div>
+
 
 
 
@@ -738,12 +782,14 @@ Receive your number
 <div className="buy-form">
 
 
+
 <div className="field">
 
 
 <label>
 Service
 </label>
+
 
 
 <div className="select-wrapper">
@@ -761,6 +807,7 @@ onChange={(e)=>setService(e.target.value)}
 <option value="">
 Select service
 </option>
+
 
 
 {
@@ -787,10 +834,12 @@ value={item.name}
 }
 
 
+
 </select>
 
 
 </div>
+
 
 
 </div>
@@ -811,33 +860,52 @@ Country
 </label>
 
 
+
 <div className="select-wrapper">
 
 
 <select
+
 value={country}
-onChange={(e)=>setCountry(e.target.value)}
+
+onChange={(e)=>{
+
+setCountry(e.target.value);
+
+}}
+
 >
+
 
 <option value="">
 Select country
 </option>
 
 
+
 {
+
 countries.map((item)=>(
 
+
 <option
+
 key={item.code}
+
 value={item.code}
+
 >
 
 {item.name}
 
 </option>
 
+
 ))
+
+
 }
+
 
 
 </select>
@@ -846,7 +914,9 @@ value={item.code}
 </div>
 
 
+
 </div>
+
 
 
 
@@ -893,7 +963,9 @@ loading
 }
 
 
+
 </button>
+
 
 
 
@@ -920,6 +992,7 @@ x=>x.name===service
 }
 
 
+
 </h3>
 
 
@@ -941,7 +1014,7 @@ x=>x.name===service
 <div className="notice">
 
 
-<FiInfo/>
+<FiInfo />
 
 
 <span>
@@ -952,10 +1025,10 @@ Receive SMS within the time limit.
 </span>
 
 
+
 </div>
 
-
-
+  
 </div>
 
 
@@ -974,7 +1047,11 @@ Receive SMS within the time limit.
 
 
 
+
+
 <div className="assigned-top">
+
+
 
 
 
@@ -987,10 +1064,12 @@ Assigned Number
 
 
 
+
 <span className="status-badge">
 
 
 <span className="status-dot"></span>
+
 
 
 {
@@ -1006,6 +1085,7 @@ order.status
 "Inactive"
 
 }
+
 
 
 </span>
@@ -1031,7 +1111,9 @@ disabled={!order}
 >
 
 
-<FiRefreshCw/>
+
+<FiRefreshCw />
+
 
 
 {
@@ -1054,7 +1136,13 @@ refreshing
 
 
 
+
+
+
 </div>
+
+
+
 
 
 
@@ -1071,14 +1159,25 @@ refreshing
 
 
 
+
+
+
+{/* NUMBER CARD */}
+
+
+
 <div className="number-card">
+
+
 
 
 
 <div className="number-header">
 
 
+
 <h2>
+
 
 {
 
@@ -1089,15 +1188,20 @@ order?.phone ||
 }
 
 
+
 </h2>
 
 
 
-<button>
 
-<FiCopy/>
+
+<button type="button">
+
+
+<FiCopy />
 
 </button>
+
 
 
 
@@ -1107,9 +1211,13 @@ order?.phone ||
 
 
 
+
+
 <p>
 
+
 Expires in
+
 
 
 <strong>
@@ -1131,7 +1239,9 @@ new Date(order.expires)
 }
 
 
+
 </strong>
+
 
 
 </p>
@@ -1153,13 +1263,16 @@ disabled={!order}
 >
 
 
-<FiTrash2/>
+
+<FiTrash2 />
 
 
 Cancel Number
 
 
+
 </button>
+
 
 
 
@@ -1171,6 +1284,15 @@ Cancel Number
 
 
 
+
+
+
+
+
+
+
+
+{/* SMS CARD */}
 
 
 
@@ -1189,9 +1311,12 @@ SMS Inbox
 
 smsMessages.length > 0
 
+
 ?
 
+
 smsMessages.map((sms,index)=>(
+
 
 
 <div
@@ -1208,18 +1333,23 @@ Verification Code
 </h4>
 
 
+
 <p>
 {sms.code}
 </p>
 
 
+
 </div>
+
 
 
 ))
 
 
+
 :
+
 
 <div className="sms-empty">
 
@@ -1229,12 +1359,15 @@ No messages yet
 </h4>
 
 
+
 <p>
 Waiting for SMS...
 </p>
 
 
+
 </div>
+
 
 
 }
@@ -1248,13 +1381,26 @@ Waiting for SMS...
 
 
 
+
+
+
+
+
+
 </div>
 
 
 
 
 
+
+
+
+
 </div>
+
+
+
 
 
 
@@ -1271,12 +1417,16 @@ Waiting for SMS...
 <div className="help-card">
 
 
+
 <div>
+
 
 
 <h4>
 Need help?
 </h4>
+
+
 
 
 <p>
@@ -1287,19 +1437,29 @@ support.
 </p>
 
 
+
 </div>
+
+
 
 
 
 <button className="docs-btn">
 
+
 View Docs
+
 
 </button>
 
 
 
+
 </div>
+
+
+
+
 
 
 
