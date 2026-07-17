@@ -1591,8 +1591,8 @@ const BuyNumber = () => {
             <div className="step-circle">1</div>
 
             <div>
-              <h4>Select Country</h4>
-              <p>Choose where your number comes from</p>
+              <h4>Select Service</h4>
+              <p>Choose the platform</p>
             </div>
           </div>
 
@@ -1604,8 +1604,8 @@ const BuyNumber = () => {
             <div className="step-circle">2</div>
 
             <div>
-              <h4>Select Service</h4>
-              <p>Choose the platform</p>
+              <h4>Select Country</h4>
+              <p>Choose Service Region</p>
             </div>
           </div>
 
@@ -1642,7 +1642,7 @@ const BuyNumber = () => {
                 }}
               >
                 <option value="" disabled>
-                  Select Country
+                  Select Service
                 </option>
 
                 {countries.map((item) => (
@@ -1718,10 +1718,10 @@ const BuyNumber = () => {
             <span>Estimated Price</span>
 
             <h3>
-              {selectedService
-                ? `$${selectedService.price}`
-                : "$0.00"}
-            </h3>
+  {selectedService
+    ? `₦${selectedService.ngnPrice.toLocaleString()}`
+    : "₦0"}
+</h3>
 
           </div>
 
