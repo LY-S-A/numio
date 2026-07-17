@@ -1626,74 +1626,68 @@ const BuyNumber = () => {
 
         {/* ================= FORM ================= */}
 
-        <div className="buy-form">
+<div className="buy-form">
 
-          <div className="field">
-            <label>Country</label>
+  {/* SERVICE */}
 
-            <div className="select-wrapper">
+  <div className="field">
+    <label>Service</label>
 
-              <select
-                value={country}
-                onChange={(e) => {
-                  setCountry(e.target.value);
-                  setService("");
-                  setServices([]);
-                }}
-              >
-                <option value="" disabled>
-                  Select Service
-                </option>
+    <div className="select-wrapper">
+      <select
+        value={service}
+        onChange={(e) => {
+          setService(e.target.value);
+          setCountry("");
+          setCountries([]);
+        }}
+      >
+        <option value="" disabled>
+          Select Service
+        </option>
 
-                {countries.map((item) => (
-                  <option
-                    key={item.code}
-                    value={item.code}
-                  >
-                    {item.name}
-                  </option>
-                ))}
+        {services.map((item) => (
+          <option
+            key={item.name}
+            value={item.name}
+          >
+            {item.name}
+          </option>
+        ))}
+      </select>
+    </div>
+  </div>
 
-              </select>
+  {/* COUNTRY */}
 
-            </div>
-          </div>
+  <div className="field">
+    <label>Country</label>
 
-          <div className="field">
+    <div className="select-wrapper">
+      <select
+        value={country}
+        disabled={!service}
+        onChange={(e) => setCountry(e.target.value)}
+      >
+        <option value="" disabled>
+          {service
+            ? "Select Country"
+            : "Select Service First"}
+        </option>
 
-            <label>Service</label>
+        {countries.map((item) => (
+          <option
+            key={item.code}
+            value={item.code}
+          >
+            {item.name}
+          </option>
+        ))}
+      </select>
+    </div>
+  </div>
 
-            <div className="select-wrapper">
-
-              <select
-                value={service}
-                disabled={!country}
-                onChange={(e) =>
-                  setService(e.target.value)
-                }
-              >
-                <option value="" disabled>
-                  {country
-                    ? "Select Service"
-                    : "Select Country First"}
-                </option>
-
-                {services.map((item) => (
-                  <option
-                    key={item.name}
-                    value={item.name}
-                  >
-                    {item.name}
-                  </option>
-                ))}
-
-              </select>
-
-            </div>
-
-          </div>
-
-        </div>
+</div>
 
         {/* ================= ACTION ================= */}
 
