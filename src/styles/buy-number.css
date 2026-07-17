@@ -647,4 +647,8 @@
   .help-card {
     padding: 14px;
   }
+
+  .field select {
+    font-size: 16px;
+}
 }
