@@ -203,14 +203,9 @@ import {
 } from "react-icons/fi";
 
 import "../styles/buy-number.css";
-
-
-const BuyNumber = () => {
-
-
 const API = process.env.REACT_APP_API_URL;
 
-
+const BuyNumber = () => {
 
 const [services, setServices] = useState([]);
 
