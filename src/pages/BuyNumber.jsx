@@ -1624,39 +1624,9 @@ const BuyNumber = () => {
 
         </div>
 
-        {/* ================= FORM ================= */}
+       {/* ================= FORM ================= */}
 
 <div className="buy-form">
-
-  {/* SERVICE */}
-
-  <div className="field">
-    <label>Service</label>
-
-    <div className="select-wrapper">
-      <select
-        value={service}
-        onChange={(e) => {
-          setService(e.target.value);
-          setCountry("");
-          setCountries([]);
-        }}
-      >
-        <option value="" disabled>
-          Select Service
-        </option>
-
-        {services.map((item) => (
-          <option
-            key={item.name}
-            value={item.name}
-          >
-            {item.name}
-          </option>
-        ))}
-      </select>
-    </div>
-  </div>
 
   {/* COUNTRY */}
 
@@ -1666,13 +1636,14 @@ const BuyNumber = () => {
     <div className="select-wrapper">
       <select
         value={country}
-        disabled={!service}
-        onChange={(e) => setCountry(e.target.value)}
+        onChange={(e) => {
+          setCountry(e.target.value);
+          setService("");
+          setServices([]);
+        }}
       >
         <option value="" disabled>
-          {service
-            ? "Select Country"
-            : "Select Service First"}
+          Select Country
         </option>
 
         {countries.map((item) => (
@@ -1687,8 +1658,36 @@ const BuyNumber = () => {
     </div>
   </div>
 
-</div>
+  {/* SERVICE */}
 
+  <div className="field">
+    <label>Service</label>
+
+    <div className="select-wrapper">
+      <select
+        value={service}
+        disabled={!country}
+        onChange={(e) => setService(e.target.value)}
+      >
+        <option value="" disabled>
+          {country
+            ? "Select Service"
+            : "Choose Country First"}
+        </option>
+
+        {services.map((item) => (
+          <option
+            key={item.name}
+            value={item.name}
+          >
+            {item.name}
+          </option>
+        ))}
+      </select>
+    </div>
+  </div>
+
+</div>
         {/* ================= ACTION ================= */}
 
         <div className="action-row">
