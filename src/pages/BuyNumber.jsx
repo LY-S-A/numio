@@ -234,7 +234,7 @@ useEffect(() => {
         try {
 
             const res = await axios.get(
-                `/api/fivesim/services?country=${country}`
+                `/api/5sim/services?country=${country}`
             );
 
 
