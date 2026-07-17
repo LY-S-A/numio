@@ -859,7 +859,113 @@ const BuyNumber = () => {
       REACT-SELECT STYLES
   =========================== */
 
- const selectStyles = {
+//  const selectStyles = {
+//   control: (base, state) => ({
+//     ...base,
+//     minHeight: 46,
+//     height: 46,
+
+//     backgroundColor: "var(--card)",
+//     border: `1px solid ${
+//       state.isFocused ? "var(--primary)" : "var(--border)"
+//     }`,
+
+//     borderRadius: 10,
+//     boxShadow: state.isFocused
+//       ? "0 0 0 3px rgba(124, 58, 237, 0.15)"
+//       : "none",
+
+//     cursor: "pointer",
+
+//     "&:hover": {
+//       borderColor: "var(--primary)",
+//     },
+//   }),
+
+//   valueContainer: (base) => ({
+//     ...base,
+//     height: 46,
+//     padding: "0 14px",
+//   }),
+
+//   input: (base) => ({
+//     ...base,
+//     margin: 0,
+//     padding: 0,
+//     color: "var(--text)",
+//     fontSize: 13,
+//     fontWeight: 500,
+//   }),
+
+//   singleValue: (base) => ({
+//     ...base,
+//     color: "var(--text)",
+//     fontSize: 13,
+//     fontWeight: 500,
+//   }),
+
+//   placeholder: (base) => ({
+//     ...base,
+//     color: "var(--text-secondary)",
+//     fontSize: 13,
+//   }),
+
+//   indicatorSeparator: () => ({
+//     display: "none",
+//   }),
+
+//   dropdownIndicator: (base) => ({
+//     ...base,
+//     color: "var(--text-secondary)",
+//     paddingRight: 12,
+
+//     "&:hover": {
+//       color: "var(--text-secondary)",
+//     },
+//   }),
+
+//   menu: (base) => ({
+//     ...base,
+//     marginTop: 6,
+//     backgroundColor: "var(--card)",
+//     border: "1px solid var(--border)",
+//     borderRadius: 10,
+//     overflow: "hidden",
+//     boxShadow: "0 10px 30px rgba(0,0,0,.25)",
+//   }),
+
+//   menuList: (base) => ({
+//     ...base,
+//     padding: 4,
+//   }),
+
+//   option: (base, state) => ({
+//     ...base,
+//     backgroundColor: state.isSelected
+//       ? "var(--primary)"
+//       : state.isFocused
+//       ? "rgba(124,58,237,.12)"
+//       : "transparent",
+
+//     color: state.isSelected
+//       ? "#fff"
+//       : "var(--text)",
+
+//     fontSize: 13,
+//     fontWeight: 500,
+//     borderRadius: 8,
+//     cursor: "pointer",
+//     padding: "10px 12px",
+
+//     ":active": {
+//       backgroundColor: "rgba(124,58,237,.18)",
+//     },
+//   }),
+// };
+
+  const isMobile = window.matchMedia("(max-width: 768px)").matches;
+
+const selectStyles = {
   control: (base, state) => ({
     ...base,
     minHeight: 46,
@@ -869,8 +975,8 @@ const BuyNumber = () => {
     border: `1px solid ${
       state.isFocused ? "var(--primary)" : "var(--border)"
     }`,
-
     borderRadius: 10,
+
     boxShadow: state.isFocused
       ? "0 0 0 3px rgba(124, 58, 237, 0.15)"
       : "none",
@@ -893,21 +999,21 @@ const BuyNumber = () => {
     margin: 0,
     padding: 0,
     color: "var(--text)",
-    fontSize: 13,
+    fontSize: isMobile ? 16 : 13,
     fontWeight: 500,
   }),
 
   singleValue: (base) => ({
     ...base,
     color: "var(--text)",
-    fontSize: 13,
+    fontSize: isMobile ? 16 : 13,
     fontWeight: 500,
   }),
 
   placeholder: (base) => ({
     ...base,
     color: "var(--text-secondary)",
-    fontSize: 13,
+    fontSize: isMobile ? 16 : 13,
   }),
 
   indicatorSeparator: () => ({
@@ -932,6 +1038,7 @@ const BuyNumber = () => {
     borderRadius: 10,
     overflow: "hidden",
     boxShadow: "0 10px 30px rgba(0,0,0,.25)",
+    zIndex: 9999,
   }),
 
   menuList: (base) => ({
@@ -947,11 +1054,9 @@ const BuyNumber = () => {
       ? "rgba(124,58,237,.12)"
       : "transparent",
 
-    color: state.isSelected
-      ? "#fff"
-      : "var(--text)",
+    color: state.isSelected ? "#fff" : "var(--text)",
 
-    fontSize: 13,
+    fontSize: isMobile ? 16 : 13,
     fontWeight: 500,
     borderRadius: 8,
     cursor: "pointer",
