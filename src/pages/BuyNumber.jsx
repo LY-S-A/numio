@@ -733,7 +733,7 @@
 
 import { useEffect, useState } from "react";
 import axios from "axios";
-import Select from "react-select";
+import Select, { components } from "react-select";
 
 import {
   FiRefreshCw,
@@ -861,28 +861,25 @@ const BuyNumber = () => {
 const isMobile = window.matchMedia("(max-width: 768px)").matches;
 
 const selectStyles = {
-  control: (base, state) => ({
-    ...base,
-    minHeight: 46,
-    height: 46,
-
-    backgroundColor: "var(--card)",
-    border: `1px solid ${
-      state.isFocused ? "var(--primary)" : "var(--border)"
-    }`,
-
-    borderRadius: 10,
-
-    boxShadow: state.isFocused
-      ? "0 0 0 3px rgba(124, 58, 237, 0.15)"
-      : "none",
-
-    cursor: "pointer",
-
-    "&:hover": {
-      borderColor: "var(--primary)",
-    },
-  }),
+ control: (base, state) => ({
+  ...base,
+  minHeight: 46,
+  height: 46,
+  borderRadius: 10,
+  borderColor: state.isFocused
+    ? "var(--primary)"
+    : "var(--border)",
+  backgroundColor: "var(--card)",
+  boxShadow: state.isFocused
+    ? "0 0 0 3px rgba(124,58,237,.15)"
+    : "none",
+  cursor: "pointer",
+  "&:hover": {
+    borderColor: "var(--primary)",
+  },
+  paddingLeft: 4,
+  paddingRight: 4,
+}),
 
   valueContainer: (base) => ({
     ...base,
@@ -977,6 +974,21 @@ const selectStyles = {
     fontSize: 13,
   }),
 };
+
+const DropdownIndicator = (props) => (
+  <components.DropdownIndicator {...props}>
+    <span
+      style={{
+        fontSize: 14,
+        color: "var(--text-secondary)",
+        lineHeight: 1,
+        userSelect: "none",
+      }}
+    >
+      ▾
+    </span>
+  </components.DropdownIndicator>
+);
   
   /* ===========================
       BUY NUMBER
@@ -1139,6 +1151,10 @@ const selectStyles = {
             options={countryOptions}
             placeholder="Search Country"
             isSearchable
+            components={{
+  DropdownIndicator,
+  IndicatorSeparator: () => null,
+}}
             value={
               countryOptions.find(
                 (item) => item.value === country
@@ -1165,6 +1181,10 @@ const selectStyles = {
             }
             isDisabled={!country}
             isSearchable
+            components={{
+  DropdownIndicator,
+  IndicatorSeparator: () => null,
+}}
             value={
               serviceOptions.find(
                 (item) => item.value === service
