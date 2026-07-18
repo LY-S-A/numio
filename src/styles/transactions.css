@@ -219,173 +219,153 @@
 ========================== */
 
 .skeleton-row {
-  pointer-events: none;
+    pointer-events: none;
 }
 
 .skeleton {
-  position: relative;
-  overflow: hidden;
-  background: rgba(255,255,255,0.06);
-  border-radius: 10px;
+    position: relative;
+    overflow: hidden;
+    background: rgba(255, 255, 255, 0.06);
+    border-radius: 10px;
 }
 
 body.light-theme .skeleton {
-  background: #e5e7eb;
+    background: #e5e7eb;
 }
 
 .skeleton::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  transform: translateX(-100%);
-  background: linear-gradient(
-    90deg,
-    transparent,
-    rgba(255,255,255,.18),
-    transparent
-  );
-  animation: skeleton-loading 1.2s infinite;
+    content: "";
+    position: absolute;
+    inset: 0;
+    transform: translateX(-100%);
+    background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(255,255,255,.18),
+        transparent
+    );
+    animation: skeleton-loading 1.2s infinite;
 }
 
 body.light-theme .skeleton::after {
-  background: linear-gradient(
-    90deg,
-    transparent,
-    rgba(255,255,255,.7),
-    transparent
-  );
+    background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(255,255,255,.7),
+        transparent
+    );
 }
 
 @keyframes skeleton-loading {
-  100% {
-    transform: translateX(100%);
-  }
-}
-
-.skeleton-circle {
-  width: 48px;
-  height: 48px;
-  border-radius: 50%;
-}
-
-.skeleton-title {
-  width: 170px;
-  height: 16px;
-  margin-bottom: 10px;
-}
-
-.skeleton-subtitle {
-  width: 120px;
-  height: 12px;
-}
-
-.skeleton-status {
-  width: 80px;
-  height: 30px;
-  border-radius: 999px;
-  margin: auto;
-}
-
-.skeleton-amount {
-  width: 90px;
-  height: 18px;
-  margin: auto;
-}
-
-.skeleton-date {
-  width: 90px;
-  height: 14px;
-  margin-bottom: 8px;
-}
-
-.skeleton-time {
-  width: 60px;
-  height: 12px;
-}
-
-.skeleton-arrow {
-  width: 18px;
-  height: 18px;
-  border-radius: 50%;
+    100% {
+        transform: translateX(100%);
+    }
 }
 
 .tx-text {
-  display: flex;
-  flex-direction: column;
+    display: flex;
+    flex-direction: column;
 }
 
-/* ==========================
-   MOBILE SKELETON
-========================== */
-
-.skeleton-row {
-    display: grid;
-    grid-template-columns: 1fr auto;
-    grid-template-areas:
-        "info status"
-        "amount date";
-    gap: 10px 12px;
-    padding: 14px 16px;
-}
-
-.skeleton-row .tx-info {
-    grid-area: info;
-}
-
-.skeleton-row .tx-status-wrapper {
-    grid-area: status;
-    justify-self: end;
-}
-
-.skeleton-row .tx-amount {
-    grid-area: amount;
-}
-
-.skeleton-row .tx-date {
-    grid-area: date;
-    align-items: flex-end;
-}
-
-.skeleton-row .skeleton-arrow {
-    display: none;
-}
+/* Desktop */
 
 .skeleton-circle {
-    width: 36px;
-    height: 36px;
+    width: 42px;
+    height: 42px;
+    border-radius: 8px;
+    flex-shrink: 0;
 }
 
 .skeleton-title {
-    width: 120px;
-    height: 14px;
+    width: 170px;
+    height: 16px;
     margin-bottom: 8px;
 }
 
 .skeleton-subtitle {
-    width: 90px;
-    height: 10px;
+    width: 120px;
+    height: 12px;
 }
 
 .skeleton-status {
-    width: 64px;
-    height: 24px;
+    width: 78px;
+    height: 28px;
+    border-radius: 999px;
+    margin: auto;
 }
 
 .skeleton-amount {
-    width: 72px;
-    height: 14px;
-    margin: 0;
+    width: 90px;
+    height: 18px;
+    margin: auto;
 }
 
 .skeleton-date {
-    width: 70px;
-    height: 12px;
+    width: 90px;
+    height: 14px;
     margin-bottom: 6px;
 }
 
 .skeleton-time {
-    width: 50px;
-    height: 10px;
+    width: 60px;
+    height: 11px;
+}
+
+.skeleton-arrow {
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    margin-left: auto;
+}
+
+/* ==========================
+   MOBILE
+========================== */
+
+@media (max-width: 768px) {
+
+    .skeleton-circle {
+        width: 36px;
+        height: 36px;
+    }
+
+    .skeleton-title {
+        width: 120px;
+        height: 14px;
+        margin-bottom: 6px;
+    }
+
+    .skeleton-subtitle {
+        width: 90px;
+        height: 10px;
+    }
+
+    .skeleton-status {
+        width: 64px;
+        height: 24px;
+        margin: 0;
+    }
+
+    .skeleton-amount {
+        width: 72px;
+        height: 14px;
+        margin: 0;
+    }
+
+    .skeleton-date {
+        width: 70px;
+        height: 12px;
+        margin-bottom: 5px;
+    }
+
+    .skeleton-time {
+        width: 50px;
+        height: 10px;
+    }
+
+    .skeleton-arrow {
+        display: none;
+    }
 }
 
 /* ====================================
