@@ -572,6 +572,27 @@
   background: var(--border);
 }
 
+/* ===========================
+   REACT SELECT
+=========================== */
+
+[class$="-menu"] {
+    background: var(--card) !important;
+}
+
+[class$="-menu-list"] {
+    background: var(--card) !important;
+}
+
+[class$="-option"] {
+    background: var(--card);
+    color: var(--text);
+}
+
+[class$="-option:hover"] {
+    background: rgba(124, 58, 237, 0.12);
+}
+
 /* =========================
    RESPONSIVE
 ========================= */
