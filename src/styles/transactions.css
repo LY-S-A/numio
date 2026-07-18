@@ -314,6 +314,80 @@ body.light-theme .skeleton::after {
   flex-direction: column;
 }
 
+/* ==========================
+   MOBILE SKELETON
+========================== */
+
+.skeleton-row {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    grid-template-areas:
+        "info status"
+        "amount date";
+    gap: 10px 12px;
+    padding: 14px 16px;
+}
+
+.skeleton-row .tx-info {
+    grid-area: info;
+}
+
+.skeleton-row .tx-status-wrapper {
+    grid-area: status;
+    justify-self: end;
+}
+
+.skeleton-row .tx-amount {
+    grid-area: amount;
+}
+
+.skeleton-row .tx-date {
+    grid-area: date;
+    align-items: flex-end;
+}
+
+.skeleton-row .skeleton-arrow {
+    display: none;
+}
+
+.skeleton-circle {
+    width: 36px;
+    height: 36px;
+}
+
+.skeleton-title {
+    width: 120px;
+    height: 14px;
+    margin-bottom: 8px;
+}
+
+.skeleton-subtitle {
+    width: 90px;
+    height: 10px;
+}
+
+.skeleton-status {
+    width: 64px;
+    height: 24px;
+}
+
+.skeleton-amount {
+    width: 72px;
+    height: 14px;
+    margin: 0;
+}
+
+.skeleton-date {
+    width: 70px;
+    height: 12px;
+    margin-bottom: 6px;
+}
+
+.skeleton-time {
+    width: 50px;
+    height: 10px;
+}
+
 /* ====================================
    TABLE CARD
 ==================================== */
