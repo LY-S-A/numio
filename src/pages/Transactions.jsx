@@ -329,16 +329,34 @@ const DepositHistory = () => {
           <span>Date</span>
         </div>
                 {loading ? (
-          <div
-            style={{
-              padding: "40px",
-              textAlign: "center",
-              color: "var(--text-secondary)",
-            }}
-          >
-            Loading deposit history...
-          </div>
-        ) : paginatedDeposits.length === 0 ? (
+  Array.from({ length: 8 }).map((_, index) => (
+    <div className="tx-row skeleton-row" key={index}>
+      <div className="tx-info">
+        <div className="tx-icon skeleton skeleton-circle" />
+
+        <div className="tx-text">
+          <div className="skeleton skeleton-title" />
+          <div className="skeleton skeleton-subtitle" />
+        </div>
+      </div>
+
+      <div className="tx-status-wrapper">
+        <div className="skeleton skeleton-status" />
+      </div>
+
+      <div className="tx-amount">
+        <div className="skeleton skeleton-amount" />
+      </div>
+
+      <div className="tx-date">
+        <div className="skeleton skeleton-date" />
+        <div className="skeleton skeleton-time" />
+      </div>
+
+      <div className="skeleton skeleton-arrow" />
+    </div>
+  ))
+) : paginatedDeposits.length === 0 ? (
           <div
             style={{
               padding: "40px",
