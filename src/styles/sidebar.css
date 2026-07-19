@@ -327,7 +327,7 @@ body.light-theme .sidebar-skeleton {
   margin-top: 12px;
   padding: 8px;
 
-  background: var(--card);
+  background: var(--bg);
   border: 1px solid var(--border);
   border-radius: 12px;
 
