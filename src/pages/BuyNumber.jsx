@@ -894,7 +894,7 @@ const BuyNumber = () => {
     =========================== */
 
     useEffect(() => {
-        document.title = "Buy Number - RealSMS";
+        document.title = "Buy Number - Numio";
     }, []);
 
     /* ===========================
