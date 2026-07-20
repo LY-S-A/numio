@@ -338,13 +338,13 @@ const loadActiveOrder = useCallback(async () => {
         fetchCountries();
     }, []);
 
-  /* ===========================
+/* ===========================
     LOAD ACTIVE ORDER
 =========================== */
 
 useEffect(() => {
     loadActiveOrder();
-}, []);
+}, [loadActiveOrder]);
 
     /* ===========================
         FETCH SERVICES
