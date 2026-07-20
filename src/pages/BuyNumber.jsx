@@ -230,7 +230,7 @@
 //     =========================== */
 
 //     useEffect(() => {
-//         document.title = "Buy Number - RealSMS";
+//         document.title = "Buy Number - Numio";
 //     }, []);
 
 //     /* ===========================
@@ -389,44 +389,49 @@
 //             color: "var(--text-secondary)",
 //         }),
 
-//         menu: (base) => ({
-//             ...base,
-//             marginTop: 6,
-//             backgroundColor: "var(--card)",
-//             border: "1px solid var(--border)",
-//             borderRadius: 10,
-//             overflow: "hidden",
-//             boxShadow: "0 10px 30px rgba(0,0,0,.25)",
-//             zIndex: 9999,
-//         }),
+//         menuPortal: (base) => ({
+//     ...base,
+//     zIndex: 99999,
+// }),
 
-//         menuList: (base) => ({
-//             ...base,
-//             padding: 4,
-//         }),
+// menu: (base) => ({
+//     ...base,
+//     marginTop: 6,
+//     backgroundColor: "var(--card)",
+//     border: "1px solid var(--border)",
+//     borderRadius: 10,
+//     overflow: "hidden",
+//     boxShadow: "0 10px 30px rgba(0,0,0,.35)",
+// }),
 
-//         option: (base, state) => ({
-//             ...base,
-//             backgroundColor: state.isSelected
-//                 ? "var(--primary)"
-//                 : state.isFocused
-//                     ? "rgba(124,58,237,.12)"
-//                     : "transparent",
+// menuList: (base) => ({
+//     ...base,
+//     padding: 4,
+//     backgroundColor: "var(--card)",
+// }),
 
-//             color: state.isSelected
-//                 ? "#fff"
-//                 : "var(--text)",
+// option: (base, state) => ({
+//     ...base,
+//     backgroundColor: state.isSelected
+//         ? "var(--primary)"
+//         : state.isFocused
+//         ? "rgba(124,58,237,.12)"
+//         : "var(--card)",
 
-//             fontSize: isMobile ? 16 : 13,
-//             fontWeight: 500,
-//             borderRadius: 8,
-//             cursor: "pointer",
-//             padding: "10px 12px",
+//     color: state.isSelected
+//         ? "#fff"
+//         : "var(--text)",
 
-//             ":active": {
-//                 backgroundColor: "rgba(124,58,237,.18)",
-//             },
-//         }),
+//     fontSize: isMobile ? 16 : 13,
+//     fontWeight: 500,
+//     borderRadius: 8,
+//     cursor: "pointer",
+//     padding: "10px 12px",
+
+//     ":active": {
+//         backgroundColor: "rgba(124,58,237,.18)",
+//     },
+// }),
 
 //         noOptionsMessage: (base) => ({
 //             ...base,
@@ -611,6 +616,8 @@
 //                             options={countryOptions}
 //                             placeholder="Search Country"
 //                             isSearchable
+//                           menuPortalTarget={document.body}
+//     menuPosition="fixed"
 //                             components={{
 //                                 DropdownIndicator,
 //                                 IndicatorSeparator: () => null,
@@ -641,6 +648,8 @@
 //                             }
 //                             isDisabled={!country}
 //                             isSearchable
+//                           menuPortalTarget={document.body}
+//     menuPosition="fixed"
 //                             components={{
 //                                 DropdownIndicator,
 //                                 IndicatorSeparator: () => null,
@@ -881,6 +890,7 @@ const BuyNumber = () => {
 
     const [countries, setCountries] = useState([]);
     const [country, setCountry] = useState("");
+    const [estimatedPrice, setEstimatedPrice] = useState(0);
 
     const [order, setOrder] = useState(null);
 
@@ -934,8 +944,12 @@ const BuyNumber = () => {
 
     useEffect(() => {
         if (!country) {
-            setServices([]);
-            setService("");
+            // setServices([]);
+            // setService("");
+
+          setServices([]);
+setService("");
+setEstimatedPrice(0);
             return;
         }
 
@@ -946,8 +960,15 @@ const BuyNumber = () => {
                     getAuthConfig()
                 );
 
-                setServices(res.data.services || []);
-                setService("");
+                // setServices(res.data.services || []);
+                // setService("");
+
+              setServices(res.data.services || []);
+setEstimatedPrice(
+    res.data.estimatedPrice?.ngn || 0
+);
+setService("");
+              
             } catch (err) {
                 console.log(err.response?.data || err.message);
                 setServices([]);
@@ -1353,11 +1374,15 @@ option: (base, state) => ({
 
                         <span>Estimated Price</span>
 
-                        <h3>
+                        {/* <h3>
                             {selectedService
                                 ? `₦${selectedService.ngnPrice.toLocaleString()}`
                                 : "₦0"}
-                        </h3>
+                        </h3> */}
+
+                      <h3>
+    ₦{estimatedPrice.toLocaleString()}
+</h3>
 
                     </div>
 
