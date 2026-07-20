@@ -995,10 +995,10 @@ setService("");
         ngnPrice: item.ngnPrice,
     }));
 
-    const selectedService =
-        serviceOptions.find(
-            (item) => item.value === service
-        ) || null;
+    // const selectedService =
+    //     serviceOptions.find(
+    //         (item) => item.value === service
+    //     ) || null;
 
     /* ===========================
         REACT-SELECT STYLES
