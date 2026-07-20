@@ -1383,14 +1383,10 @@ option: (base, state) => ({
 
                         <span>Estimated Price</span>
 
-                        {/* <h3>
-                            {selectedService
-                                ? `₦${selectedService.ngnPrice.toLocaleString()}`
-                                : "₦0"}
-                        </h3> */}
-
-                      <h3>
-    ₦{estimatedPrice.toLocaleString()}
+                       <h3>
+    {estimatedPrice !== null
+        ? `₦${estimatedPrice.toLocaleString()}`
+        : "--"}
 </h3>
 
                     </div>
