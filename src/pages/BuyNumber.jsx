@@ -733,6 +733,20 @@ const cancelNumber = async () => {
         navigator.clipboard.writeText(order.phone);
     };
 
+  /* ===========================
+    AUTO REFRESH ACTIVE ORDER
+=========================== */
+
+useEffect(() => {
+    if (!order) return;
+
+    const interval = setInterval(() => {
+        loadActiveOrder();
+    }, 10000);
+
+    return () => clearInterval(interval);
+}, [order, loadActiveOrder]);
+
     return (
         <div className="buy-number-page">
 
