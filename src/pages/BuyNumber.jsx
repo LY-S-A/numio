@@ -1336,9 +1336,7 @@ option: (base, state) => ({
                                     (item) => item.value === service
                                 ) || null
                             }
-                            {/* onChange={(option) => {
-                                setService(option.value);
-                            }} */}
+            
 
                               onChange={(option) => {
     setService(option.value);
