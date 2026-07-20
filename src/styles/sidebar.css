@@ -278,7 +278,7 @@ body.light-theme .sidebar-skeleton {
   margin-top: 12px;
   padding-top: 12px;
 
-  background: var(--bg);
+  background: var(--bg) !important;
   border-top: 1px solid var(--border);
 
   display: flex;
