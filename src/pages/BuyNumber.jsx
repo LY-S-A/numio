@@ -223,6 +223,7 @@ const BuyNumber = () => {
     const [country, setCountry] = useState("");
     const [estimatedPrice, setEstimatedPrice] = useState(null);
 
+    const [timeLeft, setTimeLeft] = useState("--");
     const [order, setOrder] = useState(null);
 
     const [loading, setLoading] = useState(false);
@@ -237,6 +238,51 @@ const BuyNumber = () => {
     useEffect(() => {
         document.title = "Buy Number - Numio";
     }, []);
+
+    useEffect(() => {
+        if (!order?.expires) {
+            setTimeLeft("--");
+            return;
+        }
+
+        const calculateTime = () => {
+            const now = new Date().getTime();
+            const expiry = new Date(order.expires).getTime();
+
+            const difference = expiry - now;
+
+            if (difference <= 0) {
+                setTimeLeft("Expired");
+                return;
+            }
+
+            const minutes = Math.floor(
+                (difference % (1000 * 60 * 60)) /
+                (1000 * 60)
+            );
+
+            const seconds = Math.floor(
+                (difference % (1000 * 60)) /
+                1000
+            );
+
+            setTimeLeft(
+                `${minutes}m ${seconds < 10 ? "0" : ""}${seconds}s`
+            );
+        };
+
+
+        calculateTime();
+
+        const timer = setInterval(
+            calculateTime,
+            1000
+        );
+
+
+        return () => clearInterval(timer);
+
+    }, [order]);
 
     /* ===========================
         AUTH
@@ -782,9 +828,7 @@ const BuyNumber = () => {
                         <p>
                             Expires in{" "}
                             <strong>
-                                {order?.expires
-                                    ? new Date(order.expires).toLocaleTimeString()
-                                    : "--"}
+                                {timeLeft}
                             </strong>
                         </p>
 
