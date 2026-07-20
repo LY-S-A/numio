@@ -274,10 +274,11 @@ body.light-theme .sidebar-skeleton {
    ACCOUNT MENU
 ========================= */
 
-/* .account-menu {
+.account-menu {
   margin-top: 12px;
   padding-top: 12px;
 
+  background: var(--bg);
   border-top: 1px solid var(--border);
 
   display: flex;
@@ -317,59 +318,7 @@ body.light-theme .sidebar-skeleton {
 
 .signout:hover {
   background: color-mix(in srgb, var(--danger) 12%, transparent);
-} */
-
-/* =========================
-   ACCOUNT MENU
-========================= */
-
-.account-menu {
-  margin-top: 12px;
-  padding: 8px;
-
-  background: var(--bg);
-  border: 1px solid var(--border);
-  border-radius: 12px;
-
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
-
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
-}
-
-.account-item {
-  width: 100%;
-  border: none;
-  background: transparent;
-
-  display: flex;
-  align-items: center;
-  gap: 10px;
-
-  padding: 12px 14px;
-  border-radius: 10px;
-
-  color: var(--text-secondary);
-  font-size: 13px;
-  font-weight: 500;
-
-  cursor: pointer;
-  transition: all 0.2s ease;
-}
-
-.account-item:hover {
-  background: var(--card-secondary);
-  color: var(--text);
-}
-
-.signout {
-  color: var(--danger);
-}
-
-.signout:hover {
-  background: color-mix(in srgb, var(--danger) 10%, transparent);
-}
+} 
 
 /* =========================
    RESPONSIVE
