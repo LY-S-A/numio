@@ -210,8 +210,8 @@ const API = process.env.REACT_APP_API_URL;
 
 const BuyNumber = () => {
 
-  const { setBalance } = useBalance();
-  
+    const { setBalance } = useBalance();
+
     /* ===========================
         STATE
     =========================== */
@@ -275,9 +275,9 @@ const BuyNumber = () => {
 
     useEffect(() => {
         if (!country) {
-           setServices([]);
-setService("");
-setEstimatedPrice(null);
+            setServices([]);
+            setService("");
+            setEstimatedPrice(null);
             return;
         }
 
@@ -288,10 +288,10 @@ setEstimatedPrice(null);
                     getAuthConfig()
                 );
 
-               setServices(res.data.services || []);
-setService("");
-setEstimatedPrice(null);
-              
+                setServices(res.data.services || []);
+                setService("");
+                setEstimatedPrice(null);
+
             } catch (err) {
                 console.log(err.response?.data || err.message);
                 setServices([]);
@@ -393,48 +393,48 @@ setEstimatedPrice(null);
         }),
 
         menuPortal: (base) => ({
-    ...base,
-    zIndex: 99999,
-}),
+            ...base,
+            zIndex: 99999,
+        }),
 
-menu: (base) => ({
-    ...base,
-    marginTop: 6,
-    backgroundColor: "var(--card)",
-    border: "1px solid var(--border)",
-    borderRadius: 10,
-    overflow: "hidden",
-    boxShadow: "0 10px 30px rgba(0,0,0,.35)",
-}),
+        menu: (base) => ({
+            ...base,
+            marginTop: 6,
+            backgroundColor: "var(--card)",
+            border: "1px solid var(--border)",
+            borderRadius: 10,
+            overflow: "hidden",
+            boxShadow: "0 10px 30px rgba(0,0,0,.35)",
+        }),
 
-menuList: (base) => ({
-    ...base,
-    padding: 4,
-    backgroundColor: "var(--card)",
-}),
+        menuList: (base) => ({
+            ...base,
+            padding: 4,
+            backgroundColor: "var(--card)",
+        }),
 
-option: (base, state) => ({
-    ...base,
-    backgroundColor: state.isSelected
-        ? "var(--primary)"
-        : state.isFocused
-        ? "rgba(124,58,237,.12)"
-        : "var(--card)",
+        option: (base, state) => ({
+            ...base,
+            backgroundColor: state.isSelected
+                ? "var(--primary)"
+                : state.isFocused
+                    ? "rgba(124,58,237,.12)"
+                    : "var(--card)",
 
-    color: state.isSelected
-        ? "#fff"
-        : "var(--text)",
+            color: state.isSelected
+                ? "#fff"
+                : "var(--text)",
 
-    fontSize: isMobile ? 16 : 13,
-    fontWeight: 500,
-    borderRadius: 8,
-    cursor: "pointer",
-    padding: "10px 12px",
+            fontSize: isMobile ? 16 : 13,
+            fontWeight: 500,
+            borderRadius: 8,
+            cursor: "pointer",
+            padding: "10px 12px",
 
-    ":active": {
-        backgroundColor: "rgba(124,58,237,.18)",
-    },
-}),
+            ":active": {
+                backgroundColor: "rgba(124,58,237,.18)",
+            },
+        }),
 
         noOptionsMessage: (base) => ({
             ...base,
@@ -462,63 +462,36 @@ option: (base, state) => ({
         BUY NUMBER
     =========================== */
 
-    // const buyNumber = async () => {
-    //     if (!country || !service) return;
+    const buyNumber = async () => {
+        if (!country || !service) return;
 
-    //     try {
-    //         setLoading(true);
+        try {
+            setLoading(true);
 
-    //         const res = await axios.post(
-    //             `${API}/api/5sim/buy`,
-    //             {
-    //                 country,
-    //                 service,
-    //             },
-    //             getAuthConfig()
-    //         );
+            const res = await axios.post(
+                `${API}/api/5sim/buy`,
+                {
+                    country,
+                    service,
+                },
+                getAuthConfig()
+            );
 
-    //         setOrder(res.data.order);
-    //         setSmsMessages([]);
-    //     } catch (err) {
-    //         alert(
-    //             err.response?.data?.message ||
-    //             "Unable to buy number."
-    //         );
-    //     } finally {
-    //         setLoading(false);
-    //     }
-    // };
+            setOrder(res.data.order);
+            setSmsMessages([]);
 
-  const buyNumber = async () => {
-    if (!country || !service) return;
+            // deduct wallet instantly
+            setBalance(res.data.wallet);
 
-    try {
-        setLoading(true);
-
-        const res = await axios.post(
-            `${API}/api/5sim/buy`,
-            {
-                country,
-                service,
-            },
-            getAuthConfig()
-        );
-
-        setOrder(res.data.order);
-        setSmsMessages([]);
-
-        // deduct wallet instantly
-        setBalance(res.data.wallet);
-
-    } catch (err) {
-        alert(
-            err.response?.data?.message ||
-            "Unable to buy number."
-        );
-    } finally {
-        setLoading(false);
-    }
-};
+        } catch (err) {
+            alert(
+                err.response?.data?.message ||
+                "Unable to buy number."
+            );
+        } finally {
+            setLoading(false);
+        }
+    };
 
     /* ===========================
         REFRESH SMS
@@ -548,53 +521,33 @@ option: (base, state) => ({
         CANCEL NUMBER
     =========================== */
 
-    // const cancelNumber = async () => {
-    //     if (!order) return;
+    const cancelNumber = async () => {
+        if (!order) return;
 
-    //     try {
-    //         await axios.post(
-    //             `${API}/api/5sim/cancel/${order._id}`,
-    //             {},
-    //             getAuthConfig()
-    //         );
+        try {
 
-    //         setOrder(null);
-    //         setSmsMessages([]);
-    //     } catch (err) {
-    //         alert(
-    //             err.response?.data?.message ||
-    //             "Unable to cancel number."
-    //         );
-    //     }
-    // };
+            const res = await axios.post(
+                `${API}/api/5sim/cancel/${order._id}`,
+                {},
+                getAuthConfig()
+            );
 
+            setOrder(null);
+            setSmsMessages([]);
 
-  const cancelNumber = async () => {
-    if (!order) return;
+            // refund wallet instantly
+            setBalance(res.data.wallet);
 
-    try {
+        } catch (err) {
 
-        const res = await axios.post(
-            `${API}/api/5sim/cancel/${order._id}`,
-            {},
-            getAuthConfig()
-        );
+            alert(
+                err.response?.data?.message ||
+                "Unable to cancel number."
+            );
 
-        setOrder(null);
-        setSmsMessages([]);
+        }
+    };
 
-        // refund wallet instantly
-        setBalance(res.data.wallet);
-
-    } catch (err) {
-
-        alert(
-            err.response?.data?.message ||
-            "Unable to cancel number."
-        );
-
-    }
-};
     /* ===========================
         HELPERS
     =========================== */
@@ -677,8 +630,8 @@ option: (base, state) => ({
                             options={countryOptions}
                             placeholder="Search Country"
                             isSearchable
-                          menuPortalTarget={document.body}
-    menuPosition="fixed"
+                            menuPortalTarget={document.body}
+                            menuPosition="fixed"
                             components={{
                                 DropdownIndicator,
                                 IndicatorSeparator: () => null,
@@ -709,8 +662,8 @@ option: (base, state) => ({
                             }
                             isDisabled={!country}
                             isSearchable
-                          menuPortalTarget={document.body}
-    menuPosition="fixed"
+                            menuPortalTarget={document.body}
+                            menuPosition="fixed"
                             components={{
                                 DropdownIndicator,
                                 IndicatorSeparator: () => null,
@@ -720,12 +673,12 @@ option: (base, state) => ({
                                     (item) => item.value === service
                                 ) || null
                             }
-            
 
-                              onChange={(option) => {
-    setService(option.value);
-    setEstimatedPrice(option.ngnPrice);
-}}
+
+                            onChange={(option) => {
+                                setService(option.value);
+                                setEstimatedPrice(option.ngnPrice);
+                            }}
                         />
                     </div>
 
@@ -753,11 +706,11 @@ option: (base, state) => ({
 
                         <span>Estimated Price</span>
 
-                       <h3>
-    {estimatedPrice !== null
-        ? `₦${estimatedPrice.toLocaleString()}`
-        : "--"}
-</h3>
+                        <h3>
+                            {estimatedPrice !== null
+                                ? `₦${estimatedPrice.toLocaleString()}`
+                                : "--"}
+                        </h3>
 
                     </div>
 
