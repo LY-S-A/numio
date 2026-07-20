@@ -970,23 +970,6 @@ setEstimatedPrice(null);
         fetchServices();
     }, [country]);
 
-
-  useEffect(() => {
-    if (!service) {
-        setEstimatedPrice(null);
-        return;
-    }
-
-    const selected = services.find(
-        (item) => item.name === service
-    );
-
-    if (selected) {
-        setEstimatedPrice(
-            selected.estimatedPrice ?? selected.ngnPrice
-        );
-    }
-}, [service, services]);
     /* ===========================
         REACT-SELECT OPTIONS
     =========================== */
@@ -1353,9 +1336,14 @@ option: (base, state) => ({
                                     (item) => item.value === service
                                 ) || null
                             }
-                            onChange={(option) => {
+                            {/* onChange={(option) => {
                                 setService(option.value);
-                            }}
+                            }} */}
+
+                              onChange={(option) => {
+    setService(option.value);
+    setEstimatedPrice(option.ngnPrice);
+}}
                         />
                     </div>
 
