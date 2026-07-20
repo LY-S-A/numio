@@ -294,6 +294,29 @@ const BuyNumber = () => {
         },
     });
 
+  /* ===========================
+    LOAD ACTIVE ORDER
+=========================== */
+
+const loadActiveOrder = async () => {
+    try {
+        const res = await axios.get(
+            `${API}/api/5sim/active`,
+            getAuthConfig()
+        );
+
+        if (res.data.order) {
+            setOrder(res.data.order);
+            setSmsMessages(res.data.sms || []);
+        } else {
+            setOrder(null);
+            setSmsMessages([]);
+        }
+    } catch (err) {
+        console.log(err.response?.data || err.message);
+    }
+};
+
     /* ===========================
         FETCH COUNTRIES
     =========================== */
@@ -314,6 +337,14 @@ const BuyNumber = () => {
 
         fetchCountries();
     }, []);
+
+  /* ===========================
+    LOAD ACTIVE ORDER
+=========================== */
+
+useEffect(() => {
+    loadActiveOrder();
+}, []);
 
     /* ===========================
         FETCH SERVICES
@@ -504,95 +535,193 @@ const BuyNumber = () => {
         </components.DropdownIndicator>
     );
 
-    /* ===========================
-        BUY NUMBER
-    =========================== */
+    // /* ===========================
+    //     BUY NUMBER
+    // =========================== */
 
-    const buyNumber = async () => {
-        if (!country || !service) return;
+    // const buyNumber = async () => {
+    //     if (!country || !service) return;
 
-        try {
-            setLoading(true);
+    //     try {
+    //         setLoading(true);
 
-            const res = await axios.post(
-                `${API}/api/5sim/buy`,
-                {
-                    country,
-                    service,
-                },
-                getAuthConfig()
-            );
+    //         const res = await axios.post(
+    //             `${API}/api/5sim/buy`,
+    //             {
+    //                 country,
+    //                 service,
+    //             },
+    //             getAuthConfig()
+    //         );
 
-            setOrder(res.data.order);
-            setSmsMessages([]);
+    //         setOrder(res.data.order);
+    //         setSmsMessages([]);
 
-            // deduct wallet instantly
+    //         // deduct wallet instantly
+    //         setBalance(res.data.wallet);
+
+    //     } catch (err) {
+    //         alert(
+    //             err.response?.data?.message ||
+    //             "Unable to buy number."
+    //         );
+    //     } finally {
+    //         setLoading(false);
+    //     }
+    // };
+
+  /* ===========================
+    BUY NUMBER
+=========================== */
+
+const buyNumber = async () => {
+    if (!country || !service) return;
+
+    try {
+        setLoading(true);
+
+        const res = await axios.post(
+            `${API}/api/5sim/buy`,
+            {
+                country,
+                service,
+            },
+            getAuthConfig()
+        );
+
+        // Update wallet instantly
+        if (typeof res.data.wallet !== "undefined") {
             setBalance(res.data.wallet);
-
-        } catch (err) {
-            alert(
-                err.response?.data?.message ||
-                "Unable to buy number."
-            );
-        } finally {
-            setLoading(false);
         }
-    };
 
-    /* ===========================
-        REFRESH SMS
-    =========================== */
+        // Load latest active order from backend
+        await loadActiveOrder();
 
-    const refreshSMS = async () => {
-        if (!order) return;
+    } catch (err) {
+        alert(
+            err.response?.data?.message ||
+            "Unable to buy number."
+        );
+    } finally {
+        setLoading(false);
+    }
+};
 
-        try {
-            setRefreshing(true);
+    // /* ===========================
+    //     REFRESH SMS
+    // =========================== */
 
-            const res = await axios.get(
-                `${API}/api/5sim/refresh/${order._id}`,
-                getAuthConfig()
-            );
+    // const refreshSMS = async () => {
+    //     if (!order) return;
 
-            setOrder(res.data.order);
-            setSmsMessages(res.data.sms || []);
-        } catch (err) {
-            console.log(err.response?.data || err.message);
-        } finally {
-            setRefreshing(false);
-        }
-    };
+    //     try {
+    //         setRefreshing(true);
 
-    /* ===========================
-        CANCEL NUMBER
-    =========================== */
+    //         const res = await axios.get(
+    //             `${API}/api/5sim/refresh/${order._id}`,
+    //             getAuthConfig()
+    //         );
 
-    const cancelNumber = async () => {
-        if (!order) return;
+    //         setOrder(res.data.order);
+    //         setSmsMessages(res.data.sms || []);
+    //     } catch (err) {
+    //         console.log(err.response?.data || err.message);
+    //     } finally {
+    //         setRefreshing(false);
+    //     }
+    // };
 
-        try {
+  /* ===========================
+    REFRESH SMS
+=========================== */
 
-            const res = await axios.post(
-                `${API}/api/5sim/cancel/${order._id}`,
-                {},
-                getAuthConfig()
-            );
+const refreshSMS = async () => {
+    if (!order) return;
 
-            setOrder(null);
-            setSmsMessages([]);
+    try {
+        setRefreshing(true);
 
-            // refund wallet instantly
+        await axios.get(
+            `${API}/api/5sim/refresh/${order._id}`,
+            getAuthConfig()
+        );
+
+        // Reload latest order & SMS
+        await loadActiveOrder();
+
+    } catch (err) {
+        console.log(err.response?.data || err.message);
+    } finally {
+        setRefreshing(false);
+    }
+};
+
+    // /* ===========================
+    //     CANCEL NUMBER
+    // =========================== */
+
+    // const cancelNumber = async () => {
+    //     if (!order) return;
+
+    //     try {
+
+    //         const res = await axios.post(
+    //             `${API}/api/5sim/cancel/${order._id}`,
+    //             {},
+    //             getAuthConfig()
+    //         );
+
+    //         setOrder(null);
+    //         setSmsMessages([]);
+
+    //         // refund wallet instantly
+    //         setBalance(res.data.wallet);
+
+    //     } catch (err) {
+
+    //         alert(
+    //             err.response?.data?.message ||
+    //             "Unable to cancel number."
+    //         );
+
+    //     }
+    // };
+
+  /* ===========================
+    CANCEL NUMBER
+=========================== */
+
+const cancelNumber = async () => {
+    if (!order) return;
+
+    const confirmed = window.confirm(
+        "Are you sure you want to cancel this number?"
+    );
+
+    if (!confirmed) return;
+
+    try {
+        const res = await axios.post(
+            `${API}/api/5sim/cancel/${order._id}`,
+            {},
+            getAuthConfig()
+        );
+
+        // Update wallet if refunded
+        if (typeof res.data.wallet !== "undefined") {
             setBalance(res.data.wallet);
-
-        } catch (err) {
-
-            alert(
-                err.response?.data?.message ||
-                "Unable to cancel number."
-            );
-
         }
-    };
+
+        // Reload order state from backend
+        await loadActiveOrder();
+
+    } catch (err) {
+        alert(
+            err.response?.data?.message ||
+            "Unable to cancel number."
+        );
+    }
+};
 
     /* ===========================
         HELPERS
