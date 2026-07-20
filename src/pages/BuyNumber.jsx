@@ -890,7 +890,7 @@ const BuyNumber = () => {
 
     const [countries, setCountries] = useState([]);
     const [country, setCountry] = useState("");
-    const [estimatedPrice, setEstimatedPrice] = useState(0);
+    const [estimatedPrice, setEstimatedPrice] = useState(null);
 
     const [order, setOrder] = useState(null);
 
@@ -944,12 +944,9 @@ const BuyNumber = () => {
 
     useEffect(() => {
         if (!country) {
-            // setServices([]);
-            // setService("");
-
-          setServices([]);
+           setServices([]);
 setService("");
-setEstimatedPrice(0);
+setEstimatedPrice(null);
             return;
         }
 
@@ -960,14 +957,9 @@ setEstimatedPrice(0);
                     getAuthConfig()
                 );
 
-                // setServices(res.data.services || []);
-                // setService("");
-
-              setServices(res.data.services || []);
-setEstimatedPrice(
-    res.data.estimatedPrice?.ngn || 0
-);
+               setServices(res.data.services || []);
 setService("");
+setEstimatedPrice(null);
               
             } catch (err) {
                 console.log(err.response?.data || err.message);
@@ -978,6 +970,23 @@ setService("");
         fetchServices();
     }, [country]);
 
+
+  useEffect(() => {
+    if (!service) {
+        setEstimatedPrice(null);
+        return;
+    }
+
+    const selected = services.find(
+        (item) => item.name === service
+    );
+
+    if (selected) {
+        setEstimatedPrice(
+            selected.estimatedPrice ?? selected.ngnPrice
+        );
+    }
+}, [service, services]);
     /* ===========================
         REACT-SELECT OPTIONS
     =========================== */
