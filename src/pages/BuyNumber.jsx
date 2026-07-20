@@ -191,7 +191,7 @@
 
 // export default BuyNumber;
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallback } from "react";
 import axios from "axios";
 import Select, { components } from "react-select";
 import { useBalance } from "../context/BalanceContext";
@@ -298,7 +298,7 @@ const BuyNumber = () => {
     LOAD ACTIVE ORDER
 =========================== */
 
-const loadActiveOrder = async () => {
+const loadActiveOrder = useCallback(async () => {
     try {
         const res = await axios.get(
             `${API}/api/5sim/active`,
@@ -315,7 +315,7 @@ const loadActiveOrder = async () => {
     } catch (err) {
         console.log(err.response?.data || err.message);
     }
-};
+}, []);
 
     /* ===========================
         FETCH COUNTRIES
