@@ -338,7 +338,7 @@ const loadActiveOrder = useCallback(async () => {
         };
 
         fetchCountries();
-   }, [getAuthConfig]);
+   }, []);
 
 /* ===========================
     LOAD ACTIVE ORDER
