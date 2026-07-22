@@ -301,11 +301,17 @@ const BuyNumber = () => {
         AUTH
     =========================== */
 
-    const getAuthConfig = () => ({
-        headers: {
-            Authorization: `Bearer ${localStorage.getItem("token")}`,
-        },
-    });
+    // const getAuthConfig = () => ({
+    //     headers: {
+    //         Authorization: `Bearer ${localStorage.getItem("token")}`,
+    //     },
+    // });
+
+  const getAuthConfig = useCallback(() => ({
+    headers: {
+        Authorization: `Bearer ${localStorage.getItem("token")}`,
+    },
+}), []);
 
   /* ===========================
     LOAD ACTIVE ORDER
@@ -614,7 +620,7 @@ const buyNumber = async () => {
 // };
 
 
-  const refreshSMS = async (showLoader = true) => {
+const refreshSMS = useCallback(async (showLoader = true) => {
     if (!order) return;
 
     try {
@@ -630,7 +636,6 @@ const buyNumber = async () => {
         setOrder(res.data.order);
         setSmsMessages(res.data.sms || []);
 
-        // Optional notification when a new OTP arrives
         if (res.data.hasNewSms) {
             console.log("New SMS received");
         }
@@ -642,8 +647,8 @@ const buyNumber = async () => {
             setRefreshing(false);
         }
     }
-};
-   
+}, [order]);
+  
   /* ===========================
     CANCEL NUMBER
 =========================== */
@@ -704,10 +709,9 @@ const cancelNumber = async () => {
 //     return () => clearInterval(interval);
 // }, [order, loadActiveOrder]);
 
-  useEffect(() => {
+useEffect(() => {
     if (!order) return;
 
-    // Stop polling if order is completed
     if (
         order.status === "FINISHED" ||
         order.status === "CANCELLED" ||
@@ -719,7 +723,7 @@ const cancelNumber = async () => {
     }
 
     const interval = setInterval(() => {
-        refreshSMS(false); // don't show loader during automatic polling
+        refreshSMS(false);
     }, 5000);
 
     return () => clearInterval(interval);
