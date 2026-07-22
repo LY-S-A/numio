@@ -10,6 +10,7 @@ import {
     FiInfo,
     FiChevronRight,
     FiCheckCircle,
+    FiCheck,
 } from "react-icons/fi";
 
 import "../styles/buy-number.css";
@@ -33,6 +34,9 @@ const BuyNumber = () => {
 
     const [timeLeft, setTimeLeft] = useState("--");
     const [order, setOrder] = useState(null);
+
+    const [numberCopied, setNumberCopied] = useState(false);
+    const [copiedOTP, setCopiedOTP] = useState(null);
 
     const [loading, setLoading] = useState(false);
     const [refreshing, setRefreshing] = useState(false);
@@ -475,16 +479,40 @@ const BuyNumber = () => {
         HELPERS
     =========================== */
 
-    const copyNumber = () => {
-        if (!order?.phone) return;
+    // const copyNumber = () => {
+    //     if (!order?.phone) return;
 
-        navigator.clipboard.writeText(order.phone);
-    };
+    //     navigator.clipboard.writeText(order.phone);
+    // };
 
-    const copyOTP = (otp) => {
+    const copyNumber = async () => {
+    if (!order?.phone) return;
+
+    await navigator.clipboard.writeText(order.phone);
+
+    setNumberCopied(true);
+
+    setTimeout(() => {
+        setNumberCopied(false);
+    }, 2000);
+};
+
+//     const copyOTP = (otp) => {
+//     if (!otp) return;
+
+//     navigator.clipboard.writeText(otp);
+// };
+
+    const copyOTP = async (otp) => {
     if (!otp) return;
 
-    navigator.clipboard.writeText(otp);
+    await navigator.clipboard.writeText(otp);
+
+    setCopiedOTP(otp);
+
+    setTimeout(() => {
+        setCopiedOTP(null);
+    }, 2000);
 };
 
     /* ===========================
@@ -714,13 +742,13 @@ const BuyNumber = () => {
                             </h2>
 
                             <button
-                                type="button"
-                                onClick={copyNumber}
-                                disabled={!order}
-                                title="Copy Number"
-                            >
-                                <FiCopy />
-                            </button>
+    type="button"
+    onClick={copyNumber}
+    disabled={!order}
+    title={numberCopied ? "Copied!" : "Copy Number"}
+>
+    {numberCopied ? <FiCheck /> : <FiCopy />}
+</button>
 
                         </div>
                     <p className="number-status">
@@ -767,13 +795,21 @@ const BuyNumber = () => {
         </strong>
 
         <button
-            type="button"
-            className="copy-otp-btn"
-            onClick={() => copyOTP(sms.code || sms.otp)}
-            title="Copy OTP"
-        >
-            <FiCopy />
-        </button>
+    type="button"
+    className="copy-otp-btn"
+    onClick={() => copyOTP(sms.code || sms.otp)}
+    title={
+        copiedOTP === (sms.code || sms.otp)
+            ? "Copied!"
+            : "Copy OTP"
+    }
+>
+    {copiedOTP === (sms.code || sms.otp) ? (
+        <FiCheck />
+    ) : (
+        <FiCopy />
+    )}
+</button>
     </div>
 )}
 
