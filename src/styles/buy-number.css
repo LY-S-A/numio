@@ -410,6 +410,7 @@
   border: none;
   border-radius: 6px;
 
+  border: 1px solid var(--border);
   background: var(--table-hover);
 
   color: var(--text);
