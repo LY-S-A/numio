@@ -51,43 +51,43 @@ const BuyNumber = () => {
         document.title = "Buy Number - Numio";
     }, []);
 
-  useEffect(() => {
-    if (!order?.expires || smsMessages.length > 0) {
-        setTimeLeft("--");
-        return;
-    }
-
-    const calculateTime = () => {
-        const now = new Date().getTime();
-        const expiry = new Date(order.expires).getTime();
-
-        const difference = expiry - now;
-
-        if (difference <= 0) {
-            setTimeLeft("Expired");
+    useEffect(() => {
+        if (!order?.expires || smsMessages.length > 0) {
+            setTimeLeft("--");
             return;
         }
 
-        const minutes = Math.floor(
-            (difference % (1000 * 60 * 60)) / (1000 * 60)
-        );
+        const calculateTime = () => {
+            const now = new Date().getTime();
+            const expiry = new Date(order.expires).getTime();
 
-        const seconds = Math.floor(
-            (difference % (1000 * 60)) / 1000
-        );
+            const difference = expiry - now;
 
-        setTimeLeft(
-            `${minutes}m ${seconds < 10 ? "0" : ""}${seconds}s`
-        );
-    };
+            if (difference <= 0) {
+                setTimeLeft("Expired");
+                return;
+            }
 
-    calculateTime();
+            const minutes = Math.floor(
+                (difference % (1000 * 60 * 60)) / (1000 * 60)
+            );
 
-    const timer = setInterval(calculateTime, 1000);
+            const seconds = Math.floor(
+                (difference % (1000 * 60)) / 1000
+            );
 
-    return () => clearInterval(timer);
+            setTimeLeft(
+                `${minutes}m ${seconds < 10 ? "0" : ""}${seconds}s`
+            );
+        };
 
-}, [order, smsMessages]);
+        calculateTime();
+
+        const timer = setInterval(calculateTime, 1000);
+
+        return () => clearInterval(timer);
+
+    }, [order, smsMessages]);
 
     /* ===========================
         AUTH
@@ -441,79 +441,67 @@ const BuyNumber = () => {
         }
     };
 
-   /* ===========================
-      FINISH ORDER
-  =========================== */
+    /* ===========================
+       FINISH ORDER
+   =========================== */
 
-  const finishOrder = async () => {
-    if (!order) return;
+    const finishOrder = async () => {
+        if (!order) return;
 
-    try {
-        const res = await axios.post(
-            `${API}/api/5sim/finish/${order._id}`,
-            {},
-            getAuthConfig()
-        );
+        try {
+            const res = await axios.post(
+                `${API}/api/5sim/finish/${order._id}`,
+                {},
+                getAuthConfig()
+            );
 
-        if (typeof res.data.wallet !== "undefined") {
-            setBalance(res.data.wallet);
+            if (typeof res.data.wallet !== "undefined") {
+                setBalance(res.data.wallet);
+            }
+
+            // Remove active order from UI
+            setOrder(null);
+            setSmsMessages([]);
+            setTimeLeft("--");
+
+            // Reload active order (should return null)
+            await loadActiveOrder();
+
+        } catch (err) {
+            alert(
+                err.response?.data?.message ||
+                "Unable to finish order."
+            );
         }
-
-        // Remove active order from UI
-        setOrder(null);
-        setSmsMessages([]);
-        setTimeLeft("--");
-
-        // Reload active order (should return null)
-        await loadActiveOrder();
-
-    } catch (err) {
-        alert(
-            err.response?.data?.message ||
-            "Unable to finish order."
-        );
-    }
-};
+    };
 
     /* ===========================
         HELPERS
     =========================== */
 
-    // const copyNumber = () => {
-    //     if (!order?.phone) return;
-
-    //     navigator.clipboard.writeText(order.phone);
-    // };
-
     const copyNumber = async () => {
-    if (!order?.phone) return;
+        if (!order?.phone) return;
 
-    await navigator.clipboard.writeText(order.phone);
+        await navigator.clipboard.writeText(order.phone);
 
-    setNumberCopied(true);
+        setNumberCopied(true);
 
-    setTimeout(() => {
-        setNumberCopied(false);
-    }, 2000);
-};
-
-//     const copyOTP = (otp) => {
-//     if (!otp) return;
-
-//     navigator.clipboard.writeText(otp);
-// };
+        setTimeout(() => {
+            setNumberCopied(false);
+        }, 2000);
+    };
 
     const copyOTP = async (otp) => {
-    if (!otp) return;
+        if (!otp) return;
 
-    await navigator.clipboard.writeText(otp);
+        await navigator.clipboard.writeText(otp);
 
-    setCopiedOTP(otp);
+        setCopiedOTP(otp);
 
-    setTimeout(() => {
-        setCopiedOTP(null);
-    }, 2000);
-};
+        setTimeout(() => {
+            setCopiedOTP(null);
+        }, 2000);
+    };
 
     /* ===========================
       AUTO REFRESH ACTIVE ORDER
@@ -529,8 +517,8 @@ const BuyNumber = () => {
         return () => clearInterval(interval);
     }, [order, loadActiveOrder]);
 
-  const hasSms = smsMessages.length > 0;
-  
+    const hasSms = smsMessages.length > 0;
+
     return (
         <div className="buy-number-page">
 
@@ -742,26 +730,26 @@ const BuyNumber = () => {
                             </h2>
 
                             <button
-    type="button"
-    onClick={copyNumber}
-    disabled={!order}
-    title={numberCopied ? "Copied!" : "Copy Number"}
->
-    {numberCopied ? <FiCheck /> : <FiCopy />}
-</button>
+                                type="button"
+                                onClick={copyNumber}
+                                disabled={!order}
+                                title={numberCopied ? "Copied!" : "Copy Number"}
+                            >
+                                {numberCopied ? <FiCheck /> : <FiCopy />}
+                            </button>
 
                         </div>
-                    <p className="number-status">
-    {hasSms ? (
-        <span className="sms-received">
-            SMS Received <span className="sms-check">✓</span>
-        </span>
-    ) : (
-        <>
-            Expires in <strong>{timeLeft}</strong>
-        </>
-    )}
-</p>
+                        <p className="number-status">
+                            {hasSms ? (
+                                <span className="sms-received">
+                                    SMS Received <span className="sms-check">✓</span>
+                                </span>
+                            ) : (
+                                <>
+                                    Expires in <strong>{timeLeft}</strong>
+                                </>
+                            )}
+                        </p>
                         <button
                             className="cancel-btn"
                             onClick={cancelNumber}
@@ -777,66 +765,66 @@ const BuyNumber = () => {
 
                     <div className="sms-cards">
 
-    <h3>SMS Inbox</h3>
+                        <h3>SMS Inbox</h3>
 
-    {smsMessages.length > 0 ? (
-        <>
-            {smsMessages.map((sms, index) => (
-                <div
-                    key={index}
-                    className="sms-message"
-                >
-                    <h4>Verification Code</h4>
+                        {smsMessages.length > 0 ? (
+                            <>
+                                {smsMessages.map((sms, index) => (
+                                    <div
+                                        key={index}
+                                        className="sms-message"
+                                    >
+                                        <h4>Verification Code</h4>
 
-                    {(sms.code || sms.otp) && (
-    <div className="otp-row">
-        <strong>
-            {sms.code || sms.otp}
-        </strong>
+                                        {(sms.code || sms.otp) && (
+                                            <div className="otp-row">
+                                                <strong>
+                                                    {sms.code || sms.otp}
+                                                </strong>
 
-        <button
-    type="button"
-    className="copy-otp-btn"
-    onClick={() => copyOTP(sms.code || sms.otp)}
-    title={
-        copiedOTP === (sms.code || sms.otp)
-            ? "Copied!"
-            : "Copy OTP"
-    }
->
-    {copiedOTP === (sms.code || sms.otp) ? (
-        <FiCheck />
-    ) : (
-        <FiCopy />
-    )}
-</button>
-    </div>
-)}
+                                                <button
+                                                    type="button"
+                                                    className="copy-otp-btn"
+                                                    onClick={() => copyOTP(sms.code || sms.otp)}
+                                                    title={
+                                                        copiedOTP === (sms.code || sms.otp)
+                                                            ? "Copied!"
+                                                            : "Copy OTP"
+                                                    }
+                                                >
+                                                    {copiedOTP === (sms.code || sms.otp) ? (
+                                                        <FiCheck />
+                                                    ) : (
+                                                        <FiCopy />
+                                                    )}
+                                                </button>
+                                            </div>
+                                        )}
 
-                    <p>
-                        {sms.message ||
-                            sms.text ||
-                            "SMS received"}
-                    </p>
-                </div>
-            ))}
+                                        <p>
+                                            {sms.message ||
+                                                sms.text ||
+                                                "SMS received"}
+                                        </p>
+                                    </div>
+                                ))}
 
-            <button
-                className="finish-btn"
-                onClick={finishOrder}
-            >
-                <FiCheckCircle />
-    Complete Order
-            </button>
-        </>
-    ) : (
-        <div className="sms-empty">
-            <h4>No messages yet</h4>
-            <p>Waiting for SMS...</p>
-        </div>
-    )}
+                                <button
+                                    className="finish-btn"
+                                    onClick={finishOrder}
+                                >
+                                    <FiCheckCircle />
+                                    Complete Order
+                                </button>
+                            </>
+                        ) : (
+                            <div className="sms-empty">
+                                <h4>No messages yet</h4>
+                                <p>Waiting for SMS...</p>
+                            </div>
+                        )}
 
-</div>
+                    </div>
                 </div>
 
             </div>
