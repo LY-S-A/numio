@@ -483,8 +483,8 @@
 }
 
 .sms-cards h3 {
-  font-size: 15px;
-  font-weight: 600;
+  font-size: 18px;
+  font-weight: 700;
   color: var(--text);
 }
 
@@ -503,15 +503,15 @@
 }
 
 .copy-otp-btn {
-  width: 25px;
-  height: 25px;
+  width: 28px;
+  height: 28px;
 
   display: flex;
   align-items: center;
   justify-content: center;
 
   border: 1px solid var(--border);
-  border-radius: 8px;
+  border-radius: 6px;
 
   background: var(--table-hover);
   color: var(--text);
@@ -523,6 +523,10 @@
 .copy-otp-btn:hover {
   border-color: var(--primary);
   color: var(--primary);
+}
+
+.sms-message {
+  margin-bottom: 16px;
 }
 
 .sms-empty {
