@@ -284,59 +284,23 @@ const BuyNumber = () => {
 
     }, [order]);
 
-  useEffect(() => {
-    if (!order) return;
-
-    if (
-        order.status === "FINISHED" ||
-        order.status === "CANCELLED" ||
-        order.status === "EXPIRED"
-    ) {
-        setOrder(null);
-        setSmsMessages([]);
-    }
-}, [order]);
-
     /* ===========================
         AUTH
     =========================== */
 
-    // const getAuthConfig = () => ({
-    //     headers: {
-    //         Authorization: `Bearer ${localStorage.getItem("token")}`,
-    //     },
-    // });
+    const getAuthConfig = () => ({
+        headers: {
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+    });
 
-  const getAuthConfig = useCallback(() => ({
-    headers: {
-        Authorization: `Bearer ${localStorage.getItem("token")}`,
-    },
-}), []);
+  
 
   /* ===========================
     LOAD ACTIVE ORDER
 =========================== */
 
-// const loadActiveOrder = useCallback(async () => {
-//     try {
-//         const res = await axios.get(
-//             `${API}/api/5sim/active`,
-//             getAuthConfig()
-//         );
-
-//         if (res.data.order) {
-//             setOrder(res.data.order);
-//             setSmsMessages(res.data.sms || []);
-//         } else {
-//             setOrder(null);
-//             setSmsMessages([]);
-//         }
-//     } catch (err) {
-//         console.log(err.response?.data || err.message);
-//     }
-// }, []);
-
-  const loadActiveOrder = useCallback(async () => {
+const loadActiveOrder = useCallback(async () => {
     try {
         const res = await axios.get(
             `${API}/api/5sim/active`,
@@ -353,7 +317,7 @@ const BuyNumber = () => {
     } catch (err) {
         console.log(err.response?.data || err.message);
     }
-}, [getAuthConfig]);
+}, []);
 
     /* ===========================
         FETCH COUNTRIES
@@ -414,7 +378,7 @@ useEffect(() => {
         };
 
         fetchServices();
-   }, [country, getAuthConfig]);
+   }, [country]);
   
     /* ===========================
         REACT-SELECT OPTIONS
@@ -617,56 +581,26 @@ const buyNumber = async () => {
 //     REFRESH SMS
 // =========================== */
 
-// const refreshSMS = async () => {
-//     if (!order) return;
-
-//     try {
-//         setRefreshing(true);
-
-//         await axios.get(
-//             `${API}/api/5sim/refresh/${order._id}`,
-//             getAuthConfig()
-//         );
-
-//         // Reload latest order & SMS
-//         await loadActiveOrder();
-
-//     } catch (err) {
-//         console.log(err.response?.data || err.message);
-//     } finally {
-//         setRefreshing(false);
-//     }
-// };
-
-
-const refreshSMS = useCallback(async (showLoader = true) => {
+const refreshSMS = async () => {
     if (!order) return;
 
     try {
-        if (showLoader) {
-            setRefreshing(true);
-        }
+        setRefreshing(true);
 
-        const res = await axios.get(
+        await axios.get(
             `${API}/api/5sim/refresh/${order._id}`,
             getAuthConfig()
         );
 
-        setOrder(res.data.order);
-        setSmsMessages(res.data.sms || []);
-
-        if (res.data.hasNewSms) {
-            console.log("New SMS received");
-        }
+        // Reload latest order & SMS
+        await loadActiveOrder();
 
     } catch (err) {
         console.log(err.response?.data || err.message);
     } finally {
-        if (showLoader) {
-            setRefreshing(false);
-        }
+        setRefreshing(false);
     }
-}, [order, getAuthConfig]);
+};
   
   /* ===========================
     CANCEL NUMBER
@@ -718,35 +652,16 @@ const cancelNumber = async () => {
     AUTO REFRESH ACTIVE ORDER
 =========================== */
 
-// useEffect(() => {
-//     if (!order) return;
-
-//     const interval = setInterval(() => {
-//         loadActiveOrder();
-//     }, 10000);
-
-//     return () => clearInterval(interval);
-// }, [order, loadActiveOrder]);
-
 useEffect(() => {
     if (!order) return;
 
-    if (
-        order.status === "FINISHED" ||
-        order.status === "CANCELLED" ||
-        order.status === "EXPIRED"
-    ) {
-        setOrder(null);
-        setSmsMessages([]);
-        return;
-    }
-
     const interval = setInterval(() => {
-        refreshSMS(false);
-    }, 5000);
+        loadActiveOrder();
+    }, 10000);
 
     return () => clearInterval(interval);
-}, [order, refreshSMS]);
+}, [order, loadActiveOrder]);
+
   
     return (
         <div className="buy-number-page">
@@ -937,13 +852,10 @@ useEffect(() => {
 
                    <button
     className="refresh-btn"
-    onClick={() => refreshSMS(true)}
+    onClick={refreshSMS}
     disabled={!order || refreshing}
 >
-    <FiRefreshCw
-        className={refreshing ? "spin" : ""}
-    />
-
+    <FiRefreshCw />
     {refreshing ? "Refreshing..." : "Refresh"}
 </button>
 
@@ -971,25 +883,9 @@ useEffect(() => {
                             </button>
 
                         </div>
-                        <p>
-    {order?.status === "RECEIVED" ? (
-        <strong
-            style={{
-                color: "#22c55e",
-                display: "flex",
-                alignItems: "center",
-                gap: "6px",
-            }}
-        >
-            ✓ SMS Received
-        </strong>
-    ) : (
-        <>
-            Expires in <strong>{timeLeft}</strong>
-        </>
-    )}
+                       <p>
+    Expires in <strong>{timeLeft}</strong>
 </p>
-
                         <button
                             className="cancel-btn"
                             onClick={cancelNumber}
