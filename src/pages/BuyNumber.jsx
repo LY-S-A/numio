@@ -284,6 +284,19 @@ const BuyNumber = () => {
 
     }, [order]);
 
+  useEffect(() => {
+    if (!order) return;
+
+    if (
+        order.status === "FINISHED" ||
+        order.status === "CANCELLED" ||
+        order.status === "EXPIRED"
+    ) {
+        setOrder(null);
+        setSmsMessages([]);
+    }
+}, [order]);
+
     /* ===========================
         AUTH
     =========================== */
@@ -535,40 +548,7 @@ useEffect(() => {
         </components.DropdownIndicator>
     );
 
-    // /* ===========================
-    //     BUY NUMBER
-    // =========================== */
-
-    // const buyNumber = async () => {
-    //     if (!country || !service) return;
-
-    //     try {
-    //         setLoading(true);
-
-    //         const res = await axios.post(
-    //             `${API}/api/5sim/buy`,
-    //             {
-    //                 country,
-    //                 service,
-    //             },
-    //             getAuthConfig()
-    //         );
-
-    //         setOrder(res.data.order);
-    //         setSmsMessages([]);
-
-    //         // deduct wallet instantly
-    //         setBalance(res.data.wallet);
-
-    //     } catch (err) {
-    //         alert(
-    //             err.response?.data?.message ||
-    //             "Unable to buy number."
-    //         );
-    //     } finally {
-    //         setLoading(false);
-    //     }
-    // };
+    
 
   /* ===========================
     BUY NUMBER
@@ -607,86 +587,63 @@ const buyNumber = async () => {
     }
 };
 
-    // /* ===========================
-    //     REFRESH SMS
-    // =========================== */
+   
+//   /* ===========================
+//     REFRESH SMS
+// =========================== */
 
-    // const refreshSMS = async () => {
-    //     if (!order) return;
+// const refreshSMS = async () => {
+//     if (!order) return;
 
-    //     try {
-    //         setRefreshing(true);
+//     try {
+//         setRefreshing(true);
 
-    //         const res = await axios.get(
-    //             `${API}/api/5sim/refresh/${order._id}`,
-    //             getAuthConfig()
-    //         );
+//         await axios.get(
+//             `${API}/api/5sim/refresh/${order._id}`,
+//             getAuthConfig()
+//         );
 
-    //         setOrder(res.data.order);
-    //         setSmsMessages(res.data.sms || []);
-    //     } catch (err) {
-    //         console.log(err.response?.data || err.message);
-    //     } finally {
-    //         setRefreshing(false);
-    //     }
-    // };
+//         // Reload latest order & SMS
+//         await loadActiveOrder();
 
-  /* ===========================
-    REFRESH SMS
-=========================== */
+//     } catch (err) {
+//         console.log(err.response?.data || err.message);
+//     } finally {
+//         setRefreshing(false);
+//     }
+// };
 
-const refreshSMS = async () => {
+
+  const refreshSMS = async (showLoader = true) => {
     if (!order) return;
 
     try {
-        setRefreshing(true);
+        if (showLoader) {
+            setRefreshing(true);
+        }
 
-        await axios.get(
+        const res = await axios.get(
             `${API}/api/5sim/refresh/${order._id}`,
             getAuthConfig()
         );
 
-        // Reload latest order & SMS
-        await loadActiveOrder();
+        setOrder(res.data.order);
+        setSmsMessages(res.data.sms || []);
+
+        // Optional notification when a new OTP arrives
+        if (res.data.hasNewSms) {
+            console.log("New SMS received");
+        }
 
     } catch (err) {
         console.log(err.response?.data || err.message);
     } finally {
-        setRefreshing(false);
+        if (showLoader) {
+            setRefreshing(false);
+        }
     }
 };
-
-    // /* ===========================
-    //     CANCEL NUMBER
-    // =========================== */
-
-    // const cancelNumber = async () => {
-    //     if (!order) return;
-
-    //     try {
-
-    //         const res = await axios.post(
-    //             `${API}/api/5sim/cancel/${order._id}`,
-    //             {},
-    //             getAuthConfig()
-    //         );
-
-    //         setOrder(null);
-    //         setSmsMessages([]);
-
-    //         // refund wallet instantly
-    //         setBalance(res.data.wallet);
-
-    //     } catch (err) {
-
-    //         alert(
-    //             err.response?.data?.message ||
-    //             "Unable to cancel number."
-    //         );
-
-    //     }
-    // };
-
+   
   /* ===========================
     CANCEL NUMBER
 =========================== */
@@ -737,15 +694,36 @@ const cancelNumber = async () => {
     AUTO REFRESH ACTIVE ORDER
 =========================== */
 
-useEffect(() => {
+// useEffect(() => {
+//     if (!order) return;
+
+//     const interval = setInterval(() => {
+//         loadActiveOrder();
+//     }, 10000);
+
+//     return () => clearInterval(interval);
+// }, [order, loadActiveOrder]);
+
+  useEffect(() => {
     if (!order) return;
 
+    // Stop polling if order is completed
+    if (
+        order.status === "FINISHED" ||
+        order.status === "CANCELLED" ||
+        order.status === "EXPIRED"
+    ) {
+        setOrder(null);
+        setSmsMessages([]);
+        return;
+    }
+
     const interval = setInterval(() => {
-        loadActiveOrder();
-    }, 10000);
+        refreshSMS(false); // don't show loader during automatic polling
+    }, 5000);
 
     return () => clearInterval(interval);
-}, [order, loadActiveOrder]);
+}, [order]);
 
     return (
         <div className="buy-number-page">
@@ -934,15 +912,17 @@ useEffect(() => {
                         </span>
                     </div>
 
-                    <button
-                        className="refresh-btn"
-                        onClick={refreshSMS}
-                        disabled={!order || refreshing}
-                    >
-                        <FiRefreshCw />
+                   <button
+    className="refresh-btn"
+    onClick={() => refreshSMS(true)}
+    disabled={!order || refreshing}
+>
+    <FiRefreshCw
+        className={refreshing ? "spin" : ""}
+    />
 
-                        {refreshing ? "Refreshing..." : "Refresh"}
-                    </button>
+    {refreshing ? "Refreshing..." : "Refresh"}
+</button>
 
                 </div>
 
@@ -969,11 +949,23 @@ useEffect(() => {
 
                         </div>
                         <p>
-                            Expires in{" "}
-                            <strong>
-                                {timeLeft}
-                            </strong>
-                        </p>
+    {order?.status === "RECEIVED" ? (
+        <strong
+            style={{
+                color: "#22c55e",
+                display: "flex",
+                alignItems: "center",
+                gap: "6px",
+            }}
+        >
+            ✓ SMS Received
+        </strong>
+    ) : (
+        <>
+            Expires in <strong>{timeLeft}</strong>
+        </>
+    )}
+</p>
 
                         <button
                             className="cancel-btn"
