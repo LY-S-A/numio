@@ -636,6 +636,40 @@ const BuyNumber = () => {
         }
     };
 
+   /* ===========================
+      FINISH ORDER
+  =========================== */
+
+  const finishOrder = async () => {
+    if (!order) return;
+
+    try {
+        const res = await axios.post(
+            `${API}/api/5sim/finish/${order._id}`,
+            {},
+            getAuthConfig()
+        );
+
+        if (typeof res.data.wallet !== "undefined") {
+            setBalance(res.data.wallet);
+        }
+
+        // Remove active order from UI
+        setOrder(null);
+        setSmsMessages([]);
+        setTimeLeft("--");
+
+        // Reload active order (should return null)
+        await loadActiveOrder();
+
+    } catch (err) {
+        alert(
+            err.response?.data?.message ||
+            "Unable to finish order."
+        );
+    }
+};
+
     /* ===========================
         HELPERS
     =========================== */
@@ -660,7 +694,8 @@ const BuyNumber = () => {
         return () => clearInterval(interval);
     }, [order, loadActiveOrder]);
 
-
+const hasSms = smsMessages.length > 0;
+  
     return (
         <div className="buy-number-page">
 
@@ -899,50 +934,46 @@ const BuyNumber = () => {
 
                     <div className="sms-cards">
 
-                        <h3>SMS Inbox</h3>
+    <h3>SMS Inbox</h3>
 
-                        {smsMessages.length > 0 ? (
+    {smsMessages.length > 0 ? (
+        <>
+            {smsMessages.map((sms, index) => (
+                <div
+                    key={index}
+                    className="sms-message"
+                >
+                    <h4>Verification Code</h4>
 
-                            smsMessages.map((sms, index) => (
+                    {(sms.code || sms.otp) && (
+                        <strong>
+                            {sms.code || sms.otp}
+                        </strong>
+                    )}
 
-                                <div
-                                    key={index}
-                                    className="sms-message"
-                                >
+                    <p>
+                        {sms.message ||
+                            sms.text ||
+                            "SMS received"}
+                    </p>
+                </div>
+            ))}
 
-                                    <h4>Verification Code</h4>
+            <button
+                className="finish-btn"
+                onClick={finishOrder}
+            >
+                Finish
+            </button>
+        </>
+    ) : (
+        <div className="sms-empty">
+            <h4>No messages yet</h4>
+            <p>Waiting for SMS...</p>
+        </div>
+    )}
 
-                                    {(sms.code || sms.otp) && (
-                                        <strong>
-                                            {sms.code || sms.otp}
-                                        </strong>
-                                    )}
-
-                                    <p>
-                                        {sms.message ||
-                                            sms.text ||
-                                            "SMS received"}
-                                    </p>
-
-                                </div>
-
-                            ))
-
-                        ) : (
-
-                            <div className="sms-empty">
-                                <h4>No messages yet</h4>
-
-                                <p>
-                                    Waiting for SMS...
-                                </p>
-
-                            </div>
-
-                        )}
-
-                    </div>
-
+</div>
                 </div>
 
             </div>
