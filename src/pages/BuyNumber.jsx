@@ -317,7 +317,26 @@ const BuyNumber = () => {
     LOAD ACTIVE ORDER
 =========================== */
 
-const loadActiveOrder = useCallback(async () => {
+// const loadActiveOrder = useCallback(async () => {
+//     try {
+//         const res = await axios.get(
+//             `${API}/api/5sim/active`,
+//             getAuthConfig()
+//         );
+
+//         if (res.data.order) {
+//             setOrder(res.data.order);
+//             setSmsMessages(res.data.sms || []);
+//         } else {
+//             setOrder(null);
+//             setSmsMessages([]);
+//         }
+//     } catch (err) {
+//         console.log(err.response?.data || err.message);
+//     }
+// }, []);
+
+  const loadActiveOrder = useCallback(async () => {
     try {
         const res = await axios.get(
             `${API}/api/5sim/active`,
@@ -334,7 +353,7 @@ const loadActiveOrder = useCallback(async () => {
     } catch (err) {
         console.log(err.response?.data || err.message);
     }
-}, []);
+}, [getAuthConfig]);
 
     /* ===========================
         FETCH COUNTRIES
@@ -355,7 +374,7 @@ const loadActiveOrder = useCallback(async () => {
         };
 
         fetchCountries();
-    }, []);
+   }, [getAuthConfig]);
 
 /* ===========================
     LOAD ACTIVE ORDER
@@ -395,8 +414,8 @@ useEffect(() => {
         };
 
         fetchServices();
-    }, [country]);
-
+   }, [country, getAuthConfig]);
+  
     /* ===========================
         REACT-SELECT OPTIONS
     =========================== */
@@ -647,7 +666,7 @@ const refreshSMS = useCallback(async (showLoader = true) => {
             setRefreshing(false);
         }
     }
-}, [order]);
+}, [order, getAuthConfig]);
   
   /* ===========================
     CANCEL NUMBER
@@ -727,8 +746,8 @@ useEffect(() => {
     }, 5000);
 
     return () => clearInterval(interval);
-}, [order]);
-
+}, [order, refreshSMS]);
+  
     return (
         <div className="buy-number-page">
 
