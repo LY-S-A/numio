@@ -294,30 +294,28 @@ const BuyNumber = () => {
         },
     });
 
-  
+    /* ===========================
+      LOAD ACTIVE ORDER
+  =========================== */
 
-  /* ===========================
-    LOAD ACTIVE ORDER
-=========================== */
+    const loadActiveOrder = useCallback(async () => {
+        try {
+            const res = await axios.get(
+                `${API}/api/5sim/active`,
+                getAuthConfig()
+            );
 
-const loadActiveOrder = useCallback(async () => {
-    try {
-        const res = await axios.get(
-            `${API}/api/5sim/active`,
-            getAuthConfig()
-        );
-
-        if (res.data.order) {
-            setOrder(res.data.order);
-            setSmsMessages(res.data.sms || []);
-        } else {
-            setOrder(null);
-            setSmsMessages([]);
+            if (res.data.order) {
+                setOrder(res.data.order);
+                setSmsMessages(res.data.sms || []);
+            } else {
+                setOrder(null);
+                setSmsMessages([]);
+            }
+        } catch (err) {
+            console.log(err.response?.data || err.message);
         }
-    } catch (err) {
-        console.log(err.response?.data || err.message);
-    }
-}, []);
+    }, []);
 
     /* ===========================
         FETCH COUNTRIES
@@ -338,15 +336,15 @@ const loadActiveOrder = useCallback(async () => {
         };
 
         fetchCountries();
-   }, []);
+    }, []);
 
-/* ===========================
-    LOAD ACTIVE ORDER
-=========================== */
+    /* ===========================
+        LOAD ACTIVE ORDER
+    =========================== */
 
-useEffect(() => {
-    loadActiveOrder();
-}, [loadActiveOrder]);
+    useEffect(() => {
+        loadActiveOrder();
+    }, [loadActiveOrder]);
 
     /* ===========================
         FETCH SERVICES
@@ -378,8 +376,8 @@ useEffect(() => {
         };
 
         fetchServices();
-   }, [country]);
-  
+    }, [country]);
+
     /* ===========================
         REACT-SELECT OPTIONS
     =========================== */
@@ -537,106 +535,106 @@ useEffect(() => {
         </components.DropdownIndicator>
     );
 
-    
 
-  /* ===========================
-    BUY NUMBER
-=========================== */
 
-const buyNumber = async () => {
-    if (!country || !service) return;
+    /* ===========================
+      BUY NUMBER
+  =========================== */
 
-    try {
-        setLoading(true);
+    const buyNumber = async () => {
+        if (!country || !service) return;
 
-        const res = await axios.post(
-            `${API}/api/5sim/buy`,
-            {
-                country,
-                service,
-            },
-            getAuthConfig()
-        );
+        try {
+            setLoading(true);
 
-        // Update wallet instantly
-        if (typeof res.data.wallet !== "undefined") {
-            setBalance(res.data.wallet);
+            const res = await axios.post(
+                `${API}/api/5sim/buy`,
+                {
+                    country,
+                    service,
+                },
+                getAuthConfig()
+            );
+
+            // Update wallet instantly
+            if (typeof res.data.wallet !== "undefined") {
+                setBalance(res.data.wallet);
+            }
+
+            // Load latest active order from backend
+            await loadActiveOrder();
+
+        } catch (err) {
+            alert(
+                err.response?.data?.message ||
+                "Unable to buy number."
+            );
+        } finally {
+            setLoading(false);
         }
+    };
 
-        // Load latest active order from backend
-        await loadActiveOrder();
 
-    } catch (err) {
-        alert(
-            err.response?.data?.message ||
-            "Unable to buy number."
-        );
-    } finally {
-        setLoading(false);
-    }
-};
+    //   /* ===========================
+    //     REFRESH SMS
+    // =========================== */
 
-   
-//   /* ===========================
-//     REFRESH SMS
-// =========================== */
+    const refreshSMS = async () => {
+        if (!order) return;
 
-const refreshSMS = async () => {
-    if (!order) return;
+        try {
+            setRefreshing(true);
 
-    try {
-        setRefreshing(true);
+            await axios.get(
+                `${API}/api/5sim/refresh/${order._id}`,
+                getAuthConfig()
+            );
 
-        await axios.get(
-            `${API}/api/5sim/refresh/${order._id}`,
-            getAuthConfig()
-        );
+            // Reload latest order & SMS
+            await loadActiveOrder();
 
-        // Reload latest order & SMS
-        await loadActiveOrder();
-
-    } catch (err) {
-        console.log(err.response?.data || err.message);
-    } finally {
-        setRefreshing(false);
-    }
-};
-  
-  /* ===========================
-    CANCEL NUMBER
-=========================== */
-
-const cancelNumber = async () => {
-    if (!order) return;
-
-    const confirmed = window.confirm(
-        "Are you sure you want to cancel this number?"
-    );
-
-    if (!confirmed) return;
-
-    try {
-        const res = await axios.post(
-            `${API}/api/5sim/cancel/${order._id}`,
-            {},
-            getAuthConfig()
-        );
-
-        // Update wallet if refunded
-        if (typeof res.data.wallet !== "undefined") {
-            setBalance(res.data.wallet);
+        } catch (err) {
+            console.log(err.response?.data || err.message);
+        } finally {
+            setRefreshing(false);
         }
+    };
 
-        // Reload order state from backend
-        await loadActiveOrder();
+    /* ===========================
+      CANCEL NUMBER
+  =========================== */
 
-    } catch (err) {
-        alert(
-            err.response?.data?.message ||
-            "Unable to cancel number."
+    const cancelNumber = async () => {
+        if (!order) return;
+
+        const confirmed = window.confirm(
+            "Are you sure you want to cancel this number?"
         );
-    }
-};
+
+        if (!confirmed) return;
+
+        try {
+            const res = await axios.post(
+                `${API}/api/5sim/cancel/${order._id}`,
+                {},
+                getAuthConfig()
+            );
+
+            // Update wallet if refunded
+            if (typeof res.data.wallet !== "undefined") {
+                setBalance(res.data.wallet);
+            }
+
+            // Reload order state from backend
+            await loadActiveOrder();
+
+        } catch (err) {
+            alert(
+                err.response?.data?.message ||
+                "Unable to cancel number."
+            );
+        }
+    };
 
     /* ===========================
         HELPERS
@@ -648,21 +646,21 @@ const cancelNumber = async () => {
         navigator.clipboard.writeText(order.phone);
     };
 
-  /* ===========================
-    AUTO REFRESH ACTIVE ORDER
-=========================== */
+    /* ===========================
+      AUTO REFRESH ACTIVE ORDER
+  =========================== */
 
-useEffect(() => {
-    if (!order) return;
+    useEffect(() => {
+        if (!order) return;
 
-    const interval = setInterval(() => {
-        loadActiveOrder();
-    }, 10000);
+        const interval = setInterval(() => {
+            loadActiveOrder();
+        }, 10000);
 
-    return () => clearInterval(interval);
-}, [order, loadActiveOrder]);
+        return () => clearInterval(interval);
+    }, [order, loadActiveOrder]);
 
-  
+
     return (
         <div className="buy-number-page">
 
@@ -850,14 +848,14 @@ useEffect(() => {
                         </span>
                     </div>
 
-                   <button
-    className="refresh-btn"
-    onClick={refreshSMS}
-    disabled={!order || refreshing}
->
-    <FiRefreshCw />
-    {refreshing ? "Refreshing..." : "Refresh"}
-</button>
+                    <button
+                        className="refresh-btn"
+                        onClick={refreshSMS}
+                        disabled={!order || refreshing}
+                    >
+                        <FiRefreshCw />
+                        {refreshing ? "Refreshing..." : "Refresh"}
+                    </button>
 
                 </div>
 
@@ -883,9 +881,9 @@ useEffect(() => {
                             </button>
 
                         </div>
-                       <p>
-    Expires in <strong>{timeLeft}</strong>
-</p>
+                        <p>
+                            Expires in <strong>{timeLeft}</strong>
+                        </p>
                         <button
                             className="cancel-btn"
                             onClick={cancelNumber}
