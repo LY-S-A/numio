@@ -683,6 +683,14 @@
     padding: 14px;
   }
 
+   .cancel-btn {
+    margin-top: 24px;
+  }
+
+  .finish-btn {
+    margin-top: auto;
+  }
+
   .field select {
     font-size: 16px;
 }
