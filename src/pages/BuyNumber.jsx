@@ -10,6 +10,7 @@ import {
     FiInfo,
     FiChevronRight,
     FiCheckCircle,
+    FiLock,
     FiCheck,
 } from "react-icons/fi";
 
@@ -754,9 +755,13 @@ const BuyNumber = () => {
                             className="cancel-btn"
                             onClick={cancelNumber}
                             disabled={!order || hasSms}
-                            title={hasSms ? "Cannot cancel after SMS has been received" : "Cancel Number"}
+                            title={
+                                hasSms
+                                    ? "Cannot cancel after SMS has been received"
+                                    : "Cancel Number"
+                            }
                         >
-                            <FiTrash2 />
+                            {hasSms ? <FiLock /> : <FiTrash2 />}
                             {hasSms ? "SMS Received" : "Cancel Number"}
                         </button>
 
