@@ -492,19 +492,19 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin: 10px 0 12px;
+  margin: 8px 0 10px;
 }
 
 .otp-row strong {
-  font-size: 20px;
+  font-size: 15px;
   font-weight: 700;
   color: var(--primary);
   letter-spacing: 1px;
 }
 
 .copy-otp-btn {
-  width: 34px;
-  height: 34px;
+  width: 25px;
+  height: 25px;
 
   display: flex;
   align-items: center;
