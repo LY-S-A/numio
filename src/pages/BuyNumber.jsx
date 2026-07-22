@@ -693,8 +693,6 @@ const BuyNumber = () => {
 
         return () => clearInterval(interval);
     }, [order, loadActiveOrder]);
-
-const hasSms = smsMessages.length > 0;
   
     return (
         <div className="buy-number-page">
