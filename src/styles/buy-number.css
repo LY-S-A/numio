@@ -426,6 +426,24 @@
   font-size: 15px;
 }
 
+.number-status {
+    font-size: 14px;
+    margin-top: 10px;
+}
+
+.sms-received {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-weight: 600;
+    color: #22c55e;
+}
+
+.sms-check {
+    font-size: 16px;
+    font-weight: 700;
+}
+
 .cancel-btn {
   margin-top: 58px;
 
