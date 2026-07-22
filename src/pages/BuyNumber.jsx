@@ -47,51 +47,6 @@ const BuyNumber = () => {
         document.title = "Buy Number - Numio";
     }, []);
 
-    // useEffect(() => {
-    //     if (!order?.expires) {
-    //         setTimeLeft("--");
-    //         return;
-    //     }
-
-    //     const calculateTime = () => {
-    //         const now = new Date().getTime();
-    //         const expiry = new Date(order.expires).getTime();
-
-    //         const difference = expiry - now;
-
-    //         if (difference <= 0) {
-    //             setTimeLeft("Expired");
-    //             return;
-    //         }
-
-    //         const minutes = Math.floor(
-    //             (difference % (1000 * 60 * 60)) /
-    //             (1000 * 60)
-    //         );
-
-    //         const seconds = Math.floor(
-    //             (difference % (1000 * 60)) /
-    //             1000
-    //         );
-
-    //         setTimeLeft(
-    //             `${minutes}m ${seconds < 10 ? "0" : ""}${seconds}s`
-    //         );
-    //     };
-
-
-    //     calculateTime();
-
-    //     const timer = setInterval(
-    //         calculateTime,
-    //         1000
-    //     );
-
-
-    //     return () => clearInterval(timer);
-
-    // }, [order]);
-
   useEffect(() => {
     if (!order?.expires || smsMessages.length > 0) {
         setTimeLeft("--");
@@ -526,6 +481,12 @@ const BuyNumber = () => {
         navigator.clipboard.writeText(order.phone);
     };
 
+    const copyOTP = (otp) => {
+    if (!otp) return;
+
+    navigator.clipboard.writeText(otp);
+};
+
     /* ===========================
       AUTO REFRESH ACTIVE ORDER
   =========================== */
@@ -800,10 +761,21 @@ const BuyNumber = () => {
                     <h4>Verification Code</h4>
 
                     {(sms.code || sms.otp) && (
-                        <strong>
-                            {sms.code || sms.otp}
-                        </strong>
-                    )}
+    <div className="otp-row">
+        <strong>
+            {sms.code || sms.otp}
+        </strong>
+
+        <button
+            type="button"
+            className="copy-otp-btn"
+            onClick={() => copyOTP(sms.code || sms.otp)}
+            title="Copy OTP"
+        >
+            <FiCopy />
+        </button>
+    </div>
+)}
 
                     <p>
                         {sms.message ||
