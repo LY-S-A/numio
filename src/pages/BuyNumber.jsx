@@ -9,6 +9,7 @@ import {
     FiTrash2,
     FiInfo,
     FiChevronRight,
+    FiCheckCircle,
 } from "react-icons/fi";
 
 import "../styles/buy-number.css";
@@ -816,7 +817,8 @@ const BuyNumber = () => {
                 className="finish-btn"
                 onClick={finishOrder}
             >
-                Finish
+                <FiCheckCircle />
+    Complete Order
             </button>
         </>
     ) : (
