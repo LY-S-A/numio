@@ -753,10 +753,11 @@ const BuyNumber = () => {
                         <button
                             className="cancel-btn"
                             onClick={cancelNumber}
-                            disabled={!order}
+                            disabled={!order || hasSms}
+                            title={hasSms ? "Cannot cancel after SMS has been received" : "Cancel Number"}
                         >
                             <FiTrash2 />
-                            Cancel Number
+                            {hasSms ? "SMS Received" : "Cancel Number"}
                         </button>
 
                     </div>
