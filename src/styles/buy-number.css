@@ -417,6 +417,11 @@
   cursor: pointer;
 }
 
+.number-header button:hover {
+  border-color: var(--primary);
+  color: var(--primary);
+}
+
 .number-card p {
   margin-top: 14px;
 
