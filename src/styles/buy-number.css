@@ -488,6 +488,43 @@
   color: var(--text);
 }
 
+.otp-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 10px 0 12px;
+}
+
+.otp-row strong {
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--primary);
+  letter-spacing: 1px;
+}
+
+.copy-otp-btn {
+  width: 34px;
+  height: 34px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border: 1px solid var(--border);
+  border-radius: 8px;
+
+  background: var(--table-hover);
+  color: var(--text);
+
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.copy-otp-btn:hover {
+  border-color: var(--primary);
+  color: var(--primary);
+}
+
 .sms-empty {
   height: 170px;
 
