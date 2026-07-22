@@ -479,6 +479,18 @@
   color: var(--danger);
 }
 
+.cancel-btn:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+  border-color: var(--border);
+  color: var(--text-secondary);
+}
+
+.cancel-btn:disabled:hover {
+  border-color: var(--border);
+  color: var(--text-secondary);
+}
+
 /* =========================
    SMS CARD
 ========================= */
