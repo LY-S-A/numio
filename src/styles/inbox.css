@@ -200,7 +200,7 @@
 
 .sms-row {
   display: grid;
-  grid-template-columns: 260px 1fr 140px 90px;
+  grid-template-columns: 260px 1fr 160px 90px;
   gap: 16px;
   align-items: center;
 
@@ -270,7 +270,8 @@
   background: rgba(124, 58, 237, 0.15);
   color: var(--primary);
 
-  font-size: 10px;
+  font-size: 11px;
+  text-transform: capitalize;
   font-weight: 600;
 }
 
@@ -278,10 +279,20 @@
    MESSAGE
 ========================= */
 
+/* .sms-message {
+  color: var(--text-secondary);
+  font-size: 12px;
+  line-height: 1.5;
+} */
+
 .sms-message {
   color: var(--text-secondary);
   font-size: 12px;
   line-height: 1.5;
+
+  white-space: normal;
+  overflow-wrap: anywhere;
+  word-break: break-word;
 }
 
 /* =========================
