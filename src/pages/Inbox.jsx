@@ -548,6 +548,11 @@ const Inbox = () => {
         return data;
     }, [messages, search, appFilter, dateFilter]);
 
+    const formatApp = (app = "") =>
+    app
+        .replace(/[_-]/g, " ")
+        .replace(/\b\w/g, (c) => c.toUpperCase());
+
     return (
         <div className="sms-history-page">
             {/* HEADER */}
@@ -653,8 +658,8 @@ const Inbox = () => {
                                             </h4>
 
                                             <span className="app-tag">
-                                                {msg.app}
-                                            </span>
+    {formatApp(msg.app)}
+</span>
                                         </div>
                                     </div>
 
