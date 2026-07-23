@@ -456,7 +456,7 @@ const Inbox = () => {
             const token = localStorage.getItem("token");
 
             const { data } = await axios.get(
-                `${API}/api/fivesim/inbox`,
+                `${API}/api/5sim/inbox`,
                 {
                     headers: {
                         Authorization: `Bearer ${token}`,
