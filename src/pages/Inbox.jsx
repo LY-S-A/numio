@@ -5,6 +5,7 @@ import {
     FiCopy,
     FiRefreshCw,
     FiChevronRight,
+    FiInbox,
 } from "react-icons/fi";
 
 import "../styles/inbox.css";
@@ -241,12 +242,22 @@ const Inbox = () => {
             {!loading &&
                 filteredMessages.length === 0 && (
                     <div className="empty-history">
-                        <h3>No SMS History</h3>
-                        <p>
-                            Finished orders with received OTPs
-                            will appear here.
-                        </p>
-                    </div>
+    <div className="empty-icon">
+        <FiInbox />
+    </div>
+
+    <h3>No SMS History Yet</h3>
+
+    <p>
+        Your received verification codes will appear here after
+        an order successfully receives an SMS.
+    </p>
+
+    <span className="empty-tip">
+        Purchase a number, receive an OTP, and it will automatically
+        be saved to your inbox.
+    </span>
+</div>
                 )}
 
             {!loading &&
