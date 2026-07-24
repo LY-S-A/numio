@@ -801,41 +801,6 @@ body.light-theme .skeleton::after {
   }
 }
 
-@media (max-width: 992px) {
-
-  .sms-history-header {
-    flex-direction: column;
-    align-items: flex-start;
-  }
-
-  .sms-toolbar {
-    grid-template-columns: 1fr;
-  }
-
-  .sms-footer {
-    flex-direction: column;
-    gap: 12px;
-    align-items: stretch;
-  }
-
-  .pagination button {
-    display: none;
-  }
-
-  .pagination button.active,
-  .pagination .next-btn {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-
-  .pagination {
-    display: flex;
-    gap: 8px;
-    justify-content: flex-end;
-  }
-}
-
 @media (max-width: 768px) {
 
   .sms-history-page {
