@@ -318,11 +318,19 @@ const paginatedMessages = filteredMessages.slice(
                                 >
                                     {/* LEFT */}
                                     <div className="sms-user">
-                                        <div className="app-icon">
-                                            {msg.app
-                                                ?.charAt(0)
-                                                .toUpperCase()}
-                                        </div>
+                                       <div className="app-icon">
+    <img
+        src={`https://cdn.simpleicons.org/${(msg.app || "").toLowerCase()}`}
+        alt={formatApp(msg.app)}
+        loading="lazy"
+        onError={(e) => {
+            e.currentTarget.style.display = "none";
+            e.currentTarget.parentElement.textContent = (msg.app || "?")
+                .charAt(0)
+                .toUpperCase();
+        }}
+    />
+</div>
 
                                         <div>
                                             <h4>
