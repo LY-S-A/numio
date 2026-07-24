@@ -741,37 +741,39 @@ body.light-theme .skeleton::after {
     flex-direction: row;
     align-items: center;
     justify-content: space-between;
+    gap: 12px;
   }
 
   .pagination-text {
+    flex: 1;
+    text-align: center;
     font-size: 11px;
+    color: var(--text-secondary);
+    white-space: nowrap;
   }
 
   .pagination {
-    width: auto;
+    display: flex;
+    align-items: center;
+    gap: 8px;
     margin-left: auto;
-    justify-content: flex-end;
   }
 
   .pagination button {
     display: none;
   }
 
-  .pagination button.active {
+  .pagination button.active,
+  .pagination .next-btn {
     display: flex;
     align-items: center;
     justify-content: center;
-  }
-
-  .pagination .next-btn {
-    display: flex;
   }
 
   .per-page {
     display: none;
   }
 }
-
 /* =========================
    SCROLLABLE TABLE
 ========================= */
