@@ -739,25 +739,22 @@ body.light-theme .skeleton::after {
   .sms-footer {
     display: flex;
     flex-direction: row;
-    align-items: center;
+    align-items: center;      /* This is what centers everything vertically */
     justify-content: space-between;
     gap: 12px;
   }
 
- @media (max-width: 768px) {
   .pagination-text {
-    height: 34px;
-    display: flex;
-    align-items: center;
+    margin: 0;
     font-size: 11px;
-    line-height: 1;
+    color: var(--text-secondary);
+    line-height: 1.4;
   }
-}
 
   .pagination {
     display: flex;
     align-items: center;
-    gap: 8px;
+    gap: 6px;
     margin-left: auto;
   }
 
@@ -776,6 +773,7 @@ body.light-theme .skeleton::after {
     display: none;
   }
 }
+
 /* =========================
    SCROLLABLE TABLE
 ========================= */
