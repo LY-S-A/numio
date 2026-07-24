@@ -158,20 +158,20 @@ const paginatedMessages = filteredMessages.slice(
                         type="text"
                         placeholder="Search by number or app..."
                         value={search}
-                        onChange={(e) =>
-                            setSearch(e.target.value)
-                            setCurrentPage(1);
-                        }
+                        onChange={(e) => {
+    setSearch(e.target.value);
+    setCurrentPage(1);
+}}
                     />
                 </div>
 
                 <div className="select-wrapper">
                     <select
                         value={dateFilter}
-                        onChange={(e) =>
-                            setDateFilter(e.target.value)
-                            setCurrentPage(1);
-                        }
+                        onChange={(e) => {
+    setSearch(e.target.value);
+    setCurrentPage(1);
+}}
                     >
                         <option value="all">All Time</option>
                         <option value="7">Last 7 Days</option>
@@ -182,10 +182,10 @@ const paginatedMessages = filteredMessages.slice(
                 <div className="select-wrapper">
                     <select
                         value={appFilter}
-                        onChange={(e) =>
-                            setAppFilter(e.target.value)
-                            setCurrentPage(1);
-                        }
+                        onChange={(e) => {
+    setSearch(e.target.value);
+    setCurrentPage(1);
+}}
                     >
                         {apps.map((app) => (
                             <option
