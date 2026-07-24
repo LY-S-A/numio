@@ -196,44 +196,48 @@ const Inbox = () => {
             {loading && (
     <div className="sms-table">
         {Array.from({ length: 8 }).map((_, index) => (
-            <div className="sms-row skeleton-row" key={index}>
-                {/* Left */}
+            <div
+                key={index}
+                className="sms-row skeleton-row"
+            >
+                {/* USER */}
                 <div className="sms-user">
-                    <div className="app-icon skeleton skeleton-circle" />
+                    <div className="app-icon skeleton" />
 
-                    <div className="sms-user-info">
-                        <div className="skeleton skeleton-title" />
-                        <div className="skeleton skeleton-tag" />
+                    <div className="sms-user-details">
+                        <div className="skeleton sms-number-skeleton" />
+                        <div className="skeleton sms-app-skeleton" />
                     </div>
                 </div>
 
-                {/* Message */}
+                {/* MESSAGE */}
                 <div className="sms-message">
-                    <div className="skeleton skeleton-message" />
-                    <div className="skeleton skeleton-message short" />
+                    <div className="skeleton sms-line" />
+                    <div className="skeleton sms-line w90" />
+                    <div className="skeleton sms-line w60" />
                 </div>
 
                 {/* OTP */}
                 <div className="sms-code">
-                    <div className="skeleton skeleton-code" />
+                    <div className="skeleton otp-skeleton" />
 
-                    <div className="skeleton skeleton-copy" />
+                    <div className="skeleton copy-skeleton" />
 
-                    <div className="mobile-meta">
-                        <div className="skeleton skeleton-time" />
+                    <div className="sms-meta mobile-meta">
+                        <div className="skeleton time-skeleton" />
                     </div>
                 </div>
 
-                {/* Status */}
+                {/* STATUS */}
                 <div className="sms-meta desktop-meta">
-                    <div className="skeleton skeleton-status" />
-                    <div className="skeleton skeleton-time" />
+                    <div className="skeleton status-skeleton" />
+                    <div className="skeleton time-skeleton" />
                 </div>
             </div>
         ))}
     </div>
 )}
-
+           
             {!loading &&
                 filteredMessages.length === 0 && (
                     <div className="empty-history">
