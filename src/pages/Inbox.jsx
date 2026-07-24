@@ -71,24 +71,46 @@ const Inbox = () => {
         ];
     }, [messages]);
 
-    const timeAgo = (date) => {
-        if (!date) return "";
+  const timeAgo = (date) => {
+    if (!date) return "";
 
-        const seconds = Math.floor(
-            (Date.now() - new Date(date).getTime()) / 1000
-        );
+    const seconds = Math.floor(
+        (Date.now() - new Date(date).getTime()) / 1000
+    );
 
-        if (seconds < 60) return `${seconds}s ago`;
+    if (seconds < 60) {
+        return `${seconds} second${seconds === 1 ? "" : "s"} ago`;
+    }
 
-        if (seconds < 3600)
-            return `${Math.floor(seconds / 60)} min ago`;
+    const minutes = Math.floor(seconds / 60);
 
-        if (seconds < 86400)
-            return `${Math.floor(seconds / 3600)} hr ago`;
+    if (minutes < 60) {
+        return `${minutes} minute${minutes === 1 ? "" : "s"} ago`;
+    }
 
-        return `${Math.floor(seconds / 86400)} day(s) ago`;
-    };
+    const hours = Math.floor(minutes / 60);
 
+    if (hours < 24) {
+        return `${hours} hour${hours === 1 ? "" : "s"} ago`;
+    }
+
+    const days = Math.floor(hours / 24);
+
+    if (days < 30) {
+        return `${days} day${days === 1 ? "" : "s"} ago`;
+    }
+
+    const months = Math.floor(days / 30);
+
+    if (months < 12) {
+        return `${months} month${months === 1 ? "" : "s"} ago`;
+    }
+
+    const years = Math.floor(months / 12);
+
+    return `${years} year${years === 1 ? "" : "s"} ago`;
+};
+    
     const filteredMessages = useMemo(() => {
         let data = [...messages];
 
