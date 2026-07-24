@@ -203,8 +203,8 @@
 .skeleton {
     position: relative;
     overflow: hidden;
+    border-radius: 8px;
     background: rgba(255,255,255,.06);
-    border-radius: 10px;
 }
 
 body.light-theme .skeleton {
@@ -235,123 +235,138 @@ body.light-theme .skeleton::after {
 }
 
 @keyframes skeleton-loading {
-    100% {
+    to {
         transform: translateX(100%);
     }
 }
 
-/* Left */
+/* USER */
 
-.sms-user-info {
+.sms-user-details {
     display: flex;
     flex-direction: column;
-    gap: 8px;
+    gap: 6px;
+    flex: 1;
 }
 
-.skeleton-circle {
-    width: 56px;
-    height: 56px;
-    border-radius: 14px;
-    flex-shrink: 0;
+.app-icon.skeleton {
+    width: 42px;
+    height: 42px;
+    border-radius: 8px;
 }
 
-.skeleton-title {
-    width: 150px;
-    height: 16px;
+.sms-number-skeleton {
+    width: 140px;
+    height: 14px;
 }
 
-.skeleton-tag {
-    width: 70px;
-    height: 22px;
+.sms-app-skeleton {
+    width: 64px;
+    height: 20px;
     border-radius: 999px;
 }
 
-/* Message */
+/* MESSAGE */
 
-.skeleton-message {
+.sms-line {
     width: 100%;
-    height: 14px;
+    height: 12px;
     margin-bottom: 8px;
 }
 
-.skeleton-message.short {
-    width: 70%;
+.sms-line:last-child {
+    margin-bottom: 0;
+}
+
+.sms-line.w90 {
+    width: 90%;
+}
+
+.sms-line.w60 {
+    width: 60%;
 }
 
 /* OTP */
 
-.skeleton-code {
-    width: 90px;
-    height: 38px;
-    border-radius: 8px;
-    margin-bottom: 10px;
+.otp-skeleton {
+    width: 74px;
+    height: 34px;
+    border-radius: 6px;
 }
 
-.skeleton-copy {
-    width: 40px;
-    height: 40px;
-    border-radius: 8px;
-    margin: auto;
+.copy-skeleton {
+    width: 34px;
+    height: 34px;
+    border-radius: 6px;
 }
 
-/* Time */
+/* STATUS */
 
-.skeleton-time {
-    width: 70px;
-    height: 12px;
-    margin-top: 8px;
-}
-
-/* Status */
-
-.skeleton-status {
-    width: 60px;
-    height: 30px;
+.status-skeleton {
+    width: 52px;
+    height: 22px;
     border-radius: 999px;
-    margin-bottom: 10px;
+    margin-left: auto;
+    margin-bottom: 8px;
 }
 
-/* Mobile */
+.time-skeleton {
+    width: 58px;
+    height: 10px;
+    margin-left: auto;
+}
 
-@media (max-width: 768px) {
+/* ==========================
+   MOBILE
+========================== */
 
-    .skeleton-circle {
-        width: 44px;
-        height: 44px;
+@media (max-width:1200px){
+
+    .status-skeleton,
+    .time-skeleton{
+        margin-left:0;
     }
 
-    .skeleton-title {
-        width: 120px;
-        height: 14px;
+}
+
+@media (max-width:768px){
+
+    .app-icon.skeleton{
+        width:38px;
+        height:38px;
     }
 
-    .skeleton-tag {
-        width: 60px;
-        height: 18px;
+    .sms-number-skeleton{
+        width:120px;
+        height:13px;
     }
 
-    .skeleton-message {
-        height: 12px;
+    .sms-app-skeleton{
+        width:58px;
+        height:18px;
     }
 
-    .skeleton-code {
-        width: 70px;
-        height: 32px;
+    .sms-line{
+        height:11px;
     }
 
-    .skeleton-copy {
-        width: 32px;
-        height: 32px;
+    .otp-skeleton{
+        width:70px;
+        height:32px;
     }
 
-    .skeleton-status {
-        width: 52px;
-        height: 24px;
+    .copy-skeleton{
+        width:34px;
+        height:34px;
     }
 
-    .skeleton-time {
-        width: 60px;
-        height: 10px;
+    .status-skeleton{
+        display:none;
+    }
+
+    .time-skeleton{
+        width:55px;
+        height:10px;
     }
 }
 
