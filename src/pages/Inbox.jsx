@@ -170,7 +170,7 @@ const paginatedMessages = filteredMessages.slice(
                     <select
                         value={dateFilter}
                         onChange={(e) => {
-    setSearch(e.target.value);
+    setDateFilter(e.target.value);
     setCurrentPage(1);
 }}
                     >
@@ -183,8 +183,8 @@ const paginatedMessages = filteredMessages.slice(
                 <div className="select-wrapper">
                     <select
                         value={appFilter}
-                        onChange={(e) => {
-    setSearch(e.target.value);
+                       onChange={(e) => {
+    setAppFilter(e.target.value);
     setCurrentPage(1);
 }}
                     >
