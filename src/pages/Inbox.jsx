@@ -267,7 +267,8 @@ const Inbox = () => {
                                             </span>
                                         </div>
                                     </div>
-                                                                        {/* STATUS */}
+                                    
+                                    {/* STATUS */}
                                     <div className="sms-meta desktop-meta">
                                        
                                         <div className="status read">
