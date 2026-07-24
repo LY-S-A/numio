@@ -5,12 +5,13 @@ import {
     FiCopy,
     FiRefreshCw,
     FiChevronRight,
-    FiInbox,
+    FiChevronLeft,
 } from "react-icons/fi";
 
 import "../styles/inbox.css";
 
 const API = process.env.REACT_APP_API_URL;
+const ITEMS_PER_PAGE = 10;
 
 const Inbox = () => {
     const [messages, setMessages] = useState([]);
@@ -19,6 +20,7 @@ const Inbox = () => {
     const [search, setSearch] = useState("");
     const [dateFilter, setDateFilter] = useState("all");
     const [appFilter, setAppFilter] = useState("All Apps");
+    const [currentPage, setCurrentPage] = useState(1);
 
     const copyCode = (code) => {
         navigator.clipboard.writeText(code);
@@ -123,6 +125,15 @@ const Inbox = () => {
         return data;
     }, [messages, search, appFilter, dateFilter]);
 
+    const totalPages = Math.ceil(
+    filteredMessages.length / ITEMS_PER_PAGE
+);
+
+const paginatedMessages = filteredMessages.slice(
+    (currentPage - 1) * ITEMS_PER_PAGE,
+    currentPage * ITEMS_PER_PAGE
+);
+
     const formatApp = (app = "") =>
     app
         .replace(/[_-]/g, " ")
@@ -149,6 +160,7 @@ const Inbox = () => {
                         value={search}
                         onChange={(e) =>
                             setSearch(e.target.value)
+                            setCurrentPage(1);
                         }
                     />
                 </div>
@@ -158,6 +170,7 @@ const Inbox = () => {
                         value={dateFilter}
                         onChange={(e) =>
                             setDateFilter(e.target.value)
+                            setCurrentPage(1);
                         }
                     >
                         <option value="all">All Time</option>
@@ -171,6 +184,7 @@ const Inbox = () => {
                         value={appFilter}
                         onChange={(e) =>
                             setAppFilter(e.target.value)
+                            setCurrentPage(1);
                         }
                     >
                         {apps.map((app) => (
@@ -338,15 +352,62 @@ const Inbox = () => {
             {/* FOOTER */}
             {!loading && filteredMessages.length > 0 && (
     <div className="sms-footer">
+
+        <p className="pagination-text">
+            Showing{" "}
+            {(currentPage - 1) * ITEMS_PER_PAGE + 1}{" "}
+            to{" "}
+            {Math.min(
+                currentPage * ITEMS_PER_PAGE,
+                filteredMessages.length
+            )}{" "}
+            of{" "}
+            {filteredMessages.length}{" "}
+            messages
+        </p>
+
         <div className="pagination">
-            <button className="active">
-                1
+
+            <button
+                disabled={currentPage === 1}
+                onClick={() =>
+                    setCurrentPage(currentPage - 1)
+                }
+            >
+                <FiChevronLeft />
             </button>
 
-            <button className="next-btn">
+            {Array.from(
+                { length: totalPages },
+                (_, index) => (
+                    <button
+                        key={index}
+                        className={
+                            currentPage === index + 1
+                                ? "active"
+                                : ""
+                        }
+                        onClick={() =>
+                            setCurrentPage(index + 1)
+                        }
+                    >
+                        {index + 1}
+                    </button>
+                )
+            )}
+
+            <button
+                className="next-btn"
+                disabled={currentPage === totalPages}
+                onClick={() =>
+                    setCurrentPage(currentPage + 1)
+                }
+            >
                 <FiChevronRight />
             </button>
+
         </div>
+
     </div>
 )}
         </div>
