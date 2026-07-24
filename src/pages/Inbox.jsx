@@ -11,6 +11,7 @@ import {
 } from "react-icons/fi";
 
 import "../styles/inbox.css";
+import unknownLogo from "../assets/question-mark.png";
 
 const API = process.env.REACT_APP_API_URL;
 const ITEMS_PER_PAGE = 10;
@@ -324,10 +325,8 @@ const paginatedMessages = filteredMessages.slice(
         alt={formatApp(msg.app)}
         loading="lazy"
         onError={(e) => {
-            e.currentTarget.style.display = "none";
-            e.currentTarget.parentElement.textContent = (msg.app || "?")
-                .charAt(0)
-                .toUpperCase();
+            e.currentTarget.src = unknownLogo;
+            e.currentTarget.onerror = null;
         }}
     />
 </div>
