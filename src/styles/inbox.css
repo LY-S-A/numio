@@ -173,6 +173,10 @@
   box-shadow: 0 0 0 3px rgba(124, 58, 237, 0.15);
 }
 
+.app-select{
+   text-transform: capitalize;
+}
+
 .filter-btn {
   border-radius: 8px;
   border: 1px solid var(--border);
@@ -278,12 +282,6 @@
 /* =========================
    MESSAGE
 ========================= */
-
-/* .sms-message {
-  color: var(--text-secondary);
-  font-size: 12px;
-  line-height: 1.5;
-} */
 
 .sms-message {
   color: var(--text-secondary);
