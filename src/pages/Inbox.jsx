@@ -194,10 +194,45 @@ const Inbox = () => {
             </div>
 
             {loading && (
-                <div className="empty-history">
-                    Loading SMS history...
+    <div className="sms-table">
+        {Array.from({ length: 8 }).map((_, index) => (
+            <div className="sms-row skeleton-row" key={index}>
+                {/* Left */}
+                <div className="sms-user">
+                    <div className="app-icon skeleton skeleton-circle" />
+
+                    <div className="sms-user-info">
+                        <div className="skeleton skeleton-title" />
+                        <div className="skeleton skeleton-tag" />
+                    </div>
                 </div>
-            )}
+
+                {/* Message */}
+                <div className="sms-message">
+                    <div className="skeleton skeleton-message" />
+                    <div className="skeleton skeleton-message short" />
+                </div>
+
+                {/* OTP */}
+                <div className="sms-code">
+                    <div className="skeleton skeleton-code" />
+
+                    <div className="skeleton skeleton-copy" />
+
+                    <div className="mobile-meta">
+                        <div className="skeleton skeleton-time" />
+                    </div>
+                </div>
+
+                {/* Status */}
+                <div className="sms-meta desktop-meta">
+                    <div className="skeleton skeleton-status" />
+                    <div className="skeleton skeleton-time" />
+                </div>
+            </div>
+        ))}
+    </div>
+)}
 
             {!loading &&
                 filteredMessages.length === 0 && (
