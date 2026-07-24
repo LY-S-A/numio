@@ -602,6 +602,7 @@ const Inbox = () => {
                             <option
                                 key={app}
                                 value={app}
+                                className="app-select"
                             >
                                 {app}
                             </option>
