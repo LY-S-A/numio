@@ -3,6 +3,7 @@ import axios from "axios";
 import {
     FiSearch,
     FiCopy,
+    FiInbox,
     FiRefreshCw,
     FiChevronRight,
     FiChevronLeft,
