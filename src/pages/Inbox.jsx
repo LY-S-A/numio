@@ -3,6 +3,7 @@ import axios from "axios";
 import {
     FiSearch,
     FiCopy,
+    FiCheck,
     FiInbox,
     FiRefreshCw,
     FiChevronRight,
@@ -22,10 +23,19 @@ const Inbox = () => {
     const [dateFilter, setDateFilter] = useState("all");
     const [appFilter, setAppFilter] = useState("All Apps");
     const [currentPage, setCurrentPage] = useState(1);
+    const [copiedCode, setCopiedCode] = useState(null);
 
-    const copyCode = (code) => {
-        navigator.clipboard.writeText(code);
-    };
+    const copyCode = async (code) => {
+    if (!code) return;
+
+    await navigator.clipboard.writeText(code);
+
+    setCopiedCode(code);
+
+    setTimeout(() => {
+        setCopiedCode(null);
+    }, 2000);
+};
 
     const loadInbox = async () => {
         try {
@@ -315,14 +325,20 @@ const paginatedMessages = filteredMessages.slice(
                                         </span>
 
                                         <button
-                                            onClick={() =>
-                                                copyCode(
-                                                    msg.code
-                                                )
-                                            }
-                                        >
-                                            <FiCopy />
-                                        </button>
+    type="button"
+    onClick={() => copyCode(msg.code)}
+    title={
+        copiedCode === msg.code
+            ? "Copied!"
+            : "Copy OTP"
+    }
+>
+    {copiedCode === msg.code ? (
+        <FiCheck />
+    ) : (
+        <FiCopy />
+    )}
+</button>
 
                                         <div className="sms-meta mobile-meta">
                                             <span>
