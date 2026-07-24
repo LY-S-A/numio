@@ -27,16 +27,16 @@ const Inbox = () => {
     const [copiedCode, setCopiedCode] = useState(null);
 
     const copyCode = async (code) => {
-    if (!code) return;
+        if (!code) return;
 
-    await navigator.clipboard.writeText(code);
+        await navigator.clipboard.writeText(code);
 
-    setCopiedCode(code);
+        setCopiedCode(code);
 
-    setTimeout(() => {
-        setCopiedCode(null);
-    }, 2000);
-};
+        setTimeout(() => {
+            setCopiedCode(null);
+        }, 2000);
+    };
 
     const loadInbox = async () => {
         try {
@@ -72,46 +72,46 @@ const Inbox = () => {
         ];
     }, [messages]);
 
-  const timeAgo = (date) => {
-    if (!date) return "";
+    const timeAgo = (date) => {
+        if (!date) return "";
 
-    const seconds = Math.floor(
-        (Date.now() - new Date(date).getTime()) / 1000
-    );
+        const seconds = Math.floor(
+            (Date.now() - new Date(date).getTime()) / 1000
+        );
 
-    if (seconds < 60) {
-        return `${seconds} second${seconds === 1 ? "" : "s"} ago`;
-    }
+        if (seconds < 60) {
+            return `${seconds} second${seconds === 1 ? "" : "s"} ago`;
+        }
 
-    const minutes = Math.floor(seconds / 60);
+        const minutes = Math.floor(seconds / 60);
 
-    if (minutes < 60) {
-        return `${minutes} minute${minutes === 1 ? "" : "s"} ago`;
-    }
+        if (minutes < 60) {
+            return `${minutes} minute${minutes === 1 ? "" : "s"} ago`;
+        }
 
-    const hours = Math.floor(minutes / 60);
+        const hours = Math.floor(minutes / 60);
 
-    if (hours < 24) {
-        return `${hours} hour${hours === 1 ? "" : "s"} ago`;
-    }
+        if (hours < 24) {
+            return `${hours} hour${hours === 1 ? "" : "s"} ago`;
+        }
 
-    const days = Math.floor(hours / 24);
+        const days = Math.floor(hours / 24);
 
-    if (days < 30) {
-        return `${days} day${days === 1 ? "" : "s"} ago`;
-    }
+        if (days < 30) {
+            return `${days} day${days === 1 ? "" : "s"} ago`;
+        }
 
-    const months = Math.floor(days / 30);
+        const months = Math.floor(days / 30);
 
-    if (months < 12) {
-        return `${months} month${months === 1 ? "" : "s"} ago`;
-    }
+        if (months < 12) {
+            return `${months} month${months === 1 ? "" : "s"} ago`;
+        }
 
-    const years = Math.floor(months / 12);
+        const years = Math.floor(months / 12);
 
-    return `${years} year${years === 1 ? "" : "s"} ago`;
-};
-    
+        return `${years} year${years === 1 ? "" : "s"} ago`;
+    };
+
     const filteredMessages = useMemo(() => {
         let data = [...messages];
 
@@ -142,7 +142,7 @@ const Inbox = () => {
             data = data.filter(
                 (msg) =>
                     Date.now() -
-                        new Date(msg.time).getTime() <=
+                    new Date(msg.time).getTime() <=
                     7 * 24 * 60 * 60 * 1000
             );
         }
@@ -151,7 +151,7 @@ const Inbox = () => {
             data = data.filter(
                 (msg) =>
                     Date.now() -
-                        new Date(msg.time).getTime() <=
+                    new Date(msg.time).getTime() <=
                     30 * 24 * 60 * 60 * 1000
             );
         }
@@ -160,18 +160,18 @@ const Inbox = () => {
     }, [messages, search, appFilter, dateFilter]);
 
     const totalPages = Math.ceil(
-    filteredMessages.length / ITEMS_PER_PAGE
-);
+        filteredMessages.length / ITEMS_PER_PAGE
+    );
 
-const paginatedMessages = filteredMessages.slice(
-    (currentPage - 1) * ITEMS_PER_PAGE,
-    currentPage * ITEMS_PER_PAGE
-);
+    const paginatedMessages = filteredMessages.slice(
+        (currentPage - 1) * ITEMS_PER_PAGE,
+        currentPage * ITEMS_PER_PAGE
+    );
 
     const formatApp = (app = "") =>
-    app
-        .replace(/[_-]/g, " ")
-        .replace(/\b\w/g, (c) => c.toUpperCase());
+        app
+            .replace(/[_-]/g, " ")
+            .replace(/\b\w/g, (c) => c.toUpperCase());
 
     return (
         <div className="sms-history-page">
@@ -193,9 +193,9 @@ const paginatedMessages = filteredMessages.slice(
                         placeholder="Search by number or app..."
                         value={search}
                         onChange={(e) => {
-    setSearch(e.target.value);
-    setCurrentPage(1);
-}}
+                            setSearch(e.target.value);
+                            setCurrentPage(1);
+                        }}
                     />
                 </div>
 
@@ -203,9 +203,9 @@ const paginatedMessages = filteredMessages.slice(
                     <select
                         value={dateFilter}
                         onChange={(e) => {
-    setDateFilter(e.target.value);
-    setCurrentPage(1);
-}}
+                            setDateFilter(e.target.value);
+                            setCurrentPage(1);
+                        }}
                     >
                         <option value="all">All Time</option>
                         <option value="7">Last 7 Days</option>
@@ -216,10 +216,11 @@ const paginatedMessages = filteredMessages.slice(
                 <div className="select-wrapper">
                     <select
                         value={appFilter}
-                       onChange={(e) => {
-    setAppFilter(e.target.value);
-    setCurrentPage(1);
-}}
+                        className="app-select-focus"
+                        onChange={(e) => {
+                            setAppFilter(e.target.value);
+                            setCurrentPage(1);
+                        }}
                     >
                         {apps.map((app) => (
                             <option
@@ -243,69 +244,69 @@ const paginatedMessages = filteredMessages.slice(
             </div>
 
             {loading && (
-    <div className="sms-table">
-        {Array.from({ length: 8 }).map((_, index) => (
-            <div
-                key={index}
-                className="sms-row skeleton-row"
-            >
-                {/* USER */}
-                <div className="sms-user">
-                    <div className="app-icon skeleton" />
+                <div className="sms-table">
+                    {Array.from({ length: 8 }).map((_, index) => (
+                        <div
+                            key={index}
+                            className="sms-row skeleton-row"
+                        >
+                            {/* USER */}
+                            <div className="sms-user">
+                                <div className="app-icon skeleton" />
 
-                    <div className="sms-user-details">
-                        <div className="skeleton sms-number-skeleton" />
-                        <div className="skeleton sms-app-skeleton" />
-                    </div>
+                                <div className="sms-user-details">
+                                    <div className="skeleton sms-number-skeleton" />
+                                    <div className="skeleton sms-app-skeleton" />
+                                </div>
+                            </div>
+
+                            {/* MESSAGE */}
+                            <div className="sms-message">
+                                <div className="skeleton sms-line" />
+                                <div className="skeleton sms-line w90" />
+                                <div className="skeleton sms-line w60" />
+                            </div>
+
+                            {/* OTP */}
+                            <div className="sms-code">
+                                <div className="skeleton otp-skeleton" />
+
+                                <div className="skeleton copy-skeleton" />
+
+                                <div className="sms-meta mobile-meta">
+                                    <div className="skeleton time-skeleton" />
+                                </div>
+                            </div>
+
+                            {/* STATUS */}
+                            <div className="sms-meta desktop-meta">
+                                <div className="skeleton status-skeleton" />
+                                <div className="skeleton time-skeleton" />
+                            </div>
+                        </div>
+                    ))}
                 </div>
+            )}
 
-                {/* MESSAGE */}
-                <div className="sms-message">
-                    <div className="skeleton sms-line" />
-                    <div className="skeleton sms-line w90" />
-                    <div className="skeleton sms-line w60" />
-                </div>
-
-                {/* OTP */}
-                <div className="sms-code">
-                    <div className="skeleton otp-skeleton" />
-
-                    <div className="skeleton copy-skeleton" />
-
-                    <div className="sms-meta mobile-meta">
-                        <div className="skeleton time-skeleton" />
-                    </div>
-                </div>
-
-                {/* STATUS */}
-                <div className="sms-meta desktop-meta">
-                    <div className="skeleton status-skeleton" />
-                    <div className="skeleton time-skeleton" />
-                </div>
-            </div>
-        ))}
-    </div>
-)}
-           
             {!loading &&
                 filteredMessages.length === 0 && (
                     <div className="empty-history">
-    <div className="empty-icon">
-        <FiInbox />
-    </div>
+                        <div className="empty-icon">
+                            <FiInbox />
+                        </div>
 
-    <h3>No SMS History Yet</h3>
+                        <h3>No SMS History Yet</h3>
 
-    <p>
-        Your received verification codes will appear here after
-        an order successfully receives an SMS.
-    </p>
+                        <p>
+                            Your received verification codes will appear here after
+                            an order successfully receives an SMS.
+                        </p>
 
-    <span className="empty-tip">
-        Purchase a number, receive an OTP, and it will automatically
-        be saved to your inbox.
-    </span>
-</div>
+                        <span className="empty-tip">
+                            Purchase a number, receive an OTP, and it will automatically
+                            be saved to your inbox.
+                        </span>
+                    </div>
                 )}
 
             {!loading &&
@@ -319,17 +320,17 @@ const paginatedMessages = filteredMessages.slice(
                                 >
                                     {/* LEFT */}
                                     <div className="sms-user">
-                                       <div className="app-icon">
-    <img
-        src={`https://cdn.simpleicons.org/${(msg.app || "").toLowerCase()}`}
-        alt={formatApp(msg.app)}
-        loading="lazy"
-        onError={(e) => {
-            e.currentTarget.src = unknownLogo;
-            e.currentTarget.onerror = null;
-        }}
-    />
-</div>
+                                        <div className="app-icon">
+                                            <img
+                                                src={`https://cdn.simpleicons.org/${(msg.app || "").toLowerCase()}`}
+                                                alt={formatApp(msg.app)}
+                                                loading="lazy"
+                                                onError={(e) => {
+                                                    e.currentTarget.src = unknownLogo;
+                                                    e.currentTarget.onerror = null;
+                                                }}
+                                            />
+                                        </div>
 
                                         <div>
                                             <h4>
@@ -337,8 +338,8 @@ const paginatedMessages = filteredMessages.slice(
                                             </h4>
 
                                             <span className="app-tag">
-    {formatApp(msg.app)}
-</span>
+                                                {formatApp(msg.app)}
+                                            </span>
                                         </div>
                                     </div>
 
@@ -354,20 +355,20 @@ const paginatedMessages = filteredMessages.slice(
                                         </span>
 
                                         <button
-    type="button"
-    onClick={() => copyCode(msg.code)}
-    title={
-        copiedCode === msg.code
-            ? "Copied!"
-            : "Copy OTP"
-    }
->
-    {copiedCode === msg.code ? (
-        <FiCheck />
-    ) : (
-        <FiCopy />
-    )}
-</button>
+                                            type="button"
+                                            onClick={() => copyCode(msg.code)}
+                                            title={
+                                                copiedCode === msg.code
+                                                    ? "Copied!"
+                                                    : "Copy OTP"
+                                            }
+                                        >
+                                            {copiedCode === msg.code ? (
+                                                <FiCheck />
+                                            ) : (
+                                                <FiCopy />
+                                            )}
+                                        </button>
 
                                         <div className="sms-meta mobile-meta">
                                             <span>
@@ -377,15 +378,15 @@ const paginatedMessages = filteredMessages.slice(
                                             </span>
                                         </div>
                                     </div>
-                                    
+
                                     {/* STATUS */}
                                     <div className="sms-meta desktop-meta">
-                                       
+
                                         <div className="status read">
                                             Read
                                         </div>
 
-                                         <span>
+                                        <span>
                                             {timeAgo(msg.time)}
                                         </span>
                                     </div>
@@ -397,65 +398,65 @@ const paginatedMessages = filteredMessages.slice(
 
             {/* FOOTER */}
             {!loading && filteredMessages.length > 0 && (
-    <div className="sms-footer">
+                <div className="sms-footer">
 
-        <p className="pagination-text">
-            Showing{" "}
-            {(currentPage - 1) * ITEMS_PER_PAGE + 1}{" "}
-            to{" "}
-            {Math.min(
-                currentPage * ITEMS_PER_PAGE,
-                filteredMessages.length
-            )}{" "}
-            of{" "}
-            {filteredMessages.length}{" "}
-            messages
-        </p>
+                    <p className="pagination-text">
+                        Showing{" "}
+                        {(currentPage - 1) * ITEMS_PER_PAGE + 1}{" "}
+                        to{" "}
+                        {Math.min(
+                            currentPage * ITEMS_PER_PAGE,
+                            filteredMessages.length
+                        )}{" "}
+                        of{" "}
+                        {filteredMessages.length}{" "}
+                        messages
+                    </p>
 
-        <div className="pagination">
+                    <div className="pagination">
 
-            <button
-                disabled={currentPage === 1}
-                onClick={() =>
-                    setCurrentPage(currentPage - 1)
-                }
-            >
-                <FiChevronLeft />
-            </button>
+                        <button
+                            disabled={currentPage === 1}
+                            onClick={() =>
+                                setCurrentPage(currentPage - 1)
+                            }
+                        >
+                            <FiChevronLeft />
+                        </button>
 
-            {Array.from(
-                { length: totalPages },
-                (_, index) => (
-                    <button
-                        key={index}
-                        className={
-                            currentPage === index + 1
-                                ? "active"
-                                : ""
-                        }
-                        onClick={() =>
-                            setCurrentPage(index + 1)
-                        }
-                    >
-                        {index + 1}
-                    </button>
-                )
+                        {Array.from(
+                            { length: totalPages },
+                            (_, index) => (
+                                <button
+                                    key={index}
+                                    className={
+                                        currentPage === index + 1
+                                            ? "active"
+                                            : ""
+                                    }
+                                    onClick={() =>
+                                        setCurrentPage(index + 1)
+                                    }
+                                >
+                                    {index + 1}
+                                </button>
+                            )
+                        )}
+
+                        <button
+                            className="next-btn"
+                            disabled={currentPage === totalPages}
+                            onClick={() =>
+                                setCurrentPage(currentPage + 1)
+                            }
+                        >
+                            <FiChevronRight />
+                        </button>
+
+                    </div>
+
+                </div>
             )}
-
-            <button
-                className="next-btn"
-                disabled={currentPage === totalPages}
-                onClick={() =>
-                    setCurrentPage(currentPage + 1)
-                }
-            >
-                <FiChevronRight />
-            </button>
-
-        </div>
-
-    </div>
-)}
         </div>
     );
 };
