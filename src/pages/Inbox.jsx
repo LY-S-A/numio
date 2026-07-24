@@ -277,7 +277,7 @@ const paginatedMessages = filteredMessages.slice(
             {!loading &&
                 filteredMessages.length > 0 && (
                     <div className="sms-table">
-                        {filteredMessages.map(
+                        {paginatedMessages.map(
                             (msg, index) => (
                                 <div
                                     key={msg.id || index}
