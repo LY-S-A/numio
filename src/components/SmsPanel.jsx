@@ -65,7 +65,6 @@
 // export default SmsPanel;
 
 import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
 import axios from "axios";
 
 import "../styles/components.css";
@@ -74,7 +73,41 @@ const API = process.env.REACT_APP_API_URL;
 
 const SmsPanel = () => {
     const [messages, setMessages] = useState([]);
-    const [loading, setLoading] = useState(true);
+
+    const timeAgo = (date) => {
+        if (!date) return "";
+
+        const seconds = Math.floor(
+            (Date.now() - new Date(date).getTime()) / 1000
+        );
+
+        if (seconds < 60)
+            return `${seconds} second${seconds === 1 ? "" : "s"} ago`;
+
+        const minutes = Math.floor(seconds / 60);
+
+        if (minutes < 60)
+            return `${minutes} minute${minutes === 1 ? "" : "s"} ago`;
+
+        const hours = Math.floor(minutes / 60);
+
+        if (hours < 24)
+            return `${hours} hour${hours === 1 ? "" : "s"} ago`;
+
+        const days = Math.floor(hours / 24);
+
+        if (days < 30)
+            return `${days} day${days === 1 ? "" : "s"} ago`;
+
+        const months = Math.floor(days / 30);
+
+        if (months < 12)
+            return `${months} month${months === 1 ? "" : "s"} ago`;
+
+        const years = Math.floor(months / 12);
+
+        return `${years} year${years === 1 ? "" : "s"} ago`;
+    };
 
     const loadMessages = async () => {
         try {
@@ -89,12 +122,9 @@ const SmsPanel = () => {
                 }
             );
 
-            // Show only the latest 4 SMS
             setMessages((data.messages || []).slice(0, 4));
         } catch (err) {
             console.error(err);
-        } finally {
-            setLoading(false);
         }
     };
 
@@ -105,47 +135,29 @@ const SmsPanel = () => {
     return (
         <div className="sms-panel">
             <div className="panel-header">
-                <div>
-                    <h3>Recent SMS</h3>
-                </div>
-
-                <Link to="/inbox" className="view-all">
-                    View All
-                </Link>
+                <h3>Recent SMS</h3>
+                <a href="/inbox">View All</a>
             </div>
 
-            {loading ? (
-                <div className="sms-loading">
-                    Loading...
-                </div>
-            ) : messages.length === 0 ? (
-                <div className="sms-empty">
-                    No SMS received yet.
-                </div>
-            ) : (
-                messages.map((msg, index) => (
-                    <div
-                        className="sms-item"
-                        key={msg.id || index}
-                    >
-                        <div className="sms-content">
-                            <h4>{msg.number}</h4>
+            {messages.map((msg, index) => (
+                <div className="sms-item" key={msg.id || index}>
+                    <div className="sms-content">
+                        <h4>{msg.number}</h4>
 
-                            <p className="sms-message">
-                                <span className="sms-msg">
-                                    Your {msg.app} code is
-                                </span>
+                        <p className="sms-message">
+                            <span className="sms-msg">
+                                Your {msg.app} code is
+                            </span>
 
-                                <span className="code">
-                                    {msg.code}
-                                </span>
-                            </p>
-                        </div>
-
-                        <small>{msg.timeAgo}</small>
+                            <span className="code">
+                                {msg.code}
+                            </span>
+                        </p>
                     </div>
-                ))
-            )}
+
+                    <small>{timeAgo(msg.time)}</small>
+                </div>
+            ))}
 
             <div className="refresh-row">
                 <span>Auto Refresh</span>
