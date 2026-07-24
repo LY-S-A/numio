@@ -336,17 +336,19 @@ const Inbox = () => {
                 )}
 
             {/* FOOTER */}
-            <div className="sms-footer">
-                <div className="pagination">
-                    <button className="active">
-                        1
-                    </button>
+            {!loading && filteredMessages.length > 0 && (
+    <div className="sms-footer">
+        <div className="pagination">
+            <button className="active">
+                1
+            </button>
 
-                    <button className="next-btn">
-                        <FiChevronRight />
-                    </button>
-                </div>
-            </div>
+            <button className="next-btn">
+                <FiChevronRight />
+            </button>
+        </div>
+    </div>
+)}
         </div>
     );
 };
