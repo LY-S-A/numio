@@ -4,6 +4,7 @@ import {
     FiSearch,
     FiChevronRight,
     FiChevronLeft,
+    FiCreditCard,
 } from "react-icons/fi";
 
 import {
@@ -388,14 +389,21 @@ const DepositHistory = () => {
                         </div>
                     ))
                 ) : paginatedDeposits.length === 0 ? (
-                    <div
-                        style={{
-                            padding: "40px",
-                            textAlign: "center",
-                            color: "var(--text-secondary)",
-                        }}
-                    >
-                        No deposit history found.
+                    <div className="empty-history">
+                        <div className="empty-icon">
+                            <FiCreditCard />
+                        </div>
+
+                        <h3>No Deposit History Yet</h3>
+
+                        <p>
+                            Your completed wallet funding transactions will appear
+                            here after you successfully fund your wallet.
+                        </p>
+
+                        <span className="empty-tip">
+                            Make your first deposit to start building your funding history.
+                        </span>
                     </div>
                 ) : (
                     paginatedDeposits.map((item) => (
