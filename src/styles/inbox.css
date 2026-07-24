@@ -736,10 +736,19 @@ body.light-theme .skeleton::after {
 
 @media (max-width: 768px) {
 
+ .sms-history-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+   
+  .sms-toolbar {
+    grid-template-columns: 1fr;
+  }
+
   .sms-footer {
     display: flex;
     flex-direction: row;
-    align-items: center;      /* This is what centers everything vertically */
+    align-items: center;      
     justify-content: space-between;
     gap: 12px;
   }
