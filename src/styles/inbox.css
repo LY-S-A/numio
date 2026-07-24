@@ -370,6 +370,102 @@ body.light-theme .skeleton::after {
     }
 }
 
+/* ==========================
+   EMPTY STATE
+========================== */
+
+.empty-history{
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+
+    min-height:340px;
+
+    padding:48px 24px;
+
+    background:var(--card);
+
+    border:1px solid var(--border);
+    border-radius:12px;
+
+    text-align:center;
+}
+
+.empty-icon{
+    width:72px;
+    height:72px;
+
+    border-radius:50%;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    background:rgba(124,58,237,.12);
+    color:var(--primary);
+
+    font-size:32px;
+
+    margin-bottom:20px;
+}
+
+.empty-history h3{
+    font-size:22px;
+    font-weight:700;
+    color:var(--text);
+    margin-bottom:10px;
+}
+
+.empty-history p{
+    max-width:420px;
+
+    color:var(--text-secondary);
+
+    font-size:14px;
+    line-height:1.7;
+
+    margin-bottom:16px;
+}
+
+.empty-tip{
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+
+    padding:8px 14px;
+
+    border-radius:999px;
+
+    background:rgba(124,58,237,.12);
+    color:var(--primary);
+
+    font-size:12px;
+    font-weight:600;
+}
+
+@media (max-width:768px){
+
+    .empty-history{
+        min-height:260px;
+        padding:40px 20px;
+    }
+
+    .empty-icon{
+        width:60px;
+        height:60px;
+        font-size:28px;
+    }
+
+    .empty-history h3{
+        font-size:20px;
+    }
+
+    .empty-history p{
+        font-size:13px;
+    }
+}
+
 /* =========================
    TABLE
 ========================= */
