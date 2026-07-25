@@ -85,7 +85,7 @@ import "../styles/dashboard.css";
 const Dashboard = () => {
 
     const [stats, setStats] = useState({
-        activeNumbers: 0,
+        totalTransactions: 0,
         smsReceived: 0,
         totalSpent: 0,
         totalOrders: 0,
