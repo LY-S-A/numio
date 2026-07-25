@@ -3,30 +3,44 @@
 ========================= */
 
 .skeleton-card {
+  position: relative;
+  overflow: hidden;
   pointer-events: none;
 }
 
 
-/* Skeleton animation */
+/* Base skeleton texture */
 
-.skeleton-card::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(
-    90deg,
-    transparent,
-    rgba(255,255,255,0.06),
-    transparent
-  );
-  transform: translateX(-100%);
-  animation: skeleton-loading 1.5s infinite;
+.skeleton-icon,
+.skeleton-title,
+.skeleton-value {
+  position: relative;
+  overflow: hidden;
+
+  background: rgba(255,255,255,.08);
 }
 
 
-.skeleton-card {
-  position: relative;
-  overflow: hidden;
+/* Shimmer */
+
+.skeleton-icon::after,
+.skeleton-title::after,
+.skeleton-value::after {
+  content: "";
+
+  position: absolute;
+  inset: 0;
+
+  transform: translateX(-100%);
+
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255,255,255,.18),
+    transparent
+  );
+
+  animation: skeleton-loading 1.4s infinite;
 }
 
 
@@ -38,12 +52,11 @@
 
   border-radius: 10px;
 
-  background: var(--card-secondary);
-  border: 1px solid var(--border);
+  flex-shrink: 0;
 }
 
 
-/* Text area */
+/* Content */
 
 .skeleton-content {
   display: flex;
@@ -52,40 +65,33 @@
 }
 
 
-/* Title placeholder */
+/* Title */
 
 .skeleton-title {
   width: 120px;
   height: 12px;
 
   border-radius: 6px;
-
-  background: var(--card-secondary);
 }
 
 
-/* Number placeholder */
+/* Value */
 
 .skeleton-value {
   width: 80px;
   height: 24px;
 
   border-radius: 6px;
-
-  background: var(--card-secondary);
 }
 
 
-/* Loading animation */
+/* Animation */
 
 @keyframes skeleton-loading {
-
-  100% {
+  to {
     transform: translateX(100%);
   }
-
 }
-
 /* =========================
    STAT CARDS
 ========================= */
