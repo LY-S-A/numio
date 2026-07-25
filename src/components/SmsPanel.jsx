@@ -67,6 +67,7 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { FiCopy, FiCheck } from "react-icons/fi";
 
 import "../styles/components.css";
 
@@ -74,8 +75,21 @@ const API = process.env.REACT_APP_API_URL;
 
 const SmsPanel = () => {
     const [messages, setMessages] = useState([]);
+    const [copiedCode, setCopiedCode] = useState(null);
 
     const navigate = useNavigate();
+
+    const copyCode = async (code) => {
+    if (!code) return;
+
+    await navigator.clipboard.writeText(code);
+
+    setCopiedCode(code);
+
+    setTimeout(() => {
+        setCopiedCode(null);
+    }, 2000);
+};
 
     const timeAgo = (date) => {
         if (!date) return "";
@@ -158,8 +172,17 @@ const SmsPanel = () => {
                             </span>
 
                             <span className="code">
-                                {msg.code}
-                            </span>
+    {msg.code}
+</span>
+
+<button
+    type="button"
+    className="copy-btn"
+    onClick={() => copyCode(msg.code)}
+    title={copiedCode === msg.code ? "Copied!" : "Copy OTP"}
+>
+    {copiedCode === msg.code ? <FiCheck /> : <FiCopy />}
+</button>
                         </p>
                     </div>
 
