@@ -118,8 +118,7 @@ const SmsPanel = () => {
     View All
 </button>
       </div>
-
-           {loading ? (
+{loading ? (
     <>
         {Array.from({ length: 4 }).map((_, index) => (
             <div
@@ -130,12 +129,12 @@ const SmsPanel = () => {
                     <div className="skeleton sms-panel-number" />
 
                     <div className="sms-message">
-                        <div className="skeleton sms-panel-line" />
+                        <div className="skeleton sms-panel-msg" />
 
-                        <div className="code-group">
+                        <span className="code-group">
                             <div className="skeleton sms-panel-code" />
                             <div className="skeleton sms-panel-copy" />
-                        </div>
+                        </span>
                     </div>
                 </div>
 
