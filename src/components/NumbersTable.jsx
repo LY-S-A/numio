@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import {
     FiSmartphone,
@@ -26,6 +27,8 @@ const maskEmail = (email) => {
 const RecentActivity = () => {
     const [activities, setActivities] = useState([]);
     const [loading, setLoading] = useState(true);
+
+    const navigate = useNavigate();
 
     const timeAgo = (date) => {
         const diff = Math.floor(
@@ -107,6 +110,28 @@ const RecentActivity = () => {
                             </div>
                         </div>
                     ))
+                    ) : activities.length === 0 ? (
+
+            <div className="sms-panel-empty">
+
+                <div className="sms-panel-empty-icon">📊</div>
+
+                <h4>No activity yet</h4>
+
+                <p>
+                    Your wallet funding and number purchases
+                    will appear here.
+                </p>
+
+                <button
+                    className="sms-panel-empty-btn"
+                    onClick={() => navigate("/buy-number")}
+                >
+                    Buy a Number
+                </button>
+
+            </div>
+
                 ) : (
                     activities.map((activity, index) => (
                         <div
