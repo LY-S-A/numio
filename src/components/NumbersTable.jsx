@@ -119,7 +119,7 @@ const RecentActivity = () => {
     className={`activity-icon ${
         activity.type === "wallet"
             ? "wallet-icon"
-            : "number-icon"
+            : "purchase-icon"
     }`}
 >
     {activity.type === "wallet" ? (
