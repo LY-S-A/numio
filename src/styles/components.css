@@ -316,6 +316,31 @@ tbody tr:hover {
   font-weight: 600;
 }
 
+.copy-btn {
+    width: 28px;
+    height: 28px;
+
+    border: 1px solid var(--border);
+    border-radius: 6px;
+
+    background: transparent;
+    color: var(--text-secondary);
+
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    margin-left: 8px;
+
+    cursor: pointer;
+    transition: all .2s ease;
+}
+
+.copy-btn:hover {
+    border-color: var(--primary);
+    color: var(--primary);
+}
+
 /* =========================
    AUTO REFRESH
 ========================= */
