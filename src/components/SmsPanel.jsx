@@ -92,13 +92,14 @@ const SmsPanel = () => {
         <div className="card sms-card">
             <div className="card-header">
         <h3>Recent SMS</h3>
-       <button
+      <button
     className="card-btn"
     onClick={() => navigate("/inbox")}
 >
     View All
 </button>
-      </div>
+</div>
+
 {loading ? (
     <>
         {Array.from({ length: 4 }).map((_, index) => (
@@ -143,6 +144,11 @@ const SmsPanel = () => {
                             type="button"
                             className="copy-btn"
                             onClick={() => copyCode(msg.code)}
+                            title={
+                                copiedCode === msg.code
+                                    ? "Copied!"
+                                    : "Copy OTP"
+                            }
                         >
                             {copiedCode === msg.code ? (
                                 <FiCheck />
