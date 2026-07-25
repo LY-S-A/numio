@@ -3,95 +3,138 @@
 ========================= */
 
 .skeleton-card {
-  position: relative;
-  overflow: hidden;
-  pointer-events: none;
+    position: relative;
+    overflow: hidden;
+    pointer-events: none;
+
+    background: var(--card);
+    border: 1px solid var(--border);
 }
 
 
-/* Base skeleton texture */
+/* Skeleton base */
 
 .skeleton-icon,
 .skeleton-title,
 .skeleton-value {
-  position: relative;
-  overflow: hidden;
 
-  background: rgba(255,255,255,.08);
+    position: relative;
+    overflow: hidden;
+
+    background: rgba(255,255,255,.08);
 }
 
 
-/* Shimmer */
+/* Shimmer animation */
 
 .skeleton-icon::after,
 .skeleton-title::after,
 .skeleton-value::after {
-  content: "";
 
-  position: absolute;
-  inset: 0;
+    content: "";
 
-  transform: translateX(-100%);
+    position: absolute;
+    inset: 0;
 
-  background: linear-gradient(
-    90deg,
-    transparent,
-    rgba(255,255,255,.18),
-    transparent
-  );
+    transform: translateX(-100%);
 
-  animation: skeleton-loading 1.4s infinite;
+    background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(255,255,255,.10),
+        transparent
+    );
+
+    animation: skeleton-loading 1.4s infinite;
 }
 
 
 /* Icon placeholder */
 
 .skeleton-icon {
-  width: 48px;
-  height: 48px;
 
-  border-radius: 10px;
+    width: 48px;
+    height: 48px;
 
-  flex-shrink: 0;
+    flex-shrink: 0;
+
+    border-radius: 10px;
 }
 
 
-/* Content */
+/* Skeleton content */
 
 .skeleton-content {
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
+
+    display: flex;
+    flex-direction: column;
+
+    gap: 5px;
 }
 
 
-/* Title */
+/* Title placeholder */
 
 .skeleton-title {
-  width: 120px;
-  height: 12px;
 
-  border-radius: 6px;
+    width: 120px;
+    height: 12px;
+
+    border-radius: 6px;
 }
 
 
-/* Value */
+/* Value placeholder */
 
 .skeleton-value {
-  width: 80px;
-  height: 24px;
 
-  border-radius: 6px;
+    width: 95px;
+    height: 26px;
+
+    border-radius: 6px;
 }
 
 
 /* Animation */
 
 @keyframes skeleton-loading {
-  to {
-    transform: translateX(100%);
-  }
+
+    to {
+        transform: translateX(100%);
+    }
+
 }
+
+
+/* Mobile */
+
+@media (max-width:768px){
+
+    .skeleton-icon {
+
+        width: 42px;
+        height: 42px;
+
+    }
+
+
+    .skeleton-title {
+
+        width: 95px;
+        height: 11px;
+
+    }
+
+
+    .skeleton-value {
+
+        width: 75px;
+        height: 22px;
+
+    }
+
+}
+
 /* =========================
    STAT CARDS
 ========================= */
