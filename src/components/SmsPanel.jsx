@@ -100,6 +100,7 @@ const SmsPanel = () => {
 </button>
 </div>
 
+            <div className="sms-card-content">
 {loading ? (
     <>
         {Array.from({ length: 4 }).map((_, index) => (
@@ -182,6 +183,7 @@ const SmsPanel = () => {
         </div>
     ))
 )}
+                </div>
 
             <div className="refresh-row">
                 <span>Auto Refresh</span>
