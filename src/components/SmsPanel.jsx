@@ -11,6 +11,9 @@ const SmsPanel = () => {
     const [messages, setMessages] = useState([]);
     const [copiedCode, setCopiedCode] = useState(null);
 
+    const [messages, setMessages] = useState([]);
+    const [loading, setLoading] = useState(true);
+
     const navigate = useNavigate();
 
     const copyCode = async (code) => {
@@ -60,24 +63,47 @@ const SmsPanel = () => {
         return `${years} year${years === 1 ? "" : "s"} ago`;
     };
 
+    // const loadMessages = async () => {
+    //     try {
+    //         const token = localStorage.getItem("token");
+
+    //         const { data } = await axios.get(
+    //             `${API}/api/5sim/inbox`,
+    //             {
+    //                 headers: {
+    //                     Authorization: `Bearer ${token}`,
+    //                 },
+    //             }
+    //         );
+
+    //         setMessages((data.messages || []).slice(0, 4));
+    //     } catch (err) {
+    //         console.error(err);
+    //     }
+    // };
+
     const loadMessages = async () => {
-        try {
-            const token = localStorage.getItem("token");
+    try {
+        setLoading(true);
 
-            const { data } = await axios.get(
-                `${API}/api/5sim/inbox`,
-                {
-                    headers: {
-                        Authorization: `Bearer ${token}`,
-                    },
-                }
-            );
+        const token = localStorage.getItem("token");
 
-            setMessages((data.messages || []).slice(0, 4));
-        } catch (err) {
-            console.error(err);
-        }
-    };
+        const { data } = await axios.get(
+            `${API}/api/5sim/inbox`,
+            {
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                },
+            }
+        );
+
+        setMessages((data.messages || []).slice(0, 4));
+    } catch (err) {
+        console.error(err);
+    } finally {
+        setLoading(false);
+    }
+};
 
     useEffect(() => {
         loadMessages();
@@ -95,40 +121,65 @@ const SmsPanel = () => {
 </button>
       </div>
 
-            {messages.map((msg, index) => (
-                <div className="sms-item" key={msg.id || index}>
-                    <div className="sms-content">
-                        <h4>{msg.number}</h4>
+           {loading ? (
+    <>
+        {Array.from({ length: 4 }).map((_, index) => (
+            <div
+                key={index}
+                className="sms-item sms-panel-skeleton"
+            >
+                <div className="sms-content">
+                    <div className="skeleton sms-panel-number" />
 
-                       <p className="sms-message">
-    <span className="sms-msg">
-        Your {msg.app} code is
-    </span>
+                    <div className="sms-message">
+                        <div className="skeleton sms-panel-line" />
 
-    <span className="code-group">
-        <span className="code">
-            {msg.code}
-        </span>
-
-        <button
-            type="button"
-            className="copy-btn"
-            onClick={() => copyCode(msg.code)}
-            title={copiedCode === msg.code ? "Copied!" : "Copy OTP"}
-        >
-            {copiedCode === msg.code ? (
-                <FiCheck />
-            ) : (
-                <FiCopy />
-            )}
-        </button>
-    </span>
-</p>
+                        <div className="code-group">
+                            <div className="skeleton sms-panel-code" />
+                            <div className="skeleton sms-panel-copy" />
+                        </div>
                     </div>
-
-                    <small>{timeAgo(msg.time)}</small>
                 </div>
-            ))}
+
+                <div className="skeleton sms-panel-time" />
+            </div>
+        ))}
+    </>
+) : (
+    messages.map((msg, index) => (
+        <div className="sms-item" key={msg.id || index}>
+            <div className="sms-content">
+                <h4>{msg.number}</h4>
+
+                <p className="sms-message">
+                    <span className="sms-msg">
+                        Your {msg.app} code is
+                    </span>
+
+                    <span className="code-group">
+                        <span className="code">
+                            {msg.code}
+                        </span>
+
+                        <button
+                            type="button"
+                            className="copy-btn"
+                            onClick={() => copyCode(msg.code)}
+                        >
+                            {copiedCode === msg.code ? (
+                                <FiCheck />
+                            ) : (
+                                <FiCopy />
+                            )}
+                        </button>
+                    </span>
+                </p>
+            </div>
+
+            <small>{timeAgo(msg.time)}</small>
+        </div>
+    ))
+)}
 
             <div className="refresh-row">
                 <span>Auto Refresh</span>
