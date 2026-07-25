@@ -85,11 +85,13 @@ const RecentActivity = () => {
             </div>
 
             <div className="activity-list">
-               {loading ? (
+{loading ? (
     [...Array(6)].map((_, i) => (
         <div className="activity-row" key={i}>
             <div className="activity-left">
-                <div className="activity-icon skeleton-circle" />
+                <div className="activity-icon skeleton-icon">
+                    <div className="skeleton skeleton-circle" />
+                </div>
 
                 <div className="activity-content">
                     <div className="skeleton activity-text-skeleton" />
