@@ -95,10 +95,9 @@ const RecentActivity = () => {
                 </div>
 
                 <div className="activity-content">
-                    <p className="activity-text activity-text-skeleton">
-                        <span className="skeleton activity-email-skeleton" />
-                        <span className="skeleton activity-action-skeleton" />
-                    </p>
+                   <p className="activity-text">
+    <span className="skeleton activity-text-skeleton"></span>
+</p>
                 </div>
 
             </div>
