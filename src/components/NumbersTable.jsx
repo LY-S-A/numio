@@ -84,49 +84,48 @@ const RecentActivity = () => {
             </div>
 
             <div className="activity-list">
-{loading ? (
-    [...Array(6)].map((_, i) => (
-        <div className="activity-row" key={i}>
-            <div className="activity-left">
+                {loading ? (
+                    [...Array(6)].map((_, i) => (
+                        <div className="activity-row" key={i}>
+                            <div className="activity-left">
 
-                <div className="activity-icon skeleton">
-                    <div className="skeleton skeleton-circle" />
-                </div>
+                                <div className="activity-icon skeleton">
+                                    <div className="skeleton skeleton-circle" />
+                                </div>
 
-                <div className="activity-content">
-                   <p className="activity-text">
-    <span className="skeleton activity-text-skeleton"></span>
-</p>
-                </div>
+                                <div className="activity-content">
+                                    <p className="activity-text">
+                                        <span className="skeleton activity-text-skeleton"></span>
+                                    </p>
+                                </div>
 
-            </div>
+                            </div>
 
-            <div className="activity-right">
-                <span className="skeleton activity-status-skeleton" />
-                <small className="skeleton activity-time-skeleton" />
-            </div>
-        </div>
-    ))
-) : (
+                            <div className="activity-right">
+                                <span className="skeleton activity-status-skeleton" />
+                                <small className="skeleton activity-time-skeleton" />
+                            </div>
+                        </div>
+                    ))
+                ) : (
                     activities.map((activity, index) => (
                         <div
                             key={activity._id || index}
                             className="activity-row"
                         >
                             <div className="activity-left">
-                               <div
-    className={`activity-icon ${
-        activity.type === "wallet"
-            ? "wallet-icon"
-            : "purchase-icon"
-    }`}
->
-    {activity.type === "wallet" ? (
-        <FaWallet />
-    ) : (
-        <FiSmartphone />
-    )}
-</div>
+                                <div
+                                    className={`activity-icon ${activity.type === "wallet"
+                                            ? "wallet-icon"
+                                            : "purchase-icon"
+                                        }`}
+                                >
+                                    {activity.type === "wallet" ? (
+                                        <FaWallet />
+                                    ) : (
+                                        <FiSmartphone />
+                                    )}
+                                </div>
 
                                 <div className="activity-content">
                                     <p className="activity-text">
