@@ -323,28 +323,6 @@ tbody tr:hover {
     margin-left: 6px;
 }
 
-/* .copy-btn {
-    width: 24px;
-    height: 24px;
-
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-
-    border: none;
-    background: transparent;
-
-    color: var(--text-secondary);
-    cursor: pointer;
-
-    padding: 0;
-    transition: color .2s ease;
-}
-
-.copy-btn:hover {
-    color: var(--primary);
-} */
-
 .copy-btn {
     display: inline-flex;
     align-items: center;
@@ -356,7 +334,8 @@ tbody tr:hover {
     padding: 3px 8px;
 
     border-radius: 6px;
-    border: none;
+    border: 1px solid var(--border);
+   
 
     background: transparent;
     color: var(--primary);
