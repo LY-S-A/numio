@@ -93,7 +93,7 @@
 .skeleton {
     position: relative;
     overflow: hidden;
-    background: rgba(255, 255, 255, 0.08);
+    background: rgba(255,255,255,.08);
     border-radius: 8px;
 }
 
@@ -105,7 +105,7 @@
     background: linear-gradient(
         90deg,
         transparent,
-        rgba(255, 255, 255, 0.18),
+        rgba(255,255,255,.18),
         transparent
     );
     animation: skeleton-loading 1.4s infinite;
@@ -128,11 +128,8 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-
     gap: 16px;
-
     padding: 14px 0;
-
     border-bottom: 1px solid var(--border);
 }
 
@@ -144,7 +141,6 @@
     display: flex;
     align-items: center;
     gap: 14px;
-
     flex: 1;
     min-width: 0;
 }
@@ -152,7 +148,6 @@
 .activity-content {
     display: flex;
     flex-direction: column;
-
     flex: 1;
     min-width: 0;
 }
@@ -161,40 +156,38 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-
-    gap: 8px;
-
+    gap: 6px;
     min-width: 95px;
 }
 
-/* Activity Icon */
+/* Icon */
 
 .activity-icon {
     width: 28px;
     height: 28px;
     min-width: 28px;
 
-    border-radius: 8px;
-
     display: flex;
     align-items: center;
     justify-content: center;
+
+    border-radius: 8px;
 
     font-size: 13px;
 }
 
 .wallet-icon {
-    background: rgba(34, 197, 94, 0.12);
+    background: rgba(34,197,94,.12);
     color: var(--success);
 }
 
 .sms-icon {
-    background: rgba(59, 130, 246, 0.12);
+    background: rgba(59,130,246,.12);
     color: var(--info);
 }
 
 .vpn-icon {
-    background: rgba(124, 58, 237, 0.12);
+    background: rgba(124,58,237,.12);
     color: var(--primary);
 }
 
@@ -202,18 +195,15 @@
 
 .activity-text {
     margin: 0;
-
     font-size: 12px;
     line-height: 1.5;
-
     color: var(--text-secondary);
-
     word-break: break-word;
 }
 
 .activity-email-inline {
-    font-weight: 700;
     color: var(--text);
+    font-weight: 700;
 }
 
 /* Status */
@@ -236,12 +226,12 @@
 }
 
 .activity-status.success {
-    background: rgba(34, 197, 94, 0.12);
+    background: rgba(34,197,94,.12);
     color: var(--success);
 }
 
 .activity-status.failed {
-    background: rgba(239, 68, 68, 0.12);
+    background: rgba(239,68,68,.12);
     color: var(--danger);
 }
 
@@ -251,101 +241,119 @@
 }
 
 /* =========================
-   Skeleton Sizes
+   Skeleton
 ========================= */
 
-.skeleton-circle {
-    width: 28px;
-    height: 28px;
-    min-width: 28px;
-
-    border-radius: 8px;
-
-    flex-shrink: 0;
+.activity-icon.skeleton {
+    background: transparent;
 }
 
-.activity-text-skeleton {
-    width: 260px;
-    max-width: 100%;
-    height: 14px;
+.skeleton-circle {
+    width: 100%;
+    height: 100%;
+    border-radius: inherit;
+}
 
+/* Matches:
+   <span>Email</span> Action
+*/
+
+.activity-text-skeleton {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    height: 18px;
+}
+
+.activity-email-skeleton {
+    width: 95px;
+    height: 12px;
+    border-radius: 6px;
+}
+
+.activity-action-skeleton {
+    width: 180px;
+    max-width: 100%;
+    height: 12px;
     border-radius: 6px;
 }
 
 .activity-status-skeleton {
-    width: 74px;
-    height: 24px;
-
+    width: 82px;
+    height: 26px;
     border-radius: 999px;
 }
 
 .activity-time-skeleton {
     width: 48px;
     height: 10px;
-
     border-radius: 999px;
+    margin-top: 4px;
 }
 
 /* =========================
-   Responsive
+   Mobile
 ========================= */
 
-@media (max-width: 768px) {
+@media (max-width:768px){
 
-    .activity-row {
-        gap: 12px;
-        padding: 12px 0;
+    .activity-row{
+        gap:12px;
+        padding:12px 0;
     }
 
-    .activity-left {
-        gap: 10px;
+    .activity-left{
+        gap:10px;
     }
 
-    .activity-icon,
-    .skeleton-circle {
-        width: 26px;
-        height: 26px;
-        min-width: 26px;
-        font-size: 12px;
+    .activity-icon{
+        width:26px;
+        height:26px;
+        min-width:26px;
+        font-size:12px;
     }
 
-    .activity-right {
-        min-width: 70px;
-        gap: 6px;
+    .activity-text{
+        font-size:11px;
     }
 
-    .activity-text {
-        font-size: 11px;
+    .activity-right{
+        min-width:70px;
+        gap:6px;
     }
 
-    .activity-status {
-        min-width: 58px;
-        padding: 5px 8px;
-        font-size: 10px;
+    .activity-status{
+        min-width:58px;
+        padding:5px 8px;
+        font-size:10px;
     }
 
-    .activity-time {
-        font-size: 10px;
+    .activity-time{
+        font-size:10px;
     }
 
     /* Skeleton */
 
-    .activity-text-skeleton {
-        width: 170px;
-        height: 13px;
+    .activity-email-skeleton{
+        width:70px;
+        height:11px;
     }
 
-    .activity-status-skeleton {
-        width: 58px;
-        height: 20px;
+    .activity-action-skeleton{
+        width:110px;
+        height:11px;
     }
 
-    .activity-time-skeleton {
-        width: 42px;
-        height: 9px;
+    .activity-status-skeleton{
+        width:58px;
+        height:20px;
+    }
+
+    .activity-time-skeleton{
+        width:42px;
+        height:9px;
     }
 }
-
 /* =========================
    GENERAL CARD
 ========================= */
