@@ -166,24 +166,30 @@ const SmsPanel = () => {
                     <div className="sms-content">
                         <h4>{msg.number}</h4>
 
-                        <p className="sms-message">
-                            <span className="sms-msg">
-                                Your {msg.app} code is
-                            </span>
+                       <p className="sms-message">
+    <span className="sms-msg">
+        Your {msg.app} code is
+    </span>
 
-                            <span className="code">
-    {msg.code}
-</span>
+    <span className="code-group">
+        <span className="code">
+            {msg.code}
+        </span>
 
-<button
-    type="button"
-    className="copy-btn"
-    onClick={() => copyCode(msg.code)}
-    title={copiedCode === msg.code ? "Copied!" : "Copy OTP"}
->
-    {copiedCode === msg.code ? <FiCheck /> : <FiCopy />}
-</button>
-                        </p>
+        <button
+            type="button"
+            className="copy-btn"
+            onClick={() => copyCode(msg.code)}
+            title={copiedCode === msg.code ? "Copied!" : "Copy OTP"}
+        >
+            {copiedCode === msg.code ? (
+                <FiCheck />
+            ) : (
+                <FiCopy />
+            )}
+        </button>
+    </span>
+</p>
                     </div>
 
                     <small>{timeAgo(msg.time)}</small>
