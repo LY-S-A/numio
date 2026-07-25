@@ -61,25 +61,6 @@ const SmsPanel = () => {
         return `${years} year${years === 1 ? "" : "s"} ago`;
     };
 
-    // const loadMessages = async () => {
-    //     try {
-    //         const token = localStorage.getItem("token");
-
-    //         const { data } = await axios.get(
-    //             `${API}/api/5sim/inbox`,
-    //             {
-    //                 headers: {
-    //                     Authorization: `Bearer ${token}`,
-    //                 },
-    //             }
-    //         );
-
-    //         setMessages((data.messages || []).slice(0, 4));
-    //     } catch (err) {
-    //         console.error(err);
-    //     }
-    // };
-
     const loadMessages = async () => {
     try {
         setLoading(true);
@@ -138,7 +119,7 @@ const SmsPanel = () => {
                     </div>
                 </div>
 
-                <div className="skeleton sms-panel-time" />
+                <small className="skeleton sms-panel-time"></small>
             </div>
         ))}
     </>
