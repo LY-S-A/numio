@@ -1,4 +1,92 @@
 /* =========================
+   STAT CARD SKELETON
+========================= */
+
+.skeleton-card {
+  pointer-events: none;
+}
+
+
+/* Skeleton animation */
+
+.skeleton-card::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255,255,255,0.06),
+    transparent
+  );
+  transform: translateX(-100%);
+  animation: skeleton-loading 1.5s infinite;
+}
+
+
+.skeleton-card {
+  position: relative;
+  overflow: hidden;
+}
+
+
+/* Icon placeholder */
+
+.skeleton-icon {
+  width: 48px;
+  height: 48px;
+
+  border-radius: 10px;
+
+  background: var(--card-secondary);
+  border: 1px solid var(--border);
+}
+
+
+/* Text area */
+
+.skeleton-content {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+
+/* Title placeholder */
+
+.skeleton-title {
+  width: 120px;
+  height: 12px;
+
+  border-radius: 6px;
+
+  background: var(--card-secondary);
+}
+
+
+/* Number placeholder */
+
+.skeleton-value {
+  width: 80px;
+  height: 24px;
+
+  border-radius: 6px;
+
+  background: var(--card-secondary);
+}
+
+
+/* Loading animation */
+
+@keyframes skeleton-loading {
+
+  100% {
+    transform: translateX(100%);
+  }
+
+}
+
+/* =========================
    STAT CARDS
 ========================= */
 
