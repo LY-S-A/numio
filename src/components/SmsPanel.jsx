@@ -66,6 +66,7 @@
 
 import { useEffect, useState } from "react";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 import "../styles/components.css";
 
@@ -73,6 +74,8 @@ const API = process.env.REACT_APP_API_URL;
 
 const SmsPanel = () => {
     const [messages, setMessages] = useState([]);
+
+    const navigate = useNavigate();
 
     const timeAgo = (date) => {
         if (!date) return "";
@@ -136,7 +139,12 @@ const SmsPanel = () => {
         <div className="card sms-card">
             <div className="card-header">
         <h3>Recent SMS</h3>
-        <button className="card-btn">View All</button>
+       <button
+    className="card-btn"
+    onClick={() => navigate("/inbox")}
+>
+    View All
+</button>
       </div>
 
             {messages.map((msg, index) => (
