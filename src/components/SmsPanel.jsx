@@ -124,11 +124,29 @@ const SmsPanel = () => {
             </div>
         ))}
     </>
+) : messages.length === 0 ? (
+    <div className="sms-panel-empty">
+        <div className="sms-panel-empty-icon">📭</div>
+
+        <h4>No SMS yet</h4>
+
+        <p>
+            Your verification codes will appear here
+            after you receive an SMS.
+        </p>
+
+        <button
+            className="sms-panel-empty-btn"
+            onClick={() => navigate("/buy-number")}
+        >
+            Buy a Number
+        </button>
+    </div>
 ) : (
     messages.map((msg, index) => (
         <div className="sms-item" key={msg.id || index}>
-            <div className="sms-content">
-                <h4>{msg.number}</h4>
+            <div>
+                <strong>{msg.number}</strong>
 
                 <p className="sms-message">
                     <span className="sms-msg">
