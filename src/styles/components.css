@@ -316,28 +316,32 @@ tbody tr:hover {
   font-weight: 600;
 }
 
+.code-group {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    margin-left: 6px;
+}
+
 .copy-btn {
-    width: 28px;
-    height: 28px;
-
-    border: 1px solid var(--border);
-    border-radius: 6px;
-
-    background: transparent;
-    color: var(--text-secondary);
+    width: 24px;
+    height: 24px;
 
     display: inline-flex;
     align-items: center;
     justify-content: center;
 
-    margin-left: 8px;
+    border: none;
+    background: transparent;
 
+    color: var(--text-secondary);
     cursor: pointer;
-    transition: all .2s ease;
+
+    padding: 0;
+    transition: color .2s ease;
 }
 
 .copy-btn:hover {
-    border-color: var(--primary);
     color: var(--primary);
 }
 
