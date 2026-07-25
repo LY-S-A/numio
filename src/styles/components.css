@@ -84,7 +84,12 @@
    RECENT ACTIVITY
 ========================= */
 
+/* =========================
+   RECENT ACTIVITY
+========================= */
+
 /* Skeleton Base */
+
 .skeleton {
     position: relative;
     overflow: hidden;
@@ -112,7 +117,7 @@
     }
 }
 
-/* Activity List */
+/* Layout */
 
 .activity-list {
     display: flex;
@@ -121,8 +126,8 @@
 
 .activity-row {
     display: flex;
-    align-items: center;
     justify-content: space-between;
+    align-items: center;
 
     gap: 16px;
 
@@ -135,8 +140,6 @@
     border-bottom: none;
 }
 
-/* Left */
-
 .activity-left {
     display: flex;
     align-items: center;
@@ -146,30 +149,6 @@
     min-width: 0;
 }
 
-.activity-icon,
-.skeleton-circle {
-    width: 28px;
-    height: 28px;
-
-    min-width: 28px;
-
-    border-radius: 8px;
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    font-size: 13px;
-}
-
-/* Skeleton Icon */
-
-.skeleton-circle {
-    flex-shrink: 0;
-}
-
-/* Text */
-
 .activity-content {
     display: flex;
     flex-direction: column;
@@ -177,20 +156,6 @@
     flex: 1;
     min-width: 0;
 }
-
-.activity-main {
-    width: 260px;
-    max-width: 100%;
-    height: 14px;
-
-    border-radius: 6px;
-}
-
-.activity-sub {
-    display: none;
-}
-
-/* Right */
 
 .activity-right {
     display: flex;
@@ -202,21 +167,21 @@
     min-width: 95px;
 }
 
-.skeleton-pill {
-    width: 74px;
-    height: 24px;
+/* Activity Icon */
 
-    border-radius: 999px;
+.activity-icon {
+    width: 28px;
+    height: 28px;
+    min-width: 28px;
+
+    border-radius: 8px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-size: 13px;
 }
-
-.time {
-    width: 48px;
-    height: 10px;
-
-    border-radius: 999px;
-}
-
-/* Activity Icons */
 
 .wallet-icon {
     background: rgba(34, 197, 94, 0.12);
@@ -247,8 +212,8 @@
 }
 
 .activity-email-inline {
-    color: var(--text);
     font-weight: 700;
+    color: var(--text);
 }
 
 /* Status */
@@ -286,7 +251,43 @@
 }
 
 /* =========================
-   MOBILE
+   Skeleton Sizes
+========================= */
+
+.skeleton-circle {
+    width: 28px;
+    height: 28px;
+    min-width: 28px;
+
+    border-radius: 8px;
+
+    flex-shrink: 0;
+}
+
+.activity-text-skeleton {
+    width: 260px;
+    max-width: 100%;
+    height: 14px;
+
+    border-radius: 6px;
+}
+
+.activity-status-skeleton {
+    width: 74px;
+    height: 24px;
+
+    border-radius: 999px;
+}
+
+.activity-time-skeleton {
+    width: 48px;
+    height: 10px;
+
+    border-radius: 999px;
+}
+
+/* =========================
+   Responsive
 ========================= */
 
 @media (max-width: 768px) {
@@ -308,24 +309,13 @@
         font-size: 12px;
     }
 
-    .activity-main {
-        width: 170px;
-        height: 13px;
-    }
-
     .activity-right {
         min-width: 70px;
         gap: 6px;
     }
 
-    .skeleton-pill {
-        width: 58px;
-        height: 20px;
-    }
-
-    .time {
-        width: 42px;
-        height: 9px;
+    .activity-text {
+        font-size: 11px;
     }
 
     .activity-status {
@@ -338,8 +328,21 @@
         font-size: 10px;
     }
 
-    .activity-text {
-        font-size: 11px;
+    /* Skeleton */
+
+    .activity-text-skeleton {
+        width: 170px;
+        height: 13px;
+    }
+
+    .activity-status-skeleton {
+        width: 58px;
+        height: 20px;
+    }
+
+    .activity-time-skeleton {
+        width: 42px;
+        height: 9px;
     }
 }
 
