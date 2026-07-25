@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import {
     FiMessageSquare,
-    FiShield,
+    FiSmartphone,
 } from "react-icons/fi";
 import { FaWallet } from "react-icons/fa";
 
@@ -115,27 +115,19 @@ const RecentActivity = () => {
                             className="activity-row"
                         >
                             <div className="activity-left">
-                                <div
-                                    className={`activity-icon ${
-                                        activity.type === "wallet"
-                                            ? "wallet-icon"
-                                            : activity.type === "sms"
-                                            ? "sms-icon"
-                                            : "vpn-icon"
-                                    }`}
-                                >
-                                    {activity.type === "wallet" && (
-                                        <FaWallet />
-                                    )}
-
-                                    {activity.type === "sms" && (
-                                        <FiMessageSquare />
-                                    )}
-
-                                    {activity.type === "vpn" && (
-                                        <FiShield />
-                                    )}
-                                </div>
+                               <div
+    className={`activity-icon ${
+        activity.type === "wallet"
+            ? "wallet-icon"
+            : "number-icon"
+    }`}
+>
+    {activity.type === "wallet" ? (
+        <FaWallet />
+    ) : (
+        <FiSmartphone />
+    )}
+</div>
 
                                 <div className="activity-content">
                                     <p className="activity-text">
