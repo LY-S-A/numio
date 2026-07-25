@@ -170,10 +170,16 @@
 }
 
 .sms-panel-time {
-    width: 48px;
+    display: block;
+
+    width: 52px;
     height: 10px;
-    border-radius: 6px;
-    margin-left: auto;
+
+    border-radius: 999px;
+
+    margin-top: 4px;
+
+    flex-shrink: 0;
 }
 
 /* =========================
