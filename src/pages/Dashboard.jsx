@@ -145,12 +145,12 @@ const Dashboard = () => {
             <div className="stats-grid">
 
 
-                <StatCard
-                    icon={<FaMobileAlt />}
-                    title="Active Numbers"
-                    value={stats.activeNumbers}
-                    color="purple"
-                />
+               <StatCard
+    icon={<FaMobileAlt />}
+    title="Active Numbers"
+    value={stats.activeNumbers}
+    color="purple"
+/>
 
 
                 <StatCard
