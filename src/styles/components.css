@@ -129,6 +129,43 @@
   border-color: var(--primary);
 }
 
+/* ==========================
+   SMS PANEL SKELETON
+========================== */
+
+.sms-panel-skeleton {
+    pointer-events: none;
+}
+
+.sms-panel-number {
+    width: 140px;
+    height: 14px;
+    margin-bottom: 10px;
+}
+
+.sms-panel-line {
+    width: 110px;
+    height: 11px;
+}
+
+.sms-panel-code {
+    width: 70px;
+    height: 24px;
+    border-radius: 6px;
+}
+
+.sms-panel-copy {
+    width: 24px;
+    height: 24px;
+    border-radius: 6px;
+}
+
+.sms-panel-time {
+    width: 48px;
+    height: 10px;
+    border-radius: 6px;
+}
+
 /* =========================
    TABLE
 ========================= */
