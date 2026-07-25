@@ -134,27 +134,32 @@
 ========================== */
 
 .sms-panel-skeleton {
+    position: relative;
     pointer-events: none;
 }
 
 .sms-panel-skeleton .sms-content {
-    flex: 1;
+    width: 100%;
 }
 
 .sms-panel-number {
     width: 150px;
     height: 15px;
     border-radius: 6px;
-    margin-bottom: 10px;
+    margin-bottom: 8px;
 }
 
-.sms-panel-msg {
-    width: 110px;
+.sms-panel-line {
+    width: 120px;
     height: 12px;
     border-radius: 6px;
+    margin-bottom: 6px;
+}
 
-    display: inline-block;
-    vertical-align: middle;
+.sms-panel-code-row {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
 }
 
 .sms-panel-code {
@@ -164,22 +169,20 @@
 }
 
 .sms-panel-copy {
-    width: 24px;
+    width: 30px;
     height: 24px;
     border-radius: 6px;
 }
 
 .sms-panel-time {
-    display: block;
+    position: absolute;
+    top: 14px;
+    right: 14px;
 
     width: 52px;
     height: 10px;
 
     border-radius: 999px;
-
-    margin-top: 4px;
-
-    flex-shrink: 0;
 }
 
 /* =========================
