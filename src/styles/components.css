@@ -84,10 +84,6 @@
    RECENT ACTIVITY
 ========================= */
 
-/* =========================
-   RECENT ACTIVITY
-========================= */
-
 /* Skeleton Base */
 
 .skeleton {
@@ -177,17 +173,12 @@
 }
 
 .wallet-icon {
-    background: rgba(34,197,94,.12);
+    background: rgba(34, 197, 94, .12);
     color: var(--success);
 }
 
-.sms-icon {
-    background: rgba(59,130,246,.12);
-    color: var(--info);
-}
-
-.vpn-icon {
-    background: rgba(124,58,237,.12);
+.purchase-icon {
+    background: rgba(124, 58, 237, .12);
     color: var(--primary);
 }
 
