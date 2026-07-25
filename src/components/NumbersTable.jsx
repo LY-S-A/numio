@@ -87,24 +87,25 @@ const RecentActivity = () => {
             <div className="activity-list">
 {loading ? (
     [...Array(6)].map((_, i) => (
-        <div key={i} className="activity-row">
+        <div className="activity-row" key={i}>
             <div className="activity-left">
-                <div className="activity-icon skeleton-icon">
-                    <div className="skeleton skeleton-icon-inner" />
+
+                <div className="activity-icon skeleton">
+                    <div className="skeleton skeleton-circle" />
                 </div>
 
                 <div className="activity-content">
-                    <p className="activity-text">
-                        <span className="skeleton skeleton-email" />
-                        {" "}
-                        <span className="skeleton skeleton-action" />
+                    <p className="activity-text activity-text-skeleton">
+                        <span className="skeleton activity-email-skeleton" />
+                        <span className="skeleton activity-action-skeleton" />
                     </p>
                 </div>
+
             </div>
 
             <div className="activity-right">
-                <span className="activity-status skeleton skeleton-status" />
-                <small className="activity-time skeleton skeleton-time" />
+                <span className="skeleton activity-status-skeleton" />
+                <small className="skeleton activity-time-skeleton" />
             </div>
         </div>
     ))
