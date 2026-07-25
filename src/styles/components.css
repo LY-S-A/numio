@@ -323,7 +323,7 @@ tbody tr:hover {
     margin-left: 6px;
 }
 
-.copy-btn {
+/* .copy-btn {
     width: 24px;
     height: 24px;
 
@@ -339,6 +339,30 @@ tbody tr:hover {
 
     padding: 0;
     transition: color .2s ease;
+}
+
+.copy-btn:hover {
+    color: var(--primary);
+} */
+
+.copy-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    height: 100%;
+    min-height: 24px;
+
+    padding: 3px 8px;
+
+    border-radius: 6px;
+    border: none;
+
+    background: transparent;
+    color: var(--primary);
+
+    cursor: pointer;
+    transition: .2s ease;
 }
 
 .copy-btn:hover {
