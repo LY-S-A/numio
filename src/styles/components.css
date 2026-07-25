@@ -156,7 +156,7 @@
     min-width: 95px;
 }
 
-/* Icon */
+
 
 .activity-icon {
     width: 28px;
@@ -260,6 +260,20 @@
     border-radius:6px;
 }
 
+.activity-status-skeleton {
+    width: 90px;
+    height: 24px;
+    border-radius: 999px;
+    display: block;
+}
+
+.activity-time-skeleton {
+    width: 45px;
+    height: 12px;
+    border-radius: 6px;
+    display: block;
+}
+
 /* =========================
    Mobile
 ========================= */
@@ -289,16 +303,6 @@
     .activity-right{
         min-width:70px;
         gap:6px;
-    }
-
-    .activity-status{
-        min-width:58px;
-        padding:5px 8px;
-        font-size:10px;
-    }
-
-    .activity-time{
-        font-size:10px;
     }
 
     /* Skeleton */
