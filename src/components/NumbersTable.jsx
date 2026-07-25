@@ -85,25 +85,24 @@ const RecentActivity = () => {
             </div>
 
             <div className="activity-list">
-                {loading ? (
-                    [...Array(4)].map((_, i) => (
-                        <div className="activity-row" key={i}>
-                            <div className="activity-left">
-                                <div className="activity-icon skeleton-circle" />
+               {loading ? (
+    [...Array(6)].map((_, i) => (
+        <div className="activity-row" key={i}>
+            <div className="activity-left">
+                <div className="activity-icon skeleton-circle" />
 
-                                <div className="activity-content">
-                                    <div className="skeleton activity-main" />
-                                    <div className="skeleton activity-sub" />
-                                </div>
-                            </div>
+                <div className="activity-content">
+                    <div className="skeleton activity-text-skeleton" />
+                </div>
+            </div>
 
-                            <div className="activity-right">
-                                <div className="skeleton skeleton-pill" />
-                                <div className="skeleton time" />
-                            </div>
-                        </div>
-                    ))
-                ) : (
+            <div className="activity-right">
+                <div className="skeleton activity-status-skeleton" />
+                <div className="skeleton activity-time-skeleton" />
+            </div>
+        </div>
+    ))
+) : (
                     activities.map((activity, index) => (
                         <div
                             key={activity._id || index}
