@@ -133,11 +133,11 @@ const SmsPanel = () => {
     }, []);
 
     return (
-        <div className="sms-panel">
-            <div className="panel-header">
-                <h3>Recent SMS</h3>
-                <a href="/inbox">View All</a>
-            </div>
+        <div className="card sms-card">
+            <div className="card-header">
+        <h3>Recent SMS</h3>
+        <button className="card-btn">View All</button>
+      </div>
 
             {messages.map((msg, index) => (
                 <div className="sms-item" key={msg.id || index}>
