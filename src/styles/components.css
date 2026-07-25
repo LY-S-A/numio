@@ -156,6 +156,13 @@
     margin-bottom: 6px;
 }
 
+.sms-panel-msg {
+    width: 125px;  
+    height: 12px;
+    border-radius: 6px;
+    margin-bottom: 6px;
+}
+
 .sms-panel-code-row {
     display: inline-flex;
     align-items: center;
