@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 import {
-    FiMessageSquare,
     FiSmartphone,
 } from "react-icons/fi";
 import { FaWallet } from "react-icons/fa";
