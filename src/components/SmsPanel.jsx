@@ -15,16 +15,16 @@ const SmsPanel = () => {
     const navigate = useNavigate();
 
     const copyCode = async (code) => {
-    if (!code) return;
+        if (!code) return;
 
-    await navigator.clipboard.writeText(code);
+        await navigator.clipboard.writeText(code);
 
-    setCopiedCode(code);
+        setCopiedCode(code);
 
-    setTimeout(() => {
-        setCopiedCode(null);
-    }, 2000);
-};
+        setTimeout(() => {
+            setCopiedCode(null);
+        }, 2000);
+    };
 
     const timeAgo = (date) => {
         if (!date) return "";
@@ -62,27 +62,27 @@ const SmsPanel = () => {
     };
 
     const loadMessages = async () => {
-    try {
-        setLoading(true);
+        try {
+            setLoading(true);
 
-        const token = localStorage.getItem("token");
+            const token = localStorage.getItem("token");
 
-        const { data } = await axios.get(
-            `${API}/api/5sim/inbox`,
-            {
-                headers: {
-                    Authorization: `Bearer ${token}`,
-                },
-            }
-        );
+            const { data } = await axios.get(
+                `${API}/api/5sim/inbox`,
+                {
+                    headers: {
+                        Authorization: `Bearer ${token}`,
+                    },
+                }
+            );
 
-        setMessages((data.messages || []).slice(0, 4));
-    } catch (err) {
-        console.error(err);
-    } finally {
-        setLoading(false);
-    }
-};
+            setMessages((data.messages || []).slice(0, 4));
+        } catch (err) {
+            console.error(err);
+        } finally {
+            setLoading(false);
+        }
+    };
 
     useEffect(() => {
         loadMessages();
@@ -91,99 +91,99 @@ const SmsPanel = () => {
     return (
         <div className="card sms-card">
             <div className="card-header">
-        <h3>Recent SMS</h3>
-      <button
-    className="card-btn"
-    onClick={() => navigate("/inbox")}
->
-    View All
-</button>
-</div>
+                <h3>Recent SMS</h3>
+                <button
+                    className="card-btn"
+                    onClick={() => navigate("/inbox")}
+                >
+                    View All
+                </button>
+            </div>
 
             <div className="sms-card-content">
-{loading ? (
-    <>
-        {Array.from({ length: 4 }).map((_, index) => (
-            <div
-                key={index}
-                className="sms-item sms-panel-skeleton"
-            >
-                <div className="sms-content">
-                    <div className="skeleton sms-panel-number" />
+                {loading ? (
+                    <>
+                        {Array.from({ length: 4 }).map((_, index) => (
+                            <div
+                                key={index}
+                                className="sms-item sms-panel-skeleton"
+                            >
+                                <div className="sms-content">
+                                    <div className="skeleton sms-panel-number" />
 
-                    <div className="sms-message">
-                        <div className="skeleton sms-panel-msg" />
+                                    <div className="sms-message">
+                                        <div className="skeleton sms-panel-msg" />
 
-                        <span className="code-group">
-                            <div className="skeleton sms-panel-code" />
-                            <div className="skeleton sms-panel-copy" />
-                        </span>
-                    </div>
-                </div>
+                                        <span className="code-group">
+                                            <div className="skeleton sms-panel-code" />
+                                            <div className="skeleton sms-panel-copy" />
+                                        </span>
+                                    </div>
+                                </div>
 
-                <small className="skeleton sms-panel-time"></small>
-            </div>
-        ))}
-    </>
-) : messages.length === 0 ? (
-    <div className="sms-panel-empty">
-        <div className="sms-panel-empty-icon">📭</div>
+                                <small className="skeleton sms-panel-time"></small>
+                            </div>
+                        ))}
+                    </>
+                ) : messages.length === 0 ? (
+                    <div className="sms-panel-empty">
+                        <div className="sms-panel-empty-icon">📭</div>
 
-        <h4>No SMS yet</h4>
+                        <h4>No SMS yet</h4>
 
-        <p>
-            Your verification codes will appear here
-            after you receive an SMS.
-        </p>
-
-        <button
-            className="sms-panel-empty-btn"
-            onClick={() => navigate("/buy-number")}
-        >
-            Buy a Number
-        </button>
-    </div>
-) : (
-    messages.map((msg, index) => (
-        <div className="sms-item" key={msg.id || index}>
-            <div>
-                <strong>{msg.number}</strong>
-
-                <p className="sms-message">
-                    <span className="sms-msg">
-                        Your {msg.app} code is
-                    </span>
-
-                    <span className="code-group">
-                        <span className="code">
-                            {msg.code}
-                        </span>
+                        <p>
+                            Your verification codes will appear here
+                            after you receive an SMS.
+                        </p>
 
                         <button
-                            type="button"
-                            className="copy-btn"
-                            onClick={() => copyCode(msg.code)}
-                            title={
-                                copiedCode === msg.code
-                                    ? "Copied!"
-                                    : "Copy OTP"
-                            }
+                            className="sms-panel-empty-btn"
+                            onClick={() => navigate("/buy-number")}
                         >
-                            {copiedCode === msg.code ? (
-                                <FiCheck />
-                            ) : (
-                                <FiCopy />
-                            )}
+                            Buy a Number
                         </button>
-                    </span>
-                </p>
-            </div>
+                    </div>
+                ) : (
+                    messages.map((msg, index) => (
+                        <div className="sms-item" key={msg.id || index}>
+                            <div>
+                                <strong>{msg.number}</strong>
 
-            <small>{timeAgo(msg.time)}</small>
-        </div>
-    ))
-)}
-                </div>
+                                <p className="sms-message">
+                                    <span className="sms-msg">
+                                        Your {msg.app} code is
+                                    </span>
+
+                                    <span className="code-group">
+                                        <span className="code">
+                                            {msg.code}
+                                        </span>
+
+                                        <button
+                                            type="button"
+                                            className="copy-btn"
+                                            onClick={() => copyCode(msg.code)}
+                                            title={
+                                                copiedCode === msg.code
+                                                    ? "Copied!"
+                                                    : "Copy OTP"
+                                            }
+                                        >
+                                            {copiedCode === msg.code ? (
+                                                <FiCheck />
+                                            ) : (
+                                                <FiCopy />
+                                            )}
+                                        </button>
+                                    </span>
+                                </p>
+                            </div>
+
+                            <small>{timeAgo(msg.time)}</small>
+                        </div>
+                    ))
+                )}
+            </div>
 
             <div className="refresh-row">
                 <span>Auto Refresh</span>
