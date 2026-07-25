@@ -10,8 +10,6 @@ const API = process.env.REACT_APP_API_URL;
 const SmsPanel = () => {
     const [messages, setMessages] = useState([]);
     const [copiedCode, setCopiedCode] = useState(null);
-
-    const [messages, setMessages] = useState([]);
     const [loading, setLoading] = useState(true);
 
     const navigate = useNavigate();
