@@ -322,7 +322,7 @@ useEffect(() => {
     </button>
   </div>
 
- {loadingDeposits ? (
+{loadingDeposits ? (
   Array.from({ length: 3 }).map((_, index) => (
     <div
       className="wallet-transaction-item wallet-transaction-skeleton"
@@ -344,6 +344,9 @@ useEffect(() => {
     </div>
   ))
 ) : recentDeposits.length === 0 ? (
+  <p>No deposits yet.</p>
+) : (
+  recentDeposits.slice(0, 3).map((deposit) => (
       <div
         className="wallet-transaction-item"
         key={deposit._id}
