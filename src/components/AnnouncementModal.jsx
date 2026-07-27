@@ -1,3 +1,77 @@
+// import { useState, useEffect } from "react";
+// import {
+//     FiX,
+//     FiBell,
+//     FiSend,
+// } from "react-icons/fi";
+
+// import "../styles/components.css";
+
+// const AnnouncementModal = () => {
+//     const [open, setOpen] = useState(false);
+
+//     useEffect(() => {
+//         const hidden = localStorage.getItem("announcement_closed");
+
+//         if (!hidden) {
+//             setOpen(true);
+//         }
+//     }, []);
+
+//     const closeModal = () => {
+//         localStorage.setItem("announcement_closed", "true");
+//         setOpen(false);
+//     };
+
+//     if (!open) return null;
+
+//     return (
+//         <div className="announcement-overlay">
+//             <div className="announcement-modal">
+
+//                 <button
+//                     className="announcement-close"
+//                     onClick={closeModal}
+//                 >
+//                     <FiX />
+//                 </button>
+
+//                 <div className="announcement-icon">
+//                     <FiBell />
+//                 </div>
+
+//                 <h2>Welcome to Numio 🎉</h2>
+
+//                 <p>
+//                     Join our official Telegram community to receive
+//                     important announcements, support updates, new
+//                     countries, services, giveaways and platform news.
+//                 </p>
+
+//                 <a
+//                     href="https://t.me/YOUR_CHANNEL"
+//                     target="_blank"
+//                     rel="noopener noreferrer"
+//                     className="telegram-btn"
+//                 >
+//                     <FiSend />
+//                     Join Telegram Channel
+//                 </a>
+
+//                 <button
+//                     className="announcement-dismiss"
+//                     onClick={closeModal}
+//                 >
+//                     Maybe Later
+//                 </button>
+
+//             </div>
+//         </div>
+//     );
+// };
+
+// export default AnnouncementModal;
+
 import { useState, useEffect } from "react";
 import {
     FiX,
@@ -11,15 +85,22 @@ const AnnouncementModal = () => {
     const [open, setOpen] = useState(false);
 
     useEffect(() => {
-        const hidden = localStorage.getItem("announcement_closed");
+        const lastSeen = localStorage.getItem("announcement_last_seen");
+        const now = Date.now();
 
-        if (!hidden) {
+        const twentyFourHours = 24 * 60 * 60 * 1000;
+
+        if (!lastSeen || now - Number(lastSeen) >= twentyFourHours) {
             setOpen(true);
         }
     }, []);
 
     const closeModal = () => {
-        localStorage.setItem("announcement_closed", "true");
+        localStorage.setItem(
+            "announcement_last_seen",
+            Date.now().toString()
+        );
+
         setOpen(false);
     };
 
@@ -28,7 +109,6 @@ const AnnouncementModal = () => {
     return (
         <div className="announcement-overlay">
             <div className="announcement-modal">
-
                 <button
                     className="announcement-close"
                     onClick={closeModal}
@@ -45,7 +125,7 @@ const AnnouncementModal = () => {
                 <p>
                     Join our official Telegram community to receive
                     important announcements, support updates, new
-                    countries, services, giveaways and platform news.
+                    countries, services, giveaways, and platform news.
                 </p>
 
                 <a
@@ -64,7 +144,6 @@ const AnnouncementModal = () => {
                 >
                     Maybe Later
                 </button>
-
             </div>
         </div>
     );
