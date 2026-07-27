@@ -406,120 +406,135 @@
     font-size: 13px;
 }
 
+/* ====================================
+   RECENT DEPOSIT SKELETON
+==================================== */
+
+.wallet-transaction-skeleton {
+    pointer-events: none;
+}
+
+.wallet-skeleton {
+    position: relative;
+    overflow: hidden;
+    background: rgba(255,255,255,.06);
+    border-radius: 8px;
+}
+
+body.light-theme .wallet-skeleton {
+    background: #e5e7eb;
+}
+
+.wallet-skeleton::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    transform: translateX(-100%);
+    background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(255,255,255,.18),
+        transparent
+    );
+    animation: walletSkeleton 1.2s infinite;
+}
+
+body.light-theme .wallet-skeleton::after {
+    background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(255,255,255,.7),
+        transparent
+    );
+}
+
+@keyframes walletSkeleton {
+    to {
+        transform: translateX(100%);
+    }
+}
+
+/* Left */
+
+.wallet-skeleton-icon {
+    width: 42px;
+    height: 42px;
+    border-radius: 8px;
+    flex-shrink: 0;
+}
+
+.wallet-transaction-info {
+    display: flex;
+    flex-direction: column;
+}
+
+.wallet-skeleton-title {
+    width: 150px;
+    height: 14px;
+    margin-bottom: 8px;
+}
+
+.wallet-skeleton-date {
+    width: 90px;
+    height: 11px;
+}
+
+/* Right */
+
+.wallet-transaction-right {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+}
+
+.wallet-skeleton-status {
+    width: 72px;
+    height: 24px;
+    border-radius: 999px;
+    margin-bottom: 10px;
+}
+
+.wallet-skeleton-amount {
+    width: 82px;
+    height: 15px;
+}
+
+/* Mobile */
+
+@media (max-width: 768px) {
+
+    .wallet-skeleton-icon {
+        width: 36px;
+        height: 36px;
+    }
+
+    .wallet-skeleton-title {
+        width: 120px;
+        height: 13px;
+        margin-bottom: 6px;
+    }
+
+    .wallet-skeleton-date {
+        width: 75px;
+        height: 10px;
+    }
+
+    .wallet-skeleton-status {
+        width: 58px;
+        height: 20px;
+        margin-bottom: 8px;
+    }
+
+    .wallet-skeleton-amount {
+        width: 68px;
+        height: 13px;
+    }
+}
+
 
 /* =========================
    TRANSACTIONS
 ========================= */
-/* ==========================
-   RECENT DEPOSIT SKELETON
-========================== */
-
-.wallet-transaction-skeleton {
-  pointer-events: none;
-}
-
-.wallet-skeleton {
-  position: relative;
-  overflow: hidden;
-  background: rgba(255,255,255,.06);
-  border-radius: 8px;
-}
-
-body.light-theme .wallet-skeleton {
-  background: #e5e7eb;
-}
-
-.wallet-skeleton::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  transform: translateX(-100%);
-  background: linear-gradient(
-    90deg,
-    transparent,
-    rgba(255,255,255,.18),
-    transparent
-  );
-  animation: walletSkeleton 1.2s infinite;
-}
-
-body.light-theme .wallet-skeleton::after {
-  background: linear-gradient(
-    90deg,
-    transparent,
-    rgba(255,255,255,.7),
-    transparent
-  );
-}
-
-@keyframes walletSkeleton {
-  to {
-    transform: translateX(100%);
-  }
-}
-
-.wallet-skeleton-text {
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-}
-
-.wallet-skeleton-icon {
-  width: 42px;
-  height: 42px;
-  border-radius: 8px;
-  flex-shrink: 0;
-}
-
-.wallet-skeleton-title {
-  width: 160px;
-  height: 14px;
-}
-
-.wallet-skeleton-date {
-  width: 100px;
-  height: 11px;
-}
-
-.wallet-skeleton-status {
-  width: 70px;
-  height: 24px;
-  border-radius: 999px;
-  margin-left: auto;
-  margin-bottom: 10px;
-}
-
-.wallet-skeleton-amount {
-  width: 90px;
-  height: 16px;
-  margin-left: auto;
-}
-
-@media (max-width: 768px) {
-  .wallet-skeleton-icon {
-    width: 36px;
-    height: 36px;
-  }
-
-  .wallet-skeleton-title {
-    width: 120px;
-  }
-
-  .wallet-skeleton-date {
-    width: 80px;
-  }
-
-  .wallet-skeleton-status {
-    width: 60px;
-    height: 20px;
-  }
-
-  .wallet-skeleton-amount {
-    width: 70px;
-    height: 14px;
-  }
-}
-
 
 .wallet-transactions-header {
     display: flex;
