@@ -464,8 +464,6 @@
     min-width: 95px;
 }
 
-
-
 .activity-icon {
     width: 28px;
     height: 28px;
@@ -512,7 +510,7 @@
     align-items: center;
     justify-content: center;
 
-    min-width: 70px;
+    min-width: 80px;
 
     padding: 6px 10px;
 
