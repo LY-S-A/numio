@@ -331,7 +331,7 @@ useEffect(() => {
       No deposits yet.
     </p>
   ) : (
-    recentDeposits.slice(0, 5).map((deposit) => (
+    recentDeposits.slice(0, 3).map((deposit) => (
       <div
         className="wallet-transaction-item"
         key={deposit._id}
