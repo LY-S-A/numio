@@ -137,6 +137,7 @@
   margin-top: 10px;
   padding-top: 18px;
   border-top: 1px solid var(--border);
+  background: var(--bg);
 
   display: flex;
   flex-direction: column;
