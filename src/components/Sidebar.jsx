@@ -84,13 +84,25 @@ const Sidebar = ({
     return () => observer.disconnect();
   }, []);
 
-  const handleLogout = () => {
-    localStorage.removeItem("token");
-    localStorage.removeItem("user");
+  // const handleLogout = () => {
+  //   localStorage.removeItem("token");
+  //   localStorage.removeItem("user");
 
-    setSidebarOpen(false);
-    navigate("/");
-  };
+  //   setSidebarOpen(false);
+  //   navigate("/");
+  // };
+
+  const handleLogout = () => {
+  // Show announcement again on next login
+  localStorage.removeItem("announcement_closed");
+
+  // Clear authentication
+  localStorage.removeItem("token");
+  localStorage.removeItem("user");
+
+  setSidebarOpen(false);
+  navigate("/");
+};
 
   const handleNavigate = (path) => {
     navigate(path);
