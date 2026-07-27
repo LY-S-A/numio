@@ -5,7 +5,7 @@ import {
     FiSend,
 } from "react-icons/fi";
 
-import "../styles/announcement-modal.css";
+import "../styles/components.css";
 
 const AnnouncementModal = () => {
     const [open, setOpen] = useState(false);
