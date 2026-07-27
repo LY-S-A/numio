@@ -338,10 +338,12 @@ useEffect(() => {
       >
         <div>
           <h4>
-            {deposit.gateway === "flutterwave"
-              ? "Flutterwave Deposit"
-              : "Paystack Deposit"}
-          </h4>
+  {deposit.provider === "FLUTTERWAVE"
+    ? "Flutterwave Deposit"
+    : deposit.provider === "PAYSTACK"
+    ? "Paystack Deposit"
+    : "Wallet Deposit"}
+</h4>
 
           <p>{formatDate(deposit.createdAt)}</p>
         </div>
