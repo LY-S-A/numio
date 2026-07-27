@@ -85,22 +85,15 @@ const AnnouncementModal = () => {
     const [open, setOpen] = useState(false);
 
     useEffect(() => {
-        const lastSeen = localStorage.getItem("announcement_last_seen");
-        const now = Date.now();
+        const hidden = localStorage.getItem("announcement_closed");
 
-        const twentyFourHours = 24 * 60 * 60 * 1000;
-
-        if (!lastSeen || now - Number(lastSeen) >= twentyFourHours) {
+        if (!hidden) {
             setOpen(true);
         }
     }, []);
 
     const closeModal = () => {
-        localStorage.setItem(
-            "announcement_last_seen",
-            Date.now().toString()
-        );
-
+        localStorage.setItem("announcement_closed", "true");
         setOpen(false);
     };
 
