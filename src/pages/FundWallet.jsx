@@ -323,10 +323,27 @@ useEffect(() => {
   </div>
 
   {loadingDeposits ? (
-    <p className="wallet-empty">
-      Loading...
-    </p>
-  ) : recentDeposits.length === 0 ? (
+  Array.from({ length: 3 }).map((_, index) => (
+    <div
+      className="wallet-transaction-item wallet-transaction-skeleton"
+      key={index}
+    >
+      <div className="wallet-transaction-left">
+        <div className="wallet-skeleton wallet-skeleton-icon" />
+
+        <div className="wallet-skeleton-text">
+          <div className="wallet-skeleton wallet-skeleton-title" />
+          <div className="wallet-skeleton wallet-skeleton-date" />
+        </div>
+      </div>
+
+      <div className="wallet-transaction-right">
+        <div className="wallet-skeleton wallet-skeleton-status" />
+        <div className="wallet-skeleton wallet-skeleton-amount" />
+      </div>
+    </div>
+  ))
+) : recentDeposits.length === 0 ? (
     <p className="wallet-empty">
       No deposits yet.
     </p>
