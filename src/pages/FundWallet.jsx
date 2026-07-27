@@ -317,7 +317,10 @@ useEffect(() => {
   <div className="wallet-transactions-header">
     <h3>Recent Deposits</h3>
 
-    <button type="button">
+    <button 
+      type="button"
+      onClick={() => window.location.href = "/transactions"}
+      >
       View All
     </button>
   </div>
