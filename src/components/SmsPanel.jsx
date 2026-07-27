@@ -124,7 +124,7 @@ const SmsPanel = () => {
                             className="sms-panel-empty-btn"
                             onClick={() => navigate("/buy-number")}
                         >
-                            Buy a Number
+                            Buy Number
                         </button>
                     </div>
                 ) : (
