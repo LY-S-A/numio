@@ -329,8 +329,6 @@ useEffect(() => {
       key={index}
     >
       <div className="wallet-transaction-left">
-        <div className="wallet-transaction-icon wallet-skeleton wallet-skeleton-icon" />
-
         <div className="wallet-transaction-info">
           <div className="wallet-skeleton wallet-skeleton-title" />
           <div className="wallet-skeleton wallet-skeleton-date" />
