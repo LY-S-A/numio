@@ -270,6 +270,11 @@ body.light-theme .sidebar-skeleton {
   transform: rotate(180deg);
 }
 
+.sidebar-user,
+.account-menu {
+    background: red !important;
+}
+
 /* =========================
    ACCOUNT MENU
 ========================= */
