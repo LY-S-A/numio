@@ -34,7 +34,7 @@ const FundSuccess = () => {
   return (
     <div className="fund-status-page">
       
-      <div className="fund-status-card fund-success">
+      <div className="fund-status-card success">
 
         <div className="shape shape1"></div>
         <div className="shape shape2"></div>
