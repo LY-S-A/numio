@@ -270,29 +270,25 @@
 }
 
 /* ==========================================
-   DARK MODE
-========================================== */
-/* 
-body.dark .fund-status-card,
-body[data-theme="dark"] .fund-status-card {
-  box-shadow:
-    0 22px 55px rgba(0, 0, 0, .45),
-    inset 0 1px 0 rgba(255, 255, 255, .03);
-} */
-
-/* ==========================================
    MOBILE
 ========================================== */
 
 @media (max-width: 768px) {
 
   .fund-status-page{
-    padding:24px 16px;
+    padding:20px 12px;
   }
 
-  .fund-status-card {
+  /* .fund-status-card {
     max-width: 100%;
     padding: 28px 20px 32px;
+    border-radius: 18px;
+  } */
+
+    .fund-status-card{
+    width: calc(100vw - 24px);
+    max-width: none;
+    padding: 28px 22px 32px;
     border-radius: 18px;
   }
 
