@@ -29,43 +29,24 @@
    CARD
 ========================================== */
 
-/* .fund-status-card {
-  width: 100%;
-  max-width: 540px;
-  background: var(--card-bg);
-  color: var(--text-color);
-  border: 1px solid var(--border-color);
-  border-radius: 20px;
-  padding: 38px 30px;
-  position: relative;
-  overflow: hidden;
-  text-align: center;
-  animation: fadeUp .6s ease;
-  box-shadow: 0 18px 45px rgba(0, 0, 0, .06);
-} */
-
 .fund-status-card {
-  width: 100%;
-  max-width: 540px;
-
   background: var(--card);
   color: var(--text);
 
   border: 1px solid var(--border);
-  border-radius: 20px;
 
+  border-radius: 20px;
   padding: 38px 30px;
 
-  position: relative;
-  overflow: hidden;
-  text-align: center;
-
-  animation: fadeUp .6s ease;
-
   box-shadow:
-    0 24px 60px rgba(0, 0, 0, .28),
-    0 8px 20px rgba(0, 0, 0, .18),
-    inset 0 1px 0 rgba(255, 255, 255, .03);
+    0 28px 60px rgba(0, 0, 0, .28),
+    0 10px 24px rgba(0, 0, 0, .16);
+}
+
+body.light-theme .fund-status-card {
+  box-shadow:
+    0 18px 40px rgba(15, 23, 42, .08),
+    0 6px 18px rgba(15, 23, 42, .05);
 }
 
 .cancel {
