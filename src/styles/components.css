@@ -168,7 +168,7 @@
    STAT CARD SKELETON
 ========================= */
 
-.skeleton-card {
+.skeleton-card{
     position: relative;
     overflow: hidden;
     pointer-events: none;
@@ -177,28 +177,24 @@
     border: 1px solid var(--border);
 }
 
-
-/* Skeleton base */
+/* Base */
 
 .skeleton-icon,
 .skeleton-title,
-.skeleton-value {
-
+.skeleton-value{
     position: relative;
     overflow: hidden;
 
-    background: rgba(255,255,255,.08);
+    background: var(--border);
+    border-radius: 8px;
 }
 
-
-/* Shimmer animation */
+/* Same shimmer as every other skeleton */
 
 .skeleton-icon::after,
 .skeleton-title::after,
-.skeleton-value::after {
-
+.skeleton-value::after{
     content: "";
-
     position: absolute;
     inset: 0;
 
@@ -207,100 +203,89 @@
     background: linear-gradient(
         90deg,
         transparent,
-        rgba(255,255,255,.10),
+        rgba(255,255,255,.18),
         transparent
     );
 
     animation: skeleton-loading 1.4s infinite;
 }
 
+/* Light mode shimmer */
 
-/* Icon placeholder */
-
-.skeleton-icon {
-
-    width: 48px;
-    height: 48px;
-
-    flex-shrink: 0;
-
-    border-radius: 10px;
+body.light-theme .skeleton-icon::after,
+body.light-theme .skeleton-title::after,
+body.light-theme .skeleton-value::after{
+    background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(255,255,255,.9),
+        transparent
+    );
 }
 
+/* Icon */
 
-/* Skeleton content */
-
-.skeleton-content {
-    flex: 1;
-    min-width: 0;
-
-    display: flex;
-    flex-direction: column;
-    gap: 3px;
+.skeleton-icon{
+    width:48px;
+    height:48px;
+    flex-shrink:0;
+    border-radius:10px;
 }
 
+/* Content */
 
-/* Title placeholder */
+.skeleton-content{
+    flex:1;
+    min-width:0;
 
-.skeleton-title {
-
-    width: 80px;
-    max-width: 100%;
-
-    height: 12px;
-
-    border-radius: 6px;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    gap:6px;
 }
 
+/* Title */
 
-
-/* Value placeholder */
-
-.skeleton-value {
-
-    width: 65px;
-    height: 26px;
-
-    border-radius: 6px;
+.skeleton-title{
+    width:80px;
+    max-width:100%;
+    height:12px;
+    border-radius:6px;
 }
 
+/* Value */
+
+.skeleton-value{
+    width:65px;
+    height:26px;
+    border-radius:6px;
+}
 
 /* Animation */
 
-@keyframes skeleton-loading {
-
-    to {
-        transform: translateX(100%);
+@keyframes skeleton-loading{
+    to{
+        transform:translateX(100%);
     }
-
 }
-
 
 /* Mobile */
 
 @media (max-width:768px){
 
-    .skeleton-icon {
-
-        width: 42px;
-        height: 42px;
-
+    .skeleton-icon{
+        width:42px;
+        height:42px;
     }
 
-
-    .skeleton-title {
-
-        width: 95px;
-        height: 11px;
-
+    .skeleton-title{
+        width:95px;
+        height:11px;
     }
 
-
-    .skeleton-value {
-
-        width: 75px;
-        height: 22px;
-
+    .skeleton-value{
+        width:75px;
+        height:22px;
     }
 
 }
