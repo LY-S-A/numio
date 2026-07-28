@@ -26,7 +26,7 @@ const settings = [
     icon: <FiMoon />,
     title: "Appearance",
     desc: "Switch between dark and light mode",
-    path: "/appearance",
+    path: "/settings/appearance",
   },
   {
     icon: <FiBell />,
