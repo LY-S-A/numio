@@ -260,7 +260,7 @@
 @media (max-width: 768px) {
 
   .fund-status-page {
-    padding: 16px 8px;
+    padding: 16px -8px;
   }
 
   .fund-status-card {
