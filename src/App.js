@@ -105,7 +105,7 @@ function App() {
               />
 
               <Route
-                path="/appearance"
+                path="/settings/appearance"
                 element={<Appearance />}
               />
             </Route>
