@@ -259,16 +259,17 @@
 
 @media (max-width: 768px) {
 
-  .fund-status-page{
-    padding:20px 12px;
+  .fund-status-page {
+    padding: 20px 12px;
   }
 
-    .fund-status-card{
-    width: 100%;
-    max-width: none;
+  .fund-status-card {
+    width: min(100%, 390px); /* wider on phones */
     padding: 28px 22px 32px;
     border-radius: 24px;
+    margin: 0 auto;
   }
+
 
   .fund-status-card h2 {
     font-size: 28px;
