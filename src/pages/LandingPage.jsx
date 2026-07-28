@@ -15,10 +15,10 @@ import {
     FiDatabase,
 } from "react-icons/fi";
 import { motion } from "framer-motion";
-import logo from "../assets/logo.png";
+import logo from "../assets/logo-favicon.png";
 import { FaFacebookF, FaTwitter, FaInstagram, FaLinkedinIn, FaGithub, } from "react-icons/fa";
 import "../styles/landing.css";
-import hero from "../assets/hero-dashboard.png";
+// import hero from "../assets/hero-dashboard.png";
 
 export default function LandingPage() {
 
