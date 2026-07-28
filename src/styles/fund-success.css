@@ -15,45 +15,6 @@
 }
 
 /* ===================================
-   FLOATING DOTS
-=================================== */
-
-.floating-dots {
-  position: absolute;
-  width: 120px;
-  height: 120px;
-  background-image: radial-gradient(
-    circle,
-    rgba(34, 197, 94, 0.35) 2px,
-    transparent 2px
-  );
-  background-size: 18px 18px;
-  animation: floatDots 6s ease-in-out infinite;
-  opacity: 0.7;
-}
-
-.dots-left {
-  top: 18%;
-  left: 10%;
-}
-
-.dots-right {
-  right: 10%;
-  bottom: 16%;
-}
-
-@keyframes floatDots {
-  0%,
-  100% {
-    transform: translateY(0);
-  }
-
-  50% {
-    transform: translateY(-14px);
-  }
-}
-
-/* ===================================
    CARD
 =================================== */
 
@@ -71,7 +32,11 @@
   box-shadow: 0 18px 45px rgba(0, 0, 0, .06);
 }
 
-.success-card {
+/* .success-card {
+  border-top: 4px solid #22c55e;
+} */
+
+.fund-status-card.success {
   border-top: 4px solid #22c55e;
 }
 
