@@ -15,6 +15,7 @@ import Register from "./pages/Register";
 import ForgotPassword from "./pages/ForgotPassword";
 import ResetPassword from "./pages/ResetPassword";
 
+import LandingPage from "./pages/LandingPage";
 import Dashboard from "./pages/Dashboard";
 import BuyNumber from "./pages/BuyNumber";
 import Inbox from "./pages/Inbox";
@@ -37,8 +38,13 @@ function App() {
 
           <Routes>
             {/* Auth Pages */}
+            <Route 
+              path="/" 
+              element={<LandingPage />} 
+             />
+  
             <Route
-              path="/"
+              path="/login"
               element={<Login />}
             />
 
