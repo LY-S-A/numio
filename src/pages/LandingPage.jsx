@@ -286,23 +286,25 @@ export default function LandingPage() {
                 >
 
                     <div className="hero-badge">
-                        Virtual numbers & Social media logs
+                        Virtual Numbers for SMS Verification
                     </div>
 
                     <h1>
-                        Virtual numbers and
+                        Buy Virtual Phone Numbers
                         <br />
-                        Social media logs
+                        for OTP Verification
                         <br />
-                        <span>you can trust.</span>
+                        <span>in 100+ Countries</span>
                     </h1>
 
                     <p>
-                        Get virtual phone numbers from 100+
-                        countries and access real SMS &
-                        social media logs instantly.
-                        Built for privacy, speed and
-                        reliability.
+                        Numio provides instant virtual phone numbers 
+                        for SMS verification, OTP activation, and online
+                        account verification across 100+ countries. 
+                        Fast delivery, secure payments, affordable pricing, 
+                        and reliable SMS reception for WhatsApp, Telegram, 
+                        Google, Facebook, TikTok, Discord, Binance, and thousands 
+                        of other services.
                     </p>
 
                     <div className="hero-buttons">
@@ -353,7 +355,7 @@ export default function LandingPage() {
 
                             <div>
                                 <h3>Instant</h3>
-                                <p>SMS & Logs</p>
+                                <p>OTP Delivery</p>
                             </div>
 
                         </div>
@@ -402,14 +404,13 @@ SERVICES
                     </span>
 
                     <h2>
-                        Everything you need in one
-                        secure marketplace
+                        Everything you need for SMS Verification
                     </h2>
 
                     <p>
-                        Buy virtual phone numbers from over 100 countries or browse
-                        premium social media logs—all from one fast, secure and
-                        reliable platform.
+                       Purchase virtual phone numbers for OTP verification from more than 100 countries. 
+                       Receive SMS verification codes instantly for popular online services using our 
+                       fast and reliable platform.
                     </p>
 
                 </div>
@@ -429,7 +430,7 @@ SERVICES
                             <FiPhone />
                         </div>
 
-                        <h3>Virtual Numbers</h3>
+                        <h3>Virtual Phone Numbers</h3>
 
                         <p>
                             Purchase virtual phone numbers from over 100 countries
@@ -453,12 +454,12 @@ SERVICES
                             <FiDatabase />
                         </div>
 
-                        <h3>Social Media Logs</h3>
+                        <h3>Virtual Phone Numbers</h3>
 
                         <p>
-                            Browse a growing marketplace of premium social media
-                            logs with secure access, competitive pricing and
-                            instant delivery after every successful purchase.
+                            Buy temporary virtual phone numbers for SMS verification on 
+                            WhatsApp, Telegram, Google, Facebook, Instagram, TikTok, Discord, 
+                            Microsoft, Binance, Uber, Amazon, and thousands of supported services.
                         </p>
 
                     </motion.div>
