@@ -4,6 +4,8 @@ import { GoogleLogin } from "@react-oauth/google";
 import {
   FiMail,
   FiLock,
+  FiEye,
+  FiEyeOff,
 } from "react-icons/fi";
 import {
   Link,
@@ -24,6 +26,7 @@ export default function Login() {
   const navigate = useNavigate();
 
   const [loading, setLoading] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
 
   const [formData, setFormData] = useState({
     email: "",
@@ -164,20 +167,39 @@ export default function Login() {
             </div>
 
             <div className="form-group">
-              <label>Password</label>
+  <label>Password</label>
 
-              <div className="input-wrapper">
-                <FiLock />
+  <div className="input-wrapper">
+    <FiLock />
 
-                <input
-                  type="password"
-                  name="password"
-                  placeholder="••••••••"
-                  value={formData.password}
-                  onChange={handleChange}
-                />
-              </div>
-            </div>
+    <input
+      type={showPassword ? "text" : "password"}
+      name="password"
+      placeholder="••••••••"
+      value={formData.password}
+      onChange={handleChange}
+    />
+
+    <button
+      type="button"
+      className="password-toggle"
+      onClick={() =>
+        setShowPassword((prev) => !prev)
+      }
+      aria-label={
+        showPassword
+          ? "Hide password"
+          : "Show password"
+      }
+    >
+      {showPassword ? (
+        <FiEyeOff />
+      ) : (
+        <FiEye />
+      )}
+    </button>
+  </div>
+</div>
 
             <div className="form-row">
               <label className="remember-me">
