@@ -13,6 +13,11 @@
   --primary: #7c3aed;
   --primary-light: #a78bfa;
 
+  --primary-bg: rgba(124, 58, 237, 0.12);
+  --danger-bg: rgba(239, 68, 68, 0.12);
+
+  --shadow: 0 12px 32px rgba(0,0,0,.28);
+
   --success: #22c55e;
   --warning: #f59e0b;
   --danger: #ef4444;
@@ -35,6 +40,11 @@ body.light-theme {
 
   --primary: #7c3aed;
   --primary-light: #8b5cf6;
+
+  --primary-bg: rgba(124,58,237,.08);
+  --danger-bg: rgba(239,68,68,.08);
+
+  --shadow: 0 10px 28px rgba(15,23,42,.08);
 
   --success: #16a34a;
   --warning: #d97706;
