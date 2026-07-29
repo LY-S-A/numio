@@ -1140,11 +1140,6 @@ FOOTER
                     <p>
                         © {new Date().getFullYear()} Numio. All rights reserved.
                     </p>
-                    <div>
-
-                        Secure payments • 99.99% uptime • GDPR Ready
-
-                    </div>
 
                 </motion.div>
 
