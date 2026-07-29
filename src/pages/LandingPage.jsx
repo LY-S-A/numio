@@ -298,13 +298,13 @@ export default function LandingPage() {
                     </h1>
 
                     <p>
-                        Numio provides instant virtual phone numbers 
+                        Numio provides instant virtual phone numbers
                         for SMS verification, OTP activation, and online
-                        account verification across 100+ countries. 
-                        Fast delivery, secure payments, affordable pricing, 
-                        and reliable SMS reception for WhatsApp, Telegram, 
-                        Google, Facebook, TikTok, Discord, Binance, and thousands 
-                        of other services. 
+                        account verification across 100+ countries.
+                        Fast delivery, secure payments, affordable pricing,
+                        and reliable SMS reception for WhatsApp, Telegram,
+                        Google, Facebook, TikTok, Discord, Binance, and thousands
+                        of other services.
                     </p>
 
                     <div className="hero-buttons">
@@ -408,9 +408,9 @@ SERVICES
                     </h2>
 
                     <p>
-                       Purchase virtual phone numbers for OTP verification from more than 100 countries. 
-                       Receive SMS verification codes instantly for popular online services using our 
-                       fast and reliable platform.
+                        Purchase virtual phone numbers for OTP verification from more than 100 countries.
+                        Receive SMS verification codes instantly for popular online services using our
+                        fast and reliable platform.
                     </p>
 
                 </div>
@@ -430,12 +430,12 @@ SERVICES
                             <FiPhone />
                         </div>
 
-                        <h3>Instant OTP Reception</h3>
+                        <h3>Virtual Phone Numbers</h3>
 
                         <p>
-                            Receive SMS verification codes instantly after purchasing a virtual number.
-                            Numio provides fast, secure, and reliable OTP delivery, making account
-                            verification simple and hassle-free.
+                            Buy temporary virtual phone numbers for SMS verification on
+                            WhatsApp, Telegram, Google, Facebook, Instagram, TikTok, Discord,
+                            Microsoft, Binance, Uber, Amazon, and thousands of supported services.
                         </p>
 
                     </motion.div>
@@ -453,12 +453,12 @@ SERVICES
                             <FiDatabase />
                         </div>
 
-                        <h3>Virtual Phone Numbers</h3>
+                        <h3>Instant OTP Reception</h3>
 
                         <p>
-                            Buy temporary virtual phone numbers for SMS verification on 
-                            WhatsApp, Telegram, Google, Facebook, Instagram, TikTok, Discord, 
-                            Microsoft, Binance, Uber, Amazon, and thousands of supported services.
+                            Receive SMS verification codes instantly after purchasing a virtual number.
+                            Numio provides fast, secure, and reliable OTP delivery, making account
+                            verification simple and hassle-free.
                         </p>
 
                     </motion.div>
@@ -498,8 +498,8 @@ WHY CHOOSE REALSMS
                     </h2>
 
                     <p>
-                        Numio helps developers, businesses, marketers, and individuals 
-                        receive OTP codes quickly using reliable virtual phone numbers 
+                        Numio helps developers, businesses, marketers, and individuals
+                        receive OTP codes quickly using reliable virtual phone numbers
                         from more than 100 countries.
                     </p>
 
@@ -718,8 +718,8 @@ WHY CHOOSE REALSMS
                         <h3>24/7 Availability</h3>
 
                         <p>
-                            Purchase numbers anytime with live inventory updates, 
-                            instant activation, and reliable SMS delivery around 
+                            Purchase numbers anytime with live inventory updates,
+                            instant activation, and reliable SMS delivery around
                             the clock.
                         </p>
 
@@ -759,7 +759,7 @@ WHY CHOOSE REALSMS
                     </h2>
 
                     <p>
-                       Start receiving SMS verification codes in less than a minute.
+                        Start receiving SMS verification codes in less than a minute.
                     </p>
 
                 </motion.div>
@@ -833,7 +833,7 @@ WHY CHOOSE REALSMS
                         <h3>Receive instantly</h3>
 
                         <p>
-                           Receive your OTP instantly and complete your account verification without delays.
+                            Receive your OTP instantly and complete your account verification without delays.
                         </p>
 
                     </motion.div>
@@ -873,8 +873,8 @@ WHY CHOOSE REALSMS
                     </h2>
 
                     <p>
-                       Create your free Numio account today and purchase 
-                        virtual phone numbers for SMS verification across 
+                        Create your free Numio account today and purchase
+                        virtual phone numbers for SMS verification across
                         100+ countries with instant delivery and secure payments.
                     </p>
 
@@ -961,9 +961,9 @@ FOOTER
 
 
                         <p>
-                           Numio is a trusted SMS verification platform providing 
-                           virtual phone numbers for OTP activation, account verification, 
-                           and online registrations across more than 100 countries.
+                            Numio is a trusted SMS verification platform providing
+                            virtual phone numbers for OTP activation, account verification,
+                            and online registrations across more than 100 countries.
                         </p>
 
                         <div className="social-icons">
@@ -1105,9 +1105,9 @@ FOOTER
                         <h4>Newsletter</h4>
 
                         <p>
-                           Stay updated with new countries,
-supported services, product updates,
-and exclusive offers from Numio.
+                            Stay updated with new countries,
+                            supported services, product updates,
+                            and exclusive offers from Numio.
                         </p>
 
                         <div className="newsletter">
@@ -1137,9 +1137,9 @@ and exclusive offers from Numio.
                     viewport={{ once: true }}
                 >
 
-                   <p>
-  © {new Date().getFullYear()} Numio. All rights reserved.
-</p>
+                    <p>
+                        © {new Date().getFullYear()} Numio. All rights reserved.
+                    </p>
                     <div>
 
                         Secure payments • 99.99% uptime • GDPR Ready
