@@ -9,8 +9,8 @@
 }
 
 body {
-    background: var(--bg-color);
-    color: var(--text-color);
+    background: var(--bg);
+    color: var(--text);
     font-family: inherit;
     font-size: 15px;
     line-height: 1.6;
@@ -38,8 +38,8 @@ select {
 .landing {
     padding-top: -65px;
     width: 100%;
-    background: var(--bg-color);
-    color: var(--text-color);
+    background: var(--bg);
+    color: var(--text);
 }
 
 /* =====================================================
@@ -52,8 +52,8 @@ select {
     align-items: center;
     justify-content: space-between;
     padding: 0 7%;
-    background: var(--topbar-bg);
-    border-bottom: 1px solid var(--border-color);
+    background: var(--card);
+    border-bottom: 1px solid var(--border);
     position: sticky;
     top: 0;
     z-index: 100;
@@ -97,7 +97,7 @@ select {
     list-style: none;
     font-size: 14px;
     font-weight: 500;
-    color: var(--secondary-text);
+    color: var(--text-secondary);
 }
 
 .nav-links li {
