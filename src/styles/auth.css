@@ -173,20 +173,23 @@ body.light-theme .auth-card {
   font-weight: 500;
 }
 
+/* ====================================
+   INPUT
+==================================== */
+
 .input-wrapper {
   position: relative;
 }
 
-.input-wrapper svg {
+/* Left icon */
+.input-wrapper > svg {
   position: absolute;
-
   left: 13px;
   top: 50%;
-
   transform: translateY(-50%);
-
   color: var(--text-secondary);
   font-size: 15px;
+  pointer-events: none;
 }
 
 .input-wrapper input {
@@ -194,27 +197,22 @@ body.light-theme .auth-card {
   height: 48px;
 
   background: var(--card-secondary);
-
   border: 1px solid var(--border);
-
   border-radius: 10px;
 
   color: var(--text);
 
-  padding: 0 14px 0 42px;
+  /* extra right padding for eye icon */
+  padding: 0 46px 0 42px;
 
   outline: none;
-
   font-size: 16px;
-
   transition: all 0.25s ease;
 }
 
 .input-wrapper input:focus {
   border-color: var(--primary);
-
-  box-shadow:
-    0 0 0 3px rgba(124, 58, 237, 0.12);
+  box-shadow: 0 0 0 3px rgba(124, 58, 237, 0.12);
 }
 
 .input-wrapper input::placeholder {
@@ -223,6 +221,47 @@ body.light-theme .auth-card {
 
 body.light-theme .input-wrapper input {
   background: #fff;
+}
+
+/* ====================================
+   PASSWORD TOGGLE
+==================================== */
+
+.password-toggle {
+  position: absolute;
+  top: 50%;
+  right: 14px;
+  transform: translateY(-50%);
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 24px;
+  height: 24px;
+
+  background: transparent;
+  border: none;
+  padding: 0;
+
+  color: var(--text-secondary);
+  cursor: pointer;
+
+  transition: color 0.2s ease;
+}
+
+.password-toggle:hover {
+  color: var(--primary);
+}
+
+.password-toggle:focus {
+  outline: none;
+}
+
+.password-toggle svg {
+  position: static !important;
+  transform: none !important;
+  font-size: 18px;
 }
 
 /* ====================================
