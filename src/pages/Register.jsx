@@ -4,6 +4,8 @@ import {
   FiUser,
   FiMail,
   FiLock,
+  FiEye,
+  FiEyeOff,
 } from "react-icons/fi";
 import { useNavigate } from "react-router-dom";
 import { useTheme } from "../context/ThemeContext";
@@ -21,6 +23,8 @@ export default function Register() {
   const navigate = useNavigate();
 
   const [loading, setLoading] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
   const [formData, setFormData] = useState({
     username: "",
@@ -165,37 +169,67 @@ export default function Register() {
               </div>
             </div>
 
-            <div className="form-group">
-              <label>Password</label>
+           <div className="form-group">
+  <label>Password</label>
 
-              <div className="input-wrapper">
-                <FiLock />
+  <div className="input-wrapper">
+    <FiLock />
 
-                <input
-                  type="password"
-                  name="password"
-                  placeholder="••••••••"
-                  value={formData.password}
-                  onChange={handleChange}
-                />
-              </div>
-            </div>
+    <input
+      type={showPassword ? "text" : "password"}
+      name="password"
+      placeholder="••••••••"
+      value={formData.password}
+      onChange={handleChange}
+    />
 
-            <div className="form-group">
-              <label>Confirm Password</label>
+    <button
+      type="button"
+      className="password-toggle"
+      onClick={() => setShowPassword((prev) => !prev)}
+      aria-label={
+        showPassword ? "Hide password" : "Show password"
+      }
+    >
+      {showPassword ? <FiEyeOff /> : <FiEye />}
+    </button>
+  </div>
+</div>
+            
+           <div className="form-group">
+  <label>Confirm Password</label>
 
-              <div className="input-wrapper">
-                <FiLock />
+  <div className="input-wrapper">
+    <FiLock />
 
-                <input
-                  type="password"
-                  name="confirmPassword"
-                  placeholder="••••••••"
-                  value={formData.confirmPassword}
-                  onChange={handleChange}
-                />
-              </div>
-            </div>
+    <input
+      type={showConfirmPassword ? "text" : "password"}
+      name="confirmPassword"
+      placeholder="••••••••"
+      value={formData.confirmPassword}
+      onChange={handleChange}
+    />
+
+    <button
+      type="button"
+      className="password-toggle"
+      onClick={() =>
+        setShowConfirmPassword((prev) => !prev)
+      }
+      aria-label={
+        showConfirmPassword
+          ? "Hide password"
+          : "Show password"
+      }
+    >
+      {showConfirmPassword ? (
+        <FiEyeOff />
+      ) : (
+        <FiEye />
+      )}
+    </button>
+  </div>
+</div>
 
             <div className="form-row">
               <label className="remember-me">
