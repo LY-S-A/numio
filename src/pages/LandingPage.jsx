@@ -304,7 +304,7 @@ export default function LandingPage() {
                         Fast delivery, secure payments, affordable pricing, 
                         and reliable SMS reception for WhatsApp, Telegram, 
                         Google, Facebook, TikTok, Discord, Binance, and thousands 
-                        of other services.
+                        of other services. 
                     </p>
 
                     <div className="hero-buttons">
