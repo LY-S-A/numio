@@ -52,7 +52,7 @@ select {
     align-items: center;
     justify-content: space-between;
     padding: 0 7%;
-    background: var(--card);
+    background: var(--bg);
     border-bottom: 1px solid var(--border);
     position: sticky;
     top: 0;
@@ -185,7 +185,7 @@ MOBILE NAV
     right:-320px;
     width:300px;
     height:100vh;
-    background:var(--card);
+    background:var(--bg);
     padding:30px;
     transition:.35s;
     z-index:999;
