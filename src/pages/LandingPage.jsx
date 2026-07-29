@@ -981,8 +981,11 @@ FOOTER
                     >
 
                         <div className="logo">
-                            <img src={logo} alt="RealSMS" />
-                        </div>
+    <img
+        src={isLightTheme ? logoLight : logoDark}
+        alt="Numio"
+    />
+</div>
 
 
                         <p>
