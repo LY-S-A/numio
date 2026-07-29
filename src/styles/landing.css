@@ -1822,7 +1822,7 @@ SMALL DEVICES
     padding-top: 28px;
 
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     align-items: center;
 
     border-top: 1px solid var(--border);
