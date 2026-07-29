@@ -79,11 +79,11 @@ const RecentActivity = () => {
     return (
         <div className="card">
             <div className="card-header">
-                <h3>Recent Activity</h3>
+                <h3>Live Activities</h3>
 
-                <button className="card-btn">
+                {/* <button className="card-btn">
                     See All
-                </button>
+                </button> */}
             </div>
 
             <div className="activity-list">
