@@ -430,13 +430,12 @@ SERVICES
                             <FiPhone />
                         </div>
 
-                        <h3>Virtual Phone Numbers</h3>
+                        <h3>Instant OTP Reception</h3>
 
                         <p>
-                            Purchase virtual phone numbers from over 100 countries
-                            for WhatsApp, Telegram, Google, Facebook, Instagram,
-                            TikTok and hundreds of other online services with
-                            instant SMS delivery.
+                            Receive SMS verification codes instantly after purchasing a virtual number.
+                            Numio provides fast, secure, and reliable OTP delivery, making account
+                            verification simple and hassle-free.
                         </p>
 
                     </motion.div>
