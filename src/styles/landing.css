@@ -872,7 +872,7 @@ SMALL DEVICES
 
     border-radius: 999px;
 
-    background: var(--primary-soft);
+    background: var(--primary-bg);
     color: var(--primary);
 
     font-size: 13px;
@@ -885,13 +885,13 @@ SMALL DEVICES
     line-height: 1.15;
     margin-bottom: 16px;
 
-    color: var(--text-color);
+    color: var(--text);
 }
 
 .why-header p {
     font-size: 16px;
     line-height: 1.7;
-    color: var(--secondary-text);
+    color: var(--text-secondary);
 }
 
 /* =====================================================
@@ -909,8 +909,8 @@ SMALL DEVICES
 ===================================================== */
 
 .why-card {
-    background: var(--card-bg);
-    border: 1px solid var(--border-color);
+    background: var(--card);
+    border: 1px solid var(--border);
     border-radius: 18px;
 
     padding: 30px 24px;
@@ -946,7 +946,7 @@ SMALL DEVICES
 
     border-radius: 16px;
 
-    background: var(--primary-soft);
+    background: var(--primary-bg);
     color: var(--primary);
 
     font-size: 26px;
@@ -965,14 +965,14 @@ SMALL DEVICES
 .why-card h3 {
     margin-bottom: 12px;
 
-    color: var(--text-color);
+    color: var(--text);
 
     font-size: 20px;
     font-weight: 700;
 }
 
 .why-card p {
-    color: var(--secondary-text);
+    color: var(--text-secondary);
     line-height: 1.7;
     font-size: 15px;
 }
@@ -1040,7 +1040,7 @@ SMALL DEVICES
 
 .how-section {
     padding: 90px 7%;
-    background: var(--bg-color);
+    background: var(--bg);
     transition: background .3s ease;
 }
 
@@ -1062,7 +1062,7 @@ SMALL DEVICES
     padding: 8px 18px;
     margin-bottom: 18px;
 
-    background: var(--primary-soft);
+    background: var(--primary-bg);
     color: var(--primary);
 
     border-radius: 999px;
@@ -1074,7 +1074,7 @@ SMALL DEVICES
 .section-title h2 {
     margin-bottom: 18px;
 
-    color: var(--text-color);
+    color: var(--text);
 
     font-size: 44px;
     font-weight: 800;
@@ -1083,7 +1083,7 @@ SMALL DEVICES
 }
 
 .section-title p {
-    color: var(--secondary-text);
+    color: var(--text-secondary);
     font-size: 16px;
     line-height: 1.7;
 }
@@ -1106,8 +1106,8 @@ SMALL DEVICES
 .step {
     flex: 1;
 
-    background: var(--card-bg);
-    border: 1px solid var(--border-color);
+    background: var(--card);
+    border: 1px solid var(--border);
     border-radius: 18px;
 
     padding: 34px 28px;
@@ -1165,14 +1165,14 @@ SMALL DEVICES
 .step h3 {
     margin-bottom: 14px;
 
-    color: var(--text-color);
+    color: var(--text);
 
     font-size: 22px;
     font-weight: 700;
 }
 
 .step p {
-    color: var(--secondary-text);
+    color: var(--text-secondary);
 
     font-size: 15px;
     line-height: 1.7;
@@ -1188,7 +1188,7 @@ SMALL DEVICES
 
     margin-top: 72px;
 
-    background: var(--primary-soft);
+    background: var(--primary-bg);
 
     border-radius: 999px;
 }
@@ -1204,7 +1204,7 @@ SMALL DEVICES
 
     padding: 90px 7%;
 
-    background: var(--bg-color);
+    background: var(--bg);
 }
 
 .feature-card {
@@ -1212,8 +1212,8 @@ SMALL DEVICES
 
     overflow: hidden;
 
-    background: var(--card-bg);
-    border: 1px solid var(--border-color);
+    background: var(--card);
+    border: 1px solid var(--border);
 
     border-radius: 22px;
 
@@ -1236,7 +1236,7 @@ SMALL DEVICES
 .feature-card h2 {
     margin-bottom: 16px;
 
-    color: var(--text-color);
+    color: var(--text);
 
     font-size: 34px;
     font-weight: 800;
@@ -1245,7 +1245,7 @@ SMALL DEVICES
 .feature-card p {
     margin-bottom: 30px;
 
-    color: var(--secondary-text);
+    color: var(--text-secondary);
 
     line-height: 1.8;
 }
@@ -1263,7 +1263,7 @@ SMALL DEVICES
     align-items: center;
     gap: 14px;
 
-    color: var(--text-color);
+    color: var(--text);
 
     font-size: 16px;
     font-weight: 500;
