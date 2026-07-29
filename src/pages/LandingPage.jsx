@@ -490,19 +490,18 @@ WHY CHOOSE REALSMS
                 >
 
                     <span className="why-badge">
-                        Why Choose RealSMS
+                        Why Choose Numio
                     </span>
 
                     <h2>
-                        Everything you need for fast,
-                        secure virtual numbers and
-                        SMS verification.
+                        Fast, Secure Virtual Numbers for
+                        SMS Verification Worldwide
                     </h2>
 
                     <p>
-                        Built for developers, businesses and individuals who need
-                        reliable virtual phone numbers, instant SMS delivery and
-                        access to social media logs.
+                        Numio helps developers, businesses, marketers, and individuals 
+                        receive OTP codes quickly using reliable virtual phone numbers 
+                        from more than 100 countries.
                     </p>
 
                 </motion.div>
@@ -717,11 +716,12 @@ WHY CHOOSE REALSMS
                             <FiMessageSquare />
                         </div>
 
-                        <h3>Social Media Logs</h3>
+                        <h3>24/7 Availability</h3>
 
                         <p>
-                            Browse available social media logs through a secure,
-                            simple and easy-to-use marketplace.
+                            Purchase numbers anytime with live inventory updates, 
+                            instant activation, and reliable SMS delivery around 
+                            the clock.
                         </p>
 
                     </motion.div>
@@ -760,8 +760,7 @@ WHY CHOOSE REALSMS
                     </h2>
 
                     <p>
-                        Buy a virtual number or access social media logs in just a few simple
-                        steps.
+                       Start receiving SMS verification codes in less than a minute.
                     </p>
 
                 </motion.div>
@@ -811,7 +810,7 @@ WHY CHOOSE REALSMS
                         <h3>Select a service</h3>
 
                         <p>
-                            Choose from virtual numbers, SMS activations or social media logs.
+                            Select your country and the online service you want to verify.
                         </p>
 
                     </motion.div>
@@ -835,7 +834,7 @@ WHY CHOOSE REALSMS
                         <h3>Receive instantly</h3>
 
                         <p>
-                            Get OTPs, messages and account logs delivered instantly with zero delay.
+                           Receive your OTP instantly and complete your account verification without delays.
                         </p>
 
                     </motion.div>
@@ -869,14 +868,15 @@ WHY CHOOSE REALSMS
                     </span>
 
                     <h2>
-                        Start receiving SMS
+                        Start Receiving OTP Codes
                         <br />
-                        in minutes.
+                        Within Minutes.
                     </h2>
 
                     <p>
-                        Join thousands of developers, businesses and marketers using our secure
-                        virtual number platform every day.
+                       Create your free Numio account today and purchase 
+                        virtual phone numbers for SMS verification across 
+                        100+ countries with instant delivery and secure payments.
                     </p>
 
                     <div className="cta-buttons">
@@ -962,11 +962,9 @@ FOOTER
 
 
                         <p>
-
-                            The fastest platform for virtual phone
-                            numbers, SMS verification and social
-                            media logs.
-
+                           Numio is a trusted SMS verification platform providing 
+                           virtual phone numbers for OTP activation, account verification, 
+                           and online registrations across more than 100 countries.
                         </p>
 
                         <div className="social-icons">
@@ -1017,7 +1015,7 @@ FOOTER
 
                             <li>SMS Verification</li>
 
-                            <li>Social Media Logs</li>
+                            <li>OTP Activation</li>
 
                             <li>API</li>
 
@@ -1108,10 +1106,9 @@ FOOTER
                         <h4>Newsletter</h4>
 
                         <p>
-
-                            Receive updates about new countries,
-                            features and product launches.
-
+                           Stay updated with new countries,
+supported services, product updates,
+and exclusive offers from Numio.
                         </p>
 
                         <div className="newsletter">
@@ -1142,7 +1139,7 @@ FOOTER
                 >
 
                    <p>
-  © {new Date().getFullYear()} RealSMS. All rights reserved.
+  © {new Date().getFullYear()} Numio. All rights reserved.
 </p>
                     <div>
 
