@@ -12,7 +12,7 @@ import {
     FiSmartphone,
     FiTrendingUp,
     FiPhone,
-    FiDatabase,
+    FiMessageCircle,
 } from "react-icons/fi";
 import { motion } from "framer-motion";
 import logo from "../assets/logo-favicon.png";
@@ -450,7 +450,7 @@ SERVICES
                     >
 
                         <div className="landing-service-icon landing-service-icon-purple">
-                            <FiDatabase />
+                            <FiMessageCircle />
                         </div>
 
                         <h3>Instant OTP Reception</h3>
