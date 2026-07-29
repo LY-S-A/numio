@@ -31,6 +31,7 @@ const Sidebar = ({
 
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
+  const [totalSpent, setTotalSpent] = useState(0);
   const [loadingProfile, setLoadingProfile] = useState(true);
 
   const navigate = useNavigate();
@@ -84,13 +85,33 @@ const Sidebar = ({
     return () => observer.disconnect();
   }, []);
 
-  // const handleLogout = () => {
-  //   localStorage.removeItem("token");
-  //   localStorage.removeItem("user");
+  useEffect(() => {
+  const fetchDashboardStats = async () => {
+    try {
+      const token = localStorage.getItem("token");
 
-  //   setSidebarOpen(false);
-  //   navigate("/");
-  // };
+      const { data } = await axios.get(
+        `${API_URL}/api/activity/stats`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+
+      if (data.success) {
+        setTotalSpent(data.stats.totalSpent || 0);
+      }
+    } catch (error) {
+      console.error(
+        "Failed to fetch dashboard stats:",
+        error
+      );
+    }
+  };
+
+  fetchDashboardStats();
+}, []);
 
   const handleLogout = () => {
   // Show announcement again on next login
@@ -109,6 +130,22 @@ const Sidebar = ({
     setSidebarOpen(false);
     setShowMenu(false);
   };
+
+  const getMembershipBadge = (spent) => {
+  if (spent >= 200000) {
+    return "Elite";
+  }
+
+  if (spent >= 50000) {
+    return "Pro";
+  }
+
+  if (spent >= 10000) {
+    return "Plus";
+  }
+
+  return "Starter";
+};
 
   return (
     <>
@@ -222,8 +259,8 @@ const Sidebar = ({
         {username}
 
         <span className="pro-badge">
-          Pro
-        </span>
+  {getMembershipBadge(totalSpent)}
+</span>
       </div>
 
       <p>{email}</p>
