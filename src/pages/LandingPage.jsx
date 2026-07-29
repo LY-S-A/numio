@@ -1,4 +1,4 @@
-import { useRef, useState } from "react";
+import { useRef, useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import {
     FiArrowRight,
@@ -15,7 +15,8 @@ import {
     FiMessageCircle,
 } from "react-icons/fi";
 import { motion } from "framer-motion";
-import logo from "../assets/logo-favicon.png";
+import logoDark from "../assets/logo-dark.png";
+import logoLight from "../assets/logo-light.png";
 import { FaFacebookF, FaTwitter, FaInstagram, FaLinkedinIn, FaGithub, } from "react-icons/fa";
 import "../styles/landing.css";
 import hero from "../assets/hero-dashboard.png";
@@ -29,8 +30,29 @@ export default function LandingPage() {
     const footerRef = useRef(null);
 
     const [menuOpen, setMenuOpen] = useState(false);
+    const [isLightTheme, setIsLightTheme] = useState(false);
 
     const navigate = useNavigate();
+
+    // Detect theme changes
+    useEffect(() => {
+        const checkTheme = () => {
+            setIsLightTheme(
+                document.body.classList.contains("light-theme")
+            );
+        };
+
+        checkTheme();
+
+        const observer = new MutationObserver(checkTheme);
+
+        observer.observe(document.body, {
+            attributes: true,
+            attributeFilter: ["class"],
+        });
+
+        return () => observer.disconnect();
+    }, []);
 
     const fadeUp = {
         hidden: {
@@ -83,7 +105,10 @@ export default function LandingPage() {
             <nav className="navbar">
 
                 <div className="logo">
-                    <img src={logo} alt="RealSMS" />
+                    <img
+                        src={isLightTheme ? logoLight : logoDark}
+                        alt="Numio"
+                    />
                 </div>
 
                 {/* Desktop Navigation */}
