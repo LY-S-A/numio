@@ -1299,7 +1299,7 @@ SMALL DEVICES
 
     background: radial-gradient(
         circle,
-        var(--primary-soft),
+        var(--primary-bg),
         transparent 70%
     );
 }
@@ -1321,10 +1321,10 @@ SMALL DEVICES
 
     border-radius: 999px;
 
-    background: var(--card-bg);
-    border: 1px solid var(--border-color);
+    background: var(--card);
+    border: 1px solid var(--border);
 
-    color: var(--text-color);
+    color: var(--text);
 
     font-size: 13px;
     font-weight: 600;
@@ -1671,10 +1671,10 @@ SMALL DEVICES
     margin-top: 100px;
     padding: 80px 7% 30px;
 
-    background: var(--bg-color);
-    color: var(--text-color);
+    background: var(--bg);
+    color: var(--text);
 
-    border-top: 1px solid var(--border-color);
+    border-top: 1px solid var(--border);
 
     transition:
         background .3s ease,
@@ -1695,7 +1695,7 @@ SMALL DEVICES
     margin-top: 18px;
     max-width: 320px;
 
-    color: var(--secondary-text);
+    color: var(--text-secondary);
 
     font-size: 14px;
     line-height: 1.8;
@@ -1704,7 +1704,7 @@ SMALL DEVICES
 /* Titles */
 
 .footer h4 {
-    color: var(--text-color);
+    color: var(--text);
     font-size: 16px;
     font-weight: 700;
     margin-bottom: 18px;
@@ -1720,7 +1720,7 @@ SMALL DEVICES
 }
 
 .footer li {
-    color: var(--secondary-text);
+    color: var(--text-secondary);
     font-size: 14px;
     transition: .25s ease;
 }
@@ -1748,10 +1748,10 @@ SMALL DEVICES
 
     border-radius: 10px;
 
-    background: var(--card-bg);
-    border: 1px solid var(--border-color);
+    background: var(--card);
+    border: 1px solid var(--border);
 
-    color: var(--text-color);
+    color: var(--text);
 
     transition: .3s ease;
 }
@@ -1769,9 +1769,9 @@ SMALL DEVICES
     display: flex;
     margin-top: 20px;
 
-    background: var(--card-bg);
+    background: var(--card);
 
-    border: 1px solid var(--border-color);
+    border: 1px solid var(--border);
 
     border-radius: 12px;
 
@@ -1788,13 +1788,13 @@ SMALL DEVICES
 
     padding: 12px 14px;
 
-    color: var(--text-color);
+    color: var(--text);
 
     font-size: 14px;
 }
 
 .newsletter input::placeholder {
-    color: var(--secondary-text);
+    color: var(--text-secondary);
 }
 
 .newsletter button {
@@ -1825,9 +1825,9 @@ SMALL DEVICES
     justify-content: space-between;
     align-items: center;
 
-    border-top: 1px solid var(--border-color);
+    border-top: 1px solid var(--border);
 
-    color: var(--secondary-text);
+    color: var(--text-secondary);
 
     font-size: 13px;
 }
@@ -1885,8 +1885,8 @@ SMALL DEVICES
 
     .newsletter input{
         width:100%;
-        background:var(--footer-card);
-        border:1px solid var(--border-color);
+        background:var(--card);
+        border:1px solid var(--border);
         border-radius:10px;
     }
 
