@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://numio.store/sitemap.xml
+Sitemap: https://numioverify.store/sitemap.xml
