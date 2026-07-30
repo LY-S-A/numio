@@ -20,6 +20,7 @@ const FundWallet = () => {
   const [loading, setLoading] = useState(false);
   const [recentDeposits, setRecentDeposits] = useState([]);
   const [loadingDeposits, setLoadingDeposits] = useState(true);
+  const [paymentStarted, setPaymentStarted] = useState(false);
 
   useEffect(() => {
   const gatewayName =
@@ -70,7 +71,45 @@ const FundWallet = () => {
   //   }
   // };
 
-  const handleFundWallet = async () => {
+//   const handleFundWallet = async () => {
+//   if (loading) return;
+
+//   if (!amount || Number(amount) < 1000) {
+//     return alert("Minimum deposit is ₦1,000");
+//   }
+
+//   try {
+//     setLoading(true);
+
+//     const token = localStorage.getItem("token");
+
+//     const endpoint =
+//       gateway === "flutterwave"
+//         ? `${API_URL}/api/flutterwave/init`
+//         : `${API_URL}/api/paystack/init`;
+
+//     const { data } = await axios.post(
+//       endpoint,
+//       { amount: Number(amount) },
+//       {
+//         headers: {
+//           Authorization: `Bearer ${token}`,
+//         },
+//       }
+//     );
+
+//     window.location.replace(data.paymentUrl);
+//   } catch (err) {
+//     alert(
+//       err.response?.data?.message ||
+//         "Unable to initialize payment."
+//     );
+
+//     setLoading(false);
+//   }
+// };
+
+const handleFundWallet = async () => {
   if (loading) return;
 
   if (!amount || Number(amount) < 1000) {
@@ -89,13 +128,18 @@ const FundWallet = () => {
 
     const { data } = await axios.post(
       endpoint,
-      { amount: Number(amount) },
+      {
+        amount: Number(amount),
+      },
       {
         headers: {
           Authorization: `Bearer ${token}`,
         },
       }
     );
+
+    // Mark payment as started
+    setPaymentStarted(true);
 
     window.location.replace(data.paymentUrl);
   } catch (err) {
@@ -105,9 +149,10 @@ const FundWallet = () => {
     );
 
     setLoading(false);
+    setPaymentStarted(false);
   }
 };
-
+  
   const fetchRecentDeposits = async () => {
   try {
     setLoadingDeposits(true);
@@ -160,44 +205,52 @@ useEffect(() => {
       <div className="wallet-card">
 
         {/* STEPS */}
-        <div className="wallet-steps">
+<div className="wallet-steps">
 
-          <div className="wallet-step active">
-            <div className="wallet-step-circle">1</div>
+  <div className={`wallet-step ${amount ? "active" : ""}`}>
+    <div className="wallet-step-circle">1</div>
 
-            <div>
-              <h4>Enter Amount</h4>
-              <p>Choose amount to fund</p>
-            </div>
-          </div>
+    <div>
+      <h4>Enter Amount</h4>
+      <p>Choose amount to fund</p>
+    </div>
+  </div>
 
-          <div className="wallet-step-arrow">
-            <FiChevronRight />
-          </div>
+  <div className="wallet-step-arrow">
+    <FiChevronRight />
+  </div>
 
-          <div className="wallet-step active">
-            <div className="wallet-step-circle">2</div>
+  <div
+    className={`wallet-step ${
+      Number(amount) >= 1000 ? "active" : ""
+    }`}
+  >
+    <div className="wallet-step-circle">2</div>
 
-            <div>
-              <h4>Select Gateway</h4>
-              <p>Choose payment method</p>
-            </div>
-          </div>
+    <div>
+      <h4>Select Gateway</h4>
+      <p>Choose payment method</p>
+    </div>
+  </div>
 
-          <div className="wallet-step-arrow">
-            <FiChevronRight />
-          </div>
+  <div className="wallet-step-arrow">
+    <FiChevronRight />
+  </div>
 
-          <div className="wallet-step active">
-            <div className="wallet-step-circle">3</div>
+  <div
+    className={`wallet-step ${
+      paymentStarted ? "active" : ""
+    }`}
+  >
+    <div className="wallet-step-circle">3</div>
 
-            <div>
-              <h4>Complete Payment</h4>
-              <p>Secure checkout</p>
-            </div>
-          </div>
+    <div>
+      <h4>Complete Payment</h4>
+      <p>Secure checkout</p>
+    </div>
+  </div>
 
-        </div>
+</div>
 
         {/* FORM */}
         <div className="wallet-form">
