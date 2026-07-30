@@ -361,6 +361,7 @@ body.light-theme .skeleton::after {
     .skeleton-time {
         width: 50px;
         height: 10px;
+        align-self: center;
     }
 
     .skeleton-arrow {
