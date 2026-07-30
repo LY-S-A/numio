@@ -55,13 +55,13 @@
     margin-bottom: 30px;
 }
 
-/* .wallet-step {
+.wallet-step {
     display: flex;
     align-items: center;
     gap: 14px;
 
     flex: 1;
-} */
+}
 
 /* .wallet-step-circle {
     width: 42px;
@@ -79,15 +79,6 @@
     font-size: 14px;
     font-weight: 600;
 } */
-
-.wallet-step {
-    opacity: .55;
-    transition: opacity .2s ease;
-}
-
-.wallet-step.active {
-    opacity: 1;
-}
 
 .wallet-step-circle {
     width: 42px;
