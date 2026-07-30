@@ -682,6 +682,13 @@ body.light-theme .skeleton::after {
         gap: 2px;
     }
 
+  .tx-date small {
+        display: block;
+        width: 100%;
+        text-align: center;
+        align-self: center;
+    }
+   
     .tx-pagination{
         display: flex;
         flex-direction: row;
