@@ -55,15 +55,15 @@
     margin-bottom: 30px;
 }
 
-.wallet-step {
+/* .wallet-step {
     display: flex;
     align-items: center;
     gap: 14px;
 
     flex: 1;
-}
+} */
 
-.wallet-step-circle {
+/* .wallet-step-circle {
     width: 42px;
     height: 42px;
 
@@ -78,6 +78,39 @@
     color: var(--primary);
     font-size: 14px;
     font-weight: 600;
+} */
+
+.wallet-step {
+    opacity: .55;
+    transition: opacity .2s ease;
+}
+
+.wallet-step.active {
+    opacity: 1;
+}
+
+.wallet-step-circle {
+    width: 42px;
+    height: 42px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 50%;
+
+    border: 2px solid var(--border);
+
+    color: var(--text);
+    font-size: 14px;
+    font-weight: 600;
+
+    transition: all .2s ease;
+}
+
+.wallet-step.active .wallet-step-circle {
+    border-color: var(--primary);
+    color: var(--primary);
 }
 
 .wallet-step h4 {
