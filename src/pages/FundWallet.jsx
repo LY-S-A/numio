@@ -32,43 +32,81 @@ const FundWallet = () => {
     setAmount(value);
   };
 
+  // const handleFundWallet = async () => {
+  //   if (!amount || Number(amount) < 1000) {
+  //     return alert("Minimum deposit is ₦1,000");
+  //   }
+
+  //   try {
+  //     setLoading(true);
+
+  //     const token = localStorage.getItem("token");
+
+  //     const endpoint =
+  //       gateway === "flutterwave"
+  //         ? `${API_URL}/api/flutterwave/init`
+  //         : `${API_URL}/api/paystack/init`;
+
+  //     const { data } = await axios.post(
+  //       endpoint,
+  //       {
+  //         amount: Number(amount),
+  //       },
+  //       {
+  //         headers: {
+  //           Authorization: `Bearer ${token}`,
+  //         },
+  //       }
+  //     );
+
+  //     window.location.href = data.paymentUrl;
+  //   } catch (err) {
+  //     alert(
+  //       err.response?.data?.message ||
+  //         "Unable to initialize payment."
+  //     );
+  //   } finally {
+  //     setLoading(false);
+  //   }
+  // };
+
   const handleFundWallet = async () => {
-    if (!amount || Number(amount) < 1000) {
-      return alert("Minimum deposit is ₦1,000");
-    }
+  if (loading) return;
 
-    try {
-      setLoading(true);
+  if (!amount || Number(amount) < 1000) {
+    return alert("Minimum deposit is ₦1,000");
+  }
 
-      const token = localStorage.getItem("token");
+  try {
+    setLoading(true);
 
-      const endpoint =
-        gateway === "flutterwave"
-          ? `${API_URL}/api/flutterwave/init`
-          : `${API_URL}/api/paystack/init`;
+    const token = localStorage.getItem("token");
 
-      const { data } = await axios.post(
-        endpoint,
-        {
-          amount: Number(amount),
+    const endpoint =
+      gateway === "flutterwave"
+        ? `${API_URL}/api/flutterwave/init`
+        : `${API_URL}/api/paystack/init`;
+
+    const { data } = await axios.post(
+      endpoint,
+      { amount: Number(amount) },
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
         },
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
+      }
+    );
 
-      window.location.href = data.paymentUrl;
-    } catch (err) {
-      alert(
-        err.response?.data?.message ||
-          "Unable to initialize payment."
-      );
-    } finally {
-      setLoading(false);
-    }
-  };
+    window.location.replace(data.paymentUrl);
+  } catch (err) {
+    alert(
+      err.response?.data?.message ||
+        "Unable to initialize payment."
+    );
+
+    setLoading(false);
+  }
+};
 
   const fetchRecentDeposits = async () => {
   try {
@@ -285,18 +323,18 @@ useEffect(() => {
         <div className="wallet-action-row">
 
           <button
-            className="wallet-fund-btn"
-            onClick={handleFundWallet}
-            disabled={loading}
-          >
-            {loading
-              ? "Redirecting..."
-              : `Fund via ${
-                  gateway === "flutterwave"
-                    ? "Flutterwave"
-                    : "Paystack"
-                }`}
-          </button>
+  className="wallet-fund-btn"
+  onClick={handleFundWallet}
+  disabled={loading}
+>
+  {loading
+    ? "Redirecting..."
+    : `Fund via ${
+        gateway === "flutterwave"
+          ? "Flutterwave"
+          : "Paystack"
+      }`}
+</button>
 
         </div>
 
