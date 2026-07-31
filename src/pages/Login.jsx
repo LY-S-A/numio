@@ -25,6 +25,7 @@ export default function Login() {
   const { darkMode } = useTheme();
   const navigate = useNavigate();
 
+  const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
 
@@ -42,73 +43,128 @@ export default function Login() {
 
   // ================= NORMAL LOGIN =================
 
+//   const handleSubmit = async (e) => {
+//     e.preventDefault();
+
+//    if (!formData.email || !formData.password) {
+//   setError("Please fill all fields.");
+//   return;
+// }
+
+//     try {
+//       setLoading(true);
+
+//       const res = await axios.post(
+//         `${API_URL}/api/auth/login`,
+//         formData
+//       );
+
+//       localStorage.setItem(
+//         "token",
+//         res.data.token
+//       );
+
+//       localStorage.setItem(
+//         "user",
+//         JSON.stringify(res.data.user)
+//       );
+
+//       navigate("/dashboard");
+//     } catch (err) {
+//       alert(
+//         err.response?.data?.message ||
+//           "Login failed."
+//       );
+//     } finally {
+//       setLoading(false);
+//     }
+//   };
+
   const handleSubmit = async (e) => {
-    e.preventDefault();
+  e.preventDefault();
 
-    if (!formData.email || !formData.password) {
-      return alert("Please fill all fields.");
-    }
+  setError("");
 
-    try {
-      setLoading(true);
+  if (!formData.email || !formData.password) {
+    setError("Please fill all fields.");
+    return;
+  }
 
-      const res = await axios.post(
-        `${API_URL}/api/auth/login`,
-        formData
-      );
+  try {
+    setLoading(true);
 
-      localStorage.setItem(
-        "token",
-        res.data.token
-      );
+    const res = await axios.post(
+      `${API_URL}/api/auth/login`,
+      formData
+    );
 
-      localStorage.setItem(
-        "user",
-        JSON.stringify(res.data.user)
-      );
+    localStorage.setItem("token", res.data.token);
+    localStorage.setItem("user", JSON.stringify(res.data.user));
 
-      navigate("/dashboard");
-    } catch (err) {
-      alert(
-        err.response?.data?.message ||
-          "Login failed."
-      );
-    } finally {
-      setLoading(false);
-    }
-  };
+    navigate("/dashboard");
+  } catch (err) {
+    setError(
+      err.response?.data?.message || "Login failed."
+    );
+  } finally {
+    setLoading(false);
+  }
+};
 
   // ================= GOOGLE LOGIN =================
-  const handleGoogleSuccess = async (
-    credentialResponse
-  ) => {
-    try {
-      const res = await axios.post(
-        `${API_URL}/api/auth/google`,
-        {
-          token:
-            credentialResponse.credential,
-        }
-      );
+  // const handleGoogleSuccess = async (
+  //   credentialResponse
+  // ) => {
+  //   try {
+  //     const res = await axios.post(
+  //       `${API_URL}/api/auth/google`,
+  //       {
+  //         token:
+  //           credentialResponse.credential,
+  //       }
+  //     );
 
-      localStorage.setItem(
-        "token",
-        res.data.token
-      );
+  //     localStorage.setItem(
+  //       "token",
+  //       res.data.token
+  //     );
 
-      localStorage.setItem(
-        "user",
-        JSON.stringify(res.data.user)
-      );
+  //     localStorage.setItem(
+  //       "user",
+  //       JSON.stringify(res.data.user)
+  //     );
 
-      navigate("/dashboard");
-    } catch (err) {
-      alert(
-        err.response?.data?.message ||
-          "Google login failed."
-      );
-    }
-  };
+  //     navigate("/dashboard");
+  //   } catch (err) {
+  //     alert(
+  //       err.response?.data?.message ||
+  //         "Google login failed."
+  //     );
+  //   }
+  // };
+
+  const handleGoogleSuccess = async (credentialResponse) => {
+  try {
+    setError("");
+
+    const res = await axios.post(
+      `${API_URL}/api/auth/google`,
+      {
+        token: credentialResponse.credential,
+      }
+    );
+
+    localStorage.setItem("token", res.data.token);
+    localStorage.setItem("user", JSON.stringify(res.data.user));
+
+    navigate("/dashboard");
+  } catch (err) {
+    setError(
+      err.response?.data?.message ||
+      "Google login failed."
+    );
+  }
+};
 
   return (
     <div className="auth-page">
@@ -148,6 +204,12 @@ export default function Login() {
             numbers, SMS inbox and account
             dashboard.
           </p>
+
+          {error && (
+  <div className="auth-error">
+    {error}
+  </div>
+)}
 
           <form onSubmit={handleSubmit}>
             <div className="form-group">
