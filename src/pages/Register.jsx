@@ -35,15 +35,6 @@ export default function Register() {
     agree: false,
   });
 
-  // const handleChange = (e) => {
-  //   const { name, value, type, checked } = e.target;
-
-  //   setFormData((prev) => ({
-  //     ...prev,
-  //     [name]: type === "checkbox" ? checked : value,
-  //   }));
-  // };
-
   const handleChange = (e) => {
   const { name, value, type, checked } = e.target;
 
@@ -54,58 +45,6 @@ export default function Register() {
     [name]: type === "checkbox" ? checked : value,
   }));
 };
-
-  // const handleSubmit = async (e) => {
-  //   e.preventDefault();
-
-  //   const {
-  //     username,
-  //     email,
-  //     password,
-  //     confirmPassword,
-  //     agree,
-  //   } = formData;
-
-  //   if (!username || !email || !password || !confirmPassword) {
-  //     return alert("Please fill all fields.");
-  //   }
-
-  //   if (password !== confirmPassword) {
-  //     return alert("Passwords do not match.");
-  //   }
-
-  //   if (!agree) {
-  //     return alert("Please accept the Terms & Conditions.");
-  //   }
-
-  //   try {
-  //     setLoading(true);
-
-  //     const res = await axios.post(
-  //       `${API_URL}/api/auth/register`,
-  //       {
-  //         username,
-  //         email,
-  //         password,
-  //       }
-  //     );
-
-  //     localStorage.setItem("token", res.data.token);
-  //     localStorage.setItem(
-  //       "user",
-  //       JSON.stringify(res.data.user)
-  //     );
-
-  //     navigate("/dashboard");
-  //   } catch (err) {
-  //     alert(
-  //       err.response?.data?.message ||
-  //         "Registration failed."
-  //     );
-  //   } finally {
-  //     setLoading(false);
-  //   }
-  // };
 
   const handleSubmit = async (e) => {
   e.preventDefault();
