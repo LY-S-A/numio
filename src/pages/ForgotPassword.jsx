@@ -20,37 +20,10 @@ export default function ForgotPassword() {
   const [loading, setLoading] = useState(false);
   const [success, setSuccess] = useState("");
 
-  // const handleSubmit = async (e) => {
-  //   e.preventDefault();
 
-  //   if (!email) {
-  //     return alert("Please enter your email address.");
-  //   }
-
-  //   try {
-  //     setLoading(true);
-  //     setSuccess("");
-
-  //     const res = await axios.post(
-  //       `${API_URL}/api/auth/forgot-password`,
-  //       {
-  //         email,
-  //       }
-  //     );
-
-  //     setSuccess(
-  //       res.data.message ||
-  //         "Password reset link sent successfully."
-  //     );
-  //   } catch (err) {
-  //     alert(
-  //       err.response?.data?.message ||
-  //         "Unable to send reset link."
-  //     );
-  //   } finally {
-  //     setLoading(false);
-  //   }
-  // };
+   /* ===========================
+        HANDLE SUBMIT
+    =========================== */
 
   const handleSubmit = async (e) => {
   e.preventDefault();
