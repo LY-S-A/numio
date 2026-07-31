@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
 import AnnouncementModal from "../components/AnnouncementModal";
@@ -12,12 +13,15 @@ import {
     FaCommentDots,
     FaChartLine,
     FaClipboardList,
+    FaHeadset,
 } from "react-icons/fa";
 
 import "../styles/dashboard.css";
 
 
 const Dashboard = () => {
+
+    const navigate = useNavigate();
 
     const [loading, setLoading] = useState(true);
 
@@ -159,6 +163,24 @@ const Dashboard = () => {
 
 
         </div>
+                     </div>
+
+
+        {/* FLOATING SUPPORT BUTTON */}
+        <button
+            className="floating-support"
+            onClick={() => navigate("/support")}
+            aria-label="Open support"
+        >
+            <FaHeadset />
+
+            <span>
+                Support
+            </span>
+        </button>
+
+
+        </>
         </>
 
     );
