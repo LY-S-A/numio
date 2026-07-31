@@ -163,6 +163,11 @@ const paginatedOrders = filteredOrders.slice(
         return `${days}d ago`;
     };
 
+    const formatService = (service = "") =>
+    service
+        .replace(/[_-]/g, " ")
+        .replace(/\b\w/g, (c) => c.toUpperCase());
+
 const formatText = (text = "") =>
     text
         .replace(/[_-]/g, " ")
