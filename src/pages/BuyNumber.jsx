@@ -104,24 +104,57 @@ const BuyNumber = () => {
       LOAD ACTIVE ORDER
   =========================== */
 
-    const loadActiveOrder = useCallback(async () => {
-        try {
-            const res = await axios.get(
-                `${API}/api/5sim/active`,
-                getAuthConfig()
-            );
+    // const loadActiveOrder = useCallback(async () => {
+    //     try {
+    //         const res = await axios.get(
+    //             `${API}/api/5sim/active`,
+    //             getAuthConfig()
+    //         );
 
-            if (res.data.order) {
-                setOrder(res.data.order);
-                setSmsMessages(res.data.sms || []);
-            } else {
-                setOrder(null);
-                setSmsMessages([]);
+    //         if (res.data.order) {
+    //             setOrder(res.data.order);
+    //             setSmsMessages(res.data.sms || []);
+    //         } else {
+    //             setOrder(null);
+    //             setSmsMessages([]);
+    //         }
+    //     } catch (err) {
+    //         console.log(err.response?.data || err.message);
+    //     }
+    // }, []);
+
+    const loadActiveOrder = useCallback(async () => {
+    try {
+        const res = await axios.get(
+            `${API}/api/5sim/active`,
+            getAuthConfig()
+        );
+
+        if (res.data.order) {
+
+            setOrder(res.data.order);
+            setSmsMessages(res.data.sms || []);
+
+        } else {
+
+            setOrder(null);
+            setSmsMessages([]);
+            setTimeLeft("--");
+
+            // Update wallet after auto refund
+            if (typeof res.data.wallet !== "undefined") {
+                setBalance(res.data.wallet);
             }
-        } catch (err) {
-            console.log(err.response?.data || err.message);
         }
-    }, []);
+
+    } catch (err) {
+
+        console.log(
+            err.response?.data || err.message
+        );
+
+    }
+}, [setBalance]);
 
     /* ===========================
         FETCH COUNTRIES
