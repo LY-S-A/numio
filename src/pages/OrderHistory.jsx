@@ -22,7 +22,7 @@ import "../styles/transactions.css";
 const API_URL = process.env.REACT_APP_API_URL;
 const ITEMS_PER_PAGE = 10;
 
-const DepositHistory = () => {
+const OrderHistory = () => {
     const { formattedBalance } = useBalance();
 
     const [deposits, setDeposits] = useState([]);
@@ -509,4 +509,4 @@ const DepositHistory = () => {
     );
 };
 
-export default DepositHistory;
+export default OrderHistory;
