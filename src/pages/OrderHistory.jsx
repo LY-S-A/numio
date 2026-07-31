@@ -166,23 +166,23 @@ const DepositHistory = () => {
     };
 
     const formatRelativeTime = (date) => {
-    if (!date) return "";
+        if (!date) return "";
 
-    const diff = Math.floor(
-        (Date.now() - new Date(date).getTime()) / 1000
-    );
+        const diff = Math.floor(
+            (Date.now() - new Date(date).getTime()) / 1000
+        );
 
-    if (diff < 60) return `${diff}s ago`;
+        if (diff < 60) return `${diff}s ago`;
 
-    const mins = Math.floor(diff / 60);
-    if (mins < 60) return `${mins}m ago`;
+        const mins = Math.floor(diff / 60);
+        if (mins < 60) return `${mins}m ago`;
 
-    const hrs = Math.floor(mins / 60);
-    if (hrs < 24) return `${hrs}h ago`;
+        const hrs = Math.floor(mins / 60);
+        if (hrs < 24) return `${hrs}h ago`;
 
-    const days = Math.floor(hrs / 24);
-    return `${days}d ago`;
-};
+        const days = Math.floor(hrs / 24);
+        return `${days}d ago`;
+    };
     return (
         <div className="tx-page">
 
@@ -200,47 +200,47 @@ const DepositHistory = () => {
             </div>
 
             {/* STATS */}
-           <div className="tx-stats">
+            <div className="tx-stats">
 
-    <div className="tx-stat-card">
-        <div className="tx-stat-icon purple">
-            <FiSmartphone />
-        </div>
+                <div className="tx-stat-card">
+                    <div className="tx-stat-icon purple">
+                        <FiSmartphone />
+                    </div>
 
-        <div>
-            <span>Total Orders</span>
+                    <div>
+                        <span>Total Orders</span>
 
-            <h3>{orders.length}</h3>
+                        <h3>{orders.length}</h3>
 
-            <small>
-                Lifetime purchases
-            </small>
-        </div>
-    </div>
+                        <small>
+                            Lifetime purchases
+                        </small>
+                    </div>
+                </div>
 
-    <div className="tx-stat-card">
-        <div className="tx-stat-icon green">
-            <FiActivity />
-        </div>
+                <div className="tx-stat-card">
+                    <div className="tx-stat-icon green">
+                        <FiActivity />
+                    </div>
 
-        <div>
-            <span>Active Numbers</span>
+                    <div>
+                        <span>Active Numbers</span>
 
-            <h3>
-                {
-                    orders.filter(
-                        item => item.status === "ACTIVE"
-                    ).length
-                }
-            </h3>
+                        <h3>
+                            {
+                                orders.filter(
+                                    item => item.status === "ACTIVE"
+                                ).length
+                            }
+                        </h3>
 
-            <small>
-                Awaiting SMS
-            </small>
-        </div>
-    </div>
+                        <small>
+                            Awaiting SMS
+                        </small>
+                    </div>
+                </div>
 
-</div>
+            </div>
 
             {/* FILTERS */}
             <div className="tx-filters">
@@ -250,14 +250,14 @@ const DepositHistory = () => {
                     <FiSearch />
 
                     <input
-    type="text"
-    placeholder="Search phone number or reference..."
-    value={searchTerm}
-    onChange={(e) => {
-        setSearchTerm(e.target.value);
-        setCurrentPage(1);
-    }}
-/>
+                        type="text"
+                        placeholder="Search phone number or reference..."
+                        value={searchTerm}
+                        onChange={(e) => {
+                            setSearchTerm(e.target.value);
+                            setCurrentPage(1);
+                        }}
+                    />
                 </div>
 
                 <div className="select-wrapper">
@@ -265,24 +265,15 @@ const DepositHistory = () => {
                     <select
                         value={statusFilter}
                         onChange={(e) => {
-                            setStatusFilter(
-                                e.target.value
-                            );
+                            setStatusFilter(e.target.value);
                             setCurrentPage(1);
                         }}
                     >
-                        <option>
-                            All Deposits
-                        </option>
-                        <option>
-                            Success
-                        </option>
-                        <option>
-                            Pending
-                        </option>
-                        <option>
-                            Failed
-                        </option>
+                        <option>All Orders</option>
+                        <option>ACTIVE</option>
+                        <option>COMPLETED</option>
+                        <option>CANCELLED</option>
+                        <option>EXPIRED</option>
                     </select>
 
                 </div>
@@ -323,9 +314,9 @@ const DepositHistory = () => {
             <div className="tx-table">
 
                 <div className="tx-table-head">
-                    <span>Gateway</span>
+                    <span>Number</span>
                     <span>Status</span>
-                    <span>Amount</span>
+                    <span>Price</span>
                     <span>Date</span>
                 </div>
                 {loading ? (
@@ -358,20 +349,21 @@ const DepositHistory = () => {
                     ))
                 ) : paginatedDeposits.length === 0 ? (
                     <div className="empty-history">
+
                         <div className="empty-icon">
-                            <FiCreditCard />
+                            <FiSmartphone />
                         </div>
 
-                        <h3>No Deposit History Yet</h3>
+                        <h3>No Orders Yet</h3>
 
                         <p>
-                            Your completed wallet funding transactions will appear
-                            here after you successfully fund your wallet.
+                            Purchased virtual numbers will appear here after your first order.
                         </p>
 
                         <span className="empty-tip">
-                            Make your first deposit to start building your funding history.
+                            Buy your first number to start receiving SMS messages.
                         </span>
+
                     </div>
                 ) : (
                     paginatedDeposits.map((item) => (
@@ -379,65 +371,56 @@ const DepositHistory = () => {
                             className="tx-row"
                             key={item._id}
                         >
+
                             <div className="tx-info">
-                                <div className="tx-icon deposit gateway-icon">
-                                    <img
-                                        src={
-                                            item.provider === "FLUTTERWAVE"
-                                                ? flutterwaveLogo
-                                                : item.provider === "PAYSTACK"
-                                                    ? paystackLogo
-                                                    : flutterwaveLogo
-                                        }
-                                        alt={item.provider}
-                                    />
+
+                                <div className="tx-icon purchase">
+                                    <FiSmartphone />
                                 </div>
 
                                 <div>
-                                    <h4>
-                                        {item.provider === "FLUTTERWAVE"
-                                            ? "Flutterwave Deposit"
-                                            : item.provider === "PAYSTACK"
-                                                ? "Paystack Deposit"
-                                                : "Wallet Deposit"}
-                                    </h4>
+
+                                    <h4>{item.phone}</h4>
 
                                     <p>
-                                        {item.reference?.length > 17
-                                            ? `${item.reference.substring(0, 17)}...`
-                                            : item.reference}
+                                        {item.country} • {item.service}
                                     </p>
+
                                 </div>
+
                             </div>
 
                             <div className="tx-status-wrapper">
+
                                 <span
                                     className={`tx-status ${item.status.toLowerCase()}`}
                                 >
                                     {item.status}
                                 </span>
+
                             </div>
 
-                            <div className="tx-amount credit">
-                                +₦
-                                {Number(
-                                    item.amount
-                                ).toLocaleString()}
+                            <div className="tx-amount debit">
+
+                                -₦
+                                {Number(item.price).toLocaleString("en-NG")}
+
                             </div>
 
                             <div className="tx-date">
+
                                 <span>
-                                    {formatDate(
-                                        item.createdAt
-                                    )}
+                                    {formatDate(item.createdAt)}
                                 </span>
 
                                 <small>
                                     {formatRelativeTime(item.createdAt)}
                                 </small>
+
                             </div>
 
                             <FiChevronRight className="tx-arrow" />
+
                         </div>
                     ))
                 )}
