@@ -22,6 +22,7 @@ export default function Register() {
   const { darkMode } = useTheme();
   const navigate = useNavigate();
 
+  const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
@@ -34,66 +35,134 @@ export default function Register() {
     agree: false,
   });
 
-  const handleChange = (e) => {
-    const { name, value, type, checked } = e.target;
+  // const handleChange = (e) => {
+  //   const { name, value, type, checked } = e.target;
 
-    setFormData((prev) => ({
-      ...prev,
-      [name]: type === "checkbox" ? checked : value,
-    }));
-  };
+  //   setFormData((prev) => ({
+  //     ...prev,
+  //     [name]: type === "checkbox" ? checked : value,
+  //   }));
+  // };
+
+  const handleChange = (e) => {
+  const { name, value, type, checked } = e.target;
+
+  setError("");
+
+  setFormData((prev) => ({
+    ...prev,
+    [name]: type === "checkbox" ? checked : value,
+  }));
+};
+
+  // const handleSubmit = async (e) => {
+  //   e.preventDefault();
+
+  //   const {
+  //     username,
+  //     email,
+  //     password,
+  //     confirmPassword,
+  //     agree,
+  //   } = formData;
+
+  //   if (!username || !email || !password || !confirmPassword) {
+  //     return alert("Please fill all fields.");
+  //   }
+
+  //   if (password !== confirmPassword) {
+  //     return alert("Passwords do not match.");
+  //   }
+
+  //   if (!agree) {
+  //     return alert("Please accept the Terms & Conditions.");
+  //   }
+
+  //   try {
+  //     setLoading(true);
+
+  //     const res = await axios.post(
+  //       `${API_URL}/api/auth/register`,
+  //       {
+  //         username,
+  //         email,
+  //         password,
+  //       }
+  //     );
+
+  //     localStorage.setItem("token", res.data.token);
+  //     localStorage.setItem(
+  //       "user",
+  //       JSON.stringify(res.data.user)
+  //     );
+
+  //     navigate("/dashboard");
+  //   } catch (err) {
+  //     alert(
+  //       err.response?.data?.message ||
+  //         "Registration failed."
+  //     );
+  //   } finally {
+  //     setLoading(false);
+  //   }
+  // };
 
   const handleSubmit = async (e) => {
-    e.preventDefault();
+  e.preventDefault();
 
-    const {
-      username,
-      email,
-      password,
-      confirmPassword,
-      agree,
-    } = formData;
+  setError("");
 
-    if (!username || !email || !password || !confirmPassword) {
-      return alert("Please fill all fields.");
-    }
+  const {
+    username,
+    email,
+    password,
+    confirmPassword,
+    agree,
+  } = formData;
 
-    if (password !== confirmPassword) {
-      return alert("Passwords do not match.");
-    }
+  if (!username || !email || !password || !confirmPassword) {
+    setError("Please fill all fields.");
+    return;
+  }
 
-    if (!agree) {
-      return alert("Please accept the Terms & Conditions.");
-    }
+  if (password !== confirmPassword) {
+    setError("Passwords do not match.");
+    return;
+  }
 
-    try {
-      setLoading(true);
+  if (!agree) {
+    setError("Please accept the Terms & Conditions.");
+    return;
+  }
 
-      const res = await axios.post(
-        `${API_URL}/api/auth/register`,
-        {
-          username,
-          email,
-          password,
-        }
-      );
+  try {
+    setLoading(true);
 
-      localStorage.setItem("token", res.data.token);
-      localStorage.setItem(
-        "user",
-        JSON.stringify(res.data.user)
-      );
+    const res = await axios.post(
+      `${API_URL}/api/auth/register`,
+      {
+        username,
+        email,
+        password,
+      }
+    );
 
-      navigate("/dashboard");
-    } catch (err) {
-      alert(
-        err.response?.data?.message ||
-          "Registration failed."
-      );
-    } finally {
-      setLoading(false);
-    }
-  };
+    localStorage.setItem("token", res.data.token);
+    localStorage.setItem(
+      "user",
+      JSON.stringify(res.data.user)
+    );
+
+    navigate("/dashboard");
+  } catch (err) {
+    setError(
+      err.response?.data?.message ||
+      "Registration failed."
+    );
+  } finally {
+    setLoading(false);
+  }
+};
 
   return (
     <div className="auth-page">
@@ -136,6 +205,12 @@ export default function Register() {
             virtual numbers.
           </p>
 
+          {error && (
+  <div className="auth-error">
+    {error}
+  </div>
+)}
+          
           <form onSubmit={handleSubmit}>
             <div className="form-group">
               <label>Username</label>
