@@ -4,7 +4,8 @@ import {
     FiSearch,
     FiChevronRight,
     FiChevronLeft,
-    FiCreditCard,
+    FiSmartphone,
+    FiActivity,
 } from "react-icons/fi";
 
 import {
@@ -249,17 +250,14 @@ const DepositHistory = () => {
                     <FiSearch />
 
                     <input
-                        type="text"
-                        placeholder="Search deposit reference..."
-                        value={searchTerm}
-                        onChange={(e) => {
-                            setSearchTerm(
-                                e.target.value
-                            );
-                            setCurrentPage(1);
-                        }}
-                    />
-
+    type="text"
+    placeholder="Search phone number or reference..."
+    value={searchTerm}
+    onChange={(e) => {
+        setSearchTerm(e.target.value);
+        setCurrentPage(1);
+    }}
+/>
                 </div>
 
                 <div className="select-wrapper">
