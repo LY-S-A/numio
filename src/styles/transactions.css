@@ -442,7 +442,7 @@ body.light-theme .skeleton::after {
   object-fit: contain;
 }
 
-.tx-icon {
+/* .tx-icon {
     width: 42px;
     height: 42px;
 
@@ -453,6 +453,29 @@ body.light-theme .skeleton::after {
     justify-content: center;
 
     font-size: 15px;
+} */
+
+.tx-icon {
+    width: 44px;
+    height: 44px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    flex-shrink: 0;
+}
+
+.tx-icon.purchase {
+    background: var(--card-secondary);
+    border: 1px solid var(--border);
+}
+
+.tx-icon.purchase img {
+    width: 22px;
+    height: 22px;
+    object-fit: contain;
+    display: block;
 }
 
 .tx-icon.deposit {
