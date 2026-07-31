@@ -173,6 +173,33 @@ body.light-theme .auth-card {
 }
 
 /* ====================================
+   AUTH SUCCESS
+==================================== */
+
+.auth-success {
+  display: flex;
+  align-items: center;
+
+  width: 100%;
+
+  margin-bottom: 18px;
+  padding: 12px 14px;
+
+  border-radius: 10px;
+  border: 1px solid var(--success);
+
+  background: var(--success-bg);
+
+  color: var(--success);
+
+  font-size: 13px;
+  font-weight: 500;
+  line-height: 1.5;
+
+  animation: authErrorFade 0.25s ease;
+}
+
+/* ====================================
    CONTENT
 ==================================== */
 
