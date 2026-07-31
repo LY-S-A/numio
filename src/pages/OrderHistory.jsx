@@ -4,6 +4,7 @@ import {
     FiSearch,
     FiChevronRight,
     FiChevronLeft,
+    FiSmartphone,
     FiActivity,
 } from "react-icons/fi";
 
