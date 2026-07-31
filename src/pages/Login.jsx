@@ -34,13 +34,6 @@ export default function Login() {
     password: "",
   });
 
-  // const handleChange = (e) => {
-  //   setFormData((prev) => ({
-  //     ...prev,
-  //     [e.target.name]: e.target.value,
-  //   }));
-  // };
-
   const handleChange = (e) => {
   setError("");
 
