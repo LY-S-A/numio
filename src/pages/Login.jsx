@@ -34,51 +34,23 @@ export default function Login() {
     password: "",
   });
 
+  // const handleChange = (e) => {
+  //   setFormData((prev) => ({
+  //     ...prev,
+  //     [e.target.name]: e.target.value,
+  //   }));
+  // };
+
   const handleChange = (e) => {
-    setFormData((prev) => ({
-      ...prev,
-      [e.target.name]: e.target.value,
-    }));
-  };
+  setError("");
+
+  setFormData((prev) => ({
+    ...prev,
+    [e.target.name]: e.target.value,
+  }));
+};
 
   // ================= NORMAL LOGIN =================
-
-//   const handleSubmit = async (e) => {
-//     e.preventDefault();
-
-//    if (!formData.email || !formData.password) {
-//   setError("Please fill all fields.");
-//   return;
-// }
-
-//     try {
-//       setLoading(true);
-
-//       const res = await axios.post(
-//         `${API_URL}/api/auth/login`,
-//         formData
-//       );
-
-//       localStorage.setItem(
-//         "token",
-//         res.data.token
-//       );
-
-//       localStorage.setItem(
-//         "user",
-//         JSON.stringify(res.data.user)
-//       );
-
-//       navigate("/dashboard");
-//     } catch (err) {
-//       alert(
-//         err.response?.data?.message ||
-//           "Login failed."
-//       );
-//     } finally {
-//       setLoading(false);
-//     }
-//   };
 
   const handleSubmit = async (e) => {
   e.preventDefault();
