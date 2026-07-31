@@ -4,11 +4,11 @@ import {
     FiSearch,
     FiChevronRight,
     FiChevronLeft,
-    FiSmartphone,
     FiActivity,
 } from "react-icons/fi";
 
 import "../styles/transactions.css";
+import unknownLogo from "../assets/question-mark.png";
 
 const API_URL = process.env.REACT_APP_API_URL;
 const ITEMS_PER_PAGE = 10;
@@ -161,6 +161,12 @@ const paginatedOrders = filteredOrders.slice(
         const days = Math.floor(hrs / 24);
         return `${days}d ago`;
     };
+
+    const formatService = (service = "") =>
+    service
+        .replace(/[_-]/g, " ")
+        .replace(/\b\w/g, (c) => c.toUpperCase());
+    
     return (
         <div className="tx-page">
 
@@ -353,17 +359,24 @@ const paginatedOrders = filteredOrders.slice(
                             <div className="tx-info">
 
                                 <div className="tx-icon purchase">
-                                    <FiSmartphone />
-                                </div>
+    <img
+        src={`https://cdn.simpleicons.org/${(item.service || "").toLowerCase()}`}
+        alt={formatService(item.service)}
+        loading="lazy"
+        onError={(e) => {
+            e.currentTarget.src = unknownLogo;
+            e.currentTarget.onerror = null;
+        }}
+    />
+</div>
 
                                 <div>
 
                                     <h4>{item.phone}</h4>
 
                                     <p>
-                                        {item.country} • {item.service}
-                                    </p>
-
+    {item.country} • {formatService(item.service)}
+</p>
                                 </div>
 
                             </div>
