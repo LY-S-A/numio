@@ -163,11 +163,11 @@ const paginatedOrders = filteredOrders.slice(
         return `${days}d ago`;
     };
 
-    const formatService = (service = "") =>
-    service
+const formatText = (text = "") =>
+    text
         .replace(/[_-]/g, " ")
         .replace(/\b\w/g, (c) => c.toUpperCase());
-    
+   
     return (
         <div className="tx-page">
 
@@ -375,8 +375,8 @@ const paginatedOrders = filteredOrders.slice(
 
                                     <h4>{item.phone}</h4>
 
-                                    <p>
-    {item.country} • {formatService(item.service)}
+                                   <p>
+    {formatText(item.country)} • {formatText(item.service)}
 </p>
                                 </div>
 
