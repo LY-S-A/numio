@@ -22,6 +22,7 @@ import Inbox from "./pages/Inbox";
 import FundWallet from "./pages/FundWallet";
 import FundSuccess from "./pages/FundSuccess";
 import FundCancel from "./pages/FundCancel";
+import Orders from "./pages/OrderHistory";
 import Transactions from "./pages/Transactions";
 import Support from "./pages/Support";
 import Settings from "./pages/Settings";
@@ -93,6 +94,11 @@ function App() {
               <Route
                 path="/fund-cancel"
                 element={<FundCancel />}
+              />
+
+              <Route
+                path="/orders"
+                element={<Orders />}
               />
 
               <Route
