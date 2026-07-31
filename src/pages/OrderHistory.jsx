@@ -255,10 +255,10 @@ const formatText = (text = "") =>
                         }}
                     >
                         <option>All Orders</option>
-                        <option>ACTIVE</option>
-                        <option>COMPLETED</option>
-                        <option>CANCELLED</option>
-                        <option>EXPIRED</option>
+                        <option>Active</option>
+                        <option>Finished</option>
+                        <option>Cancelled</option>
+                        <option>Expired</option>
                     </select>
 
                 </div>
