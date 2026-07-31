@@ -15,41 +15,77 @@ const API_URL = process.env.REACT_APP_API_URL;
 export default function ForgotPassword() {
   const { darkMode } = useTheme();
 
+  const [error, setError] = useState("");
   const [email, setEmail] = useState("");
   const [loading, setLoading] = useState(false);
   const [success, setSuccess] = useState("");
 
+  // const handleSubmit = async (e) => {
+  //   e.preventDefault();
+
+  //   if (!email) {
+  //     return alert("Please enter your email address.");
+  //   }
+
+  //   try {
+  //     setLoading(true);
+  //     setSuccess("");
+
+  //     const res = await axios.post(
+  //       `${API_URL}/api/auth/forgot-password`,
+  //       {
+  //         email,
+  //       }
+  //     );
+
+  //     setSuccess(
+  //       res.data.message ||
+  //         "Password reset link sent successfully."
+  //     );
+  //   } catch (err) {
+  //     alert(
+  //       err.response?.data?.message ||
+  //         "Unable to send reset link."
+  //     );
+  //   } finally {
+  //     setLoading(false);
+  //   }
+  // };
+
   const handleSubmit = async (e) => {
-    e.preventDefault();
+  e.preventDefault();
 
-    if (!email) {
-      return alert("Please enter your email address.");
-    }
+  setError("");
+  setSuccess("");
 
-    try {
-      setLoading(true);
-      setSuccess("");
+  if (!email) {
+    setError("Please enter your email address.");
+    return;
+  }
 
-      const res = await axios.post(
-        `${API_URL}/api/auth/forgot-password`,
-        {
-          email,
-        }
-      );
+  try {
+    setLoading(true);
 
-      setSuccess(
-        res.data.message ||
-          "Password reset link sent successfully."
-      );
-    } catch (err) {
-      alert(
-        err.response?.data?.message ||
-          "Unable to send reset link."
-      );
-    } finally {
-      setLoading(false);
-    }
-  };
+    const res = await axios.post(
+      `${API_URL}/api/auth/forgot-password`,
+      {
+        email,
+      }
+    );
+
+    setSuccess(
+      res.data.message ||
+        "Password reset link sent successfully."
+    );
+  } catch (err) {
+    setError(
+      err.response?.data?.message ||
+        "Unable to send reset link."
+    );
+  } finally {
+    setLoading(false);
+  }
+};
 
   return (
     <div className="auth-page">
@@ -95,23 +131,17 @@ export default function ForgotPassword() {
             reset your password.
           </p>
 
+          {error && (
+  <div className="auth-error">
+    {error}
+  </div>
+)}
+
           {success && (
-            <div
-              style={{
-                background:
-                  "rgba(34,197,94,.12)",
-                color: "#22c55e",
-                border:
-                  "1px solid rgba(34,197,94,.25)",
-                padding: "12px",
-                borderRadius: "10px",
-                marginBottom: "18px",
-                fontSize: "14px",
-              }}
-            >
-              {success}
-            </div>
-          )}
+  <div className="auth-success">
+    {success}
+  </div>
+)}
 
           <form onSubmit={handleSubmit}>
             <div className="form-group">
@@ -124,9 +154,11 @@ export default function ForgotPassword() {
                   type="email"
                   placeholder="you@example.com"
                   value={email}
-                  onChange={(e) =>
-                    setEmail(e.target.value)
-                  }
+                  onChange={(e) => {
+  setEmail(e.target.value);
+  setError("");
+  setSuccess("");
+}}
                 />
               </div>
             </div>
