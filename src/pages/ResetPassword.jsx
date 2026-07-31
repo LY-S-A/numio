@@ -18,6 +18,9 @@ export default function ResetPassword() {
   const navigate = useNavigate();
   const { token } = useParams();
 
+
+  const [error, setError] = useState("");
+  const [success, setSuccess] = useState("");
   const [loading, setLoading] = useState(false);
 
   const [formData, setFormData] = useState({
@@ -26,56 +29,66 @@ export default function ResetPassword() {
   });
 
   const handleChange = (e) => {
-    setFormData((prev) => ({
-      ...prev,
-      [e.target.name]: e.target.value,
-    }));
-  };
+  setError("");
+  setSuccess("");
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
+  setFormData((prev) => ({
+    ...prev,
+    [e.target.name]: e.target.value,
+  }));
+};
 
-    const { password, confirmPassword } = formData;
+ const handleSubmit = async (e) => {
+  e.preventDefault();
 
-    if (!password || !confirmPassword) {
-      return alert("Please fill all fields.");
-    }
+  setError("");
+  setSuccess("");
 
-    if (password.length < 6) {
-      return alert(
-        "Password must be at least 6 characters."
-      );
-    }
+  const { password, confirmPassword } = formData;
 
-    if (password !== confirmPassword) {
-      return alert("Passwords do not match.");
-    }
+  if (!password || !confirmPassword) {
+    setError("Please fill all fields.");
+    return;
+  }
 
-    try {
-      setLoading(true);
+  if (password.length < 6) {
+    setError("Password must be at least 6 characters.");
+    return;
+  }
 
-      const res = await axios.post(
-        `${API_URL}/api/auth/reset-password/${token}`,
-        {
-          password,
-        }
-      );
+  if (password !== confirmPassword) {
+    setError("Passwords do not match.");
+    return;
+  }
 
-      alert(
-        res.data.message ||
-          "Password reset successful."
-      );
+  try {
+    setLoading(true);
 
+    const res = await axios.post(
+      `${API_URL}/api/auth/reset-password/${token}`,
+      {
+        password,
+      }
+    );
+
+    setSuccess(
+      res.data.message ||
+        "Password reset successful."
+    );
+
+    setTimeout(() => {
       navigate("/");
-    } catch (err) {
-      alert(
-        err.response?.data?.message ||
-          "Unable to reset password."
-      );
-    } finally {
-      setLoading(false);
-    }
-  };
+    }, 1500);
+
+  } catch (err) {
+    setError(
+      err.response?.data?.message ||
+        "Unable to reset password."
+    );
+  } finally {
+    setLoading(false);
+  }
+};
 
   return (
     <div className="auth-page">
@@ -118,6 +131,18 @@ export default function ResetPassword() {
             and easy for you to remember.
           </p>
 
+           {error && (
+  <div className="auth-error">
+    {error}
+  </div>
+)}
+
+{success && (
+  <div className="auth-success">
+    {success}
+  </div>
+)}
+          
           <form onSubmit={handleSubmit}>
             <div className="form-group">
               <label>New Password</label>
