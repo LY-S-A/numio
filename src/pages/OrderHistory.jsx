@@ -8,15 +8,6 @@ import {
     FiActivity,
 } from "react-icons/fi";
 
-import {
-    FaArrowDown,
-    FaWallet,
-} from "react-icons/fa";
-
-import flutterwaveLogo from "../assets/flutterwave.png";
-import paystackLogo from "../assets/paystack.png";
-
-import { useBalance } from "../context/BalanceContext";
 import "../styles/transactions.css";
 
 const API_URL = process.env.REACT_APP_API_URL;
@@ -25,135 +16,124 @@ const ITEMS_PER_PAGE = 10;
 const OrderHistory = () => {
     const { formattedBalance } = useBalance();
 
-    const [deposits, setDeposits] = useState([]);
+    const [orders, setOrders] = useState([]);
     const [loading, setLoading] = useState(true);
 
     const [searchTerm, setSearchTerm] = useState("");
     const [statusFilter, setStatusFilter] =
-        useState("All Deposits");
+    useState("All Orders");
     const [dateFilter, setDateFilter] =
         useState("Last 30 Days");
-
-    const [totalDeposited, setTotalDeposited] =
-        useState(0);
 
     const [currentPage, setCurrentPage] =
         useState(1);
 
     useEffect(() => {
-        document.title = "Deposit History - Numio";
-        fetchDeposits();
+       document.title = "Order History - Numio";
+       fetchOrders();
     }, []);
 
-    const fetchDeposits = async () => {
-        try {
-            setLoading(true);
+ const fetchOrders = async () => {
+    try {
+        setLoading(true);
 
-            const token = localStorage.getItem("token");
+        const token = localStorage.getItem("token");
 
-            const { data } = await axios.get(
-                `${API_URL}/api/transaction/deposits-history`,
-                {
-                    headers: {
-                        Authorization: `Bearer ${token}`,
-                    },
-                }
-            );
-
-            setDeposits(data.deposits || []);
-            setTotalDeposited(
-                data.totalDeposited || 0
-            );
-        } catch (err) {
-            console.error(err);
-        } finally {
-            setLoading(false);
-        }
-    };
-
-    const filteredDeposits = useMemo(() => {
-        return deposits.filter((item) => {
-            const matchesSearch =
-                item.reference
-                    ?.toLowerCase()
-                    .includes(
-                        searchTerm.toLowerCase()
-                    );
-
-            const matchesStatus =
-                statusFilter === "All Deposits"
-                    ? true
-                    : item.status?.toLowerCase() ===
-                    statusFilter.toLowerCase();
-
-            const createdAt = new Date(
-                item.createdAt
-            );
-
-            const now = new Date();
-
-            let matchesDate = true;
-
-            switch (dateFilter) {
-                case "Today":
-                    matchesDate =
-                        createdAt.toDateString() ===
-                        now.toDateString();
-                    break;
-
-                case "Last 7 Days":
-                    matchesDate =
-                        now - createdAt <=
-                        7 * 24 * 60 * 60 * 1000;
-                    break;
-
-                case "Last 30 Days":
-                    matchesDate =
-                        now - createdAt <=
-                        30 * 24 * 60 * 60 * 1000;
-                    break;
-
-                case "Last 90 Days":
-                    matchesDate =
-                        now - createdAt <=
-                        90 * 24 * 60 * 60 * 1000;
-                    break;
-
-                case "This Year":
-                    matchesDate =
-                        createdAt.getFullYear() ===
-                        now.getFullYear();
-                    break;
-
-                default:
-                    matchesDate = true;
+        const { data } = await axios.get(
+            `${API_URL}/api/orders/history`, // <-- Replace with your actual Order History endpoint
+            {
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                },
             }
-
-            return (
-                matchesSearch &&
-                matchesStatus &&
-                matchesDate
-            );
-        });
-    }, [
-        deposits,
-        searchTerm,
-        statusFilter,
-        dateFilter,
-    ]);
-
-    const totalPages = Math.ceil(
-        filteredDeposits.length /
-        ITEMS_PER_PAGE
-    );
-
-    const paginatedDeposits =
-        filteredDeposits.slice(
-            (currentPage - 1) *
-            ITEMS_PER_PAGE,
-            currentPage * ITEMS_PER_PAGE
         );
 
+        setOrders(data.orders || []);
+    } catch (err) {
+        console.error(err);
+    } finally {
+        setLoading(false);
+    }
+};
+
+const filteredOrders = useMemo(() => {
+    return orders.filter((item) => {
+        const matchesSearch =
+            item.phone
+                ?.toLowerCase()
+                .includes(searchTerm.toLowerCase()) ||
+            item.reference
+                ?.toLowerCase()
+                .includes(searchTerm.toLowerCase());
+
+        const matchesStatus =
+            statusFilter === "All Orders"
+                ? true
+                : item.status?.toLowerCase() ===
+                  statusFilter.toLowerCase();
+
+        const createdAt = new Date(item.createdAt);
+        const now = new Date();
+
+        let matchesDate = true;
+
+        switch (dateFilter) {
+            case "Today":
+                matchesDate =
+                    createdAt.toDateString() ===
+                    now.toDateString();
+                break;
+
+            case "Last 7 Days":
+                matchesDate =
+                    now - createdAt <=
+                    7 * 24 * 60 * 60 * 1000;
+                break;
+
+            case "Last 30 Days":
+                matchesDate =
+                    now - createdAt <=
+                    30 * 24 * 60 * 60 * 1000;
+                break;
+
+            case "Last 90 Days":
+                matchesDate =
+                    now - createdAt <=
+                    90 * 24 * 60 * 60 * 1000;
+                break;
+
+            case "This Year":
+                matchesDate =
+                    createdAt.getFullYear() ===
+                    now.getFullYear();
+                break;
+
+            default:
+                matchesDate = true;
+        }
+
+        return (
+            matchesSearch &&
+            matchesStatus &&
+            matchesDate
+        );
+    });
+}, [
+    orders,
+    searchTerm,
+    statusFilter,
+    dateFilter,
+]);
+
+const totalPages = Math.ceil(
+    filteredOrders.length / ITEMS_PER_PAGE
+);
+
+const paginatedOrders = filteredOrders.slice(
+    (currentPage - 1) * ITEMS_PER_PAGE,
+    currentPage * ITEMS_PER_PAGE
+);
+    
     const formatDate = (date) => {
         return new Date(date).toLocaleDateString(
             "en-NG",
@@ -347,7 +327,7 @@ const OrderHistory = () => {
                             <div className="skeleton skeleton-arrow" />
                         </div>
                     ))
-                ) : paginatedDeposits.length === 0 ? (
+                ) : paginatedOrders.length === 0 ? (
                     <div className="empty-history">
 
                         <div className="empty-icon">
@@ -366,7 +346,7 @@ const OrderHistory = () => {
 
                     </div>
                 ) : (
-                    paginatedDeposits.map((item) => (
+                    paginatedOrders.map((item) => (
                         <div
                             className="tx-row"
                             key={item._id}
@@ -427,7 +407,7 @@ const OrderHistory = () => {
 
                 {/* PAGINATION */}
                 {!loading &&
-                    filteredDeposits.length >
+                    filteredOrders.length >
                     0 && (
                         <div className="tx-pagination">
                             <p className="pagination-text">
@@ -439,10 +419,10 @@ const OrderHistory = () => {
                                 {Math.min(
                                     currentPage *
                                     ITEMS_PER_PAGE,
-                                    filteredDeposits.length
+                                    filteredOrders.length
                                 )}{" "}
                                 of{" "}
-                                {filteredDeposits.length}{" "}
+                                {filteredOrders.length}{" "}
                                 deposits
                             </p>
 
