@@ -134,6 +134,45 @@ body.light-theme .auth-card {
 }
 
 /* ====================================
+   AUTH ERROR
+==================================== */
+
+.auth-error {
+  display: flex;
+  align-items: center;
+
+  width: 100%;
+
+  margin-bottom: 18px;
+  padding: 12px 14px;
+
+  border-radius: 10px;
+  border: 1px solid var(--danger);
+
+  background: var(--danger-bg);
+
+  color: var(--danger);
+
+  font-size: 13px;
+  font-weight: 500;
+  line-height: 1.5;
+
+  animation: authErrorFade 0.25s ease;
+}
+
+@keyframes authErrorFade {
+  from {
+    opacity: 0;
+    transform: translateY(-6px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ====================================
    CONTENT
 ==================================== */
 
