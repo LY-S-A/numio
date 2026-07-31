@@ -38,7 +38,7 @@ const OrderHistory = () => {
         const token = localStorage.getItem("token");
 
         const { data } = await axios.get(
-            `${API_URL}/api/orders/history`, // <-- Replace with your actual Order History endpoint
+            `${API_URL}/api/5sim/history`, // <-- Replace with your actual Order History endpoint
             {
                 headers: {
                     Authorization: `Bearer ${token}`,
