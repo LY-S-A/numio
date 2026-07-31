@@ -14,8 +14,6 @@ const API_URL = process.env.REACT_APP_API_URL;
 const ITEMS_PER_PAGE = 10;
 
 const OrderHistory = () => {
-    const { formattedBalance } = useBalance();
-
     const [orders, setOrders] = useState([]);
     const [loading, setLoading] = useState(true);
 
