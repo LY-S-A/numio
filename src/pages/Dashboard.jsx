@@ -163,8 +163,6 @@ const Dashboard = () => {
 
 
         </div>
-                     </div>
-
 
         {/* FLOATING SUPPORT BUTTON */}
         <button
@@ -180,7 +178,6 @@ const Dashboard = () => {
         </button>
 
 
-        </>
         </>
 
     );
