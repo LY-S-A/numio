@@ -456,9 +456,9 @@ body.light-theme .skeleton::after {
 } */
 
 .tx-icon {
-    width: 44px;
-    height: 44px;
-    border-radius: 12px;
+    width: 42px;
+    height: 42px;
+    border-radius: 8px;
     display: flex;
     align-items: center;
     justify-content: center;
