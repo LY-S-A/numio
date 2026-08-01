@@ -911,9 +911,9 @@ const BuyNumber = () => {
                             </>
                         ) : (
                             <div className="sms-empty">
-    <div className="sms-pulse">
-        <FiMessageSquare />
-    </div>
+    <div className={`sms-pulse ${order && !hasSms ? "active" : ""}`}>
+    <FiMessageSquare />
+</div>
 
     <h4>Waiting for SMS</h4>
 
