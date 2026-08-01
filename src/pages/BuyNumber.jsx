@@ -110,71 +110,28 @@ const BuyNumber = () => {
   =========================== */
 
     const loadActiveOrder = useCallback(async () => {
-    try {
-        const res = await axios.get(
-            `${API}/api/5sim/active`,
-            getAuthConfig()
-        );
-
-        if (res.data.order) {
-
-            setOrder(res.data.order);
-            setSmsMessages(res.data.sms || []);
-
-        } else {
-
-            setOrder(null);
-            setSmsMessages([]);
-            setTimeLeft("--");
-
-            // Update wallet after auto refund
-            if (typeof res.data.wallet !== "undefined") {
-                setBalance(res.data.wallet);
-            }
-        }
-
-    } catch (err) {
-
-        console.log(
-            err.response?.data || err.message
-        );
-
-    }
-}, [setBalance]);
-
-    /* ===========================
-        FETCH COUNTRIES
-    =========================== */
-
-    // useEffect(() => {
-    //     const fetchCountries = async () => {
-    //         try {
-    //             const res = await axios.get(
-    //                 `${API}/api/5sim/countries`,
-    //                 getAuthConfig()
-    //             );
-
-    //             setCountries(res.data.countries || []);
-    //         } catch (err) {
-    //             console.log(err.response?.data || err.message);
-    //         }
-    //     };
-
-    //     fetchCountries();
-    // }, []);
-
-    useEffect(() => {
-    const fetchCountries = async () => {
-
         try {
-            setCountriesLoading(true);
-
             const res = await axios.get(
-                `${API}/api/5sim/countries`,
+                `${API}/api/5sim/active`,
                 getAuthConfig()
             );
 
-            setCountries(res.data.countries || []);
+            if (res.data.order) {
+
+                setOrder(res.data.order);
+                setSmsMessages(res.data.sms || []);
+
+            } else {
+
+                setOrder(null);
+                setSmsMessages([]);
+                setTimeLeft("--");
+
+                // Update wallet after auto refund
+                if (typeof res.data.wallet !== "undefined") {
+                    setBalance(res.data.wallet);
+                }
+            }
 
         } catch (err) {
 
@@ -182,18 +139,44 @@ const BuyNumber = () => {
                 err.response?.data || err.message
             );
 
-            setCountries([]);
-
-        } finally {
-
-            setCountriesLoading(false);
-
         }
-    };
+    }, [setBalance]);
 
-    fetchCountries();
+    /* ===========================
+        FETCH COUNTRIES
+    =========================== */
 
-}, []);
+    useEffect(() => {
+        const fetchCountries = async () => {
+
+            try {
+                setCountriesLoading(true);
+
+                const res = await axios.get(
+                    `${API}/api/5sim/countries`,
+                    getAuthConfig()
+                );
+
+                setCountries(res.data.countries || []);
+
+            } catch (err) {
+
+                console.log(
+                    err.response?.data || err.message
+                );
+
+                setCountries([]);
+
+            } finally {
+
+                setCountriesLoading(false);
+
+            }
+        };
+
+        fetchCountries();
+
+    }, []);
 
     /* ===========================
         LOAD ACTIVE ORDER
@@ -204,83 +187,51 @@ const BuyNumber = () => {
     }, [loadActiveOrder]);
 
     /* ===========================
-        FETCH SERVICES
-    =========================== */
-
-    // useEffect(() => {
-    //     if (!country) {
-    //         setServices([]);
-    //         setService("");
-    //         setEstimatedPrice(null);
-    //         return;
-    //     }
-
-    //     const fetchServices = async () => {
-    //         try {
-    //             const res = await axios.get(
-    //                 `${API}/api/5sim/services?country=${country}`,
-    //                 getAuthConfig()
-    //             );
-
-    //             setServices(res.data.services || []);
-    //             setService("");
-    //             setEstimatedPrice(null);
-
-    //         } catch (err) {
-    //             console.log(err.response?.data || err.message);
-    //             setServices([]);
-    //         }
-    //     };
-
-    //     fetchServices();
-    // }, [country]);
-
-    /* ===========================
     FETCH SERVICES
 =========================== */
 
-useEffect(() => {
+    useEffect(() => {
 
-    if (!country) {
-        setServices([]);
-        setService("");
-        setEstimatedPrice(null);
-        return;
-    }
-
-    const fetchServices = async () => {
-
-        try {
-
-            setServicesLoading(true);
-
-            const res = await axios.get(
-                `${API}/api/5sim/services?country=${country}`,
-                getAuthConfig()
-            );
-
-            setServices(res.data.services || []);
+        if (!country) {
+            setServices([]);
             setService("");
             setEstimatedPrice(null);
-
-        } catch (err) {
-
-            console.log(
-                err.response?.data || err.message
-            );
-
-            setServices([]);
-
-        } finally {
-
-            setServicesLoading(false);
-
+            return;
         }
-    };
 
-    fetchServices();
+        const fetchServices = async () => {
 
-}, [country]);
+            try {
+
+                setServicesLoading(true);
+
+                const res = await axios.get(
+                    `${API}/api/5sim/services?country=${country}`,
+                    getAuthConfig()
+                );
+
+                setServices(res.data.services || []);
+                setService("");
+                setEstimatedPrice(null);
+
+            } catch (err) {
+
+                console.log(
+                    err.response?.data || err.message
+                );
+
+                setServices([]);
+
+            } finally {
+
+                setServicesLoading(false);
+
+            }
+        };
+
+        fetchServices();
+
+    }, [country]);
 
     /* ===========================
         REACT-SELECT OPTIONS
@@ -418,9 +369,9 @@ useEffect(() => {
         }),
 
         loadingIndicator: (base) => ({
-    ...base,
-    color: "var(--primary)",
-}),
+            ...base,
+            color: "var(--primary)",
+        }),
 
         noOptionsMessage: (base) => ({
             ...base,
@@ -445,43 +396,43 @@ useEffect(() => {
     );
 
 
-/* ===========================
-   BUY NUMBER
-=========================== */
- const buyNumber = async () => {
-    if (!country || !service) {
-        setPurchaseError("Please select a country and service.");
-        return;
-    }
-
-    try {
-        setPurchaseError("");
-        setLoading(true);
-
-        const res = await axios.post(
-            `${API}/api/5sim/buy`,
-            {
-                country,
-                service,
-            },
-            getAuthConfig()
-        );
-
-        if (typeof res.data.wallet !== "undefined") {
-            setBalance(res.data.wallet);
+    /* ===========================
+       BUY NUMBER
+    =========================== */
+    const buyNumber = async () => {
+        if (!country || !service) {
+            setPurchaseError("Please select a country and service.");
+            return;
         }
 
-        await loadActiveOrder();
+        try {
+            setPurchaseError("");
+            setLoading(true);
 
-    } catch (err) {
-        setPurchaseError(
-            err.response?.data?.message ||
-            "Unable to buy number."
-        );
-    } finally {
-        setLoading(false);
-    }
-};
+            const res = await axios.post(
+                `${API}/api/5sim/buy`,
+                {
+                    country,
+                    service,
+                },
+                getAuthConfig()
+            );
+
+            if (typeof res.data.wallet !== "undefined") {
+                setBalance(res.data.wallet);
+            }
+
+            await loadActiveOrder();
+
+        } catch (err) {
+            setPurchaseError(
+                err.response?.data?.message ||
+                "Unable to buy number."
+            );
+        } finally {
+            setLoading(false);
+        }
+    };
 
     //   /* ===========================
     //     REFRESH SMS
@@ -508,76 +459,76 @@ useEffect(() => {
         }
     };
 
-/* ===========================
-   CANCEL NUMBER
-=========================== */
+    /* ===========================
+       CANCEL NUMBER
+    =========================== */
 
-const cancelNumber = async () => {
-    if (!order) return;
+    const cancelNumber = async () => {
+        if (!order) return;
 
-    const confirmed = window.confirm(
-        "Are you sure you want to cancel this number?"
-    );
-
-    if (!confirmed) return;
-
-    try {
-        setOrderError("");
-
-        const res = await axios.post(
-            `${API}/api/5sim/cancel/${order._id}`,
-            {},
-            getAuthConfig()
+        const confirmed = window.confirm(
+            "Are you sure you want to cancel this number?"
         );
 
-        if (typeof res.data.wallet !== "undefined") {
-            setBalance(res.data.wallet);
+        if (!confirmed) return;
+
+        try {
+            setOrderError("");
+
+            const res = await axios.post(
+                `${API}/api/5sim/cancel/${order._id}`,
+                {},
+                getAuthConfig()
+            );
+
+            if (typeof res.data.wallet !== "undefined") {
+                setBalance(res.data.wallet);
+            }
+
+            await loadActiveOrder();
+
+        } catch (err) {
+            setOrderError(
+                err.response?.data?.message ||
+                "Unable to cancel number."
+            );
         }
+    };
 
-        await loadActiveOrder();
+    /* ===========================
+       FINISH ORDER
+    =========================== */
 
-    } catch (err) {
-        setOrderError(
-            err.response?.data?.message ||
-            "Unable to cancel number."
-        );
-    }
-};
+    const finishOrder = async () => {
+        if (!order) return;
 
-/* ===========================
-   FINISH ORDER
-=========================== */
+        try {
+            setOrderError("");
 
-const finishOrder = async () => {
-    if (!order) return;
+            const res = await axios.post(
+                `${API}/api/5sim/finish/${order._id}`,
+                {},
+                getAuthConfig()
+            );
 
-    try {
-        setOrderError("");
+            if (typeof res.data.wallet !== "undefined") {
+                setBalance(res.data.wallet);
+            }
 
-        const res = await axios.post(
-            `${API}/api/5sim/finish/${order._id}`,
-            {},
-            getAuthConfig()
-        );
+            setOrder(null);
+            setSmsMessages([]);
+            setTimeLeft("--");
 
-        if (typeof res.data.wallet !== "undefined") {
-            setBalance(res.data.wallet);
+            await loadActiveOrder();
+
+        } catch (err) {
+            setOrderError(
+                err.response?.data?.message ||
+                "Unable to complete order."
+            );
         }
+    };
 
-        setOrder(null);
-        setSmsMessages([]);
-        setTimeLeft("--");
-
-        await loadActiveOrder();
-
-    } catch (err) {
-        setOrderError(
-            err.response?.data?.message ||
-            "Unable to complete order."
-        );
-    }
-};
-    
     /* ===========================
         HELPERS
     =========================== */
@@ -637,11 +588,11 @@ const finishOrder = async () => {
 
             {/* ================= ERROR ================= */}
 
-{purchaseError && (
-    <div className="page-alert page-alert-error">
-        {purchaseError}
-    </div>
-)}
+            {purchaseError && (
+                <div className="page-alert page-alert-error">
+                    {purchaseError}
+                </div>
+            )}
 
 
             {/* ================= PURCHASE CARD ================= */}
@@ -699,33 +650,33 @@ const finishOrder = async () => {
                         <label>Country</label>
 
                         <Select
-    styles={selectStyles}
-    options={countryOptions}
-    placeholder={
-        countriesLoading
-            ? "Loading countries..."
-            : "Search Country"
-    }
-    isLoading={countriesLoading}
-    loadingMessage={() => "Loading countries..."}
-    isDisabled={countriesLoading}
-    isSearchable
-    menuPortalTarget={document.body}
-    menuPosition="fixed"
-    components={{
-        DropdownIndicator,
-        IndicatorSeparator: () => null,
-    }}
-    value={
-        countryOptions.find(
-            (item) => item.value === country
-        ) || null
-    }
-    onChange={(option) => {
-        setPurchaseError("");
-        setCountry(option.value);
-    }}
-/>
+                            styles={selectStyles}
+                            options={countryOptions}
+                            placeholder={
+                                countriesLoading
+                                    ? "Loading countries..."
+                                    : "Search Country"
+                            }
+                            isLoading={countriesLoading}
+                            loadingMessage={() => "Loading countries..."}
+                            isDisabled={countriesLoading}
+                            isSearchable
+                            menuPortalTarget={document.body}
+                            menuPosition="fixed"
+                            components={{
+                                DropdownIndicator,
+                                IndicatorSeparator: () => null,
+                            }}
+                            value={
+                                countryOptions.find(
+                                    (item) => item.value === country
+                                ) || null
+                            }
+                            onChange={(option) => {
+                                setPurchaseError("");
+                                setCountry(option.value);
+                            }}
+                        />
                     </div>
 
                     {/* SERVICE */}
@@ -733,37 +684,37 @@ const finishOrder = async () => {
                     <div className="field">
                         <label>Service</label>
 
-                       <Select
-    styles={selectStyles}
-    options={serviceOptions}
-    placeholder={
-        !country
-            ? "Choose Country First"
-            : servicesLoading
-                ? "Loading services..."
-                : "Search Service"
-    }
-    isLoading={servicesLoading}
-    loadingMessage={() => "Loading services..."}
-    isDisabled={!country || servicesLoading}
-    isSearchable
-    menuPortalTarget={document.body}
-    menuPosition="fixed"
-    components={{
-        DropdownIndicator,
-        IndicatorSeparator: () => null,
-    }}
-    value={
-        serviceOptions.find(
-            (item) => item.value === service
-        ) || null
-    }
-    onChange={(option) => {
-        setPurchaseError("");
-        setService(option.value);
-        setEstimatedPrice(option.ngnPrice);
-    }}
-/>
+                        <Select
+                            styles={selectStyles}
+                            options={serviceOptions}
+                            placeholder={
+                                !country
+                                    ? "Choose Country First"
+                                    : servicesLoading
+                                        ? "Loading services..."
+                                        : "Search Service"
+                            }
+                            isLoading={servicesLoading}
+                            loadingMessage={() => "Loading services..."}
+                            isDisabled={!country || servicesLoading}
+                            isSearchable
+                            menuPortalTarget={document.body}
+                            menuPosition="fixed"
+                            components={{
+                                DropdownIndicator,
+                                IndicatorSeparator: () => null,
+                            }}
+                            value={
+                                serviceOptions.find(
+                                    (item) => item.value === service
+                                ) || null
+                            }
+                            onChange={(option) => {
+                                setPurchaseError("");
+                                setService(option.value);
+                                setEstimatedPrice(option.ngnPrice);
+                            }}
+                        />
                     </div>
 
                 </div>
@@ -777,13 +728,19 @@ const finishOrder = async () => {
                         onClick={buyNumber}
                         disabled={
                             loading ||
+                            countriesLoading ||
+                            servicesLoading ||
                             !country ||
                             !service
                         }
                     >
                         {loading
                             ? "Getting Number..."
-                            : "Get Number"}
+                            : countriesLoading
+                                ? "Loading Countries..."
+                                : servicesLoading
+                                    ? "Loading Services..."
+                                    : "Get Number"}
                     </button>
 
                     <div className="price-box">
@@ -840,11 +797,11 @@ const finishOrder = async () => {
 
                 </div>
 
-                 {orderError && (
-        <div className="page-alert page-alert-error">
-            {orderError}
-        </div>
-    )}
+                {orderError && (
+                    <div className="page-alert page-alert-error">
+                        {orderError}
+                    </div>
+                )}
 
                 <div className="assigned-grid">
 
