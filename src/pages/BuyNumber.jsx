@@ -119,14 +119,39 @@ const BuyNumber = () => {
 
             if (res.data.order) {
 
-                setOrder(res.data.order);
-                setSmsMessages(res.data.sms || []);
+    const activeOrder = res.data.order;
 
-            } else {
+    setOrder(activeOrder);
+    setSmsMessages(res.data.sms || []);
 
-                setOrder(null);
-                setSmsMessages([]);
-                setTimeLeft("--");
+    // Restore selected values after page refresh
+    setCountry(activeOrder.country || "");
+    setService(activeOrder.service || "");
+
+    // Restore estimated price if available
+    if (activeOrder.price) {
+        setEstimatedPrice(activeOrder.price);
+    }
+
+} else {
+
+    setOrder(null);
+    setSmsMessages([]);
+    setTimeLeft("--");
+
+    // Clear restored selections
+    setCountry("");
+    setService("");
+    setEstimatedPrice(null);
+
+    if (typeof res.data.wallet !== "undefined") {
+        setBalance(res.data.wallet);
+    }
+}
+
+                // setOrder(null);
+                // setSmsMessages([]);
+                // setTimeLeft("--");
 
                 // Update wallet after auto refund
                 if (typeof res.data.wallet !== "undefined") {
@@ -604,7 +629,7 @@ const BuyNumber = () => {
 
                 <div className="steps-row">
 
-                    <div className={`step-item ${country ? "active" : ""}`}>
+                   <div className={`step-item ${(country || order) ? "active" : ""}`}>
                         <div className="step-circle">1</div>
 
                         <div>
@@ -617,7 +642,7 @@ const BuyNumber = () => {
                         <FiChevronRight />
                     </div>
 
-                    <div className={`step-item ${service ? "active" : ""}`}>
+                    <div className={`step-item ${(service || order) ? "active" : ""}`}>
                         <div className="step-circle">2</div>
 
                         <div>
