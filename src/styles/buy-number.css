@@ -641,13 +641,13 @@
     width: 64px;
     height: 64px;
 
-    border-radius: 50%;
-
     display: flex;
     align-items: center;
     justify-content: center;
 
-    background: rgba(124, 58, 237, 0.12);
+    border-radius: 50%;
+
+    background: rgba(124,58,237,.12);
     color: var(--primary);
 
     font-size: 26px;
@@ -656,30 +656,34 @@
 }
 
 .sms-pulse::before,
-.sms-pulse::after {
-    content: "";
-    position: absolute;
-    inset: 0;
+.sms-pulse::after{
+    content:"";
+    position:absolute;
+    inset:0;
+    border-radius:50%;
+    border:2px solid rgba(124,58,237,.35);
 
-    border-radius: 50%;
-    border: 2px solid rgba(124, 58, 237, 0.35);
-
-    animation: smsPulse 2.2s ease-out infinite;
+    opacity:0;
 }
 
-.sms-pulse::after {
-    animation-delay: 1.1s;
+.sms-pulse.active::before,
+.sms-pulse.active::after{
+    animation:smsPulse 2s ease-out infinite;
 }
 
-@keyframes smsPulse {
-    0% {
-        transform: scale(1);
-        opacity: .8;
+.sms-pulse.active::after{
+    animation-delay:1s;
+}
+
+@keyframes smsPulse{
+    0%{
+        transform:scale(1);
+        opacity:.8;
     }
 
-    100% {
-        transform: scale(1.9);
-        opacity: 0;
+    100%{
+        transform:scale(1.8);
+        opacity:0;
     }
 }
 
