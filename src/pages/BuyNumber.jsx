@@ -235,33 +235,52 @@ const BuyNumber = () => {
     //     fetchServices();
     // }, [country]);
 
-    const fetchServices = async () => {
+    /* ===========================
+    FETCH SERVICES
+=========================== */
 
-    try {
+useEffect(() => {
 
-        setServicesLoading(true);
-
-        const res = await axios.get(
-            `${API}/api/5sim/services?country=${country}`,
-            getAuthConfig()
-        );
-
-        setServices(res.data.services || []);
+    if (!country) {
+        setServices([]);
         setService("");
         setEstimatedPrice(null);
-
-    } catch (err) {
-
-        console.log(err.response?.data || err.message);
-
-        setServices([]);
-
-    } finally {
-
-        setServicesLoading(false);
-
+        return;
     }
-};
+
+    const fetchServices = async () => {
+
+        try {
+
+            setServicesLoading(true);
+
+            const res = await axios.get(
+                `${API}/api/5sim/services?country=${country}`,
+                getAuthConfig()
+            );
+
+            setServices(res.data.services || []);
+            setService("");
+            setEstimatedPrice(null);
+
+        } catch (err) {
+
+            console.log(
+                err.response?.data || err.message
+            );
+
+            setServices([]);
+
+        } finally {
+
+            setServicesLoading(false);
+
+        }
+    };
+
+    fetchServices();
+
+}, [country]);
 
     /* ===========================
         REACT-SELECT OPTIONS
