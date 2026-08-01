@@ -110,63 +110,103 @@ const BuyNumber = () => {
       LOAD ACTIVE ORDER
   =========================== */
 
+//     const loadActiveOrder = useCallback(async () => {
+//         try {
+//             const res = await axios.get(
+//                 `${API}/api/5sim/active`,
+//                 getAuthConfig()
+//             );
+
+//             if (res.data.order) {
+
+//     const activeOrder = res.data.order;
+
+//     setOrder(activeOrder);
+//     setSmsMessages(res.data.sms || []);
+
+//     // Restore selected values after page refresh
+//     setCountry(activeOrder.country || "");
+//     setService(activeOrder.service || "");
+
+//     // Restore estimated price if available
+//     if (activeOrder.price) {
+//         setEstimatedPrice(activeOrder.price);
+//     }
+
+// } else {
+
+//     setOrder(null);
+//     setSmsMessages([]);
+//     setTimeLeft("--");
+
+//     // Clear restored selections
+//     setCountry("");
+//     setService("");
+//     setEstimatedPrice(null);
+
+//     if (typeof res.data.wallet !== "undefined") {
+//         setBalance(res.data.wallet);
+//     }
+// }
+
+//                 // setOrder(null);
+//                 // setSmsMessages([]);
+//                 // setTimeLeft("--");
+
+//                 // Update wallet after auto refund
+//                 if (typeof res.data.wallet !== "undefined") {
+//                     setBalance(res.data.wallet);
+//                 }
+//             }
+
+//         } catch (err) {
+
+//             console.log(
+//                 err.response?.data || err.message
+//             );
+
+//         }
+//     }, [setBalance]);
+
     const loadActiveOrder = useCallback(async () => {
-        try {
-            const res = await axios.get(
-                `${API}/api/5sim/active`,
-                getAuthConfig()
-            );
+    try {
+        const res = await axios.get(
+            `${API}/api/5sim/active`,
+            getAuthConfig()
+        );
 
-            if (res.data.order) {
+        if (res.data.order) {
+            const activeOrder = res.data.order;
 
-    const activeOrder = res.data.order;
+            setOrder(activeOrder);
+            setSmsMessages(res.data.sms || []);
 
-    setOrder(activeOrder);
-    setSmsMessages(res.data.sms || []);
+            // Restore selected values after page refresh
+            setCountry(activeOrder.country || "");
+            setService(activeOrder.service || "");
 
-    // Restore selected values after page refresh
-    setCountry(activeOrder.country || "");
-    setService(activeOrder.service || "");
+            // Restore estimated price if available
+            setEstimatedPrice(activeOrder.price || null);
+        } else {
+            setOrder(null);
+            setSmsMessages([]);
+            setTimeLeft("--");
 
-    // Restore estimated price if available
-    if (activeOrder.price) {
-        setEstimatedPrice(activeOrder.price);
-    }
+            setCountry("");
+            setService("");
+            setEstimatedPrice(null);
 
-} else {
-
-    setOrder(null);
-    setSmsMessages([]);
-    setTimeLeft("--");
-
-    // Clear restored selections
-    setCountry("");
-    setService("");
-    setEstimatedPrice(null);
-
-    if (typeof res.data.wallet !== "undefined") {
-        setBalance(res.data.wallet);
-    }
-}
-
-                // setOrder(null);
-                // setSmsMessages([]);
-                // setTimeLeft("--");
-
-                // Update wallet after auto refund
-                if (typeof res.data.wallet !== "undefined") {
-                    setBalance(res.data.wallet);
-                }
+            // Update wallet after auto refund
+            if (typeof res.data.wallet !== "undefined") {
+                setBalance(res.data.wallet);
             }
-
-        } catch (err) {
-
-            console.log(
-                err.response?.data || err.message
-            );
-
         }
-    }, [setBalance]);
+    } catch (err) {
+        console.log(
+            err.response?.data || err.message
+        );
+    }
+}, [setBalance]);
 
     /* ===========================
         FETCH COUNTRIES
