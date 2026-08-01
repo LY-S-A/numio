@@ -12,7 +12,7 @@ import {
     FiCheckCircle,
     FiLock,
     FiCheck,
-    FiMessageSquare,
+    FiMessageCircle,
 } from "react-icons/fi";
 
 import "../styles/buy-number.css";
@@ -912,7 +912,7 @@ const BuyNumber = () => {
                         ) : (
                             <div className="sms-empty">
     <div className={`sms-pulse ${order && !hasSms ? "active" : ""}`}>
-    <FiMessageSquare />
+    <FiMessageCircle />
 </div>
 
     <h4>Waiting for SMS</h4>
