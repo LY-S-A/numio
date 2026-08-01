@@ -31,6 +31,9 @@ const BuyNumber = () => {
     const [services, setServices] = useState([]);
     const [service, setService] = useState("");
 
+
+    const [countriesLoading, setCountriesLoading] = useState(false);
+    const [servicesLoading, setServicesLoading] = useState(false);
     const [countries, setCountries] = useState([]);
     const [country, setCountry] = useState("");
     const [estimatedPrice, setEstimatedPrice] = useState(null);
@@ -143,22 +146,54 @@ const BuyNumber = () => {
         FETCH COUNTRIES
     =========================== */
 
+    // useEffect(() => {
+    //     const fetchCountries = async () => {
+    //         try {
+    //             const res = await axios.get(
+    //                 `${API}/api/5sim/countries`,
+    //                 getAuthConfig()
+    //             );
+
+    //             setCountries(res.data.countries || []);
+    //         } catch (err) {
+    //             console.log(err.response?.data || err.message);
+    //         }
+    //     };
+
+    //     fetchCountries();
+    // }, []);
+
     useEffect(() => {
-        const fetchCountries = async () => {
-            try {
-                const res = await axios.get(
-                    `${API}/api/5sim/countries`,
-                    getAuthConfig()
-                );
+    const fetchCountries = async () => {
 
-                setCountries(res.data.countries || []);
-            } catch (err) {
-                console.log(err.response?.data || err.message);
-            }
-        };
+        try {
+            setCountriesLoading(true);
 
-        fetchCountries();
-    }, []);
+            const res = await axios.get(
+                `${API}/api/5sim/countries`,
+                getAuthConfig()
+            );
+
+            setCountries(res.data.countries || []);
+
+        } catch (err) {
+
+            console.log(
+                err.response?.data || err.message
+            );
+
+            setCountries([]);
+
+        } finally {
+
+            setCountriesLoading(false);
+
+        }
+    };
+
+    fetchCountries();
+
+}, []);
 
     /* ===========================
         LOAD ACTIVE ORDER
@@ -172,33 +207,61 @@ const BuyNumber = () => {
         FETCH SERVICES
     =========================== */
 
-    useEffect(() => {
-        if (!country) {
-            setServices([]);
-            setService("");
-            setEstimatedPrice(null);
-            return;
-        }
+    // useEffect(() => {
+    //     if (!country) {
+    //         setServices([]);
+    //         setService("");
+    //         setEstimatedPrice(null);
+    //         return;
+    //     }
 
-        const fetchServices = async () => {
-            try {
-                const res = await axios.get(
-                    `${API}/api/5sim/services?country=${country}`,
-                    getAuthConfig()
-                );
+    //     const fetchServices = async () => {
+    //         try {
+    //             const res = await axios.get(
+    //                 `${API}/api/5sim/services?country=${country}`,
+    //                 getAuthConfig()
+    //             );
 
-                setServices(res.data.services || []);
-                setService("");
-                setEstimatedPrice(null);
+    //             setServices(res.data.services || []);
+    //             setService("");
+    //             setEstimatedPrice(null);
 
-            } catch (err) {
-                console.log(err.response?.data || err.message);
-                setServices([]);
-            }
-        };
+    //         } catch (err) {
+    //             console.log(err.response?.data || err.message);
+    //             setServices([]);
+    //         }
+    //     };
 
-        fetchServices();
-    }, [country]);
+    //     fetchServices();
+    // }, [country]);
+
+    const fetchServices = async () => {
+
+    try {
+
+        setServicesLoading(true);
+
+        const res = await axios.get(
+            `${API}/api/5sim/services?country=${country}`,
+            getAuthConfig()
+        );
+
+        setServices(res.data.services || []);
+        setService("");
+        setEstimatedPrice(null);
+
+    } catch (err) {
+
+        console.log(err.response?.data || err.message);
+
+        setServices([]);
+
+    } finally {
+
+        setServicesLoading(false);
+
+    }
+};
 
     /* ===========================
         REACT-SELECT OPTIONS
@@ -334,6 +397,11 @@ const BuyNumber = () => {
                 backgroundColor: "rgba(124,58,237,.18)",
             },
         }),
+
+        loadingIndicator: (base) => ({
+    ...base,
+    color: "var(--primary)",
+}),
 
         noOptionsMessage: (base) => ({
             ...base,
@@ -612,26 +680,33 @@ const finishOrder = async () => {
                         <label>Country</label>
 
                         <Select
-                            styles={selectStyles}
-                            options={countryOptions}
-                            placeholder="Search Country"
-                            isSearchable
-                            menuPortalTarget={document.body}
-                            menuPosition="fixed"
-                            components={{
-                                DropdownIndicator,
-                                IndicatorSeparator: () => null,
-                            }}
-                            value={
-                                countryOptions.find(
-                                    (item) => item.value === country
-                                ) || null
-                            }
-                           onChange={(option) => {
-    setPurchaseError("");
-    setCountry(option.value);
-}}
-                        />
+    styles={selectStyles}
+    options={countryOptions}
+    placeholder={
+        countriesLoading
+            ? "Loading countries..."
+            : "Search Country"
+    }
+    isLoading={countriesLoading}
+    loadingMessage={() => "Loading countries..."}
+    isDisabled={countriesLoading}
+    isSearchable
+    menuPortalTarget={document.body}
+    menuPosition="fixed"
+    components={{
+        DropdownIndicator,
+        IndicatorSeparator: () => null,
+    }}
+    value={
+        countryOptions.find(
+            (item) => item.value === country
+        ) || null
+    }
+    onChange={(option) => {
+        setPurchaseError("");
+        setCountry(option.value);
+    }}
+/>
                     </div>
 
                     {/* SERVICE */}
@@ -639,35 +714,37 @@ const finishOrder = async () => {
                     <div className="field">
                         <label>Service</label>
 
-                        <Select
-                            styles={selectStyles}
-                            options={serviceOptions}
-                            placeholder={
-                                country
-                                    ? "Search Service"
-                                    : "Choose Country First"
-                            }
-                            isDisabled={!country}
-                            isSearchable
-                            menuPortalTarget={document.body}
-                            menuPosition="fixed"
-                            components={{
-                                DropdownIndicator,
-                                IndicatorSeparator: () => null,
-                            }}
-                            value={
-                                serviceOptions.find(
-                                    (item) => item.value === service
-                                ) || null
-                            }
-
-
-                            onChange={(option) => {
-    setPurchaseError("");
-    setService(option.value);
-    setEstimatedPrice(option.ngnPrice);
-}}
-                        />
+                       <Select
+    styles={selectStyles}
+    options={serviceOptions}
+    placeholder={
+        !country
+            ? "Choose Country First"
+            : servicesLoading
+                ? "Loading services..."
+                : "Search Service"
+    }
+    isLoading={servicesLoading}
+    loadingMessage={() => "Loading services..."}
+    isDisabled={!country || servicesLoading}
+    isSearchable
+    menuPortalTarget={document.body}
+    menuPosition="fixed"
+    components={{
+        DropdownIndicator,
+        IndicatorSeparator: () => null,
+    }}
+    value={
+        serviceOptions.find(
+            (item) => item.value === service
+        ) || null
+    }
+    onChange={(option) => {
+        setPurchaseError("");
+        setService(option.value);
+        setEstimatedPrice(option.ngnPrice);
+    }}
+/>
                     </div>
 
                 </div>
