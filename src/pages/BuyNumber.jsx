@@ -12,6 +12,7 @@ import {
     FiCheckCircle,
     FiLock,
     FiCheck,
+    FiMessageSquare,
 } from "react-icons/fi";
 
 import "../styles/buy-number.css";
@@ -910,9 +911,16 @@ const BuyNumber = () => {
                             </>
                         ) : (
                             <div className="sms-empty">
-                                <h4>No messages yet</h4>
-                                <p>Waiting for SMS...</p>
-                            </div>
+    <div className="sms-pulse">
+        <FiMessageSquare />
+    </div>
+
+    <h4>Waiting for SMS</h4>
+
+    <p>
+        Checking for incoming verification code...
+    </p>
+</div>
                         )}
 
                     </div>
