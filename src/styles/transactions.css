@@ -743,7 +743,6 @@ body.light-theme .skeleton::after {
     }
 
     .tx-pages button.active,
-    .tx-pages .prev-btn 
     .tx-pages .next-btn {
         display: flex;
         align-items: center;
