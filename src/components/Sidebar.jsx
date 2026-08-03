@@ -165,7 +165,7 @@ const Sidebar = ({
                 <div className="sidebar-logo">
                     <img
                         src={isLightTheme ? logoLight : logoDark}
-                        alt="RealSMS Logo"
+                        alt="Numio Logo"
                         className="logo-image"
                     />
                 </div>
