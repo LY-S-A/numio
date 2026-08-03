@@ -474,6 +474,7 @@ const DepositHistory = () => {
 
                             <div className="tx-pages">
                                 <button
+                                    className="prev-btn"
                                     disabled={
                                         currentPage ===
                                         1
