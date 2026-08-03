@@ -20,7 +20,7 @@ const OrderHistory = () => {
 
     const [searchTerm, setSearchTerm] = useState("");
     const [statusFilter, setStatusFilter] =
-    useState("All Orders");
+        useState("All Orders");
     const [dateFilter, setDateFilter] =
         useState("Last 30 Days");
 
@@ -28,111 +28,111 @@ const OrderHistory = () => {
         useState(1);
 
     useEffect(() => {
-       document.title = "Order History - Numio";
-       fetchOrders();
+        document.title = "Order History - Numio";
+        fetchOrders();
     }, []);
 
- const fetchOrders = async () => {
-    try {
-        setLoading(true);
+    const fetchOrders = async () => {
+        try {
+            setLoading(true);
 
-        const token = localStorage.getItem("token");
+            const token = localStorage.getItem("token");
 
-        const { data } = await axios.get(
-            `${API_URL}/api/5sim/history`, // <-- Replace with your actual Order History endpoint
-            {
-                headers: {
-                    Authorization: `Bearer ${token}`,
-                },
-            }
-        );
+            const { data } = await axios.get(
+                `${API_URL}/api/5sim/history`, // <-- Replace with your actual Order History endpoint
+                {
+                    headers: {
+                        Authorization: `Bearer ${token}`,
+                    },
+                }
+            );
 
-        setOrders(data.orders || []);
-    } catch (err) {
-        console.error(err);
-    } finally {
-        setLoading(false);
-    }
-};
-
-const filteredOrders = useMemo(() => {
-    return orders.filter((item) => {
-        const matchesSearch =
-            item.phone
-                ?.toLowerCase()
-                .includes(searchTerm.toLowerCase()) ||
-            item.reference
-                ?.toLowerCase()
-                .includes(searchTerm.toLowerCase());
-
-        const matchesStatus =
-            statusFilter === "All Orders"
-                ? true
-                : item.status?.toLowerCase() ===
-                  statusFilter.toLowerCase();
-
-        const createdAt = new Date(item.createdAt);
-        const now = new Date();
-
-        let matchesDate = true;
-
-        switch (dateFilter) {
-            case "Today":
-                matchesDate =
-                    createdAt.toDateString() ===
-                    now.toDateString();
-                break;
-
-            case "Last 7 Days":
-                matchesDate =
-                    now - createdAt <=
-                    7 * 24 * 60 * 60 * 1000;
-                break;
-
-            case "Last 30 Days":
-                matchesDate =
-                    now - createdAt <=
-                    30 * 24 * 60 * 60 * 1000;
-                break;
-
-            case "Last 90 Days":
-                matchesDate =
-                    now - createdAt <=
-                    90 * 24 * 60 * 60 * 1000;
-                break;
-
-            case "This Year":
-                matchesDate =
-                    createdAt.getFullYear() ===
-                    now.getFullYear();
-                break;
-
-            default:
-                matchesDate = true;
+            setOrders(data.orders || []);
+        } catch (err) {
+            console.error(err);
+        } finally {
+            setLoading(false);
         }
+    };
 
-        return (
-            matchesSearch &&
-            matchesStatus &&
-            matchesDate
-        );
-    });
-}, [
-    orders,
-    searchTerm,
-    statusFilter,
-    dateFilter,
-]);
+    const filteredOrders = useMemo(() => {
+        return orders.filter((item) => {
+            const matchesSearch =
+                item.phone
+                    ?.toLowerCase()
+                    .includes(searchTerm.toLowerCase()) ||
+                item.reference
+                    ?.toLowerCase()
+                    .includes(searchTerm.toLowerCase());
 
-const totalPages = Math.ceil(
-    filteredOrders.length / ITEMS_PER_PAGE
-);
+            const matchesStatus =
+                statusFilter === "All Orders"
+                    ? true
+                    : item.status?.toLowerCase() ===
+                    statusFilter.toLowerCase();
 
-const paginatedOrders = filteredOrders.slice(
-    (currentPage - 1) * ITEMS_PER_PAGE,
-    currentPage * ITEMS_PER_PAGE
-);
-    
+            const createdAt = new Date(item.createdAt);
+            const now = new Date();
+
+            let matchesDate = true;
+
+            switch (dateFilter) {
+                case "Today":
+                    matchesDate =
+                        createdAt.toDateString() ===
+                        now.toDateString();
+                    break;
+
+                case "Last 7 Days":
+                    matchesDate =
+                        now - createdAt <=
+                        7 * 24 * 60 * 60 * 1000;
+                    break;
+
+                case "Last 30 Days":
+                    matchesDate =
+                        now - createdAt <=
+                        30 * 24 * 60 * 60 * 1000;
+                    break;
+
+                case "Last 90 Days":
+                    matchesDate =
+                        now - createdAt <=
+                        90 * 24 * 60 * 60 * 1000;
+                    break;
+
+                case "This Year":
+                    matchesDate =
+                        createdAt.getFullYear() ===
+                        now.getFullYear();
+                    break;
+
+                default:
+                    matchesDate = true;
+            }
+
+            return (
+                matchesSearch &&
+                matchesStatus &&
+                matchesDate
+            );
+        });
+    }, [
+        orders,
+        searchTerm,
+        statusFilter,
+        dateFilter,
+    ]);
+
+    const totalPages = Math.ceil(
+        filteredOrders.length / ITEMS_PER_PAGE
+    );
+
+    const paginatedOrders = filteredOrders.slice(
+        (currentPage - 1) * ITEMS_PER_PAGE,
+        currentPage * ITEMS_PER_PAGE
+    );
+
     const formatDate = (date) => {
         return new Date(date).toLocaleDateString(
             "en-NG",
@@ -164,15 +164,15 @@ const paginatedOrders = filteredOrders.slice(
     };
 
     const formatService = (service = "") =>
-    service
-        .replace(/[_-]/g, " ")
-        .replace(/\b\w/g, (c) => c.toUpperCase());
+        service
+            .replace(/[_-]/g, " ")
+            .replace(/\b\w/g, (c) => c.toUpperCase());
 
-const formatText = (text = "") =>
-    text
-        .replace(/[_-]/g, " ")
-        .replace(/\b\w/g, (c) => c.toUpperCase());
-   
+    const formatText = (text = "") =>
+        text
+            .replace(/[_-]/g, " ")
+            .replace(/\b\w/g, (c) => c.toUpperCase());
+
     return (
         <div className="tx-page">
 
@@ -219,13 +219,13 @@ const formatText = (text = "") =>
                         <h3>
                             {
                                 orders.filter(
-                                    item => item.status === "ACTIVE"
+                                    item => item.status === "FINISHED"
                                 ).length
                             }
                         </h3>
 
                         <small>
-                            Awaiting SMS
+                            Completed orders
                         </small>
                     </div>
                 </div>
@@ -260,7 +260,6 @@ const formatText = (text = "") =>
                         }}
                     >
                         <option>All Orders</option>
-                        <option>Active</option>
                         <option>Finished</option>
                         <option>Cancelled</option>
                         <option>Expired</option>
@@ -365,24 +364,24 @@ const formatText = (text = "") =>
                             <div className="tx-info">
 
                                 <div className="tx-icon purchase">
-    <img
-        src={`https://cdn.simpleicons.org/${(item.service || "").toLowerCase()}`}
-        alt={formatService(item.service)}
-        loading="lazy"
-        onError={(e) => {
-            e.currentTarget.src = unknownLogo;
-            e.currentTarget.onerror = null;
-        }}
-    />
-</div>
+                                    <img
+                                        src={`https://cdn.simpleicons.org/${(item.service || "").toLowerCase()}`}
+                                        alt={formatService(item.service)}
+                                        loading="lazy"
+                                        onError={(e) => {
+                                            e.currentTarget.src = unknownLogo;
+                                            e.currentTarget.onerror = null;
+                                        }}
+                                    />
+                                </div>
 
                                 <div>
 
                                     <h4>{item.phone}</h4>
 
-                                   <p>
-    {formatText(item.country)} • {formatText(item.service)}
-</p>
+                                    <p>
+                                        {formatText(item.country)} • {formatText(item.service)}
+                                    </p>
                                 </div>
 
                             </div>
