@@ -738,7 +738,7 @@ body.light-theme .skeleton::after {
         flex-direction: row;
     }
 
-    .tx-pages button {
+    /* .tx-pages button {
         display: none;
     }
 
@@ -748,5 +748,26 @@ body.light-theme .skeleton::after {
         display: flex;
         align-items: center;
         justify-content: center;
+    } */
+
+     .tx-pages{
+        display:flex;
+        gap:8px;
+        align-items:center;
     }
+
+    .tx-pages button{
+        display:none;
+    }
+
+    .tx-pages .prev-btn,
+    .tx-pages .next-btn,
+    .tx-pages button.active{
+        display:flex;
+        align-items:center;
+        justify-content:center;
+        width:34px;
+        height:34px;
+    }
+}
 }
